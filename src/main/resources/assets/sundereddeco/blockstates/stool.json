@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": {
+      "model": "sundereddeco:stool"
+    },
+    "inventory": {
+      "model": "sundereddeco:stool",
+      "transform": "forge:default-block"
+    }
+  }
+}

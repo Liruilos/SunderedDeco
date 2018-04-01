@@ -1,7 +1,10 @@
 package net.grallarius.sundereddeco.item.tool;
 
+import net.grallarius.sundereddeco.InvModel;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.minecraft.item.Item;
+
+import static net.grallarius.sundereddeco.SunderedDeco.ITEM_REGISTRY;
 
 public class ItemModSword extends net.minecraft.item.ItemSword {
 
@@ -12,9 +15,12 @@ public class ItemModSword extends net.minecraft.item.ItemSword {
         setRegistryName(name);
         setUnlocalizedName(name);
         this.name = name;
+
+        register();
     }
 
-    public void registerItemModel(Item item) {
-        SunderedDeco.proxy.registerItemRenderer(this, 0, name);
+    public void register() {
+        ITEM_REGISTRY.register(this);
+        InvModel.add(this, 0, name);
     }
 }

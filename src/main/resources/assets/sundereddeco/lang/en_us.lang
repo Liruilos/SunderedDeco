@@ -1,9 +1,8 @@
 # Items
 item.ingot_copper.name=Copper Ingot
-item.corn.name=Corn
-item.corn_seed.name=Corn Seed
 item.copper_sword.name=Copper Sword
 
 # Blocks
 tile.ore_copper.name=Copper Ore
 tile.pedestal.name=Pedestal
+tile.table.name=Table

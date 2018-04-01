@@ -1,25 +1,24 @@
 package net.grallarius.sundereddeco.proxy;
 
-import net.grallarius.sundereddeco.InvModel;
+import net.grallarius.sundereddeco.block.ModBlocks;
+import net.grallarius.sundereddeco.item.ModItems;
+import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-public class ClientProxy extends ServerProxy {
+public class ServerProxy {
 
-    @Override
     public void preInit(FMLPreInitializationEvent event) {
-        super.preInit(event);
-        InvModel.register();
+        ModBlocks.preInit();
+        ModItems.preInit();
     }
 
-    @Override
     public void init(FMLInitializationEvent event) {
-        super.init(event);
+        ModRecipes.init();
     }
 
-    @Override
     public void postInit(FMLPostInitializationEvent event) {
-        super.postInit(event);
+
     }
 }
