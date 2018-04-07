@@ -1,14 +1,13 @@
 ﻿{
-	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
-		"0": "blocks/WoodBrown",
-		"particle": "blocks/WoodBrown"
+		"0": "blocks/planks_spruce",
+		"particle": "blocks/planks_spruce"
 	},
 	"elements": [
 		{
 			"name": "cube",
 			"from": [11, 0, 3],
-			"to": [13, 6, 5],
+			"to": [13, 8, 5],
 			"faces": {
 				"north": {"uv": [0, 0, 2, 6], "texture": "#0"},
 				"east": {"uv": [0, 0, 2, 6], "texture": "#0"},
@@ -21,7 +20,7 @@
 		{
 			"name": "cube",
 			"from": [11, 0, 11],
-			"to": [13, 6, 13],
+			"to": [13, 8, 13],
 			"faces": {
 				"north": {"uv": [0, 0, 2, 6], "texture": "#0"},
 				"east": {"uv": [0, 0, 2, 6], "texture": "#0"},
@@ -33,8 +32,8 @@
 		},
 		{
 			"name": "cube",
-			"from": [4, 0, 11],
-			"to": [6, 6, 13],
+			"from": [3, 0, 11],
+			"to": [5, 8, 13],
 			"faces": {
 				"north": {"uv": [0, 0, 2, 6], "texture": "#0"},
 				"east": {"uv": [0, 0, 2, 6], "texture": "#0"},
@@ -46,8 +45,8 @@
 		},
 		{
 			"name": "cube",
-			"from": [4, 0, 3],
-			"to": [6, 6, 5],
+			"from": [3, 0, 3],
+			"to": [5, 8, 5],
 			"faces": {
 				"north": {"uv": [0, 0, 2, 6], "texture": "#0"},
 				"east": {"uv": [0, 0, 2, 6], "texture": "#0"},
@@ -58,9 +57,9 @@
 			}
 		},
 		{
-			"name": "cube",
-			"from": [3, 6, 2],
-			"to": [14, 8, 14],
+			"name": "seat",
+			"from": [2, 8, 2],
+			"to": [14, 10, 14],
 			"faces": {
 				"north": {"uv": [0, 0, 11, 2], "texture": "#0"},
 				"east": {"uv": [0, 0, 12, 2], "texture": "#0"},
