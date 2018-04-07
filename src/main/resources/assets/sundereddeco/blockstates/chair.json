@@ -1,0 +1,12 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": {
+      "model": "sundereddeco:chair"
+    },
+    "inventory": {
+      "model": "sundereddeco:chair",
+      "transform": "forge:default-block"
+    }
+  }
+}

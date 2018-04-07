@@ -43,9 +43,9 @@ public class BlockSittable extends BlockBase {
                                     EnumFacing facing, float hitX, float hitY, float hitZ) {
         List<SittableEntity> sittables = world.getEntitiesWithinAABB(SittableEntity.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)));
         if (sittables.isEmpty()) {
-            SittableEntity stool = new SittableEntity(world, pos);
-            world.spawnEntity(stool);
-            player.startRiding(stool);
+            SittableEntity sittable = new SittableEntity(world, pos);
+            world.spawnEntity(sittable);
+            player.startRiding(sittable);
         }
         return true;
     }
