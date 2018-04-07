@@ -7,11 +7,15 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockChair extends BlockSittable {
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.125D, 0.0D,0.125D,0.875D,1.0D,0.875D);
+    public BlockChair() {
+        super( "chair");
+    }
+
+    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.065D, 0.0D,0.065D,0.935D,0.62D,0.935D);
 
     //directional code
 
-    //ability to be higher than 1 block
+    //model higher than 1 block - make blocks unable to be placed directly on top? or leave so back is unbounded?
 
     @Override
     @Deprecated

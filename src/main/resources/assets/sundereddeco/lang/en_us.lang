@@ -6,3 +6,5 @@ item.copper_sword.name=Copper Sword
 tile.ore_copper.name=Copper Ore
 tile.pedestal.name=Pedestal
 tile.table.name=Table
+tile.stool.name=Stool
+tile.chair.name=Chair
