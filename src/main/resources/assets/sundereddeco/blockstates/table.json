@@ -1,11 +1,28 @@
 {
   "forge_marker": 1,
+  "defaults": {
+    "model": "sundereddeco:table_top",
+    "uvlock": true
+  },
   "variants": {
-    "normal": {
-      "model": "sundereddeco:table"
+    "northwest": {
+      "true": {"submodel": "sundereddeco:table_leg" },
+      "false": {}
+    },
+    "northeast": {
+      "true": {"submodel": "sundereddeco:table_leg", "y": 90 },
+      "false": {}
+    },
+    "southeast": {
+      "true": {"submodel": "sundereddeco:table_leg", "y": 180 },
+      "false": {}
+    },
+    "southwest": {
+      "true": {"submodel": "sundereddeco:table_leg", "y": 270 },
+      "false": {}
     },
     "inventory": {
-      "model": "sundereddeco:table",
+      "model": "sundereddeco:table_full",
       "transform": "forge:default-block"
     }
   }
