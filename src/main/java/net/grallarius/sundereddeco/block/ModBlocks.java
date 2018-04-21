@@ -1,10 +1,7 @@
 package net.grallarius.sundereddeco.block;
 
 
-import net.grallarius.sundereddeco.block.furniture.BlockChair;
-import net.grallarius.sundereddeco.block.furniture.BlockPedestal;
-import net.grallarius.sundereddeco.block.furniture.BlockSittable;
-import net.grallarius.sundereddeco.block.furniture.BlockTable;
+import net.grallarius.sundereddeco.block.furniture.*;
 
 public class ModBlocks {
 
@@ -12,7 +9,8 @@ public class ModBlocks {
     public static BlockPedestal pedestal = new BlockPedestal();
     public static BlockTable table = new BlockTable();
     public static BlockSittable stool = new BlockSittable("stool");
-    public static BlockChair chair = new BlockChair();
+    public static BlockChair chair = new BlockChair("chair");
+    public static BlockConnectedChair parkbench = new BlockConnectedChair();
 
     public static void preInit() {
                 oreCopper.register();
@@ -20,6 +18,7 @@ public class ModBlocks {
                 table.register();
                 stool.register();
                 chair.register();
+                parkbench.register();
     }
 
     public static void registerBlocks() {

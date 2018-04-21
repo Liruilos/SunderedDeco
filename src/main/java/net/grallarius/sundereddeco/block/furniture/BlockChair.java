@@ -20,8 +20,8 @@ public class BlockChair extends BlockSittable {
     //directional code
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-    public BlockChair() {
-        super( "chair");
+    public BlockChair(String name) {
+        super(name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
     }
 

@@ -1,7 +1,7 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "sundereddeco:parkbench_full"
+    "model": "sundereddeco:parkbench_seat"
   },
   "variants": {
     "facing": {
@@ -9,6 +9,14 @@
       "east":  { "y": 180 },
       "south": { "y": 270 },
       "west":  { "y": 0 }
+    },
+    "leftside": {
+      "true": {"submodel": "sundereddeco:parkbench_leftside" },
+      "false": {}
+    },
+    "rightside": {
+      "true": {"submodel": "sundereddeco:parkbench_rightside"},
+      "false": {}
     },
     "inventory": {
       "model": "sundereddeco:parkbench_full",

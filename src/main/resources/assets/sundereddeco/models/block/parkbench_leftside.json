@@ -1,0 +1,57 @@
+﻿{
+	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+	"textures": {
+		"0": "blocks/planks_spruce",
+		"particle": "blocks/planks_spruce"
+	},
+	"elements": [
+		{
+			"name": "legSE",
+			"from": [12, 0, 14],
+			"to": [14, 8, 16],
+			"faces": {
+				"north": { "texture": "#0"},
+				"east": { "texture": "#0"},
+				"south": { "texture": "#0"},
+				"west": { "texture": "#0"},
+				"down": { "texture": "#0"}
+			}
+		},
+		{
+			"name": "legSW",
+			"from": [0, 0, 14],
+			"to": [2, 8, 16],
+			"faces": {
+				"north": { "texture": "#0"},
+				"east": { "texture": "#0"},
+				"south": { "texture": "#0"},
+				"west": { "texture": "#0"},
+				"down": { "texture": "#0"}
+			}
+		},
+		{
+			"name": "arm",
+			"from": [12, 10, 14],
+			"to": [14, 12, 16],
+			"faces": {
+				"north": { "texture": "#0"},
+				"east": { "texture": "#0"},
+				"south": { "texture": "#0"},
+				"west": { "texture": "#0"}
+			}
+		},
+		{
+			"name": "arm_top",
+			"from": [2, 12, 14],
+			"to": [14, 14, 16],
+			"faces": {
+				"north": { "texture": "#0"},
+				"east": { "texture": "#0"},
+				"south": { "texture": "#0"},
+				"west": { "texture": "#0"},
+				"up": {"texture": "#0"},
+				"down": {"texture": "#0"}
+			}
+		}
+	]
+}
