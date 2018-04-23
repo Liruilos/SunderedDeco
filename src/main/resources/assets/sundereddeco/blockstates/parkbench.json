@@ -18,6 +18,18 @@
       "true": {"submodel": "sundereddeco:parkbench_rightside"},
       "false": {}
     },
+    "leftcorner": {
+      "true": {"submodel": "sundereddeco:parkbench_back", "y": 270},
+      "false": {}
+    },
+    "rightcorner": {
+      "true": {"submodel": "sundereddeco:parkbench_back", "y": 90},
+      "false": {}
+    },
+    "hasback": {
+      "true": {"submodel": "sundereddeco:parkbench_back"},
+      "false": {}
+    },
     "inventory": {
       "model": "sundereddeco:parkbench_full",
       "transform": "forge:default-block"

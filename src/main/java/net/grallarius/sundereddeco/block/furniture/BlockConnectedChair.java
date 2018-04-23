@@ -16,13 +16,19 @@ public class BlockConnectedChair extends BlockChair {
     public static final PropertyBool LEFTSIDE = PropertyBool.create("leftside");
     /** Whether there should be legs to the right */
     public static final PropertyBool RIGHTSIDE = PropertyBool.create("rightside");
+    /** Whether there should be legs to the right */
+    public static final PropertyBool LEFTCORNER = PropertyBool.create("leftcorner");
+    /** Whether there should be legs to the right */
+    public static final PropertyBool RIGHTCORNER = PropertyBool.create("rightcorner");
+    /** Whether there should be legs to the right */
+    public static final PropertyBool HASBACK = PropertyBool.create("hasback");
 
     public BlockConnectedChair() {
         super("parkbench");
     }
 
-    /** If no other connectable Chair to the left side (anticlockwise in y) in the same axis then add left side submodel */
-    /** If no other connectable Chair to the right side (clockwise in y) in the same axis then add right side submodel */
+
+    /** Logic for connectable chair submodels */
     @Override
     @Deprecated
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
@@ -30,12 +36,27 @@ public class BlockConnectedChair extends BlockChair {
 
         IBlockState blockleft = worldIn.getBlockState(pos.offset(state.getValue(FACING).rotateYCCW()));
         IBlockState blockright = worldIn.getBlockState(pos.offset(state.getValue(FACING).rotateY()));
+        IBlockState blockfront = worldIn.getBlockState(pos.offset(state.getValue(FACING).getOpposite()));
+        IBlockState blockback = worldIn.getBlockState(pos.offset(state.getValue(FACING)));
 
-        boolean leftChair = blockleft.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockleft.getValue(FACING));
-        boolean rightChair = blockright.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockright.getValue(FACING));
+        boolean leftChair = blockleft.getBlock() instanceof BlockConnectedChair && !(state.getValue(FACING) == blockleft.getValue(FACING).getOpposite());
+        boolean rightChair = blockright.getBlock() instanceof BlockConnectedChair && !(state.getValue(FACING) == blockright.getValue(FACING).getOpposite());
+        boolean frontChairLeft = blockfront.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockfront.getValue(FACING).rotateY());
+        boolean frontChairRight = blockfront.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockfront.getValue(FACING).rotateYCCW());
+        boolean backChairLeft = blockback.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockback.getValue(FACING).rotateY());
+        boolean backChairRight = blockback.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockback.getValue(FACING).rotateYCCW());
 
-        return state.withProperty(LEFTSIDE, !leftChair)
-                .withProperty(RIGHTSIDE,  !rightChair);
+        /** LEFTCORNER / RIGHTCORNER submodels add back rotated in correct position to make internal corners */
+        /** LEFTSIDE /RIGHTSIDE submodel added if no other connectable Chair to the side (in any direction but opposite) */
+        /** Submodel for sides must be separate as submodel is mirrored not rotated, unlike for the corners */
+        /** HASBACK property usually true, exception is when forming an outer corner */
+
+
+        return state.withProperty(LEFTCORNER, frontChairLeft && !leftChair)
+                .withProperty(RIGHTCORNER, frontChairRight && !rightChair)
+                .withProperty(LEFTSIDE, !leftChair && !frontChairLeft && !backChairRight)
+                .withProperty(RIGHTSIDE,  !rightChair && !frontChairRight && !backChairLeft)
+                .withProperty(HASBACK, !((backChairLeft && !rightChair && !frontChairLeft) || (backChairRight && !leftChair && !frontChairRight)));
 
     }
 
@@ -47,6 +68,6 @@ public class BlockConnectedChair extends BlockChair {
 
     @Override
     protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING, LEFTSIDE, RIGHTSIDE});
+        return new BlockStateContainer(this, new IProperty[] {FACING, LEFTSIDE, RIGHTSIDE, LEFTCORNER, RIGHTCORNER, HASBACK});
     }
 }
