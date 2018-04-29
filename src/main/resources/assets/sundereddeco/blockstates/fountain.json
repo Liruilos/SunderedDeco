@@ -1,0 +1,24 @@
+{
+  "forge_marker": 1,
+  "variants": {
+    "normal": {
+      "model": "sundereddeco:fountain_single"
+    },
+    "northwest": {
+      "model": "sundereddeco:fountain_corner"
+    },
+    "northwest": {
+      "model": "sundereddeco:fountain_corner", "y": 90
+    },
+    "northwest": {
+      "model": "sundereddeco:fountain_corner", "y": 180
+    },
+    "northwest": {
+      "model": "sundereddeco:fountain_corner", "y": 270
+    },
+    "inventory": {
+      "model": "sundereddeco:fountain_single",
+      "transform": "forge:default-block"
+    }
+  }
+}
