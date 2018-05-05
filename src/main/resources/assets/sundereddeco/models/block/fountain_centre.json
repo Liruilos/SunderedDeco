@@ -2,7 +2,8 @@
 	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
 	"textures": {
 		"0": "blocks/stone",
-		"1": "blocks/water",
+		"1": "blocks/water_still",
+		"2": "blocks/water_flow",
 		"particle": "blocks/stone"
 	},
 	"elements": [
@@ -28,6 +29,66 @@
 			"to": [16, 12, 16],
 			"faces": {
 				"up": {"uv": [0, 0, 16, 16], "texture": "#1"}
+			}
+		},
+		{
+			"name": "spring_pole",
+			"from": [7, 10, 7],
+			"to": [9, 18, 9],
+			"faces": {
+				"north": {"uv": [0, 0, 2, 5], "texture": "#0"},
+				"east": {"uv": [0, 0, 2, 5], "texture": "#0"},
+				"south": {"uv": [0, 0, 2, 5], "texture": "#0"},
+				"west": {"uv": [0, 0, 2, 5], "texture": "#0"},
+				"up": {"uv": [0, 0, 2, 2], "texture": "#0"}
+			}
+		},
+		{
+			"name": "spring_top",
+			"from": [5, 18, 5],
+			"to": [11, 20, 11],
+			"faces": {
+				"north": {"uv": [0, 0, 4, 1], "texture": "#2"},
+				"east": {"uv": [0, 0, 4, 1], "texture": "#2"},
+				"south": {"uv": [0, 0, 4, 1], "texture": "#2"},
+				"west": {"uv": [0, 0, 4, 1], "texture": "#2"},
+				"up": {"uv": [0, 0, 4, 4], "texture": "#1"}
+			}
+		},
+		{
+			"name": "spring_side",
+			"from": [5, 12, 10],
+			"to": [10, 18, 11],
+			"faces": {
+				"south": {"uv": [0, 0, 3, 3], "texture": "#2"},
+				"west": {"uv": [0, 0, 1, 3], "texture": "#2"}
+			}
+		},
+		{
+			"name": "spring_side",
+			"from": [6, 12, 5],
+			"to": [11, 18, 6],
+			"faces": {
+				"north": {"uv": [0, 0, 3, 3], "texture": "#2"},
+				"east": {"uv": [0, 0, 1, 3], "texture": "#2"}
+			}
+		},
+		{
+			"name": "spring_side",
+			"from": [10, 12, 6],
+			"to": [11, 18, 11],
+			"faces": {
+				"east": {"uv": [0, 0, 3, 3], "texture": "#2"},
+				"south": {"uv": [0, 0, 1, 3], "texture": "#2"}
+			}
+		},
+		{
+			"name": "spring_side",
+			"from": [5, 12, 5],
+			"to": [6, 18, 10],
+			"faces": {
+				"north": {"uv": [0, 0, 1, 3], "texture": "#2"},
+				"west": {"uv": [0, 0, 3, 3], "texture": "#2"}
 			}
 		}
 	]

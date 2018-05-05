@@ -1,24 +1,49 @@
 {
   "forge_marker": 1,
+  "defaults": {
+    "model": "sundereddeco:fountain_single",
+    "uvlock": true
+  },
   "variants": {
-    "normal": {
-      "model": "sundereddeco:fountain_single"
-    },
     "northwest": {
-      "model": "sundereddeco:fountain_corner"
+      "true": {"model": "sundereddeco:fountain_corner"},
+      "false": {}
     },
-    "northwest": {
-      "model": "sundereddeco:fountain_corner", "y": 90
+    "northeast": {
+      "true": {"model": "sundereddeco:fountain_corner", "y": 90},
+      "false": {}
     },
-    "northwest": {
-      "model": "sundereddeco:fountain_corner", "y": 180
+    "southeast": {
+      "true": {"model": "sundereddeco:fountain_corner", "y": 180},
+      "false": {}
     },
-    "northwest": {
-      "model": "sundereddeco:fountain_corner", "y": 270
+    "southwest": {
+      "true": {"model": "sundereddeco:fountain_corner", "y": 270},
+      "false": {}
     },
     "inventory": {
       "model": "sundereddeco:fountain_single",
       "transform": "forge:default-block"
+    },
+    "west": {
+      "true": {"model": "sundereddeco:fountain_side"},
+      "false": {}
+    },
+    "north": {
+      "true": {"model": "sundereddeco:fountain_side", "y": 90},
+      "false": {}
+    },
+    "east": {
+      "true": {"model": "sundereddeco:fountain_side", "y": 180},
+      "false": {}
+    },
+    "south": {
+      "true": {"model": "sundereddeco:fountain_side", "y": 270},
+      "false": {}
+    },
+    "centre": {
+      "true": {"model": "sundereddeco:fountain_centre"},
+      "false": {}
     }
   }
 }
