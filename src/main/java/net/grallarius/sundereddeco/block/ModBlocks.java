@@ -1,6 +1,7 @@
 package net.grallarius.sundereddeco.block;
 
 
+import net.grallarius.sundereddeco.block.counter.BlockCounter;
 import net.grallarius.sundereddeco.block.furniture.*;
 
 public class ModBlocks {
@@ -11,6 +12,8 @@ public class ModBlocks {
     public static BlockSittable stool = new BlockSittable("stool");
     public static BlockChair chair = new BlockChair("chair");
     public static BlockConnectedChair parkbench = new BlockConnectedChair();
+    public static BlockCounter counter = new BlockCounter();
+    public static BlockPedestal pedstal = new BlockPedestal();
 
     public static void preInit() {
                 oreCopper.register();
@@ -19,6 +22,9 @@ public class ModBlocks {
                 stool.register();
                 chair.register();
                 parkbench.register();
+                counter.register();
+                pedstal.register();
+
     }
 
     public static void registerBlocks() {
