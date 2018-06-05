@@ -1,5 +1,6 @@
 package net.grallarius.sundereddeco.block;
 
+import net.grallarius.sundereddeco.ModGuiHandler;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -47,13 +48,7 @@ public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
                 }
                 tile.markDirty();
             } else {
-                ItemStack stack = itemHandler.getStackInSlot(0);
-                if (!stack.isEmpty()) {
-                    String localized = SunderedDeco.proxy.localize(stack.getUnlocalizedName() + ".name");
-                    Minecraft.getMinecraft().player.sendChatMessage(stack.getCount() + "x " + localized);
-                } else {
-                    Minecraft.getMinecraft().player.sendChatMessage("Empty");
-                }
+                player.openGui(SunderedDeco.instance, ModGuiHandler.PEDESTAL, world, pos.getX(), pos.getY(), pos.getZ());
             }
         }
         return true;

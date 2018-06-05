@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 
@@ -33,6 +34,7 @@ public class SunderedDeco {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
     }
 
     @EventHandler

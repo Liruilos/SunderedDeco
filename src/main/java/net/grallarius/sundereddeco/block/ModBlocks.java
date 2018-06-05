@@ -13,7 +13,7 @@ public class ModBlocks {
     public static BlockChair chair = new BlockChair("chair");
     public static BlockConnectedChair parkbench = new BlockConnectedChair();
     public static BlockCounter counter = new BlockCounter();
-    public static BlockPedestal pedstal = new BlockPedestal();
+    public static BlockPedestal pedestal = new BlockPedestal();
 
     public static void preInit() {
                 oreCopper.register();
@@ -23,7 +23,7 @@ public class ModBlocks {
                 chair.register();
                 parkbench.register();
                 counter.register();
-                pedstal.register();
+                pedestal.register();
 
     }
 
