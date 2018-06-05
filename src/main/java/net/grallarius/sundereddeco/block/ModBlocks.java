@@ -3,6 +3,7 @@ package net.grallarius.sundereddeco.block;
 
 import net.grallarius.sundereddeco.block.counter.BlockCounter;
 import net.grallarius.sundereddeco.block.furniture.*;
+import net.grallarius.sundereddeco.block.pedestal.BlockPedestal;
 
 public class ModBlocks {
 

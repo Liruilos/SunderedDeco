@@ -1,8 +1,8 @@
 package net.grallarius.sundereddeco;
 
-import net.grallarius.sundereddeco.block.ContainerPedestal;
-import net.grallarius.sundereddeco.block.GuiPedestal;
-import net.grallarius.sundereddeco.block.TileEntityPedestal;
+import net.grallarius.sundereddeco.block.pedestal.ContainerPedestal;
+import net.grallarius.sundereddeco.block.pedestal.GuiPedestal;
+import net.grallarius.sundereddeco.block.pedestal.TileEntityPedestal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.math.BlockPos;

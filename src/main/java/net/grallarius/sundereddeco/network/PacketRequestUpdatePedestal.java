@@ -1,7 +1,7 @@
 package net.grallarius.sundereddeco.network;
 
 import io.netty.buffer.ByteBuf;
-import net.grallarius.sundereddeco.block.TileEntityPedestal;
+import net.grallarius.sundereddeco.block.pedestal.TileEntityPedestal;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.FMLCommonHandler;

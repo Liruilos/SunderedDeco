@@ -1,6 +1,7 @@
-package net.grallarius.sundereddeco.block;
+package net.grallarius.sundereddeco.block.pedestal;
 
 import net.grallarius.sundereddeco.SunderedDeco;
+import net.grallarius.sundereddeco.block.ModBlocks;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;

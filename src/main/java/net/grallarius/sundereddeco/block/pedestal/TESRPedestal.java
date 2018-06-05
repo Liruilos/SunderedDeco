@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.block;
+package net.grallarius.sundereddeco.block.pedestal;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;

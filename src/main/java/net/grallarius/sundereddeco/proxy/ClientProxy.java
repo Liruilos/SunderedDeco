@@ -1,8 +1,8 @@
 package net.grallarius.sundereddeco.proxy;
 
 import net.grallarius.sundereddeco.InvModel;
-import net.grallarius.sundereddeco.block.TESRPedestal;
-import net.grallarius.sundereddeco.block.TileEntityPedestal;
+import net.grallarius.sundereddeco.block.pedestal.TESRPedestal;
+import net.grallarius.sundereddeco.block.pedestal.TileEntityPedestal;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;

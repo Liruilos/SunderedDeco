@@ -1,5 +1,6 @@
-package net.grallarius.sundereddeco.block;
+package net.grallarius.sundereddeco.block.pedestal;
 
+import net.grallarius.sundereddeco.block.pedestal.TileEntityPedestal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -9,8 +10,6 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
-
-import java.awt.*;
 
 public class ContainerPedestal extends Container {
 

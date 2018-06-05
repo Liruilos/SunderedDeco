@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.block;
+package net.grallarius.sundereddeco.block.pedestal;
 
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.network.PacketRequestUpdatePedestal;
