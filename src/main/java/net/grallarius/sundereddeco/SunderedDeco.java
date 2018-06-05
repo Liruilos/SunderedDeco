@@ -1,6 +1,8 @@
 package net.grallarius.sundereddeco;
 
 import net.grallarius.sundereddeco.client.SunderedDecoTab;
+import net.grallarius.sundereddeco.network.PacketRequestUpdatePedestal;
+import net.grallarius.sundereddeco.network.PacketUpdatePedestal;
 import net.grallarius.sundereddeco.proxy.ServerProxy;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -12,7 +14,9 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
+import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.registries.IForgeRegistry;
 
 @Mod(modid = SunderedDeco.MODID, name = SunderedDeco.NAME, version = SunderedDeco.VERSION)
@@ -25,6 +29,8 @@ public class SunderedDeco {
     public static IForgeRegistry<Block> BLOCK_REGISTRY = GameRegistry.findRegistry(Block.class);
     public static IForgeRegistry<Item> ITEM_REGISTRY  = GameRegistry.findRegistry(Item.class);
 
+    public static SimpleNetworkWrapper wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(SunderedDeco.MODID);
+
     public static final SunderedDecoTab creativeTab = new SunderedDecoTab();
     public static final Item.ToolMaterial copperToolMaterial = EnumHelper.addToolMaterial("COPPER", 2, 500, 6, 2,14);
 
@@ -34,7 +40,13 @@ public class SunderedDeco {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         proxy.preInit(event);
+
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
+
+        wrapper.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, 0, Side.CLIENT);
+        wrapper.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, 1, Side.SERVER);
+
+        proxy.registerRenderers();
     }
 
     @EventHandler

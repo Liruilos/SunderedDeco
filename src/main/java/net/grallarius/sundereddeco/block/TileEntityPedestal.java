@@ -1,20 +1,42 @@
 package net.grallarius.sundereddeco.block;
 
+import net.grallarius.sundereddeco.SunderedDeco;
+import net.grallarius.sundereddeco.network.PacketRequestUpdatePedestal;
+import net.grallarius.sundereddeco.network.PacketUpdatePedestal;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
 public class TileEntityPedestal extends TileEntity {
+    public long lastChangeTime;
 
-    private ItemStackHandler inventory = new ItemStackHandler(1);
+    public ItemStackHandler inventory = new ItemStackHandler(1) {
+        @Override
+        protected void onContentsChanged(int slot){
+            if (!world.isRemote) {
+                lastChangeTime = world.getTotalWorldTime();
+                SunderedDeco.wrapper.sendToAllAround(new PacketUpdatePedestal(TileEntityPedestal.this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
+            }
+        }
+    };
+
+    @Override
+    public void onLoad() {
+        if (world.isRemote) {
+            SunderedDeco.wrapper.sendToServer(new PacketRequestUpdatePedestal(this));
+        }
+    }
 
     public NBTTagCompound writeTONBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
+        compound.setLong("lastChangeTime", lastChangeTime);
         return super.writeToNBT(compound);
     }
 
@@ -22,6 +44,7 @@ public class TileEntityPedestal extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"));
+        lastChangeTime =compound.getLong("lastChangeTime");
         super.readFromNBT(compound);
     }
 
@@ -35,5 +58,10 @@ public class TileEntityPedestal extends TileEntity {
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)inventory : super.getCapability(capability, facing);
+    }
+
+    @Override
+    public AxisAlignedBB getRenderBoundingBox() {
+        return new AxisAlignedBB(getPos(), getPos().add(1, 2, 1));
     }
 }

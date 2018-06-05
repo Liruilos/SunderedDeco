@@ -1,7 +1,10 @@
 package net.grallarius.sundereddeco.proxy;
 
 import net.grallarius.sundereddeco.InvModel;
+import net.grallarius.sundereddeco.block.TESRPedestal;
+import net.grallarius.sundereddeco.block.TileEntityPedestal;
 import net.minecraft.client.resources.I18n;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -29,4 +32,8 @@ public class ClientProxy extends ServerProxy {
         return I18n.format(unlocalized, args);
     }
 
+    @Override
+    public void registerRenderers() {
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestal.class, new TESRPedestal());
+    }
 }
