@@ -3,7 +3,6 @@ package net.grallarius.sundereddeco.block.pedestal;
 import net.grallarius.sundereddeco.ModGuiHandler;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.BlockTileEntity;
-import net.grallarius.sundereddeco.block.pedestal.TileEntityPedestal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;

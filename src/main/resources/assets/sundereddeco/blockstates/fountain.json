@@ -5,6 +5,30 @@
     "uvlock": true
   },
   "variants": {
+    "openwest": {
+      "true": {"model": "sundereddeco:fountain_onesideopen"},
+      "false": {}
+    },
+    "opennorth": {
+      "true": {"model": "sundereddeco:fountain_onesideopen", "y": 90},
+      "false": {}
+    },
+    "openeast": {
+      "true": {"model": "sundereddeco:fountain_onesideopen", "y": 180},
+      "false": {}
+    },
+    "opensouth": {
+      "true": {"model": "sundereddeco:fountain_onesideopen", "y": 270},
+      "false": {}
+    },
+    "openeastwest": {
+      "true": {"model": "sundereddeco:fountain_oppsidesopen"},
+      "false": {}
+    },
+    "opennorthsouth": {
+      "true": {"model": "sundereddeco:fountain_oppsidesopen", "y": 90},
+      "false": {}
+    },
     "northwest": {
       "true": {"model": "sundereddeco:fountain_corner"},
       "false": {}

@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.block.furniture;
+package net.grallarius.sundereddeco.block.garden;
 
 import net.grallarius.sundereddeco.block.BlockBase;
 import net.minecraft.block.material.Material;
@@ -11,7 +11,15 @@ import net.minecraft.world.IBlockAccess;
 
 public class BlockFountain extends BlockBase {
 
-    /** Whether there should be a leg in the NW position */
+    /** Working out which type of model to place so all are connected correctly, open means the fountain connects in
+     * that/those direction(s), side means it connects to that entire side */
+
+    public static final PropertyBool OPENW = PropertyBool.create("openwest");
+    public static final PropertyBool OPENN = PropertyBool.create("opennorth");
+    public static final PropertyBool OPENE = PropertyBool.create("openeast");
+    public static final PropertyBool OPENS = PropertyBool.create("opensouth");
+    public static final PropertyBool OPENEW = PropertyBool.create("openeastwest");
+    public static final PropertyBool OPENNS = PropertyBool.create("opennorthsouth");
     public static final PropertyBool CORNERNW = PropertyBool.create("northwest");
     public static final PropertyBool CORNERNE = PropertyBool.create("northeast");
     public static final PropertyBool CORNERSE = PropertyBool.create("southeast");
@@ -34,25 +42,27 @@ public class BlockFountain extends BlockBase {
         boolean southFountain = worldIn.getBlockState(pos.south()).getBlock() instanceof BlockFountain;
         boolean eastFountain = worldIn.getBlockState(pos.east()).getBlock() instanceof BlockFountain;
         boolean westFountain = worldIn.getBlockState(pos.west()).getBlock() instanceof BlockFountain;
-        boolean northwestFountain = worldIn.getBlockState(pos.add(-1,0,-1)).getBlock() instanceof BlockFountain;
-        boolean northeastFountain = worldIn.getBlockState(pos.add(1,0,-1)).getBlock() instanceof BlockFountain;
-        boolean southeastFountain = worldIn.getBlockState(pos.add(1,0,1)).getBlock() instanceof BlockFountain;
-        boolean southwestFountain = worldIn.getBlockState(pos.add(-1,0,1)).getBlock() instanceof BlockFountain;
 
-        return state.withProperty(CORNERNW, northFountain && westFountain && northwestFountain && !southFountain && !eastFountain)
-                .withProperty(CORNERNE, northFountain && eastFountain && northeastFountain && !southFountain && !westFountain)
-                .withProperty(CORNERSE, southFountain && eastFountain && southeastFountain && !northFountain && ! westFountain)
-                .withProperty(CORNERSW, southFountain && westFountain && southwestFountain && !northFountain && !eastFountain)
+        return state.withProperty(OPENW, !northFountain && westFountain && !southFountain && !eastFountain)
+                .withProperty(OPENN, northFountain && !westFountain && !southFountain && !eastFountain)
+                .withProperty(OPENE, !northFountain && !westFountain && !southFountain && eastFountain)
+                .withProperty(OPENS, !northFountain && !westFountain && southFountain && !eastFountain)
+                .withProperty(OPENEW, !northFountain && westFountain && !southFountain && eastFountain)
+                .withProperty(OPENNS, northFountain && !westFountain && southFountain && !eastFountain)
+                .withProperty(CORNERNW, northFountain && westFountain && !southFountain && !eastFountain)
+                .withProperty(CORNERNE, northFountain && eastFountain && !southFountain && !westFountain)
+                .withProperty(CORNERSE, southFountain && eastFountain && !northFountain && !westFountain)
+                .withProperty(CORNERSW, southFountain && westFountain && !northFountain && !eastFountain)
                 .withProperty(SIDEW, westFountain && northFountain && southFountain && !eastFountain)
                 .withProperty(SIDEN, northFountain && westFountain && eastFountain && !southFountain)
                 .withProperty(SIDEE, eastFountain && northFountain && southFountain && !westFountain)
                 .withProperty(SIDES, southFountain && westFountain && eastFountain && !northFountain)
-                .withProperty(CENTRE, southFountain && westFountain && eastFountain && northFountain && southwestFountain && southeastFountain && northeastFountain && northwestFountain);
+                .withProperty(CENTRE, southFountain && westFountain && eastFountain && northFountain);
     }
 
     protected BlockStateContainer createBlockState()
     {
-        return new BlockStateContainer(this, new IProperty[] {CORNERNW, CORNERNE, CORNERSE, CORNERSW, SIDEW, SIDEN, SIDEE, SIDES, CENTRE});
+        return new BlockStateContainer(this, new IProperty[] {OPENW, OPENN, OPENE, OPENS, OPENEW, OPENNS, CORNERNW, CORNERNE, CORNERSE, CORNERSW, SIDEW, SIDEN, SIDEE, SIDES, CENTRE});
     }
 
     @Override
