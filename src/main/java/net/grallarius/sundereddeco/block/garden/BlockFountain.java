@@ -1,13 +1,21 @@
 package net.grallarius.sundereddeco.block.garden;
 
 import net.grallarius.sundereddeco.block.BlockBase;
+import net.grallarius.sundereddeco.block.ModBlocks;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Blocks;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockFountain extends BlockBase {
 
@@ -30,9 +38,9 @@ public class BlockFountain extends BlockBase {
     public static final PropertyBool SIDES = PropertyBool.create("south");
     public static final PropertyBool CENTRE = PropertyBool.create("centre");
 
+
     public BlockFountain() {
-        super(Material.ROCK, "fountain");
-    }
+        super(Material.ROCK, "fountain"); }
 
     @Override
     @Deprecated
@@ -75,6 +83,34 @@ public class BlockFountain extends BlockBase {
     @Deprecated
     public boolean isFullCube(IBlockState state) {
         return false;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public BlockRenderLayer getBlockLayer()
+    {
+        return BlockRenderLayer.TRANSLUCENT;
+    }
+
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+        IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
+        Block block = iblockstate.getBlock();
+
+        if (this == ModBlocks.fountain)
+        {
+            if (blockState != iblockstate)
+            {
+                return true;
+            }
+
+            if (block == this)
+            {
+                return false;
+            }
+        }
+
+        return (block != this) && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 
     public int getMetaFromState(IBlockState state)

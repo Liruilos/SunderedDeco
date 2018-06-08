@@ -34,7 +34,7 @@ public class TileEntityPedestal extends TileEntity {
         }
     }
 
-    public NBTTagCompound writeTONBT(NBTTagCompound compound) {
+    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
         compound.setLong("lastChangeTime", lastChangeTime);
         return super.writeToNBT(compound);
