@@ -1,0 +1,28 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "sundereddeco:garden/planterbox_single",
+    "uvlock": true
+  },
+  "variants": {
+    "shape": {
+      "single": {"model": "sundereddeco:garden/planterbox_single"},
+      "endeast": {"model": "sundereddeco:garden/planterbox_end", "y": 180},
+      "endsouth": {"model": "sundereddeco:garden/planterbox_end", "y": 270},
+      "endwest": {"model": "sundereddeco:garden/planterbox_end"},
+      "endnorth": {"model": "sundereddeco:garden/planterbox_end", "y": 90},
+      "straighteastwest": {"model": "sundereddeco:garden/planterbox_straight"},
+      "straightnorthsouth": {"model": "sundereddeco:garden/planterbox_straight", "y": 90},
+      "northwest": {"model": "sundereddeco:garden/planterbox_corner", "y": 180},
+      "northeast": {"model": "sundereddeco:garden/planterbox_corner", "y": 270},
+      "southeast": {"model": "sundereddeco:garden/planterbox_corner"},
+      "southwest": {"model": "sundereddeco:garden/planterbox_corner", "y": 90},
+      "sideeast": {"model": "sundereddeco:garden/planterbox_side", "y": 90},
+      "sidesouth": {"model": "sundereddeco:garden/planterbox_side", "y": 180},
+      "sidewest": {"model": "sundereddeco:garden/planterbox_side", "y": 270},
+      "sidenorth": {"model": "sundereddeco:garden/planterbox_side"},
+      "centre": {"model": "sundereddeco:garden/planterbox_centre"}
+    },
+    "inventory": {"model": "sundereddeco:garden/planterbox_single", "transform": "forge:default-block"}
+  }
+}

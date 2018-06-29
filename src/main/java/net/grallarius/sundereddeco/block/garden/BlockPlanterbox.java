@@ -1,27 +1,26 @@
 package net.grallarius.sundereddeco.block.garden;
 
 import net.grallarius.sundereddeco.block.BlockBase;
-import net.grallarius.sundereddeco.block.ModBlocks;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockFountain extends BlockBase {
+public class BlockPlanterbox extends BlockBase {
+
+
 
     public static final PropertyEnum<EnumShape> SHAPE = PropertyEnum.create("shape", EnumShape.class);
 
-    public BlockFountain(String name) {
-        super(Material.ROCK, name); }
+    public BlockPlanterbox(String name){
+        super(Material.WOOD, name);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(SHAPE, EnumShape.SINGLE));
+    }
 
     @Override
     @Deprecated
@@ -36,51 +35,53 @@ public class BlockFountain extends BlockBase {
         /** Working out which type of model to place so all are connected correctly, end = |_|    straight = | |
          * corner = |_     side = _     centre =     */
 
-        boolean northFountain = worldIn.getBlockState(pos.north()).getBlock() instanceof BlockFountain;
-        boolean southFountain = worldIn.getBlockState(pos.south()).getBlock() instanceof BlockFountain;
-        boolean eastFountain = worldIn.getBlockState(pos.east()).getBlock() instanceof BlockFountain;
-        boolean westFountain = worldIn.getBlockState(pos.west()).getBlock() instanceof BlockFountain;
+        boolean northPlanter = worldIn.getBlockState(pos.north()).getBlock() instanceof BlockPlanterbox;
+        boolean southPlanter = worldIn.getBlockState(pos.south()).getBlock() instanceof BlockPlanterbox;
+        boolean eastPlanter = worldIn.getBlockState(pos.east()).getBlock() instanceof BlockPlanterbox;
+        boolean westPlanter = worldIn.getBlockState(pos.west()).getBlock() instanceof BlockPlanterbox;
 
-        if (!northFountain && !westFountain && !southFountain && !eastFountain) {
+        if (!northPlanter && !westPlanter && !southPlanter && !eastPlanter) {
             return EnumShape.SINGLE;
-        } else if (!northFountain && westFountain && !southFountain && !eastFountain) {
+        } else if (!northPlanter && westPlanter && !southPlanter && !eastPlanter) {
             return EnumShape.ENDE;
-        } else if (northFountain && !westFountain && !southFountain && !eastFountain) {
+        } else if (northPlanter && !westPlanter && !southPlanter && !eastPlanter) {
             return EnumShape.ENDS;
-        } else if (!northFountain && !westFountain && !southFountain && eastFountain) {
+        } else if (!northPlanter && !westPlanter && !southPlanter && eastPlanter) {
             return EnumShape.ENDW;
-        } else if (!northFountain && !westFountain && southFountain && !eastFountain) {
+        } else if (!northPlanter && !westPlanter && southPlanter && !eastPlanter) {
             return EnumShape.ENDN;
-        } else if (!northFountain && westFountain && !southFountain && eastFountain) {
+        } else if (!northPlanter && westPlanter && !southPlanter && eastPlanter) {
             return EnumShape.STRAIGHTEW;
-        } else if (northFountain && !westFountain && southFountain && !eastFountain) {
+        } else if (northPlanter && !westPlanter && southPlanter && !eastPlanter) {
             return EnumShape.STRAIGHTNS;
-        } else if (northFountain && westFountain && !southFountain && !eastFountain) {
+        } else if (northPlanter && westPlanter && !southPlanter && !eastPlanter) {
             return EnumShape.CORNERNW;
-        } else if (northFountain && eastFountain && !southFountain && !westFountain) {
+        } else if (northPlanter && eastPlanter && !southPlanter && !westPlanter) {
             return EnumShape.CORNERNE;
-        } else if (southFountain && eastFountain && !northFountain && !westFountain) {
+        } else if (southPlanter && eastPlanter && !northPlanter && !westPlanter) {
             return EnumShape.CORNERSE;
-        } else if (southFountain && westFountain && !northFountain && !eastFountain) {
+        } else if (southPlanter && westPlanter && !northPlanter && !eastPlanter) {
             return EnumShape.CORNERSW;
-        } else if (westFountain && northFountain && southFountain && !eastFountain) {
+        } else if (westPlanter && northPlanter && southPlanter && !eastPlanter) {
             return EnumShape.SIDEE;
-        } else if (northFountain && westFountain && eastFountain && !southFountain) {
+        } else if (northPlanter && westPlanter && eastPlanter && !southPlanter) {
             return EnumShape.SIDES;
-        } else if (eastFountain && northFountain && southFountain && !westFountain) {
+        } else if (eastPlanter && northPlanter && southPlanter && !westPlanter) {
             return EnumShape.SIDEW;
-        } else if (southFountain && westFountain && eastFountain && !northFountain) {
+        } else if (southPlanter && westPlanter && eastPlanter && !northPlanter) {
             return EnumShape.SIDEN;
-        } else if (southFountain && westFountain && eastFountain && northFountain) {
+        } else if (southPlanter && westPlanter && eastPlanter && northPlanter) {
             return EnumShape.CENTRE;
         }
         return EnumShape.SINGLE;
     }
 
+
     protected BlockStateContainer createBlockState()
     {
         return new BlockStateContainer(this, new IProperty[] {SHAPE});
     }
+
 
     @Override
     @Deprecated
@@ -94,30 +95,13 @@ public class BlockFountain extends BlockBase {
         return false;
     }
 
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.TRANSLUCENT;
-    }
-
-    @SideOnly(Side.CLIENT)
-    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
-    {
-        IBlockState iblockstate = blockAccess.getBlockState(pos.offset(side));
-        Block block = iblockstate.getBlock();
-
-        if (this == ModBlocks.fountain)
-        {
-                return false;
-        }
-
-        return (block != this) && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
-    }
-
     public int getMetaFromState(IBlockState state)
     {
         return 0;
     }
+
+    @Override
+    public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable){ return true;}
 
     public enum EnumShape implements IStringSerializable {
 

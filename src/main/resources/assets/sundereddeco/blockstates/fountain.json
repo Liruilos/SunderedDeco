@@ -1,73 +1,28 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "sundereddeco:fountain_single",
+    "model": "sundereddeco:garden/fountain_single",
     "uvlock": true
   },
   "variants": {
-    "openwest": {
-      "true": {"model": "sundereddeco:fountain_onesideopen"},
-      "false": {}
+    "shape": {
+      "single": {"model": "sundereddeco:garden/fountain_single"},
+      "endeast": {"model": "sundereddeco:garden/fountain_end"},
+      "endsouth": {"model": "sundereddeco:garden/fountain_end", "y": 90},
+      "endwest": {"model": "sundereddeco:garden/fountain_end", "y": 180},
+      "endnorth": {"model": "sundereddeco:garden/fountain_end", "y": 270},
+      "straighteastwest": {"model": "sundereddeco:garden/fountain_straight"},
+      "straightnorthsouth": {"model": "sundereddeco:garden/fountain_straight", "y": 90},
+      "northwest": {"model": "sundereddeco:garden/fountain_corner"},
+      "northeast": {"model": "sundereddeco:garden/fountain_corner", "y": 90},
+      "southeast": {"model": "sundereddeco:garden/fountain_corner", "y": 180},
+      "southwest": {"model": "sundereddeco:garden/fountain_corner", "y": 270},
+      "sideeast": {"model": "sundereddeco:garden/fountain_side"},
+      "sidesouth": {"model": "sundereddeco:garden/fountain_side", "y": 90},
+      "sidewest": {"model": "sundereddeco:garden/fountain_side", "y": 180},
+      "sidenorth": {"model": "sundereddeco:garden/fountain_side", "y": 270},
+      "centre": {"model": "sundereddeco:garden/fountain_centre"}
     },
-    "opennorth": {
-      "true": {"model": "sundereddeco:fountain_onesideopen", "y": 90},
-      "false": {}
-    },
-    "openeast": {
-      "true": {"model": "sundereddeco:fountain_onesideopen", "y": 180},
-      "false": {}
-    },
-    "opensouth": {
-      "true": {"model": "sundereddeco:fountain_onesideopen", "y": 270},
-      "false": {}
-    },
-    "openeastwest": {
-      "true": {"model": "sundereddeco:fountain_oppsidesopen"},
-      "false": {}
-    },
-    "opennorthsouth": {
-      "true": {"model": "sundereddeco:fountain_oppsidesopen", "y": 90},
-      "false": {}
-    },
-    "northwest": {
-      "true": {"model": "sundereddeco:fountain_corner"},
-      "false": {}
-    },
-    "northeast": {
-      "true": {"model": "sundereddeco:fountain_corner", "y": 90},
-      "false": {}
-    },
-    "southeast": {
-      "true": {"model": "sundereddeco:fountain_corner", "y": 180},
-      "false": {}
-    },
-    "southwest": {
-      "true": {"model": "sundereddeco:fountain_corner", "y": 270},
-      "false": {}
-    },
-    "inventory": {
-      "model": "sundereddeco:fountain_single",
-      "transform": "forge:default-block"
-    },
-    "west": {
-      "true": {"model": "sundereddeco:fountain_side"},
-      "false": {}
-    },
-    "north": {
-      "true": {"model": "sundereddeco:fountain_side", "y": 90},
-      "false": {}
-    },
-    "east": {
-      "true": {"model": "sundereddeco:fountain_side", "y": 180},
-      "false": {}
-    },
-    "south": {
-      "true": {"model": "sundereddeco:fountain_side", "y": 270},
-      "false": {}
-    },
-    "centre": {
-      "true": {"model": "sundereddeco:fountain_centre"},
-      "false": {}
-    }
+    "inventory": {"model": "sundereddeco:garden/fountain_single", "transform": "forge:default-block"}
   }
 }
