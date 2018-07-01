@@ -8,17 +8,18 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 
 public class BlockPlanterbox extends BlockBase {
 
 
-
     public static final PropertyEnum<EnumShape> SHAPE = PropertyEnum.create("shape", EnumShape.class);
+/*    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.0D, 0.0D,0.0D,1.0D,1.125D,1.0D);*/
 
     public BlockPlanterbox(String name){
-        super(Material.WOOD, name);
+        super(Material.ROCK, name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(SHAPE, EnumShape.SINGLE));
     }
 
@@ -157,4 +158,10 @@ public class BlockPlanterbox extends BlockBase {
         }
 
     }
+
+/*    @Override
+    @Deprecated
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+        return BOUNDBOX;
+    }*/
 }

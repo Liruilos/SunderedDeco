@@ -11,7 +11,7 @@ public class ModBlocks {
 
     public static BlockOre oreCopper = new BlockOre("ore_copper", "oreCopper");
     public static BlockFountain fountain = new BlockFountain("fountain");
-    public static BlockPlanterbox planterbox = new BlockPlanterbox("planterbox");
+    public static BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
     public static BlockTable table = new BlockTable();
     public static BlockSittable stool = new BlockSittable("stool");
     public static BlockChair chair = new BlockChair("chair");
@@ -22,7 +22,7 @@ public class ModBlocks {
     public static void preInit() {
                 oreCopper.register();
                 fountain.register();
-                planterbox.register();
+                largeplanterbox.register();
                 table.register();
                 stool.register();
                 chair.register();
