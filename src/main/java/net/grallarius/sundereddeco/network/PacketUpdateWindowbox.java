@@ -1,7 +1,7 @@
 package net.grallarius.sundereddeco.network;
 
 import io.netty.buffer.ByteBuf;
-import net.grallarius.sundereddeco.block.pedestal.TileEntityPedestal;
+import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
@@ -10,22 +10,22 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketUpdatePedestal implements IMessage {
+public class PacketUpdateWindowbox implements IMessage {
     private BlockPos pos;
     private ItemStack stack;
     private long lastChangeTime;
 
-    public PacketUpdatePedestal(BlockPos pos, ItemStack stack, long lastChangeTime) {
+    public PacketUpdateWindowbox(BlockPos pos, ItemStack stack, long lastChangeTime) {
         this.pos = pos;
         this.stack = stack;
         this.lastChangeTime = lastChangeTime;
     }
 
-    public PacketUpdatePedestal(TileEntityPedestal tep) {
-        this(tep.getPos(), tep.inventory.getStackInSlot(0), tep.lastChangeTime);
+    public PacketUpdateWindowbox(TileEntityWindowbox tew) {
+        this(tew.getPos(), tew.inventory.getStackInSlot(0), tew.lastChangeTime);
     }
 
-    public PacketUpdatePedestal() {
+    public PacketUpdateWindowbox() {
     }
 
     @Override
@@ -42,14 +42,14 @@ public class PacketUpdatePedestal implements IMessage {
         lastChangeTime = buf.readLong();
     }
 
-    public static class Handler implements IMessageHandler<PacketUpdatePedestal, IMessage> {
+    public static class Handler implements IMessageHandler<PacketUpdateWindowbox, IMessage> {
 
         @Override
-        public IMessage onMessage(PacketUpdatePedestal message, MessageContext ctx) {
+        public IMessage onMessage(PacketUpdateWindowbox message, MessageContext ctx) {
             Minecraft.getMinecraft().addScheduledTask(() -> {
-                TileEntityPedestal tep = (TileEntityPedestal)Minecraft.getMinecraft().world.getTileEntity(message.pos);
-                tep.inventory.setStackInSlot(0, message.stack);
-                tep.lastChangeTime = message.lastChangeTime;
+                TileEntityWindowbox tew = (TileEntityWindowbox)Minecraft.getMinecraft().world.getTileEntity(message.pos);
+                tew.inventory.setStackInSlot(0, message.stack);
+                tew.lastChangeTime = message.lastChangeTime;
             });
             return null;
         }

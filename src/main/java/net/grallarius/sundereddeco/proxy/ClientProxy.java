@@ -1,6 +1,8 @@
 package net.grallarius.sundereddeco.proxy;
 
 import net.grallarius.sundereddeco.InvModel;
+import net.grallarius.sundereddeco.block.garden.windowbox.TESRWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.pedestal.TESRPedestal;
 import net.grallarius.sundereddeco.block.pedestal.TileEntityPedestal;
 import net.minecraft.client.resources.I18n;
@@ -34,6 +36,7 @@ public class ClientProxy extends ServerProxy {
 
     @Override
     public void registerRenderers() {
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestal.class, new TESRPedestal());
+/*        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestal.class, new TESRPedestal());*/
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWindowbox.class, new TESRWindowbox());
     }
 }

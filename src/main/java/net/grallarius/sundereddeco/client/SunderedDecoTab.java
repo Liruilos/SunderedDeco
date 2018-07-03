@@ -17,8 +17,4 @@ public class SunderedDecoTab extends CreativeTabs {
         return  new ItemStack(ModItems.ingotCopper);
     }
 
-    @Override
-    public boolean hasSearchBar() {
-        return true;
-    }
 }

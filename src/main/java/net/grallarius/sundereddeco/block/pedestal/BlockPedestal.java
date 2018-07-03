@@ -35,7 +35,7 @@ public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
         return false;
     }
 
-    @Override
+/*    @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             TileEntityPedestal tile = getTileEntity(world, pos);
@@ -64,7 +64,7 @@ public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
             world.spawnEntity(item);
         }
         super.breakBlock(world, pos, state);
-    }
+    }*/
 
     @Override
     public Class<TileEntityPedestal> getTileEntityClass() {

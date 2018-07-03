@@ -2,7 +2,9 @@ package net.grallarius.sundereddeco;
 
 import net.grallarius.sundereddeco.client.SunderedDecoTab;
 import net.grallarius.sundereddeco.network.PacketRequestUpdatePedestal;
+import net.grallarius.sundereddeco.network.PacketRequestUpdateWindowbox;
 import net.grallarius.sundereddeco.network.PacketUpdatePedestal;
+import net.grallarius.sundereddeco.network.PacketUpdateWindowbox;
 import net.grallarius.sundereddeco.proxy.ServerProxy;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -45,6 +47,8 @@ public class SunderedDeco {
 
         wrapper.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, 0, Side.CLIENT);
         wrapper.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, 1, Side.SERVER);
+        wrapper.registerMessage(new PacketUpdateWindowbox.Handler(), PacketUpdateWindowbox.class, 0, Side.CLIENT);
+        wrapper.registerMessage(new PacketRequestUpdateWindowbox.Handler(), PacketRequestUpdateWindowbox.class, 1, Side.SERVER);
 
         proxy.registerRenderers();
     }

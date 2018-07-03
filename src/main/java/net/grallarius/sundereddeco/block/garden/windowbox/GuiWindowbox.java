@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.block.pedestal;
+package net.grallarius.sundereddeco.block.garden.windowbox;
 
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.ModBlocks;
@@ -9,12 +9,12 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiPedestal extends GuiContainer {
+public class GuiWindowbox extends GuiContainer {
     private static final ResourceLocation BG_TEXTURE = new ResourceLocation(SunderedDeco.MODID, "textures/gui/pedestal.png");
 
     private InventoryPlayer playerInv;
 
-    public GuiPedestal(Container container, InventoryPlayer playerInv) {
+    public GuiWindowbox(Container container, InventoryPlayer playerInv) {
         super(container);
         this.playerInv =playerInv;
     }
@@ -29,8 +29,8 @@ public class GuiPedestal extends GuiContainer {
     }
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-/*        String name = I18n.format(ModBlocks.pedestal.getUnlocalizedName() + ".name");
+        String name = I18n.format(ModBlocks.windowbox.getUnlocalizedName() + ".name");
         fontRenderer.drawString(name, xSize / 2 - fontRenderer.getStringWidth(name) / 2, 6, 0x404040);
-        fontRenderer.drawString(playerInv.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);*/
+        fontRenderer.drawString(playerInv.getDisplayName().getUnformattedText(), 8, ySize - 94, 0x404040);
     }
 }
