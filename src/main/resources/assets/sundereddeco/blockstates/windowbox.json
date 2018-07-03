@@ -1,0 +1,30 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "sundereddeco:garden/windowbox_single",
+    "textures": {
+      "box": "blocks/hardened_clay",
+      "dirt": "blocks/dirt_podzol_top"
+    },
+    "uvlock": true
+  },
+  "variants": {
+    "facing": {
+      "north": { "y": 0 },
+      "east":  { "y": 90 },
+      "south": { "y": 180 },
+      "west":  { "y": 270 }
+    },
+    "shape": {
+      "single": {"model": "sundereddeco:garden/windowbox_single"},
+
+      "endleft": {"model": "sundereddeco:garden/windowbox_end_openleft"},
+
+      "endright": {"model": "sundereddeco:garden/windowbox_end_openright"},
+
+      "straight": {"model": "sundereddeco:garden/windowbox_straight"}
+
+    },
+    "inventory": {"model": "sundereddeco:garden/windowbox_single", "transform": "forge:default-block"}
+  }
+}
