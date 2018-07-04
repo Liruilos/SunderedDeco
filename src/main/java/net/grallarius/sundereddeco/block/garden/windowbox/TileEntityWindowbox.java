@@ -3,6 +3,7 @@ package net.grallarius.sundereddeco.block.garden.windowbox;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.network.PacketRequestUpdateWindowbox;
 import net.grallarius.sundereddeco.network.PacketUpdateWindowbox;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -18,7 +19,7 @@ public class TileEntityWindowbox extends TileEntity {
     public long lastChangeTime;
     public int facing;
 
-    public ItemStackHandler inventory = new ItemStackHandler(1) {
+    public ItemStackHandler inventory = new ItemStackHandler(2) {
         @Override
         protected void onContentsChanged(int slot){
             if (!world.isRemote) {

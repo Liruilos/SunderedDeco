@@ -166,7 +166,7 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
         return false;
     }
 
-    public boolean canBePotted(ItemStack stack)
+    public static boolean canBePotted(ItemStack stack)
     {
         Block block = Block.getBlockFromItem(stack.getItem());
         Boolean isFlower = block instanceof BlockFlower;
@@ -189,7 +189,12 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
             IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
             if (!player.isSneaking()) {
                 if (player.getHeldItem(hand).isEmpty()) {
-                    player.setHeldItem(hand, itemHandler.extractItem(0, 64, false));
+                    if(!itemHandler.getStackInSlot(0).isEmpty() && canBePotted(itemHandler.getStackInSlot(0))){
+                        player.setHeldItem(hand, itemHandler.extractItem(0, 64, false));
+                    }
+/*                    if(!itemHandler.getStackInSlot(1).isEmpty()){
+                        player.setHeldItem(hand, itemHandler.extractItem(1, 64, false));
+                    }*/
                 } else if(canBePotted(player.getHeldItem(hand))) {
                     player.setHeldItem(hand, itemHandler.insertItem(0, player.getHeldItem(hand), false));
                 } else {return false;}

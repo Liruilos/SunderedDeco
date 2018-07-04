@@ -18,6 +18,10 @@ public class ContainerWindowbox extends Container {
             @Override
             public void onSlotChanged() { windowbox.markDirty(); }
         });
+/*        addSlotToContainer(new SlotItemHandler(inventory, 1, 90, 35) {
+            @Override
+            public void onSlotChanged() { windowbox.markDirty(); }
+        });*/
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
