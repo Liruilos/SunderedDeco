@@ -4,9 +4,11 @@ import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.network.PacketRequestUpdateWindowbox;
 import net.grallarius.sundereddeco.network.PacketUpdateWindowbox;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -20,6 +22,7 @@ public class TileEntityWindowbox extends TileEntity {
     public int facing;
 
     public ItemStackHandler inventory = new ItemStackHandler(2) {
+
         @Override
         protected void onContentsChanged(int slot){
             if (!world.isRemote) {
@@ -27,6 +30,7 @@ public class TileEntityWindowbox extends TileEntity {
                 SunderedDeco.wrapper.sendToAllAround(new PacketUpdateWindowbox(TileEntityWindowbox.this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
             }
         }
+
     };
 
     @Override

@@ -14,14 +14,14 @@ public class ContainerWindowbox extends Container {
 
     public ContainerWindowbox(InventoryPlayer playerInv, final TileEntityWindowbox windowbox) {
         IItemHandler inventory = windowbox.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        addSlotToContainer(new SlotItemHandler(inventory, 0, 80, 35) {
+        addSlotToContainer(new SlotItemHandler(inventory, 0, 60, 35) {
             @Override
             public void onSlotChanged() { windowbox.markDirty(); }
         });
-/*        addSlotToContainer(new SlotItemHandler(inventory, 1, 90, 35) {
+        addSlotToContainer(new SlotItemHandler(inventory, 1, 100, 35) {
             @Override
             public void onSlotChanged() { windowbox.markDirty(); }
-        });*/
+        });
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {

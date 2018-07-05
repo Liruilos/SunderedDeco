@@ -44,10 +44,9 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
     public BlockWindowbox(String name){
         super(Material.ROCK, name);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(SHAPE, EnumShape.SINGLE));
-
-       /** still need to , and tile entity to take 2 flowers */
     }
 
+    @Deprecated
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
         switch ((EnumFacing)state.getValue(FACING))
@@ -135,6 +134,7 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
     /**
      * Pops windowbox block off if full block it was placed against is removed
      */
+    @Deprecated
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
         EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
@@ -185,20 +185,29 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
     @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
-            TileEntityWindowbox tile = getTileEntity(world, pos);
-            IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
+            TileEntityWindowbox te = getTileEntity(world, pos);
+            IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
+
             if (!player.isSneaking()) {
                 if (player.getHeldItem(hand).isEmpty()) {
-                    if(!itemHandler.getStackInSlot(0).isEmpty() && canBePotted(itemHandler.getStackInSlot(0))){
+                    if(!itemHandler.getStackInSlot(1).isEmpty() && canBePotted(itemHandler.getStackInSlot(1))){
+                        player.setHeldItem(hand, itemHandler.extractItem(1, 64, false));
+                    }
+                    else if(!itemHandler.getStackInSlot(0).isEmpty() && canBePotted(itemHandler.getStackInSlot(0))){
                         player.setHeldItem(hand, itemHandler.extractItem(0, 64, false));
                     }
-/*                    if(!itemHandler.getStackInSlot(1).isEmpty()){
-                        player.setHeldItem(hand, itemHandler.extractItem(1, 64, false));
-                    }*/
+
                 } else if(canBePotted(player.getHeldItem(hand))) {
-                    player.setHeldItem(hand, itemHandler.insertItem(0, player.getHeldItem(hand), false));
+                    if(itemHandler.getStackInSlot(0).isEmpty()){
+                        player.setHeldItem(hand, itemHandler.insertItem(0, player.getHeldItem(hand), false));
+                    }
+                    else if(itemHandler.getStackInSlot(1).isEmpty()){
+                        player.setHeldItem(hand, itemHandler.insertItem(1, player.getHeldItem(hand), false));
+                    }
+
+
                 } else {return false;}
-                tile.markDirty();
+                te.markDirty();
             } else {
                 player.openGui(SunderedDeco.instance, ModGuiHandler.WINDOWBOX, world, pos.getX(), pos.getY(), pos.getZ());
             }
@@ -210,10 +219,15 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
         TileEntityWindowbox tile = getTileEntity(world, pos);
         IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        ItemStack stack = itemHandler.getStackInSlot(0);
-        if (!stack.isEmpty()) {
-            EntityItem item = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack);
-            world.spawnEntity(item);
+        ItemStack stack1 = itemHandler.getStackInSlot(0);
+        ItemStack stack2 = itemHandler.getStackInSlot(1);
+        if (!stack1.isEmpty()) {
+            EntityItem item1 = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack1);
+            world.spawnEntity(item1);
+        }
+        if (!stack2.isEmpty()) {
+            EntityItem item2 = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack2);
+            world.spawnEntity(item2);
         }
         super.breakBlock(world, pos, state);
     }
