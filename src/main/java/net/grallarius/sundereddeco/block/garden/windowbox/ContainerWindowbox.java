@@ -1,5 +1,6 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
+import net.grallarius.sundereddeco.slots.SlotFlower;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -14,11 +15,15 @@ public class ContainerWindowbox extends Container {
 
     public ContainerWindowbox(InventoryPlayer playerInv, final TileEntityWindowbox windowbox) {
         IItemHandler inventory = windowbox.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        addSlotToContainer(new SlotItemHandler(inventory, 0, 60, 35) {
+        addSlotToContainer(new SlotFlower(inventory, 0, 60, 21) {
             @Override
             public void onSlotChanged() { windowbox.markDirty(); }
         });
-        addSlotToContainer(new SlotItemHandler(inventory, 1, 100, 35) {
+        addSlotToContainer(new SlotFlower(inventory, 1, 100, 21) {
+            @Override
+            public void onSlotChanged() { windowbox.markDirty(); }
+        });
+        addSlotToContainer(new SlotItemHandler(inventory, 2, 80, 53) {
             @Override
             public void onSlotChanged() { windowbox.markDirty(); }
         });
@@ -50,6 +55,10 @@ public class ContainerWindowbox extends Container {
 
             int containerSlots = inventorySlots.size() - player.inventory.mainInventory.size();
 
+/*            System.out.println("player.inventory.mainInventory.size() = " + player.inventory.mainInventory.size());
+            System.out.println("inventorySlots.size() = " + inventorySlots.size());*/
+
+
             if (index < containerSlots) {
                 if (!this.mergeItemStack(itemstack1, containerSlots, inventorySlots.size(), true)) {
                     return ItemStack.EMPTY;
@@ -58,12 +67,13 @@ public class ContainerWindowbox extends Container {
                 return ItemStack.EMPTY;
             }
 
+            //If nothing is left in the itemstack then set it to empty and call onSlotChanged//
             if (itemstack1.getCount() == 0) {
                 slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }
-
+            //if the orginal number of items in the slot is equal to the new number of items (ie no change happened after all that?) then return empty//
             if (itemstack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;
             }

@@ -10,7 +10,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiWindowbox extends GuiContainer {
-    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(SunderedDeco.MODID, "textures/gui/pedestal.png");
+    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(SunderedDeco.MODID, "textures/gui/windowbox_gui.png");
 
     private InventoryPlayer playerInv;
 

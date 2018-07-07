@@ -19,7 +19,7 @@ public class TESRWindowbox extends TileEntitySpecialRenderer<TileEntityWindowbox
         ItemStack stack1 = te.inventory.getStackInSlot(0);
         ItemStack stack2 = te.inventory.getStackInSlot(1);
 
-        if (!stack1.isEmpty() && BlockWindowbox.canBePotted(stack1)) {
+        if (!stack1.isEmpty()) {
 
                 GlStateManager.enableRescaleNormal();
                 GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
@@ -65,7 +65,7 @@ public class TESRWindowbox extends TileEntitySpecialRenderer<TileEntityWindowbox
                 GlStateManager.disableBlend();
         }
 
-        if (!stack2.isEmpty() && BlockWindowbox.canBePotted(stack2)) {
+        if (!stack2.isEmpty()) {
 
 
             GlStateManager.enableRescaleNormal();

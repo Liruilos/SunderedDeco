@@ -25,14 +25,10 @@ public class BlockConnectableHorizontal extends BlockBase {
         /** Working out which type of model to place so all are connected correctly, end = |_|    straight = | |
          * corner = |_     side = _     centre =     */
 
-/*        boolean northConnectable = worldIn.getBlockState(pos.north()).getBlock() instanceof cls;*/
-
         boolean northConnectable = worldIn.getBlockState(pos.north()).getBlock() == this;
         boolean southConnectable = worldIn.getBlockState(pos.south()).getBlock() == this;
         boolean eastConnectable = worldIn.getBlockState(pos.east()).getBlock() == this;
         boolean westConnectable = worldIn.getBlockState(pos.west()).getBlock() == this;
-
-        System.out.println("getblock tells me: " + worldIn.getBlockState(pos.north()).getBlock());
 
         if (!northConnectable && !westConnectable && !southConnectable && !eastConnectable) {
             return EnumShape.SINGLE;

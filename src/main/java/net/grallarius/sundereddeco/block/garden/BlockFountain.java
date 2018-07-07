@@ -31,7 +31,7 @@ public class BlockFountain extends BlockConnectableHorizontal {
         EnumShape shape = getShape(state, worldIn, pos, worldIn.getBlockState(pos).getClass());
         return state.withProperty(SHAPE, shape);
     }
-    
+
     @SideOnly(Side.CLIENT)
     public BlockRenderLayer getBlockLayer()
     {
@@ -51,6 +51,18 @@ public class BlockFountain extends BlockConnectableHorizontal {
         }
 
         return (block != this) && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    }
+
+    @Override
+    @Deprecated
+    public boolean isOpaqueCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    @Deprecated
+    public boolean isFullCube(IBlockState state) {
+        return false;
     }
 
 }
