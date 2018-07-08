@@ -2,7 +2,6 @@ package net.grallarius.sundereddeco.block.garden.windowbox;
 
 import net.grallarius.sundereddeco.ModGuiHandler;
 import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.slots.SlotFlower;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockHorizontal;
@@ -76,7 +75,7 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
     @Deprecated
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
 
-        /** Working out which type of model to place so all are connected correctly, end (openleft and openright) = |_|
+        /** Working out which type of model to place so all are connected correctly, ends (openleft and openright) = |_|
          *    straight = | |   and single  */
 
         TileEntityWindowbox tile = getTileEntity(worldIn, pos);
@@ -178,7 +177,7 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
 
             if (!player.isSneaking() && itemHandler != null) {
                 if (player.getHeldItem(hand).isEmpty()) {
-                    //remove items from relevant slot//
+                    /**remove items from relevant slot*/
                     if(!itemHandler.getStackInSlot(1).isEmpty()){
                         player.setHeldItem(hand, itemHandler.extractItem(1, 1, false));
                     }
@@ -187,7 +186,7 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
                     }
 
                 } else if(canBePotted(player.getHeldItem(hand))) {
-                    //insert items from hand//
+                    /**insert items from hand*/
                     if(itemHandler.getStackInSlot(0).isEmpty()){
 
                     ItemStack singleItemFromHand1 = player.getHeldItem(hand).splitStack(1);
@@ -196,11 +195,9 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
                     player.setHeldItem(hand, itemHandler.insertItem(0, singleItemFromHand1, false));
                     player.setHeldItem(hand, remainingItems);
 
-                    /*player.setHeldItem(hand, itemHandler.insertItem(0, player.getHeldItem(hand), false));*/
-
                     }
                     else if(itemHandler.getStackInSlot(1).isEmpty()){
-                        
+
                         ItemStack singleItemFromHand2 = player.getHeldItem(hand).splitStack(1);
                         int remainder = player.getHeldItem(hand).getCount();
                         ItemStack remainingItems = player.getHeldItem(hand).splitStack(remainder);
@@ -222,7 +219,7 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
         Block block = Block.getBlockFromItem(stack.getItem());
         Boolean isFlower = block instanceof BlockFlower;
 
-        if ((!isFlower) && (block != Blocks.YELLOW_FLOWER) && (block != Blocks.RED_FLOWER) && (block != Blocks.CACTUS) && (block != Blocks.BROWN_MUSHROOM) && (block != Blocks.RED_MUSHROOM) && (block != Blocks.SAPLING) && (block != Blocks.DEADBUSH))
+        if ((!isFlower) && (block != Blocks.YELLOW_FLOWER) && (block != Blocks.RED_FLOWER) && (block != Blocks.BROWN_MUSHROOM) && (block != Blocks.RED_MUSHROOM) && (block != Blocks.SAPLING) && (block != Blocks.DEADBUSH))
         {
             int i = stack.getMetadata();
             return block == Blocks.TALLGRASS && i == BlockTallGrass.EnumType.FERN.getMeta();

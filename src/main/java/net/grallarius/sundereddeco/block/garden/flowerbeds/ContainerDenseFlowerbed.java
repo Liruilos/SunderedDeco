@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.block.garden.windowbox;
+package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
 import net.grallarius.sundereddeco.slots.SlotFlower;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,23 +9,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
 
-public class ContainerWindowbox extends Container {
-
-    public ContainerWindowbox(InventoryPlayer playerInv, final TileEntityWindowbox windowbox) {
-        IItemHandler inventory = windowbox.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+public class ContainerDenseFlowerbed extends Container {
+    public ContainerDenseFlowerbed(InventoryPlayer playerInv, final TileEntityDenseFlowerbed DenseFlowerbed) {
+        IItemHandler inventory = DenseFlowerbed.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
         addSlotToContainer(new SlotFlower(inventory, 0, 60, 21) {
             @Override
-            public void onSlotChanged() { windowbox.markDirty(); }
+            public void onSlotChanged() { DenseFlowerbed.markDirty(); }
         });
         addSlotToContainer(new SlotFlower(inventory, 1, 100, 21) {
             @Override
-            public void onSlotChanged() { windowbox.markDirty(); }
+            public void onSlotChanged() { DenseFlowerbed.markDirty(); }
         });
-        addSlotToContainer(new SlotItemHandler(inventory, 2, 80, 53) {
+        addSlotToContainer(new SlotFlower(inventory, 2, 60, 53) {
             @Override
-            public void onSlotChanged() { windowbox.markDirty(); }
+            public void onSlotChanged() { DenseFlowerbed.markDirty(); }
+        });
+        addSlotToContainer(new SlotFlower(inventory, 3, 100, 53) {
+            @Override
+            public void onSlotChanged() { DenseFlowerbed.markDirty(); }
         });
 
         for (int i = 0; i < 3; i++) {

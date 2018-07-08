@@ -2,11 +2,11 @@ package net.grallarius.sundereddeco.block;
 
 
 import net.grallarius.sundereddeco.block.furniture.*;
-import net.grallarius.sundereddeco.block.garden.BlockFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockDenseFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockFlowerbed;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
-import net.grallarius.sundereddeco.block.pedestal.BlockPedestal;
 
 public class ModBlocks {
 
@@ -20,6 +20,7 @@ public class ModBlocks {
     public static BlockConnectedChair parkbench = new BlockConnectedChair();
 
     public static BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
+    public static BlockDenseFlowerbed denseFlowerbed = new BlockDenseFlowerbed("denseflowerbed");
 
 
     /*    public static BlockPedestal pedestal = new BlockPedestal();*/
@@ -35,6 +36,7 @@ public class ModBlocks {
                 parkbench.register();
 
                 flowerbed.register();
+                denseFlowerbed.register();
 
 /*                pedestal.register();*/
 

@@ -1,17 +1,12 @@
 package net.grallarius.sundereddeco.block.garden;
 
-import net.grallarius.sundereddeco.block.BlockBase;
 import net.grallarius.sundereddeco.block.BlockConnectableHorizontal;
 import net.grallarius.sundereddeco.block.ModBlocks;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
