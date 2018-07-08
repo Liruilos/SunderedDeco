@@ -142,7 +142,8 @@ public class BlockDenseFlowerbed extends BlockConnectableHTileEntity<TileEntityD
         if (!stack3.isEmpty()) {
             EntityItem item3 = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack3);
             world.spawnEntity(item3);
-        }if (!stack3.isEmpty()) {
+        }
+        if (!stack4.isEmpty()) {
             EntityItem item4 = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack4);
             world.spawnEntity(item4);
         }

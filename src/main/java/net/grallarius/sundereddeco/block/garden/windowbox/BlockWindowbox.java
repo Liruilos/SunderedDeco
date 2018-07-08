@@ -179,10 +179,10 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
                 if (player.getHeldItem(hand).isEmpty()) {
                     /**remove items from relevant slot*/
                     if(!itemHandler.getStackInSlot(1).isEmpty()){
-                        player.setHeldItem(hand, itemHandler.extractItem(1, 1, false));
+                        player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(1,1,false));
                     }
                     else if(!itemHandler.getStackInSlot(0).isEmpty()){
-                        player.setHeldItem(hand, itemHandler.extractItem(0, 1, false));
+                        player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(0,1,false));
                     }
 
                 } else if(canBePotted(player.getHeldItem(hand))) {

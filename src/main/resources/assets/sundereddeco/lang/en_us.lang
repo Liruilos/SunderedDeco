@@ -7,6 +7,7 @@ tile.ore_copper.name=Copper Ore
 tile.pedestal.name=Pedestal
 tile.windowbox.name=Windowbox
 tile.flowerbed.name=Flower Bed
+tile.denseflowerbed.name=Dense Flowerbed
 tile.largeplanterbox.name=Large Planter Box
 tile.table.name=Table
 tile.stool.name=Stool

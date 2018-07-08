@@ -2,7 +2,9 @@ package net.grallarius.sundereddeco.proxy;
 
 import net.grallarius.sundereddeco.InvModel;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.TESRDenseFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.TESRFlowerbed;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityDenseFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityFlowerbed;
 import net.grallarius.sundereddeco.block.garden.windowbox.TESRWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.pedestal.TESRPedestal;
@@ -41,5 +43,6 @@ public class ClientProxy extends ServerProxy {
 /*        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestal.class, new TESRPedestal());*/
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWindowbox.class, new TESRWindowbox());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenseFlowerbed.class, new TESRDenseFlowerbed());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlowerbed.class, new TESRFlowerbed());
     }
 }

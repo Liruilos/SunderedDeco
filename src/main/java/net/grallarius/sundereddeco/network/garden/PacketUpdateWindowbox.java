@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.network;
+package net.grallarius.sundereddeco.network.garden;
 
 import io.netty.buffer.ByteBuf;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
@@ -9,7 +9,6 @@ import net.minecraftforge.fml.common.network.ByteBufUtils;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import net.minecraftforge.items.ItemStackHandler;
 
 public class PacketUpdateWindowbox implements IMessage {
     private BlockPos pos;

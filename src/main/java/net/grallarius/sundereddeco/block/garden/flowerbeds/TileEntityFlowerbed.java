@@ -1,8 +1,8 @@
-package net.grallarius.sundereddeco.block.garden.windowbox;
+package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
 import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.network.garden.PacketRequestUpdateWindowbox;
-import net.grallarius.sundereddeco.network.garden.PacketUpdateWindowbox;
+import net.grallarius.sundereddeco.network.garden.PacketRequestUpdateFlowerbed;
+import net.grallarius.sundereddeco.network.garden.PacketUpdateFlowerbed;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -14,17 +14,16 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public class TileEntityWindowbox extends TileEntity {
-    public long lastChangeTime;
+public class TileEntityFlowerbed extends TileEntity {
+
     public int facing;
 
-    public ItemStackHandler inventory = new ItemStackHandler(3) {
+    public ItemStackHandler inventory = new ItemStackHandler(2) {
 
         @Override
         protected void onContentsChanged(int slot){
             if (!world.isRemote) {
-                lastChangeTime = world.getTotalWorldTime();
-                SunderedDeco.wrapper.sendToAllAround(new PacketUpdateWindowbox(TileEntityWindowbox.this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
+                SunderedDeco.wrapper.sendToAllAround(new PacketUpdateFlowerbed(TileEntityFlowerbed.this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
             }
         }
 
@@ -33,13 +32,12 @@ public class TileEntityWindowbox extends TileEntity {
     @Override
     public void onLoad() {
         if (world.isRemote) {
-            SunderedDeco.wrapper.sendToServer(new PacketRequestUpdateWindowbox(this));
+            SunderedDeco.wrapper.sendToServer(new PacketRequestUpdateFlowerbed(this));
         }
     }
 
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
-        compound.setLong("lastChangeTime", lastChangeTime);
         compound.setInteger("facing", getFacing());
         return super.writeToNBT(compound);
     }
@@ -48,7 +46,6 @@ public class TileEntityWindowbox extends TileEntity {
     @Override
     public void readFromNBT(NBTTagCompound compound) {
         inventory.deserializeNBT(compound.getCompoundTag("inventory"));
-        lastChangeTime =compound.getLong("lastChangeTime");
         facing = compound.getInteger("facing");
         super.readFromNBT(compound);
     }

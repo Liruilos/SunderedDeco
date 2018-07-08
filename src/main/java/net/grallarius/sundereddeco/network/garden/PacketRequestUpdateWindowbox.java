@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.network;
+package net.grallarius.sundereddeco.network.garden;
 
 import io.netty.buffer.ByteBuf;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
