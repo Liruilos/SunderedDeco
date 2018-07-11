@@ -1,0 +1,16 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "sundereddeco:shop/crate_goods",
+    "textures": {
+      "top":    "sundereddeco:blocks/shop/crate/crate_apple",
+      "bottom": "sundereddeco:blocks/shop/crate/crate_closed",
+      "side":   "sundereddeco:blocks/shop/crate/crate_side"
+    }
+  },
+  "variants": {
+    "normal":{"model":"sundereddeco:shop/crate_goods"},
+    "inventory": {"transform": "forge:default-block" }
+  }
+}
+
