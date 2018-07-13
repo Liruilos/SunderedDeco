@@ -23,3 +23,13 @@ tile.crate_grain.name=Crate of Grain
 tile.crate_ingot.name=Crate of Ingots
 tile.crate_potato.name=Crate of Potatoes
 tile.crate_sugar.name=Crate of Sugar
+
+tile.basket_apple.name=Basket of Apples
+tile.basket_berry.name=Basket of Berries
+tile.basket_carrot.name=Basket of Carrots
+tile.basket_closed.name=Closed Basket
+tile.basket_fish.name=Basket of Fish
+tile.basket_grain.name=Basket of Grain
+tile.basket_ingot.name=Basket of Ingots
+tile.basket_potato.name=Basket of Potatoes
+tile.basket_sugar.name=Basket of Sugar

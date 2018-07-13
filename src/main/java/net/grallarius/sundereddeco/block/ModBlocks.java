@@ -7,6 +7,7 @@ import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockFlowerbed;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
+import net.grallarius.sundereddeco.block.shop.BlockBasket;
 import net.grallarius.sundereddeco.block.shop.BlockCrate;
 
 public class ModBlocks {
@@ -36,6 +37,15 @@ public class ModBlocks {
     public static BlockCrate crateIngot = new BlockCrate("crate_ingot");
     public static BlockCrate cratePotato = new BlockCrate("crate_potato");
     public static BlockCrate crateSugar = new BlockCrate("crate_sugar");
+
+    public static BlockBasket basketApple = new BlockBasket("basket_apple");
+    public static BlockBasket basketBerry = new BlockBasket("basket_berry");
+    public static BlockBasket basketCarrot = new BlockBasket("basket_carrot");
+    public static BlockBasket basketFish = new BlockBasket("basket_fish");
+    public static BlockBasket basketGrain = new BlockBasket("basket_grain");
+    public static BlockBasket basketIngot = new BlockBasket("basket_ingot");
+    public static BlockBasket basketPotato = new BlockBasket("basket_potato");
+    public static BlockBasket basketSugar = new BlockBasket("basket_sugar");
 
 
     /*    public static BlockPedestal pedestal = new BlockPedestal();*/
@@ -67,6 +77,15 @@ public class ModBlocks {
         crateIngot.register();
         cratePotato.register();
         crateSugar.register();
+
+        basketApple.register();
+        basketBerry.register();
+        basketCarrot.register();
+        basketFish.register();
+        basketGrain.register();
+        basketIngot.register();
+        basketPotato.register();
+        basketSugar.register();
 
     }
 
