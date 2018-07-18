@@ -30,8 +30,8 @@ public class BlockTable extends BlockBase{
     public static final AxisAlignedBB SOUTHEAST_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.0D, 0.625D, 1.5D, 0.375D);
     public static final AxisAlignedBB SOUTHWEST_AABB = new AxisAlignedBB(0.625D, 0.0D, 0.375D, 1.0D, 1.5D, 0.625D);
 */
-    public BlockTable() {
-        super(Material.WOOD, "table");
+    public BlockTable(String name) {
+        super(Material.WOOD, name);
         setSoundType(SoundType.WOOD);
     }
 /*

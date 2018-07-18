@@ -10,16 +10,21 @@ import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.pedestal.TESRPedestal;
 import net.grallarius.sundereddeco.block.pedestal.TileEntityPedestal;
 import net.minecraft.client.resources.I18n;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+
+import static net.grallarius.sundereddeco.SunderedDeco.MODID;
 
 public class ClientProxy extends ServerProxy {
 
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
+        OBJLoader.INSTANCE.addDomain(MODID);
         InvModel.register();
     }
 

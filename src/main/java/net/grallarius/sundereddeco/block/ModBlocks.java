@@ -9,15 +9,20 @@ import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
 import net.grallarius.sundereddeco.block.shop.BlockBasket;
 import net.grallarius.sundereddeco.block.shop.BlockCrate;
+import net.grallarius.sundereddeco.block.shop.BlockLargeBasket;
+import net.minecraft.block.material.Material;
 
 public class ModBlocks {
 
-    public static BlockOre oreCopper = new BlockOre("ore_copper", "oreCopper");
+    /*public static BlockOre oreCopper = new BlockOre("ore_copper", "oreCopper");*/
 
-    public static BlockTable table = new BlockTable();
+    public static BlockTable table = new BlockTable("table");
     public static BlockSittable stool = new BlockSittable("stool");
     public static BlockChair chair = new BlockChair("chair");
     public static BlockConnectedChair parkbench = new BlockConnectedChair();
+
+    public static BlockDirectional sidetable = new BlockDirectional(Material.WOOD, "sidetable");
+
 
 
     /** garden blocks */
@@ -47,16 +52,27 @@ public class ModBlocks {
     public static BlockBasket basketPotato = new BlockBasket("basket_potato");
     public static BlockBasket basketSugar = new BlockBasket("basket_sugar");
 
+    public static BlockLargeBasket basketLargeApple = new BlockLargeBasket("basket_large_apple");
+    public static BlockLargeBasket basketLargeBerry = new BlockLargeBasket("basket_large_berry");
+    public static BlockLargeBasket basketLargeCarrot = new BlockLargeBasket("basket_large_carrot");
+    public static BlockLargeBasket basketLargeFish = new BlockLargeBasket("basket_large_fish");
+    public static BlockLargeBasket basketLargeGrain = new BlockLargeBasket("basket_large_grain");
+    public static BlockLargeBasket basketLargeIngot = new BlockLargeBasket("basket_large_ingot");
+    public static BlockLargeBasket basketLargePotato = new BlockLargeBasket("basket_large_potato");
+    public static BlockLargeBasket basketLargeSugar = new BlockLargeBasket("basket_large_sugar");
+
 
     /*    public static BlockPedestal pedestal = new BlockPedestal();*/
 
     public static void preInit() {
-                oreCopper.register();
+                /*oreCopper.register();*/
 
                 table.register();
                 stool.register();
                 chair.register();
                 parkbench.register();
+                sidetable.register();
+
 
         /** garden blocks */
         fountain.register();
@@ -65,7 +81,7 @@ public class ModBlocks {
         flowerbed.register();
         denseFlowerbed.register();
 
-/*                pedestal.register();*/
+/*      pedestal.register();*/
 
         /** shop blocks */
         crateClosed.register();
@@ -86,6 +102,15 @@ public class ModBlocks {
         basketIngot.register();
         basketPotato.register();
         basketSugar.register();
+
+        basketLargeApple.register();
+        basketLargeBerry.register();
+        basketLargeCarrot.register();
+        basketLargeFish.register();
+        basketLargeGrain.register();
+        basketLargeIngot.register();
+        basketLargePotato.register();
+        basketLargeSugar.register();
 
     }
 

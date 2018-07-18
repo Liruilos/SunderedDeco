@@ -11,12 +11,12 @@ public class ModItems {
     public static ItemModSword copperSword = new ItemModSword(SunderedDeco.copperToolMaterial, "copper_sword");
 
     public static void preInit() {
-                ingotCopper.register();
-                copperSword.register();
+/*                ingotCopper.register();
+                copperSword.register();*/
     }
 
     public static void registerModels() {
-        ingotCopper.register();
-        copperSword.register();
+/*        ingotCopper.register();
+        copperSword.register();*/
     }
 }

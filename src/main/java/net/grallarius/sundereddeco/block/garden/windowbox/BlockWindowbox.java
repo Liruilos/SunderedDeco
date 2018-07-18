@@ -252,6 +252,7 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
         }
         super.breakBlock(world, pos, state);
     }
+
     @Override
     public Class<TileEntityWindowbox> getTileEntityClass() {
         return TileEntityWindowbox.class;

@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.client.model.obj.OBJLoader;
 
 @Mod(modid = SunderedDeco.MODID, name = SunderedDeco.NAME, version = SunderedDeco.VERSION)
 
@@ -38,15 +39,15 @@ public class SunderedDeco {
     @Mod.Instance(MODID)
     public static SunderedDeco instance;
 
+
     private static byte packetId = 0;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
         proxy.preInit(event);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
-
-
 
         wrapper.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, packetId++, Side.CLIENT);
         wrapper.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, packetId++, Side.SERVER);
