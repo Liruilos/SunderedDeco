@@ -12,12 +12,14 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class BlockBasket extends BlockCrate {
+public class BlockDisplayCrate extends BlockCrate {
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.065D, 0.0D,0.065D,0.935D,0.4D,0.935D);
+    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.065D, 0.0D,0.065D,0.935D,0.68D,0.935D);
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
 
-    public BlockBasket(String name){ super(name); }
+    public BlockDisplayCrate(String name){
+        super(name);
+    }
 
     @Override
     @Deprecated
@@ -37,18 +39,6 @@ public class BlockBasket extends BlockCrate {
 
     @Override
     @Deprecated
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @Deprecated
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @Deprecated
     public IBlockState getStateFromMeta(int meta) {
         return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
     }
@@ -56,4 +46,5 @@ public class BlockBasket extends BlockCrate {
     public int getMetaFromState(IBlockState state) {
         return state.getValue(FACING).getIndex();
     }
+
 }

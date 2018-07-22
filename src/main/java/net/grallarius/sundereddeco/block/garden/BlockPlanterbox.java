@@ -2,6 +2,7 @@ package net.grallarius.sundereddeco.block.garden;
 
 import net.grallarius.sundereddeco.block.BlockConnectableHorizontal;
 
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.EnumFacing;
 
@@ -27,6 +28,14 @@ public class BlockPlanterbox extends BlockConnectableHorizontal {
         return state.withProperty(SHAPE, shape);
     }
 
+    @Deprecated
+    public BlockFaceShape getBlockFaceShape(IBlockAccess p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_)
+    {
+        return BlockFaceShape.SOLID;
+    }
+
+    @Override
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos){return true;}
 
     @Override
     public boolean canSustainPlant(IBlockState state, IBlockAccess world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable){ return true;}

@@ -1,0 +1,21 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "sundereddeco:shop/display_crate_goods",
+    "textures": {
+      "good":    "sundereddeco:blocks/shop/crate/crate_carrot",
+      "crate":    "blocks/planks_oak"
+    }
+  },
+  "variants": {
+    "normal":{"model":"sundereddeco:shop/display_crate_goods"},
+    "facing": {
+      "north": { "y": 0 },
+      "east":  { "y": 90 },
+      "south": { "y": 180 },
+      "west":  { "y": 270 }
+    },
+    "inventory": {"transform": "forge:default-block" }
+  }
+}
+

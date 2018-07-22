@@ -101,6 +101,9 @@ public class BlockTable extends BlockBase{
         return false;
     }
 
+    @Override
+    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos){return true;}
+
     public int getMetaFromState(IBlockState state)
     {
         return 0;

@@ -9,6 +9,7 @@ import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
 import net.grallarius.sundereddeco.block.shop.BlockBasket;
 import net.grallarius.sundereddeco.block.shop.BlockCrate;
+import net.grallarius.sundereddeco.block.shop.BlockDisplayCrate;
 import net.grallarius.sundereddeco.block.shop.BlockLargeBasket;
 import net.minecraft.block.material.Material;
 
@@ -22,6 +23,7 @@ public class ModBlocks {
     public static BlockConnectedChair parkbench = new BlockConnectedChair();
 
     public static BlockDirectional sidetable = new BlockDirectional(Material.WOOD, "sidetable");
+
 
 
 
@@ -42,6 +44,15 @@ public class ModBlocks {
     public static BlockCrate crateIngot = new BlockCrate("crate_ingot");
     public static BlockCrate cratePotato = new BlockCrate("crate_potato");
     public static BlockCrate crateSugar = new BlockCrate("crate_sugar");
+
+    public static BlockDisplayCrate displayCrateApple = new BlockDisplayCrate("display_crate_apple");
+    public static BlockDisplayCrate displayCrateBerry = new BlockDisplayCrate("display_crate_berry");
+    public static BlockDisplayCrate displayCrateCarrot = new BlockDisplayCrate("display_crate_carrot");
+    public static BlockDisplayCrate displayCrateFish = new BlockDisplayCrate("display_crate_fish");
+    public static BlockDisplayCrate displayCrateGrain = new BlockDisplayCrate("display_crate_grain");
+    public static BlockDisplayCrate displayCrateIngot = new BlockDisplayCrate("display_crate_ingot");
+    public static BlockDisplayCrate displayCratePotato = new BlockDisplayCrate("display_crate_potato");
+    public static BlockDisplayCrate displayCrateSugar = new BlockDisplayCrate("display_crate_sugar");
 
     public static BlockBasket basketApple = new BlockBasket("basket_apple");
     public static BlockBasket basketBerry = new BlockBasket("basket_berry");
@@ -74,6 +85,7 @@ public class ModBlocks {
                 sidetable.register();
 
 
+
         /** garden blocks */
         fountain.register();
         largeplanterbox.register();
@@ -93,6 +105,15 @@ public class ModBlocks {
         crateIngot.register();
         cratePotato.register();
         crateSugar.register();
+
+        displayCrateApple.register();
+        displayCrateBerry.register();
+        displayCrateCarrot.register();
+        displayCrateFish.register();
+        displayCrateGrain.register();
+        displayCrateIngot.register();
+        displayCratePotato.register();
+        displayCrateSugar.register();
 
         basketApple.register();
         basketBerry.register();
