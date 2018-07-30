@@ -23,6 +23,10 @@ public class ModBlocks {
     public static BlockConnectedChair parkbench = new BlockConnectedChair();
 
     public static BlockDirectional sidetable = new BlockDirectional(Material.WOOD, "sidetable");
+    public static BlockDirectional scales = new BlockDirectional(Material.IRON, "scales");
+    public static BlockBottle bottlePlaced = new BlockBottle("bottle_placed");
+
+    public static BlockDirectional roofShinglesRed = new BlockDirectional(Material.WOOD, "roof_shingles_red");
 
 
 
@@ -83,7 +87,10 @@ public class ModBlocks {
                 chair.register();
                 parkbench.register();
                 sidetable.register();
+                scales.register();
+                bottlePlaced.register();
 
+                roofShinglesRed.register();
 
 
         /** garden blocks */

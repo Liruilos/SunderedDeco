@@ -1,10 +1,10 @@
 {
   "forge_marker": 1,
   "defaults": {
-    "model": "sundereddeco:testcube.obj"
+    "model": "sundereddeco:firepit_fire.obj"
   },
   "variants": {
-    "normal":{"model":"sundereddeco:testcube.obj"},
+    "normal":{"model":"sundereddeco:firepit_fire.obj"},
     "inventory": {"transform": "forge:default-block" }
   }
 }
