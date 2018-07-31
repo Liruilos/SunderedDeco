@@ -25,8 +25,11 @@ public class ModBlocks {
     public static BlockDirectional sidetable = new BlockDirectional(Material.WOOD, "sidetable");
     public static BlockDirectional scales = new BlockDirectional(Material.IRON, "scales");
     public static BlockBottle bottlePlaced = new BlockBottle("bottle_placed");
+    public static BlockDirectional plateMuffins = new BlockDirectional(Material.WOOD, "plate_muffins");
 
     public static BlockDirectional roofShinglesRed = new BlockDirectional(Material.WOOD, "roof_shingles_red");
+    public static BlockDirectional roofShinglesRedConcave = new BlockDirectional(Material.WOOD,"roof_shingles_red_concave");
+    public static BlockDirectional roofShinglesRedConvex = new BlockDirectional(Material.WOOD, "roof_shingles_red_convex");
 
 
 
@@ -89,8 +92,11 @@ public class ModBlocks {
                 sidetable.register();
                 scales.register();
                 bottlePlaced.register();
+                plateMuffins.register();
 
                 roofShinglesRed.register();
+                roofShinglesRedConcave.register();
+                roofShinglesRedConvex.register();
 
 
         /** garden blocks */
