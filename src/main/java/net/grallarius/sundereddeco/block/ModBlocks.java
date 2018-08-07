@@ -7,6 +7,7 @@ import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockFlowerbed;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
+import net.grallarius.sundereddeco.block.pedestal.BlockPedestal;
 import net.grallarius.sundereddeco.block.shop.BlockBasket;
 import net.grallarius.sundereddeco.block.shop.BlockCrate;
 import net.grallarius.sundereddeco.block.shop.BlockDisplayCrate;
@@ -28,6 +29,7 @@ public class ModBlocks {
     public static BlockDirectional plateMuffins = new BlockDirectional(Material.WOOD, "plate_muffins");
     public static BlockDirectional plateCroissants = new BlockDirectional(Material.WOOD, "plate_croissants");
     public static BlockDirectional coinpurse = new BlockDirectional(Material.CARPET, "coinpurse");
+    public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
 
     public static BlockDirectional roofShinglesRed = new BlockDirectional(Material.WOOD, "roof_shingles_red");
     public static BlockDirectional roofShinglesRedConcave = new BlockDirectional(Material.WOOD,"roof_shingles_red_concave");
@@ -97,6 +99,7 @@ public class ModBlocks {
                 plateMuffins.register();
                 plateCroissants.register();
                 coinpurse.register();
+                bookPedestal.register();
 
                 roofShinglesRed.register();
                 roofShinglesRedConcave.register();

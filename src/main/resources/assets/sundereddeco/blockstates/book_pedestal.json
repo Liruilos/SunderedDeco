@@ -1,0 +1,22 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "sundereddeco:book_pedestal"
+  },
+  "variants": {
+    "facing": {
+      "north": { "y": 0 },
+      "east":  { "y": 90 },
+      "south": { "y": 180 },
+      "west":  { "y": 270 }
+    },
+    "hasbook": {
+      "true": {"submodel": "sundereddeco:book_pedestal_book_submodel" },
+      "false": {}
+    },
+    "inventory": {
+      "model": "sundereddeco:book_pedestal",
+      "transform": "forge:default-block" }
+  }
+}
+

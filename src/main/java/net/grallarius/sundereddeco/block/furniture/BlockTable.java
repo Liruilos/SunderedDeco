@@ -33,6 +33,8 @@ public class BlockTable extends BlockBase{
     public BlockTable(String name) {
         super(Material.WOOD, name);
         setSoundType(SoundType.WOOD);
+        this.setDefaultState(this.blockState.getBaseState().withProperty(NORTHEAST, true).withProperty(NORTHWEST, true)
+                .withProperty(SOUTHWEST, true).withProperty(SOUTHEAST, true));
     }
 /*
     public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean bool)

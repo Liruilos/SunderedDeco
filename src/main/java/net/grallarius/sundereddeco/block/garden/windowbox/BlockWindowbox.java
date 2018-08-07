@@ -235,20 +235,11 @@ public class BlockWindowbox extends BlockTileEntity<TileEntityWindowbox> {
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
         TileEntityWindowbox tile = getTileEntity(world, pos);
         IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        ItemStack stack1 = itemHandler.getStackInSlot(0);
-        ItemStack stack2 = itemHandler.getStackInSlot(1);
-        ItemStack stack3 = itemHandler.getStackInSlot(2);
-        if (!stack1.isEmpty()) {
-            EntityItem item1 = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack1);
-            world.spawnEntity(item1);
-        }
-        if (!stack2.isEmpty()) {
-            EntityItem item2 = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack2);
-            world.spawnEntity(item2);
-        }
-        if (!stack3.isEmpty()) {
-            EntityItem item3 = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), stack3);
-            world.spawnEntity(item3);
+        for (int i = 0; i < 2; i++) {
+            if(!itemHandler.getStackInSlot(i).isEmpty()){
+                EntityItem droppedItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemHandler.getStackInSlot(i));
+                world.spawnEntity(droppedItem);
+            }
         }
         super.breakBlock(world, pos, state);
     }

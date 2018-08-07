@@ -16,7 +16,7 @@ public class GuiWindowbox extends GuiContainer {
 
     public GuiWindowbox(Container container, InventoryPlayer playerInv) {
         super(container);
-        this.playerInv =playerInv;
+        this.playerInv = playerInv;
     }
 
     @Override

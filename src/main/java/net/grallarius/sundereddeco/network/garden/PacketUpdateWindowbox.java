@@ -55,7 +55,7 @@ public class PacketUpdateWindowbox implements IMessage {
             Minecraft.getMinecraft().addScheduledTask(() -> {
                 TileEntityWindowbox tew = (TileEntityWindowbox)Minecraft.getMinecraft().world.getTileEntity(message.pos);
                 tew.inventory.setStackInSlot(0, message.stack);
-                tew.inventory.setStackInSlot(1,message.stack2);
+                tew.inventory.setStackInSlot(1, message.stack2);
                 tew.lastChangeTime = message.lastChangeTime;
             });
             return null;
