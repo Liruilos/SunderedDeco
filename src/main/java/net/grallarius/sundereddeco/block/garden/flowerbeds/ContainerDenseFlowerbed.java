@@ -1,6 +1,6 @@
 package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
-import net.grallarius.sundereddeco.slots.SlotFlower;
+import net.grallarius.sundereddeco.block.garden.SlotFlower;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

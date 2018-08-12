@@ -14,6 +14,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -69,12 +70,9 @@ public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
         if (!world.isRemote) {
             TileEntityPedestal tile = getTileEntity(world, pos);
             IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
-            if (!player.isSneaking()) {
-                if (player.getHeldItem(hand).isEmpty()) {
-                    player.setHeldItem(hand, itemHandler.extractItem(0, 64, false));
-                } else {
-                    world.setBlockState(pos, state.withProperty(HASBOOK, true));
-                    player.setHeldItem(hand, itemHandler.insertItem(0, player.getHeldItem(hand), false));
+            if (!player.isSneaking() && itemHandler != null) {
+                if (itemHandler.getStackInSlot(0).getItem() instanceof ItemBook){
+                    player.openGui(SunderedDeco.instance, ModGuiHandler.PEDESTAL, world, pos.getX(), pos.getY(), pos.getZ());
                 }
                 tile.markDirty();
             } else {
@@ -104,11 +102,17 @@ public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
     @Override
     @Deprecated
     public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+        return this.getDefaultState()
+                .withProperty(FACING, EnumFacing.getHorizontal(meta & 3))
+                .withProperty(HASBOOK, (meta & 4) == 4)
+                ;
     }
 
     public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
+        return (
+                (EnumFacing) state.getValue(FACING)).getHorizontalIndex()
+                | (((boolean) state.getValue(HASBOOK)) ? 4 : 0
+        );
     }
 
     @Override

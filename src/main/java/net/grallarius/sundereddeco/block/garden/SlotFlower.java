@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.slots;
+package net.grallarius.sundereddeco.block.garden;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
