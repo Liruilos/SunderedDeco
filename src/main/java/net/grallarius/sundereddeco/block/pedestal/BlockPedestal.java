@@ -11,10 +11,12 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBook;
+import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -29,7 +31,7 @@ import javax.annotation.Nullable;
 
 public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
 
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    private static final PropertyDirection FACING = BlockHorizontal.FACING;
     /** Whether there should be a book model on the pedestal */
     public static final PropertyBool HASBOOK = PropertyBool.create("hasbook");
 
@@ -71,8 +73,13 @@ public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
             TileEntityPedestal tile = getTileEntity(world, pos);
             IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
             if (!player.isSneaking() && itemHandler != null) {
+                //TODO add different open gui options depending on what is in the pedestal, ie. enchantments list, defer open gui
                 if (itemHandler.getStackInSlot(0).getItem() instanceof ItemBook){
                     player.openGui(SunderedDeco.instance, ModGuiHandler.PEDESTAL, world, pos.getX(), pos.getY(), pos.getZ());
+                }
+                tile.markDirty();
+                if (itemHandler.getStackInSlot(0).getItem() instanceof ItemEnchantedBook){
+                    Minecraft.getMinecraft().displayGuiScreen(new GuiEnchantments());
                 }
                 tile.markDirty();
             } else {

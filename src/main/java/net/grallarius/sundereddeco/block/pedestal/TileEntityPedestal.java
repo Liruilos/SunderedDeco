@@ -27,15 +27,15 @@ public class TileEntityPedestal extends TileEntity {
         protected void onContentsChanged(int slot){
             if (!world.isRemote) {
                 if (!getStackInSlot(0).isEmpty()){
-                    System.out.println("I am setting has book to true with item " + getStackInSlot(0) + " from " + inventory);
+                    //System.out.println("I am setting has book to true with item " + getStackInSlot(0) + " from " + inventory);
                     world.setBlockState(pos, world.getBlockState(pos).withProperty(HASBOOK, true));
-                    System.out.println("I have set has book to true with item " + getStackInSlot(0) + " from " + inventory);
+                    //System.out.println("I have set has book to true with item " + getStackInSlot(0) + " from " + inventory);
                     markDirty();
                 }
                 if (getStackInSlot(0).isEmpty()){
-                    System.out.println("I am setting has book to false with item " + getStackInSlot(0) + " from " + inventory);
+                    //System.out.println("I am setting has book to false with item " + getStackInSlot(0) + " from " + inventory);
                     world.setBlockState(pos, world.getBlockState(pos).withProperty(HASBOOK, false));
-                    System.out.println("I have set has book to false with item " + getStackInSlot(0) + " from " + inventory);
+                    //System.out.println("I have set has book to false with item " + getStackInSlot(0) + " from " + inventory);
                     markDirty();
                 }
 
