@@ -31,6 +31,7 @@ public class ModBlocks {
     public static BlockDirectional plateCroissants = new BlockDirectional(Material.WOOD, "plate_croissants");
     public static BlockDirectional coinpurse = new BlockDirectional(Material.CARPET, "coinpurse");
     public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
+    public static BlockDirectional shrine = new BlockDirectional(Material.ROCK, "shrine");
 
     public static BlockDirectional roofShinglesRed = new BlockDirectional(Material.WOOD, "roof_shingles_red");
     public static BlockDirectional roofShinglesRedConcave = new BlockDirectional(Material.WOOD,"roof_shingles_red_concave");
@@ -102,6 +103,7 @@ public class ModBlocks {
                 plateCroissants.register();
                 coinpurse.register();
                 bookPedestal.register();
+                shrine.register();
 
                 roofShinglesRed.register();
                 roofShinglesRedConcave.register();

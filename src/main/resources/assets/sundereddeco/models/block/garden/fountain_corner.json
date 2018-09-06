@@ -1,75 +1,73 @@
-﻿{
-	"credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
+{
+	"__comment": "Designed by Liruilos with Cubik Studio - https://cubik.studio",
 	"textures": {
 		"0": "blocks/stone",
 		"1": "blocks/water_still",
 		"particle": "blocks/stone"
 	},
-	"elements": [
+	"elements": [ 	 
 		{
-			"name": "base",
-			"from": [0, 0, 0],
-			"to": [16, 2, 16],
+			"__comment": "Element",
+			"from": [ 0, 0, 0 ],
+			"to": [ 16, 2, 16 ],
 			"faces": {
-				"east": {"uv": [0, 0, 13, 2], "texture": "#0"},
-				"south": {"uv": [0, 0, 13, 2], "texture": "#0"},
-				"up": {"uv": [0, 0, 13, 13], "texture": "#0"},
-				"down": {"uv": [0, 0, 13, 13], "texture": "#0"}
+				"down": { "uv": [ 0, 0, 13, 13 ], "texture": "#0", "cullface": "down" },
+				"up": { "uv": [ 0, 0, 13, 13 ], "texture": "#0" },
+				"south": { "uv": [ 0, 0, 13, 2 ], "texture": "#0", "cullface": "south" },
+				"east": { "uv": [ 0, 0, 13, 2 ], "texture": "#0", "cullface": "east" }
 			}
 		},
 		{
-			"name": "stand",
-			"from": [0, 2, 0],
-			"to": [13, 9, 13],
+			"__comment": "Element",
+			"from": [ 0, 2, 0 ],
+			"to": [ 13, 9, 13 ],
 			"faces": {
-				"north": {"uv": [0, 0, 10, 7], "texture": "#0"},
-				"east": {"uv": [0, 0, 10, 7], "texture": "#0"},
-				"south": {"uv": [0, 0, 10, 7], "texture": "#0"},
-				"west": {"uv": [0, 0, 10, 7], "texture": "#0"},
-				"up": {"uv": [0, 0, 10, 7], "texture": "#0"},
-				"down": {"uv": [0, 0, 10, 7], "texture": "#0"}
+				"north": { "uv": [ 0, 0, 10, 7 ], "texture": "#0", "cullface": "north" },
+				"south": { "uv": [ 0, 0, 10, 7 ], "texture": "#0" },
+				"west": { "uv": [ 0, 0, 10, 7 ], "texture": "#0", "cullface": "west" },
+				"east": { "uv": [ 0, 0, 10, 7 ], "texture": "#0" }
 			}
 		},
 		{
-			"name": "basin_base",
-			"from": [0, 9, 0],
-			"to": [16, 10, 16],
+			"__comment": "Element",
+			"from": [ 0, 9, 0 ],
+			"to": [ 16, 10, 16 ],
 			"faces": {
-				"east": {"uv": [0, 0, 14, 1], "texture": "#0"},
-				"south": {"uv": [0, 0, 14, 1], "texture": "#0"},
-				"up": {"uv": [0, 0, 14, 14], "texture": "#0"},
-				"down": {"uv": [0, 0, 14, 14], "texture": "#0"}
+				"down": { "uv": [ 0, 0, 14, 14 ], "texture": "#0" },
+				"up": { "uv": [ 0, 0, 14, 14 ], "texture": "#0" },
+				"south": { "uv": [ 0, 0, 14, 1 ], "texture": "#0", "cullface": "south" },
+				"east": { "uv": [ 0, 0, 14, 1 ], "texture": "#0", "cullface": "east" }
 			}
 		},
 		{
-			"name": "basin_south",
-			"from": [0, 10, 15],
-			"to": [16, 13, 16],
+			"__comment": "Element",
+			"from": [ 0, 10, 15 ],
+			"to": [ 16, 15, 16 ],
 			"faces": {
-				"north": {"uv": [0, 0, 14, 3], "texture": "#0"},
-				"east": {"uv": [0, 0, 1, 3], "texture": "#0"},
-				"south": {"uv": [0, 0, 14, 3], "texture": "#0"},
-				"west": {"uv": [0, 0, 1, 3], "texture": "#0"},
-				"up": {"uv": [0, 0, 14, 1], "texture": "#0"}
+				"up": { "uv": [ 0, 0, 14, 1 ], "texture": "#0" },
+				"north": { "uv": [ 0, 0, 14, 3 ], "texture": "#0" },
+				"south": { "uv": [ 0, 0, 14, 3 ], "texture": "#0", "cullface": "south" },
+				"west": { "uv": [ 0, 0, 1, 3 ], "texture": "#0", "cullface": "west" },
+				"east": { "uv": [ 0, 0, 1, 3 ], "texture": "#0", "cullface": "east" }
 			}
 		},
 		{
-			"name": "basin_east",
-			"from": [15, 10, 0],
-			"to": [16, 13, 15],
+			"__comment": "Element",
+			"from": [ 15, 10, 0 ],
+			"to": [ 16, 15, 15 ],
 			"faces": {
-				"north": {"uv": [0, 0, 1, 3], "texture": "#0"},
-				"east": {"uv": [0, 0, 13, 3], "texture": "#0"},
-				"west": {"uv": [0, 0, 13, 3], "texture": "#0"},
-				"up": {"uv": [0, 0, 1, 13], "texture": "#0"}
+				"up": { "uv": [ 0, 0, 1, 13 ], "texture": "#0" },
+				"north": { "uv": [ 0, 0, 1, 3 ], "texture": "#0", "cullface": "north" },
+				"west": { "uv": [ 0, 0, 13, 3 ], "texture": "#0" },
+				"east": { "uv": [ 0, 0, 13, 3 ], "texture": "#0", "cullface": "east" }
 			}
 		},
 		{
-			"name": "basin_water",
-			"from": [0, 10, 0],
-			"to": [15, 12, 15],
+			"__comment": "Element",
+			"from": [ 0, 10, 0 ],
+			"to": [ 15, 14, 15 ],
 			"faces": {
-				"up": {"uv": [0, 0, 13, 13], "texture": "#1"}
+				"up": { "uv": [ 0, 0, 13, 13 ], "texture": "#1" }
 			}
 		}
 	]
