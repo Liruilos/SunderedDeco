@@ -5,6 +5,7 @@ import net.grallarius.sundereddeco.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -27,13 +28,13 @@ public class BlockFountain extends BlockConnectableHorizontal {
         return state.withProperty(SHAPE, shape);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer()
-    {
-        return BlockRenderLayer.TRANSLUCENT;
+    public BlockRenderLayer getBlockLayer() {
+        return Minecraft.getMinecraft().gameSettings.fancyGraphics ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.SOLID;
     }
 
-    @SideOnly(Side.CLIENT)
+/*    @SideOnly(Side.CLIENT)
     @Deprecated
     public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
     {
@@ -46,6 +47,12 @@ public class BlockFountain extends BlockConnectableHorizontal {
         }
 
         return (block != this) && super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    }*/
+
+    @SideOnly(Side.CLIENT)
+    public boolean shouldSideBeRendered(IBlockState blockState, IBlockAccess blockAccess, BlockPos pos, EnumFacing side)
+    {
+        return /*!Minecraft.getMinecraft().gameSettings.fancyGraphics && */blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }
 
     @Override

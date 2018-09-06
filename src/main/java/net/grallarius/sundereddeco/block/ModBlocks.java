@@ -2,6 +2,7 @@ package net.grallarius.sundereddeco.block;
 
 
 import net.grallarius.sundereddeco.block.furniture.*;
+import net.grallarius.sundereddeco.block.garden.BlockHedge;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockDenseFlowerbed;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockFlowerbed;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
@@ -40,6 +41,7 @@ public class ModBlocks {
 
     /** garden blocks */
     public static BlockFountain fountain = new BlockFountain("fountain");
+    public static BlockHedge hedge = new BlockHedge("hedge");
     public static BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
     public static BlockWindowbox windowbox = new BlockWindowbox("windowbox");
     public static BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
@@ -108,12 +110,12 @@ public class ModBlocks {
 
         /** garden blocks */
         fountain.register();
+        hedge.register();
         largeplanterbox.register();
         windowbox.register();
         flowerbed.register();
         denseFlowerbed.register();
 
-/*      pedestal.register();*/
 
         /** shop blocks */
         crateClosed.register();

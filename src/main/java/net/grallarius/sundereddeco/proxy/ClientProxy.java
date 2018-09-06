@@ -9,6 +9,7 @@ import net.grallarius.sundereddeco.block.garden.windowbox.TESRWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.pedestal.TESRPedestal;
 import net.grallarius.sundereddeco.block.pedestal.TileEntityPedestal;
+import net.grallarius.sundereddeco.client.ModColourManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.client.model.obj.OBJLoader;
@@ -30,6 +31,7 @@ public class ClientProxy extends ServerProxy {
 
     @Override
     public void init(FMLInitializationEvent event) {
+        ModColourManager.registerColourHandlers();
         super.init(event);
     }
 

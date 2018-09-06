@@ -1,0 +1,22 @@
+{
+	"__comment": "Designed by Liruilos with Cubik Studio - https://cubik.studio",
+	"textures": {
+		"particle": "blocks/leaves_oak",
+		"texture": "blocks/leaves_oak"
+	},
+	"elements": [ 	 
+		{
+			"__comment": "Box2",
+			"from": [ 2, 0, 2 ],
+			"to": [ 14, 16, 14 ],
+			"faces": {
+				"down": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture", "tintindex": 0},
+				"up": { "uv": [ 2, 2, 14, 14 ], "texture": "#texture", "tintindex": 0},
+				"north": { "uv": [ 2, 0, 14, 16 ], "texture": "#texture", "tintindex": 0, "cullface": "north"},
+				"south": { "uv": [ 2, 0, 14, 16 ], "texture": "#texture", "tintindex": 0, "cullface": "south"},
+				"west": { "uv": [ 2, 0, 14, 16 ], "texture": "#texture", "tintindex": 0},
+				"east": { "uv": [ 2, 0, 14, 16 ], "texture": "#texture", "tintindex": 0}
+			}
+		}
+	]
+}

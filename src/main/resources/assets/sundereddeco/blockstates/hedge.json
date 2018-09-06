@@ -1,0 +1,49 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "sundereddeco:garden/hedge_bottom_single",
+    "uvlock": true
+  },
+  "variants": {
+    "north": {
+      "true": {"submodel": "sundereddeco:garden/hedge_bottom_submodel", "y": 270},
+      "false": {}
+    },
+    "east": {
+      "true": {"submodel": "sundereddeco:garden/hedge_bottom_submodel"},
+      "false": {}
+    },
+    "south": {
+      "true": {"submodel": "sundereddeco:garden/hedge_bottom_submodel", "y": 90},
+      "false": {}
+    },
+    "west": {
+      "true": {"submodel": "sundereddeco:garden/hedge_bottom_submodel", "y": 180},
+      "false": {}
+    },
+    "top": {
+      "true": {"model": "sundereddeco:garden/hedge_top_single"},
+      "false": {}
+    },
+    "topnorth": {
+      "true": {"submodel": "sundereddeco:garden/hedge_top_submodel", "y": 270},
+      "false": {}
+    },
+    "topeast": {
+      "true": {"submodel": "sundereddeco:garden/hedge_top_submodel"},
+      "false": {}
+    },
+    "topsouth": {
+      "true": {"submodel": "sundereddeco:garden/hedge_top_submodel", "y": 90},
+      "false": {}
+    },
+    "topwest": {
+      "true": {"submodel": "sundereddeco:garden/hedge_top_submodel", "y": 180},
+      "false": {}
+    },
+    "inventory": {
+      "model": "sundereddeco:garden/hedge_bottom_single",
+      "transform": "forge:default-block"
+    }
+  }
+}
