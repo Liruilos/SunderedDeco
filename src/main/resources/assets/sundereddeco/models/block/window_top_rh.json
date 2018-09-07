@@ -1,0 +1,7 @@
+{
+  "parent": "block/door_top_rh",
+  "textures": {
+    "bottom": "sundereddeco:blocks/window_lower_oak",
+    "top": "sundereddeco:blocks/window_upper_oak"
+  }
+}

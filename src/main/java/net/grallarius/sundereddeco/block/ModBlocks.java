@@ -37,6 +37,9 @@ public class ModBlocks {
     public static BlockDirectional roofShinglesRedConcave = new BlockDirectional(Material.WOOD,"roof_shingles_red_concave");
     public static BlockDirectional roofShinglesRedConvex = new BlockDirectional(Material.WOOD, "roof_shingles_red_convex");
 
+    //for now is registering itself and model registry happening in InvModel
+    public static BlockWindow window = new BlockWindow(Material.WOOD,"window");
+
 
 
 
@@ -108,6 +111,7 @@ public class ModBlocks {
                 roofShinglesRed.register();
                 roofShinglesRedConcave.register();
                 roofShinglesRedConvex.register();
+
 
 
         /** garden blocks */
