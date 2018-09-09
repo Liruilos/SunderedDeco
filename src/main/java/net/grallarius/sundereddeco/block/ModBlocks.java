@@ -9,10 +9,7 @@ import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
 import net.grallarius.sundereddeco.block.pedestal.BlockPedestal;
-import net.grallarius.sundereddeco.block.shop.BlockBasket;
-import net.grallarius.sundereddeco.block.shop.BlockCrate;
-import net.grallarius.sundereddeco.block.shop.BlockDisplayCrate;
-import net.grallarius.sundereddeco.block.shop.BlockLargeBasket;
+import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.material.Material;
 
 public class ModBlocks {
@@ -37,7 +34,7 @@ public class ModBlocks {
     public static BlockDirectional roofShinglesRedConcave = new BlockDirectional(Material.WOOD,"roof_shingles_red_concave");
     public static BlockDirectional roofShinglesRedConvex = new BlockDirectional(Material.WOOD, "roof_shingles_red_convex");
 
-    //for now is registering itself and model registry happening in InvModel
+    //TODO for now is registering itself and model registry happening in InvModel
     public static BlockWindow window = new BlockWindow(Material.WOOD,"window");
 
 
@@ -88,6 +85,27 @@ public class ModBlocks {
     public static BlockLargeBasket basketLargeIngot = new BlockLargeBasket("basket_large_ingot");
     public static BlockLargeBasket basketLargePotato = new BlockLargeBasket("basket_large_potato");
     public static BlockLargeBasket basketLargeSugar = new BlockLargeBasket("basket_large_sugar");
+
+    public static BlockShopSign signApothecary = new BlockShopSign("sign_apothecary");
+    public static BlockShopSign signArmoury = new BlockShopSign("sign_armoury");
+    public static BlockShopSign signBakery = new BlockShopSign("sign_bakery");
+    public static BlockShopSign signBlacksmith = new BlockShopSign("sign_blacksmith");
+    public static BlockShopSign signBrewery = new BlockShopSign("sign_brewery");
+    public static BlockShopSign signClinic = new BlockShopSign("sign_clinic");
+    public static BlockShopSign signClothing = new BlockShopSign("sign_clothing");
+    public static BlockShopSign signDiner = new BlockShopSign("sign_diner");
+    public static BlockShopSign signExotics = new BlockShopSign("sign_exotics");
+    public static BlockShopSign signFishery = new BlockShopSign("sign_fishery");
+    public static BlockShopSign signFlorist = new BlockShopSign("sign_florist");
+    public static BlockShopSign signFurniture = new BlockShopSign("sign_furniture");
+    public static BlockShopSign signGeneral = new BlockShopSign("sign_general");
+    public static BlockShopSign signInn = new BlockShopSign("sign_inn");
+    public static BlockShopSign signJeweller = new BlockShopSign("sign_jeweller");
+    public static BlockShopSign signMusic = new BlockShopSign("sign_music");
+    public static BlockShopSign signPetshop = new BlockShopSign("sign_petshop");
+    public static BlockShopSign signPostal = new BlockShopSign("sign_postal");
+    public static BlockShopSign signPub = new BlockShopSign("sign_pub");
+    public static BlockShopSign signWeapons = new BlockShopSign("sign_weapons");
 
 
     /*    public static BlockPedestal pedestal = new BlockPedestal();*/
@@ -160,6 +178,27 @@ public class ModBlocks {
         basketLargeIngot.register();
         basketLargePotato.register();
         basketLargeSugar.register();
+
+        signApothecary.register();
+        signArmoury.register();
+        signBakery.register();
+        signBlacksmith.register();
+        signBrewery.register();
+        signClinic.register();
+        signClothing.register();
+        signDiner.register();
+        signExotics.register();
+        signFishery.register();
+        signFlorist.register();
+        signFurniture.register();
+        signGeneral.register();
+        signInn.register();
+        signJeweller.register();
+        signMusic.register();
+        signPetshop.register();
+        signPostal.register();
+        signPub.register();
+        signWeapons.register();
 
     }
 
