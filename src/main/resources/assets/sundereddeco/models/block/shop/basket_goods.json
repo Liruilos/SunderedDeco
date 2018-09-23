@@ -2,9 +2,9 @@
 	"credit": "Made with Blockbench",
 	"textures": {
 		"0": "#good",
-		"1": "sundereddeco:blocks/shop/crate/crate_closed",
-		"2": "sundereddeco:blocks/shop/crate/crate_closed",
-		"particle": "sundereddeco:blocks/shop/crate/crate_closed"
+		"1": "sundereddeco:blocks/rope_block",
+		"2": "sundereddeco:blocks/rope_block",
+		"particle": "sundereddeco:blocks/rope_block"
 	},
 	"elements": [
 		{

@@ -1,6 +1,5 @@
 package net.grallarius.sundereddeco.block;
 
-import net.grallarius.sundereddeco.InvModel;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
@@ -11,10 +10,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.block.statemap.StateMap;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
@@ -28,9 +25,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
-
-import static net.grallarius.sundereddeco.SunderedDeco.BLOCK_REGISTRY;
-import static net.grallarius.sundereddeco.SunderedDeco.ITEM_REGISTRY;
 
 public class BlockWindow extends BlockDoor {
 
@@ -50,7 +44,7 @@ public class BlockWindow extends BlockDoor {
         GameRegistry.findRegistry(Item.class).register(item);
         this.item = item;
         this.setHardness(3F);
-        this.setSoundType(SoundType.WOOD);
+        this.setSoundType(SoundType.GLASS);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH)
                 .withProperty(OPEN, Boolean.valueOf(false)).withProperty(HINGE, BlockDoor.EnumHingePosition.LEFT)
                 .withProperty(POWERED, Boolean.valueOf(false)).withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER));

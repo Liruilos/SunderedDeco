@@ -3,7 +3,6 @@ package net.grallarius.sundereddeco.block.shop;
 import net.grallarius.sundereddeco.block.BlockDirectional;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -21,7 +20,7 @@ public class BlockShopSign extends BlockDirectional {
     @Deprecated
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
     {
-        switch ((EnumFacing)state.getValue(FACING))
+        switch (state.getValue(FACING))
         {
             case NORTH:
                 return BOUNDBOX_NS;

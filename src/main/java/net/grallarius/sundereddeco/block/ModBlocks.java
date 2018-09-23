@@ -113,23 +113,16 @@ public class ModBlocks {
     public static void preInit() {
                 /*oreCopper.register();*/
 
-                table.register();
-                stool.register();
-                chair.register();
-                parkbench.register();
-                sidetable.register();
-                scales.register();
+
                 bottlePlaced.register();
                 plateMuffins.register();
                 plateCroissants.register();
-                coinpurse.register();
+
                 bookPedestal.register();
-                shrine.register();
 
                 roofShinglesRed.register();
                 roofShinglesRedConcave.register();
                 roofShinglesRedConvex.register();
-
 
 
         /** garden blocks */
@@ -139,9 +132,19 @@ public class ModBlocks {
         windowbox.register();
         flowerbed.register();
         denseFlowerbed.register();
+        parkbench.register();
+        shrine.register();
 
+        /** home blocks */
+        table.register();
+        stool.register();
+        chair.register();
+        sidetable.register();
 
         /** shop blocks */
+        coinpurse.register();
+        scales.register();
+
         crateClosed.register();
         crateApple.register();
         crateBerry.register();

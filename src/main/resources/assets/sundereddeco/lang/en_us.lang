@@ -3,17 +3,26 @@ item.ingot_copper.name=Copper Ingot
 item.copper_sword.name=Copper Sword
 
 # Blocks
-tile.ore_copper.name=Copper Ore
-tile.pedestal.name=Pedestal
+# garden
+tile.fountain.name=Fountain
+tile.hedge.name=Garden Hedge
+tile.largeplanterbox.name=Large Planter Box
 tile.windowbox.name=Windowbox
 tile.flowerbed.name=Flower Bed
 tile.denseflowerbed.name=Dense Flowerbed
-tile.largeplanterbox.name=Large Planter Box
+tile.parkbench.name=Parkbench
+tile.shrine.name=Shrine of Offering
+
+# home
 tile.table.name=Table
 tile.stool.name=Stool
 tile.chair.name=Chair
-tile.parkbench.name=Parkbench
-tile.fountain.name=Fountain
+tile.sidetable.name=Sidetable
+
+# shop
+tile.coinpurse.name=Coinpurse
+tile.scales.name=Scales
+
 tile.crate_apple.name=Crate of Apples
 tile.crate_berry.name=Crate of Berries
 tile.crate_carrot.name=Crate of Carrots
@@ -24,6 +33,15 @@ tile.crate_ingot.name=Crate of Ingots
 tile.crate_potato.name=Crate of Potatoes
 tile.crate_sugar.name=Crate of Sugar
 
+tile.display_crate_apple.name=Display Crate of Apples
+tile.display_crate_berry.name=Display Crate of Berries
+tile.display_crate_carrot.name=Display Crate of Carrots
+tile.display_crate_fish.name=Display Crate of Fish
+tile.display_crate_grain.name=Display Crate of Grain
+tile.display_crate_ingot.name=Display Crate of Ingots
+tile.display_crate_potato.name=Display Crate of Potatoes
+tile.display_crate_sugar.name=Display Crate of Sugar
+
 tile.basket_apple.name=Basket of Apples
 tile.basket_berry.name=Basket of Berries
 tile.basket_carrot.name=Basket of Carrots
@@ -33,3 +51,34 @@ tile.basket_grain.name=Basket of Grain
 tile.basket_ingot.name=Basket of Ingots
 tile.basket_potato.name=Basket of Potatoes
 tile.basket_sugar.name=Basket of Sugar
+
+tile.basket_large_apple.name=Large Basket of Apples
+tile.basket_large_berry.name=Large Basket of Berries
+tile.basket_large_carrot.name=Large Basket of Carrots
+tile.basket_large_closed.name=Large Closed Basket
+tile.basket_large_fish.name=Large Basket of Fish
+tile.basket_large_grain.name=Large Basket of Grain
+tile.basket_large_ingot.name=Large Basket of Ingots
+tile.basket_large_potato.name=Large Basket of Potatoes
+tile.basket_large_sugar.name=Large Basket of Sugar
+
+tile.sign_apothecary.name=Apothecary
+tile.sign_armoury.name=Armoury
+tile.sign_bakery.name=Bakery
+tile.sign_blacksmith.name=Blacksmith
+tile.sign_brewery.name=Brewery
+tile.sign_clinic.name=Clinic
+tile.sign_clothing.name=Clothing Store
+tile.sign_diner.name=Diner
+tile.sign_exotics.name=Exotic Goods
+tile.sign_fishery.name=Fishery
+tile.sign_florist.name=Florist
+tile.sign_furniture.name=Furniture Store
+tile.sign_general.name=General Store
+tile.sign_inn.name=Inn
+tile.sign_jeweller.name=Jeweller
+tile.sign_music.name=Music Store
+tile.sign_petshop.name=Pet Store
+tile.sign_postal.name=Post Office
+tile.sign_pub.name=Pub
+tile.sign_weapons.name=Weapons Store
