@@ -28,7 +28,15 @@ public class ModBlocks {
     public static BlockDirectional plateCroissants = new BlockDirectional(Material.WOOD, "plate_croissants");
     public static BlockDirectional coinpurse = new BlockDirectional(Material.CARPET, "coinpurse");
     public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
-    public static BlockDirectional shrine = new BlockDirectional(Material.ROCK, "shrine");
+
+    public static BlockLantern lanternCandle = new BlockLantern("lantern_candle");
+    public static BlockLantern lanternBlue = new BlockLantern("lantern_blue");
+    public static BlockLantern lanternGreen = new BlockLantern("lantern_green");
+    public static BlockLantern lanternRed = new BlockLantern("lantern_red");
+    public static BlockLantern lanternYellow = new BlockLantern("lantern_yellow");
+
+
+
 
     public static BlockDirectional roofShinglesRed = new BlockDirectional(Material.WOOD, "roof_shingles_red");
     public static BlockDirectional roofShinglesRedConcave = new BlockDirectional(Material.WOOD,"roof_shingles_red_concave");
@@ -47,6 +55,7 @@ public class ModBlocks {
     public static BlockWindowbox windowbox = new BlockWindowbox("windowbox");
     public static BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
     public static BlockDenseFlowerbed denseFlowerbed = new BlockDenseFlowerbed("denseflowerbed");
+    public static BlockDirectional shrine = new BlockDirectional(Material.ROCK, "shrine");
 
     /** shop blocks */
     public static BlockCrate crateClosed = new BlockCrate("crate_closed");
@@ -108,17 +117,19 @@ public class ModBlocks {
     public static BlockShopSign signWeapons = new BlockShopSign("sign_weapons");
 
 
-    /*    public static BlockPedestal pedestal = new BlockPedestal();*/
-
     public static void preInit() {
-                /*oreCopper.register();*/
-
 
                 bottlePlaced.register();
                 plateMuffins.register();
                 plateCroissants.register();
 
                 bookPedestal.register();
+
+                lanternCandle.register();
+                lanternBlue.register();
+                lanternGreen.register();
+                lanternRed.register();
+                lanternYellow.register();
 
                 roofShinglesRed.register();
                 roofShinglesRedConcave.register();

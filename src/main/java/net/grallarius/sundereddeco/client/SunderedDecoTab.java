@@ -9,7 +9,7 @@ public class SunderedDecoTab extends CreativeTabs {
 
     public SunderedDecoTab() {
         super(SunderedDeco.MODID);
-        setBackgroundImageName("item_search.png");
+        //setBackgroundImageName("item_search.png");
     }
 
     @Override
