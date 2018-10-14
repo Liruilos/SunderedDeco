@@ -558,12 +558,12 @@
 			"to": [ 14.5, 3, 12 ],
 			"rotation": { "origin": [ 11.5, 2, 9 ], "axis": "z", "angle": -45 },
 			"faces": {
-				"down": { "uv": [ 5.5, 9.5, 4.5, 9 ], "texture": "#voxels_atlas", "cullface": "down", "rotation": 180 },
-				"up": { "uv": [ 4.5, 9, 3.5, 9.5 ], "texture": "#voxels_atlas", "cullface": "down", "rotation": 180 },
-				"north": { "uv": [ 6.5, 8, 5.5, 8.25 ], "texture": "#voxels_atlas", "cullface": "down" },
-				"south": { "uv": [ 7, 15.75, 8, 16 ], "texture": "#voxels_atlas", "cullface": "down" },
-				"west": { "uv": [ 13.75, 15.5, 13.25, 15.25 ], "texture": "#voxels_atlas", "cullface": "down", "rotation": 180 },
-				"east": { "uv": [ 13.75, 15.5, 14.25, 15.25 ], "texture": "#voxels_atlas", "cullface": "down", "rotation": 180 }
+				"down": { "uv": [ 5.5, 9.5, 4.5, 9 ], "texture": "#voxels_atlas", "rotation": 180 },
+				"up": { "uv": [ 4.5, 9, 3.5, 9.5 ], "texture": "#voxels_atlas", "rotation": 180 },
+				"north": { "uv": [ 6.5, 8, 5.5, 8.25 ], "texture": "#voxels_atlas"},
+				"south": { "uv": [ 7, 15.75, 8, 16 ], "texture": "#voxels_atlas"},
+				"west": { "uv": [ 13.75, 15.5, 13.25, 15.25 ], "texture": "#voxels_atlas", "rotation": 180 },
+				"east": { "uv": [ 13.75, 15.5, 14.25, 15.25 ], "texture": "#voxels_atlas", "rotation": 180 }
 			}
 		},
 		{

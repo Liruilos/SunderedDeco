@@ -1,10 +1,21 @@
-itemGroup.sundereddeco=Decorative Items
+itemGroup.sundereddeco=Sundered Decorative Items
 
 # Items
 item.ingot_copper.name=Copper Ingot
-item.copper_sword.name=Copper Sword
+
 
 # Blocks
+
+tile.roof_shingles_red.name=Red Roofing Shingles
+tile.roof_shingles_red_concave.name=Red Roofing Shingles Inner Corner
+tile.roof_shingles_red.name_convex=Red Roofing Shingles Outer Corner
+
+tile.bottle_placed.name=Green Glass Bottle
+tile.plate_croissants.name=Plate of Croissants
+tile.plate_muffins.name=Plate of Muffins
+
+tile.book_pedestal.name=Book Pedestal
+
 # garden
 tile.fountain.name=Fountain
 tile.hedge.name=Garden Hedge
@@ -14,6 +25,12 @@ tile.flowerbed.name=Flower Bed
 tile.denseflowerbed.name=Dense Flowerbed
 tile.parkbench.name=Parkbench
 tile.shrine.name=Shrine of Offering
+
+tile.lantern_candle.name=Candlebox Lantern
+tile.lantern_blue.name=Blue Lantern
+tile.lantern_green.name=Green Lantern
+tile.lantern_red.name=Red Lantern
+tile.lantern_yellow.name=Yellow Lantern
 
 # home
 tile.table.name=Table
