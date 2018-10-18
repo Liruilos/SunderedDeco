@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class BlockChair extends BlockSittable {
 
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.065D, 0.0D,0.065D,0.935D,1.2D,0.935D);
+    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.125D, 0.0D,0.125D,0.875D,0.62D,0.875D);
 
     //directional code
     public static final PropertyDirection FACING = BlockHorizontal.FACING;
