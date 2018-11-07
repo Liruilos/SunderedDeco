@@ -24,8 +24,8 @@ public class ModBlocks {
     public static BlockDirectional sidetable = new BlockDirectional(Material.WOOD, "sidetable");
     public static BlockDirectional scales = new BlockDirectional(Material.IRON, "scales");
     public static BlockBottle bottlePlaced = new BlockBottle("bottle_placed");
-    public static BlockDirectional plateMuffins = new BlockDirectional(Material.WOOD, "plate_muffins");
-    public static BlockDirectional plateCroissants = new BlockDirectional(Material.WOOD, "plate_croissants");
+    public static BlockClutterPlate plateMuffins = new BlockClutterPlate("plate_muffins");
+    public static BlockClutterPlate plateCroissants = new BlockClutterPlate("plate_croissants");
     public static BlockDirectional coinpurse = new BlockDirectional(Material.CARPET, "coinpurse");
     public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
 
