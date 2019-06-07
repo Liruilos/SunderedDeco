@@ -1,6 +1,7 @@
 package net.grallarius.sundereddeco.block;
 
 import net.grallarius.sundereddeco.SunderedDeco;
+import net.grallarius.sundereddeco.client.SunderedDecoTab;
 import net.grallarius.sundereddeco.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
@@ -22,7 +23,7 @@ public class BlockBase extends Block {
         this.name = name;
         setRegistryName(SunderedDeco.MODID, name);
 
-        ModItems.itemBlocks.add(new ItemBlock(this, new ItemBlock.Properties().group(ItemGroup.MISC)).setRegistryName(SunderedDeco.MODID, name));
+        ModItems.itemBlocks.add(new ItemBlock(this, new ItemBlock.Properties().group(SunderedDeco.creativeTab)).setRegistryName(SunderedDeco.MODID, name));
         //setCreativeTab(SunderedDeco.creativeTab);
     }
 
