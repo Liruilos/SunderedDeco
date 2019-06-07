@@ -8,17 +8,17 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 
-public class TileEntityWindowbox extends TileEntity {
+//extends TileEntity
+public class TileEntityWindowbox  {
     public long lastChangeTime;
     public int facing;
 
-    public ItemStackHandler inventory = new ItemStackHandler(3) {
+/*    public ItemStackHandler inventory = new ItemStackHandler(3) {
 
         @Override
         protected void onContentsChanged(int slot){
@@ -35,8 +35,9 @@ public class TileEntityWindowbox extends TileEntity {
         if (world.isRemote) {
             SunderedDeco.wrapper.sendToServer(new PacketRequestUpdateWindowbox(this));
         }
-    }
+    }*/
 
+/*
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         compound.setTag("inventory", inventory.serializeNBT());
         compound.setLong("lastChangeTime", lastChangeTime);
@@ -52,24 +53,25 @@ public class TileEntityWindowbox extends TileEntity {
         facing = compound.getInteger("facing");
         super.readFromNBT(compound);
     }
+*/
 
     public int getFacing() { return facing; }
 
     public void setFacing(int facing) { this.facing = facing; }
 
-    @Override
+/*    @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
-    }
+    }*/
 
-    @Nullable
+/*    @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)inventory : super.getCapability(capability, facing);
-    }
+    }*/
 
-    @Override
+/*    @Override
     public AxisAlignedBB getRenderBoundingBox() {
         return new AxisAlignedBB(getPos(), getPos().add(1, 2, 1));
-    }
+    }*/
 }

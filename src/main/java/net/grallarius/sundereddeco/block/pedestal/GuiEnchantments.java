@@ -7,10 +7,8 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class GuiEnchantments extends GuiScreen
 {
@@ -70,7 +68,7 @@ public class GuiEnchantments extends GuiScreen
     public void initGui()
     {
         // DEBUG
-        System.out.println("Gui Enchantments initGUI()");
+/*        System.out.println("Gui Enchantments initGUI()");
         buttonList.clear();
         Keyboard.enableRepeatEvents(true);
 
@@ -81,24 +79,24 @@ public class GuiEnchantments extends GuiScreen
         buttonList.add(buttonDone);
         int offsetFromScreenLeft = (width - bookImageWidth) / 2;
         buttonList.add(buttonNextPage = new NextPageButton(1, offsetFromScreenLeft + 120, 156, true));
-        buttonList.add(buttonPreviousPage = new NextPageButton(2, offsetFromScreenLeft + 38, 156, false));
+        buttonList.add(buttonPreviousPage = new NextPageButton(2, offsetFromScreenLeft + 38, 156, false));*/
     }
 
     /**
      * Called from the main game loop to update the screen.
      */
-    @Override
+/*    @Override
     public void updateScreen()
     {
         buttonDone.visible = (currPage == bookTotalPages - 1);
         buttonNextPage.visible = (currPage < bookTotalPages - 1);
         buttonPreviousPage.visible = currPage > 0;
-    }
+    }*/
 
     /**
      * Draws the screen and all the components in it.
      */
-    @Override
+/*    @Override
     public void drawScreen(int parWidth, int parHeight, float p_73863_3_)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -132,13 +130,13 @@ public class GuiEnchantments extends GuiScreen
         fontRenderer.drawStringWithShadow(stringPageTitle[currPage], offsetFromScreenLeft + 36, 18, 0xB40431);
         fontRenderer.drawSplitString(stringPageText[currPage], offsetFromScreenLeft + 36, 34, 116, 0);
         super.drawScreen(parWidth, parHeight, p_73863_3_);
-    }
+    }*/
 
-    /**
+ /*   *//**
      * Called when a mouse button is pressed and the mouse is moved around.
      * Parameters are : mouseX, mouseY, lastButtonClicked &
      * timeSinceMouseClick.
-     */
+     *//*
     @Override
     protected void mouseClickMove(int parMouseX, int parMouseY, int parLastButtonClicked, long parTimeSinceMouseClick) {}
 
@@ -165,7 +163,7 @@ public class GuiEnchantments extends GuiScreen
                 --currPage;
             }
         }
-    }
+    }*/
 
     /**
      * Called when the screen is unloaded. Used to disable keyboard repeat
@@ -187,7 +185,7 @@ public class GuiEnchantments extends GuiScreen
         return true;
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     static class NextPageButton extends GuiButton
     {
         private final boolean isNextButton;
@@ -198,7 +196,7 @@ public class GuiEnchantments extends GuiScreen
             isNextButton = parIsNextButton;
         }
 
-         // Draws this button to the screen
+       /*  // Draws this button to the screen
         @Override
         public void drawButton(Minecraft mc, int parX, int parY, float partialTicks) {
             if (visible)
@@ -231,6 +229,6 @@ public class GuiEnchantments extends GuiScreen
                 drawTexturedModalRect(posX/2, posY/2, textureX, textureY, 23, 13);
                 GlStateManager.scale(0.5, 0.5, 0.5);
             }
-        }
+        }*/
     }
 }

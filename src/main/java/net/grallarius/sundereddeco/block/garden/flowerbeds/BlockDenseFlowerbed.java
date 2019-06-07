@@ -7,6 +7,8 @@ import net.grallarius.sundereddeco.block.BlockConnectableHorizontal;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFlower;
 import net.minecraft.block.BlockTallGrass;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,7 +18,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
@@ -24,19 +26,24 @@ import net.minecraftforge.items.IItemHandler;
 import javax.annotation.Nullable;
 
 
-public class BlockDenseFlowerbed extends BlockConnectableHTileEntity<TileEntityDenseFlowerbed> {
+//extends BlockConnectableHTileEntity<TileEntityDenseFlowerbed>
+public class BlockDenseFlowerbed  {
     protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.0D, 0.0D,0.0D,1.0D,0.6D,1.0D);
 
+/*    private static final Properties props = Properties.create(Material.ROCK)
+            .sound(SoundType.STONE);
+
     public BlockDenseFlowerbed(String name){
-        super(name);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(SHAPE, BlockConnectableHorizontal.EnumShape.SINGLE));
-    }
+        super(props, name);
+        this.setDefaultState(this.stateContainer.getBaseState().with(SHAPE, BlockConnectableHorizontal.EnumShape.SINGLE));
+    }*/
+    /*
     @Override
     @Deprecated
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    public IBlockState getActualState(IBlockState state, IBlockReader worldIn, BlockPos pos) {
 
         BlockConnectableHorizontal.EnumShape shape = getShape(state, worldIn, pos, worldIn.getBlockState(pos).getClass());
-        return state.withProperty(SHAPE, shape);
+        return state.with(SHAPE, shape);
     }
 
     @Override
@@ -48,7 +55,7 @@ public class BlockDenseFlowerbed extends BlockConnectableHTileEntity<TileEntityD
 
             if (!player.isSneaking() && itemHandler != null) {
                 if (player.getHeldItem(hand).isEmpty()) {
-                    /**remove items from relevant slot*/
+                    *//**remove items from relevant slot*//*
                     if(!itemHandler.getStackInSlot(3).isEmpty()){
                         player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(3,1,false));
                     }
@@ -63,7 +70,7 @@ public class BlockDenseFlowerbed extends BlockConnectableHTileEntity<TileEntityD
                     }
 
                 } else if(canBePotted(player.getHeldItem(hand))) {
-                    /**insert items from hand*/
+                    *//**insert items from hand*//*
                     if(itemHandler.getStackInSlot(0).isEmpty()){
 
                         ItemStack singleItemFromHand1 = player.getHeldItem(hand).splitStack(1);
@@ -148,13 +155,13 @@ public class BlockDenseFlowerbed extends BlockConnectableHTileEntity<TileEntityD
             world.spawnEntity(item4);
         }
         super.breakBlock(world, pos, state);
-    }
-    @Override
+    }*/
+/*    @Override
     public Class<TileEntityDenseFlowerbed> getTileEntityClass() {
         return TileEntityDenseFlowerbed.class;
-    }
+    }*/
 
-    @Nullable
+   /* @Nullable
     @Override
     public TileEntityDenseFlowerbed createTileEntity(World world, IBlockState state) {
         return new TileEntityDenseFlowerbed();
@@ -164,5 +171,5 @@ public class BlockDenseFlowerbed extends BlockConnectableHTileEntity<TileEntityD
     @Deprecated
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return BOUNDBOX;
-    }
+    }*/
 }

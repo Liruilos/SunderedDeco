@@ -1,10 +1,5 @@
 package net.grallarius.sundereddeco.recipe;
 
-import net.grallarius.sundereddeco.block.ModBlocks;
-import net.grallarius.sundereddeco.item.ModItems;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.registry.GameRegistry;
-
 public class ModRecipes {
 
     public static void init() {

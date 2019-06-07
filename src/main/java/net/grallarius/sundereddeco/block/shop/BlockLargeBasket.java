@@ -3,7 +3,7 @@ package net.grallarius.sundereddeco.block.shop;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 
 public class BlockLargeBasket extends BlockBasket {
 
@@ -13,10 +13,10 @@ public class BlockLargeBasket extends BlockBasket {
         super(name);
     }
 
-    @Override
+/*    @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
         return BOUNDBOX;
-    }
+    }*/
 
 }

@@ -1,79 +1,90 @@
 package net.grallarius.sundereddeco.block;
 
 
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyEnum;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.EnumProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+
+import javax.annotation.Nullable;
 
 public class BlockConnectableHorizontal extends BlockBase {
 
-    public static final PropertyEnum<EnumShape> SHAPE = PropertyEnum.create("shape", EnumShape.class);
+    public static final EnumProperty<EnumShape> SHAPE = EnumProperty.create("shape", EnumShape.class);
 
-    public BlockConnectableHorizontal(String name){
-        super(Material.ROCK, name);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(SHAPE, EnumShape.SINGLE));
+    public BlockConnectableHorizontal(Properties properties, String name){
+        super(properties, name);
+        this.setDefaultState(this.stateContainer.getBaseState().with(SHAPE, EnumShape.SINGLE));
     }
 
+    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+        builder.add(SHAPE);
+    }
 
-    public EnumShape getShape(IBlockState state, IBlockAccess worldIn, BlockPos pos, Class cls) {
-
-        /** Working out which type of model to place so all are connected correctly, end = |_|    straight = | |
-         * corner = |_     side = _     centre =     */
-
-        boolean northConnectable = worldIn.getBlockState(pos.north()).getBlock() == this;
-        boolean southConnectable = worldIn.getBlockState(pos.south()).getBlock() == this;
-        boolean eastConnectable = worldIn.getBlockState(pos.east()).getBlock() == this;
-        boolean westConnectable = worldIn.getBlockState(pos.west()).getBlock() == this;
+    /** Working out which type of model to place so all are connected correctly, end = |_|    straight = | |
+     * corner = |_     side = _     centre =     */
+    private IBlockState connectedState(IWorld world, BlockPos pos){
+        boolean northConnectable = world.getBlockState(pos.north()).getBlock() == this;
+        boolean southConnectable = world.getBlockState(pos.south()).getBlock() == this;
+        boolean eastConnectable = world.getBlockState(pos.east()).getBlock() == this;
+        boolean westConnectable = world.getBlockState(pos.west()).getBlock() == this;
 
         if (!northConnectable && !westConnectable && !southConnectable && !eastConnectable) {
-            return EnumShape.SINGLE;
+            return this.getDefaultState().with(SHAPE, EnumShape.SINGLE);
         } else if (!northConnectable && westConnectable && !southConnectable && !eastConnectable) {
-            return EnumShape.ENDE;
+            return this.getDefaultState().with(SHAPE, EnumShape.ENDE);
         } else if (northConnectable && !westConnectable && !southConnectable && !eastConnectable) {
-            return EnumShape.ENDS;
+            return this.getDefaultState().with(SHAPE, EnumShape.ENDS);
         } else if (!northConnectable && !westConnectable && !southConnectable && eastConnectable) {
-            return EnumShape.ENDW;
+            return this.getDefaultState().with(SHAPE, EnumShape.ENDW);
         } else if (!northConnectable && !westConnectable && southConnectable && !eastConnectable) {
-            return EnumShape.ENDN;
+            return this.getDefaultState().with(SHAPE, EnumShape.ENDN);
         } else if (!northConnectable && westConnectable && !southConnectable && eastConnectable) {
-            return EnumShape.STRAIGHTEW;
+            return this.getDefaultState().with(SHAPE, EnumShape.STRAIGHTEW);
         } else if (northConnectable && !westConnectable && southConnectable && !eastConnectable) {
-            return EnumShape.STRAIGHTNS;
+            return this.getDefaultState().with(SHAPE, EnumShape.STRAIGHTNS);
         } else if (northConnectable && westConnectable && !southConnectable && !eastConnectable) {
-            return EnumShape.CORNERNW;
+            return this.getDefaultState().with(SHAPE, EnumShape.CORNERNW);
         } else if (northConnectable && eastConnectable && !southConnectable && !westConnectable) {
-            return EnumShape.CORNERNE;
+            return this.getDefaultState().with(SHAPE, EnumShape.CORNERNE);
         } else if (southConnectable && eastConnectable && !northConnectable && !westConnectable) {
-            return EnumShape.CORNERSE;
+            return this.getDefaultState().with(SHAPE, EnumShape.CORNERSE);
         } else if (southConnectable && westConnectable && !northConnectable && !eastConnectable) {
-            return EnumShape.CORNERSW;
+            return this.getDefaultState().with(SHAPE, EnumShape.CORNERSW);
         } else if (westConnectable && northConnectable && southConnectable && !eastConnectable) {
-            return EnumShape.SIDEE;
+            return this.getDefaultState().with(SHAPE, EnumShape.SIDEE);
         } else if (northConnectable && westConnectable && eastConnectable && !southConnectable) {
-            return EnumShape.SIDES;
+            return this.getDefaultState().with(SHAPE, EnumShape.SIDES);
         } else if (eastConnectable && northConnectable && southConnectable && !westConnectable) {
-            return EnumShape.SIDEW;
+            return this.getDefaultState().with(SHAPE, EnumShape.SIDEW);
         } else if (southConnectable && westConnectable && eastConnectable && !northConnectable) {
-            return EnumShape.SIDEN;
+            return this.getDefaultState().with(SHAPE, EnumShape.SIDEN);
         } else if (southConnectable && westConnectable && eastConnectable && northConnectable) {
-            return EnumShape.CENTRE;
+            return this.getDefaultState().with(SHAPE, EnumShape.CENTRE);
         }
-        return EnumShape.SINGLE;
+        return this.getDefaultState().with(SHAPE, EnumShape.SINGLE);
     }
-
-
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[] {SHAPE});
-    }
-
 
     @Override
+    @Deprecated
+    public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+        return connectedState(world, currentPos);
+    }
+
+    @Override
+    @Nullable
+    public IBlockState getStateForPlacement(BlockItemUseContext context) {
+        return connectedState(context.getWorld(), context.getPos());
+    }
+
+    //@Override
     @Deprecated
     public boolean isOpaqueCube(IBlockState state) {
         return false;
@@ -83,11 +94,6 @@ public class BlockConnectableHorizontal extends BlockBase {
     @Deprecated
     public boolean isFullCube(IBlockState state) {
         return false;
-    }
-
-    public int getMetaFromState(IBlockState state)
-    {
-        return 0;
     }
 
     public enum EnumShape implements IStringSerializable {
@@ -144,4 +150,5 @@ public class BlockConnectableHorizontal extends BlockBase {
         }
 
     }
+
 }

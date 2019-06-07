@@ -12,7 +12,7 @@ import net.minecraftforge.items.IItemHandler;
 
 public class ContainerDenseFlowerbed extends Container {
     public ContainerDenseFlowerbed(InventoryPlayer playerInv, final TileEntityDenseFlowerbed DenseFlowerbed) {
-        IItemHandler inventory = DenseFlowerbed.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+      /*  IItemHandler inventory = DenseFlowerbed.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
         addSlotToContainer(new SlotFlower(inventory, 0, 60, 21) {
             @Override
             public void onSlotChanged() { DenseFlowerbed.markDirty(); }
@@ -38,7 +38,7 @@ public class ContainerDenseFlowerbed extends Container {
 
         for (int k = 0; k < 9; k++) {
             addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
-        }
+        }*/
     }
 
     @Override

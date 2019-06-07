@@ -6,11 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketUpdateDenseFlowerbed implements IMessage {
+//implements IMessage
+public class PacketUpdateDenseFlowerbed {
     private BlockPos pos;
     private ItemStack stack1;
     private ItemStack stack2;
@@ -26,15 +24,15 @@ public class PacketUpdateDenseFlowerbed implements IMessage {
         this.stack4 = stack4;
     }
 
-    public PacketUpdateDenseFlowerbed(TileEntityDenseFlowerbed te) {
+/*    public PacketUpdateDenseFlowerbed(TileEntityDenseFlowerbed te) {
         this(te.getPos(), te.inventory.getStackInSlot(0), te.inventory.getStackInSlot(1), te.inventory.getStackInSlot(2), te.inventory.getStackInSlot(3));
 
 
-    }
+    }*/
 
     public PacketUpdateDenseFlowerbed() {
     }
-
+/*
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(pos.toLong());
@@ -67,5 +65,5 @@ public class PacketUpdateDenseFlowerbed implements IMessage {
             return null;
         }
 
-    }
+    }*/
 }

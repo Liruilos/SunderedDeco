@@ -1,42 +1,103 @@
 package net.grallarius.sundereddeco.block;
 
 
+import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.furniture.*;
-import net.grallarius.sundereddeco.block.garden.BlockHedge;
-import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockDenseFlowerbed;
-import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockFlowerbed;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
+import net.grallarius.sundereddeco.block.garden.BlockHedge;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
-import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
-import net.grallarius.sundereddeco.block.pedestal.BlockPedestal;
 import net.grallarius.sundereddeco.block.shop.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.IForgeRegistry;
+import net.minecraftforge.registries.ObjectHolder;
 
+@Mod.EventBusSubscriber(modid = SunderedDeco.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
+@ObjectHolder(SunderedDeco.MODID)
 public class ModBlocks {
 
-    /*public static BlockOre oreCopper = new BlockOre("ore_copper", "oreCopper");*/
+    //SHOP
+    public static final BlockCrate crate_closed = new BlockCrate("crate_closed");
+    public static final BlockCrate crate_apple = new BlockCrate("crate_apple");
+    public static final BlockCrate crate_berry = new BlockCrate("crate_berry");
+    public static final BlockCrate crate_carrot = new BlockCrate("crate_carrot");
+    public static final BlockCrate crate_fish = new BlockCrate("crate_fish");
+    public static final BlockCrate crate_grain = new BlockCrate("crate_grain");
+    public static final BlockCrate crate_ingot = new BlockCrate("crate_ingot");
+    public static final BlockCrate crate_potato = new BlockCrate("crate_potato");
+    public static final BlockCrate crate_sugar = new BlockCrate("crate_sugar");
+
+    public static final BlockBasket basket_berry = new BlockBasket("basket_berry");
+    public static final BlockBasket basket_apple = new BlockBasket("basket_apple");
+    public static final BlockBasket basket_carrot = new BlockBasket("basket_carrot");
+    public static final BlockBasket basket_fish = new BlockBasket("basket_fish");
+    public static final BlockBasket basket_grain = new BlockBasket("basket_grain");
+    public static final BlockBasket basket_ingot = new BlockBasket("basket_ingot");
+    public static final BlockBasket basket_potato = new BlockBasket("basket_potato");
+    public static final BlockBasket basket_sugar = new BlockBasket("basket_sugar");
+
+    public static final BlockLargeBasket basket_large_apple = new BlockLargeBasket("basket_large_apple");
+    public static final BlockLargeBasket basket_large_berry = new BlockLargeBasket("basket_large_berry");
+    public static final BlockLargeBasket basket_large_carrot = new BlockLargeBasket("basket_large_carrot");
+    public static final BlockLargeBasket basket_large_fish = new BlockLargeBasket("basket_large_fish");
+    public static final BlockLargeBasket basket_large_grain = new BlockLargeBasket("basket_large_grain");
+    public static final BlockLargeBasket basket_large_ingot = new BlockLargeBasket("basket_large_ingot");
+    public static final BlockLargeBasket basket_large_potato = new BlockLargeBasket("basket_large_potato");
+    public static final BlockLargeBasket basket_large_sugar = new BlockLargeBasket("basket_large_sugar");
+
+
+    //GARDEN
+    public static final BlockLantern lantern_candle = new BlockLantern("lantern_candle");
+    public static final BlockLantern lantern_blue = new BlockLantern("lantern_blue");
+    public static final BlockLantern lantern_green = new BlockLantern("lantern_green");
+    public static final BlockLantern lantern_red = new BlockLantern("lantern_red");
+    public static final BlockLantern lantern_yellow = new BlockLantern("lantern_yellow");
+
+    public static final BlockHedge hedge = new BlockHedge("hedge");
+    public static final BlockFountain fountain = new BlockFountain("fountain");
+
+    //HOME
+    public static final BlockDirectional sidetable = new BlockDirectional(Block.Properties.create(Material.WOOD), "sidetable");
+    public static final BlockSittable stool = new BlockSittable(Block.Properties.create(Material.WOOD),"stool");
+
+
+    @SubscribeEvent
+    public static void registerBlocks(RegistryEvent.Register<Block> event) {
+        event.getRegistry().registerAll(
+
+                //SHOP
+            crate_closed, crate_apple, crate_berry, crate_carrot, crate_fish, crate_grain, crate_ingot, crate_potato, crate_sugar,
+                basket_berry, basket_apple, basket_carrot, basket_fish, basket_grain, basket_ingot, basket_potato, basket_sugar,
+                basket_large_apple, basket_large_berry, basket_large_carrot, basket_large_fish, basket_large_grain,
+                basket_large_ingot, basket_large_potato, basket_large_sugar,
+
+                //GARDEN
+                lantern_candle, lantern_blue, lantern_green, lantern_red, lantern_yellow,
+                hedge, fountain,
+
+                //HOME
+                sidetable, stool
+        );
+    }
+
+
+/*
 
     public static BlockTable table = new BlockTable("table");
-    public static BlockSittable stool = new BlockSittable("stool");
     public static BlockChair chair = new BlockChair("chair");
     public static BlockConnectedChair parkbench = new BlockConnectedChair();
 
-    public static BlockDirectional sidetable = new BlockDirectional(Material.WOOD, "sidetable");
+
     public static BlockDirectional scales = new BlockDirectional(Material.IRON, "scales");
     public static BlockBottle bottlePlaced = new BlockBottle("bottle_placed");
     public static BlockClutterPlate plateMuffins = new BlockClutterPlate("plate_muffins");
     public static BlockClutterPlate plateCroissants = new BlockClutterPlate("plate_croissants");
     public static BlockDirectional coinpurse = new BlockDirectional(Material.CARPET, "coinpurse");
-    public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
-
-    public static BlockLantern lanternCandle = new BlockLantern("lantern_candle");
-    public static BlockLantern lanternBlue = new BlockLantern("lantern_blue");
-    public static BlockLantern lanternGreen = new BlockLantern("lantern_green");
-    public static BlockLantern lanternRed = new BlockLantern("lantern_red");
-    public static BlockLantern lanternYellow = new BlockLantern("lantern_yellow");
-
-
-
+    //public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
 
     public static BlockDirectional roofShinglesRed = new BlockDirectional(Material.WOOD, "roof_shingles_red");
     public static BlockDirectional roofShinglesRedConcave = new BlockDirectional(Material.WOOD,"roof_shingles_red_concave");
@@ -48,25 +109,17 @@ public class ModBlocks {
 
 
 
-    /** garden blocks */
-    public static BlockFountain fountain = new BlockFountain("fountain");
-    public static BlockHedge hedge = new BlockHedge("hedge");
+    */
+/** garden block *//*
+
     public static BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
-    public static BlockWindowbox windowbox = new BlockWindowbox("windowbox");
-    public static BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
-    public static BlockDenseFlowerbed denseFlowerbed = new BlockDenseFlowerbed("denseflowerbed");
+    //public static BlockWindowbox windowbox = new BlockWindowbox("windowbox");
+    //public static BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
+    //public static BlockDenseFlowerbed denseFlowerbed = new BlockDenseFlowerbed("denseflowerbed");
     public static BlockDirectional shrine = new BlockDirectional(Material.ROCK, "shrine");
 
-    /** shop blocks */
-    public static BlockCrate crateClosed = new BlockCrate("crate_closed");
-    public static BlockCrate crateApple = new BlockCrate("crate_apple");
-    public static BlockCrate crateBerry = new BlockCrate("crate_berry");
-    public static BlockCrate crateCarrot = new BlockCrate("crate_carrot");
-    public static BlockCrate crateFish = new BlockCrate("crate_fish");
-    public static BlockCrate crateGrain = new BlockCrate("crate_grain");
-    public static BlockCrate crateIngot = new BlockCrate("crate_ingot");
-    public static BlockCrate cratePotato = new BlockCrate("crate_potato");
-    public static BlockCrate crateSugar = new BlockCrate("crate_sugar");
+    */
+/** shop block *//*
 
     public static BlockDisplayCrate displayCrateApple = new BlockDisplayCrate("display_crate_apple");
     public static BlockDisplayCrate displayCrateBerry = new BlockDisplayCrate("display_crate_berry");
@@ -77,23 +130,7 @@ public class ModBlocks {
     public static BlockDisplayCrate displayCratePotato = new BlockDisplayCrate("display_crate_potato");
     public static BlockDisplayCrate displayCrateSugar = new BlockDisplayCrate("display_crate_sugar");
 
-    public static BlockBasket basketApple = new BlockBasket("basket_apple");
-    public static BlockBasket basketBerry = new BlockBasket("basket_berry");
-    public static BlockBasket basketCarrot = new BlockBasket("basket_carrot");
-    public static BlockBasket basketFish = new BlockBasket("basket_fish");
-    public static BlockBasket basketGrain = new BlockBasket("basket_grain");
-    public static BlockBasket basketIngot = new BlockBasket("basket_ingot");
-    public static BlockBasket basketPotato = new BlockBasket("basket_potato");
-    public static BlockBasket basketSugar = new BlockBasket("basket_sugar");
 
-    public static BlockLargeBasket basketLargeApple = new BlockLargeBasket("basket_large_apple");
-    public static BlockLargeBasket basketLargeBerry = new BlockLargeBasket("basket_large_berry");
-    public static BlockLargeBasket basketLargeCarrot = new BlockLargeBasket("basket_large_carrot");
-    public static BlockLargeBasket basketLargeFish = new BlockLargeBasket("basket_large_fish");
-    public static BlockLargeBasket basketLargeGrain = new BlockLargeBasket("basket_large_grain");
-    public static BlockLargeBasket basketLargeIngot = new BlockLargeBasket("basket_large_ingot");
-    public static BlockLargeBasket basketLargePotato = new BlockLargeBasket("basket_large_potato");
-    public static BlockLargeBasket basketLargeSugar = new BlockLargeBasket("basket_large_sugar");
 
     public static BlockShopSign signApothecary = new BlockShopSign("sign_apothecary");
     public static BlockShopSign signArmoury = new BlockShopSign("sign_armoury");
@@ -116,14 +153,16 @@ public class ModBlocks {
     public static BlockShopSign signPub = new BlockShopSign("sign_pub");
     public static BlockShopSign signWeapons = new BlockShopSign("sign_weapons");
 
+*/
 
     public static void preInit() {
+/*
 
                 bottlePlaced.register();
                 plateMuffins.register();
                 plateCroissants.register();
 
-                bookPedestal.register();
+                //bookPedestal.register();
 
                 lanternCandle.register();
                 lanternBlue.register();
@@ -136,23 +175,29 @@ public class ModBlocks {
                 roofShinglesRedConvex.register();
 
 
-        /** garden blocks */
+        */
+/** garden block *//*
+
         fountain.register();
         hedge.register();
         largeplanterbox.register();
-        windowbox.register();
-        flowerbed.register();
-        denseFlowerbed.register();
+        //windowbox.register();
+        //flowerbed.register();
+        //denseFlowerbed.register();
         parkbench.register();
         shrine.register();
 
-        /** home blocks */
+        */
+/** home block *//*
+
         table.register();
         stool.register();
         chair.register();
         sidetable.register();
 
-        /** shop blocks */
+        */
+/** shop block *//*
+
         coinpurse.register();
         scales.register();
 
@@ -213,7 +258,12 @@ public class ModBlocks {
         signPostal.register();
         signPub.register();
         signWeapons.register();
+*/
 
+    }
+
+    public static void registerTiles(IForgeRegistry<TileEntityType<?>> registry){
+        //registry.register(TileEntityType.Builder.create(TileEntityFlowerbed::new).build(null).setRegistryName(new ResourceLocation(SunderedDeco.MODID, "flowerbed")));
     }
 
     public static void registerBlocks() {

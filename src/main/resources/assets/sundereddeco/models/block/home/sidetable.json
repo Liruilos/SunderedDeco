@@ -1,10 +1,10 @@
 ﻿{
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "sundereddeco:blocks/home/sidetable_drawers",
-		"1": "sundereddeco:blocks/home/sidetable_side",
-		"2": "sundereddeco:blocks/home/workbench_front",
-		"particle": "sundereddeco:blocks/home/sidetable_side"
+		"0": "sundereddeco:block/home/sidetable_drawers",
+		"1": "sundereddeco:block/home/sidetable_side",
+		"2": "sundereddeco:block/home/workbench_front",
+		"particle": "sundereddeco:block/home/sidetable_side"
 	},
 	"elements": [
 		{

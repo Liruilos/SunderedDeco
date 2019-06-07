@@ -14,7 +14,7 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ContainerWindowbox extends Container {
 
     public ContainerWindowbox(InventoryPlayer playerInv, final TileEntityWindowbox windowbox) {
-        IItemHandler inventory = windowbox.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+       /* IItemHandler inventory = windowbox.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
         addSlotToContainer(new SlotFlower(inventory, 0, 60, 21) {
             @Override
             public void onSlotChanged() { windowbox.markDirty(); }
@@ -36,7 +36,7 @@ public class ContainerWindowbox extends Container {
 
         for (int k = 0; k < 9; k++) {
             addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
-        }
+        }*/
     }
 
     @Override

@@ -1,0 +1,8 @@
+{
+  "parent": "sundereddeco:block/shop/crate/crate_goods",
+  "textures": {
+    "top":    "sundereddeco:block/shop/crate/crate_apple",
+    "bottom": "sundereddeco:block/shop/crate/crate_closed",
+    "side":   "sundereddeco:block/shop/crate/crate_side"
+  }
+}

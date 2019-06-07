@@ -1,27 +1,25 @@
 package net.grallarius.sundereddeco.block.furniture;
 
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 
 public class BlockConnectedChair extends BlockChair {
 
     protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.0D, 0.0D,0.0D,1.0D,0.62D,1.0D);
 
     /** Whether there should be legs to the left */
-    public static final PropertyBool LEFTSIDE = PropertyBool.create("leftside");
+    public static final BooleanProperty LEFTSIDE = BooleanProperty.create("leftside");
     /** Whether there should be legs to the right */
-    public static final PropertyBool RIGHTSIDE = PropertyBool.create("rightside");
+    public static final BooleanProperty RIGHTSIDE = BooleanProperty.create("rightside");
     /** Whether there should be legs to the right */
-    public static final PropertyBool LEFTCORNER = PropertyBool.create("leftcorner");
+    public static final BooleanProperty LEFTCORNER = BooleanProperty.create("leftcorner");
     /** Whether there should be legs to the right */
-    public static final PropertyBool RIGHTCORNER = PropertyBool.create("rightcorner");
+    public static final BooleanProperty RIGHTCORNER = BooleanProperty.create("rightcorner");
     /** Whether there should be legs to the right */
-    public static final PropertyBool HASBACK = PropertyBool.create("hasback");
+    public static final BooleanProperty HASBACK = BooleanProperty.create("hasback");
 
     public BlockConnectedChair() {
         super("parkbench");
@@ -29,9 +27,9 @@ public class BlockConnectedChair extends BlockChair {
 
 
     /** Logic for connectable chair submodels */
-    @Override
+   /* @Override
     @Deprecated
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
+    public IBlockState getActualState(IBlockState state, IBlockReader worldIn, BlockPos pos)
     {
 
         IBlockState blockleft = worldIn.getBlockState(pos.offset(state.getValue(FACING).rotateYCCW()));
@@ -46,10 +44,10 @@ public class BlockConnectedChair extends BlockChair {
         boolean backChairLeft = blockback.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockback.getValue(FACING).rotateY());
         boolean backChairRight = blockback.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockback.getValue(FACING).rotateYCCW());
 
-        /** LEFTCORNER / RIGHTCORNER submodels add back rotated in correct position to make internal corners */
-        /** LEFTSIDE /RIGHTSIDE submodel added if no other connectable Chair to the side (in any direction but opposite) */
-        /** Submodel for sides must be separate as submodel is mirrored not rotated, unlike for the corners */
-        /** HASBACK property usually true, exception is when forming an outer corner */
+        *//** LEFTCORNER / RIGHTCORNER submodels add back rotated in correct position to make internal corners *//*
+        *//** LEFTSIDE /RIGHTSIDE submodel added if no other connectable Chair to the side (in any direction but opposite) *//*
+        *//** Submodel for sides must be separate as submodel is mirrored not rotated, unlike for the corners *//*
+        *//** HASBACK property usually true, exception is when forming an outer corner *//*
 
 
         return state.withProperty(LEFTCORNER, frontChairLeft && !leftChair)
@@ -58,16 +56,16 @@ public class BlockConnectedChair extends BlockChair {
                 .withProperty(RIGHTSIDE,  !rightChair && !frontChairRight && !backChairLeft)
                 .withProperty(HASBACK, !((backChairLeft && !rightChair && !frontChairLeft) || (backChairRight && !leftChair && !frontChairRight)));
 
-    }
+    }*/
 
-    @Override
+/*    @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
         return BOUNDBOX;
-    }
+    }*/
 
-    @Override
+/*    @Override
     protected BlockStateContainer createBlockState() {
         return new BlockStateContainer(this, new IProperty[] {FACING, LEFTSIDE, RIGHTSIDE, LEFTCORNER, RIGHTCORNER, HASBACK});
-    }
+    }*/
 }

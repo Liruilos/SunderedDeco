@@ -1,0 +1,6 @@
+{
+  "parent": "sundereddeco:block/shop/basket/large_basket_goods",
+  "textures": {
+    "good":    "sundereddeco:block/shop/crate/crate_berry"
+  }
+}

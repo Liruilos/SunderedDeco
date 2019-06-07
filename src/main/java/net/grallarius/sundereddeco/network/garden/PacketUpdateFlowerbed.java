@@ -6,11 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketUpdateFlowerbed implements IMessage {
+// implements IMessage
+public class PacketUpdateFlowerbed{
     private BlockPos pos;
     private ItemStack stack1;
     private ItemStack stack2;
@@ -23,7 +21,7 @@ public class PacketUpdateFlowerbed implements IMessage {
         this.stack2 =stack2;
 
     }
-
+/*
     public PacketUpdateFlowerbed(TileEntityFlowerbed te) {
         this(te.getPos(), te.inventory.getStackInSlot(0), te.inventory.getStackInSlot(1));
 
@@ -59,5 +57,5 @@ public class PacketUpdateFlowerbed implements IMessage {
             return null;
         }
 
-    }
+    }*/
 }

@@ -4,12 +4,9 @@ import io.netty.buffer.ByteBuf;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityDenseFlowerbed;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketRequestUpdateDenseFlowerbed implements IMessage {
+//implements IMessage
+public class PacketRequestUpdateDenseFlowerbed {
     private BlockPos pos;
     private int dimension;
 
@@ -17,7 +14,7 @@ public class PacketRequestUpdateDenseFlowerbed implements IMessage {
         this.pos = pos;
         this.dimension = dimension;
     }
-
+/*
     public PacketRequestUpdateDenseFlowerbed(TileEntityDenseFlowerbed te) {
         this(te.getPos(), te.getWorld().provider.getDimension());
     }
@@ -50,5 +47,5 @@ public class PacketRequestUpdateDenseFlowerbed implements IMessage {
             }
         }
 
-    }
+    }*/
 }

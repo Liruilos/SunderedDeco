@@ -1,10 +1,10 @@
 {
 	"__comment": "Designed by Liruilos with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"0": "blocks/stone",
-		"1": "blocks/water_still",
-		"2": "blocks/water_flow",
-		"particle": "blocks/stone"
+		"0": "block/stone",
+		"1": "block/water_still",
+		"2": "block/water_flow",
+		"particle": "block/stone"
 	},
 	"elements": [ 	 
 		{

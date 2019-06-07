@@ -6,11 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.fml.common.network.ByteBufUtils;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketUpdateWindowbox implements IMessage {
+//implements IMessage
+public class PacketUpdateWindowbox  {
     private BlockPos pos;
     private ItemStack stack;
     private ItemStack stack2;
@@ -22,7 +20,7 @@ public class PacketUpdateWindowbox implements IMessage {
         this.stack2 =stack2;
         this.lastChangeTime = lastChangeTime;
     }
-
+/*
     public PacketUpdateWindowbox(TileEntityWindowbox tew) {
         this(tew.getPos(), tew.inventory.getStackInSlot(0), tew.inventory.getStackInSlot(1), tew.lastChangeTime);
 
@@ -61,5 +59,5 @@ public class PacketUpdateWindowbox implements IMessage {
             return null;
         }
 
-    }
+    }*/
 }

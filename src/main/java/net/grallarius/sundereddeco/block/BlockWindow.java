@@ -4,25 +4,20 @@ import net.grallarius.sundereddeco.SunderedDeco;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDoor;
 import net.minecraft.block.SoundType;
-import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemDoor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -31,11 +26,11 @@ public class BlockWindow extends BlockDoor {
     protected Item item;
 
     public BlockWindow(Material material, String name){
-        super(material);
+        super(Properties.create(material));
         setRegistryName(name);
-        setUnlocalizedName(SunderedDeco.MODID + "." + name);
-        setCreativeTab(SunderedDeco.creativeTab);
-        Item item = new ItemDoor(this) {
+
+        //setCreativeTab(SunderedDeco.creativeTab);
+/*        Item item = new ItemDoor(this) {
 
         }.setCreativeTab(SunderedDeco.creativeTab);
         item.setRegistryName(this.getRegistryName());
@@ -47,10 +42,10 @@ public class BlockWindow extends BlockDoor {
         this.setSoundType(SoundType.GLASS);
         this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH)
                 .withProperty(OPEN, Boolean.valueOf(false)).withProperty(HINGE, BlockDoor.EnumHingePosition.LEFT)
-                .withProperty(POWERED, Boolean.valueOf(false)).withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER));
+                .withProperty(POWERED, Boolean.valueOf(false)).withProperty(HALF, BlockDoor.EnumDoorHalf.LOWER));*/
     }
 
-    @Override
+/*    @Override
     public MapColor getMapColor(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
         return state.getMaterial().getMaterialMapColor();
     }
@@ -78,9 +73,9 @@ public class BlockWindow extends BlockDoor {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public BlockRenderLayer getBlockLayer() {
         return Minecraft.getMinecraft().gameSettings.fancyGraphics ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.SOLID;
-    }
+    }*/
 
 }

@@ -2,7 +2,6 @@ package net.grallarius.sundereddeco;
 
 
 import net.grallarius.sundereddeco.block.ModBlocks;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
 
@@ -28,13 +27,13 @@ public class InvModel {
 
     public static void register() {
 
-        System.out.println("model registry is called");
+/*        System.out.println("model registry is called");
 
         for(InvModel invmodel : models){
             ModelLoader.setCustomModelResourceLocation(invmodel.item, invmodel.meta,
                     new ModelResourceLocation(SunderedDeco.MODID + ":" + invmodel.name, "inventory"));
 
             ModBlocks.window.initModel();
-        }
+        }*/
     }
 }

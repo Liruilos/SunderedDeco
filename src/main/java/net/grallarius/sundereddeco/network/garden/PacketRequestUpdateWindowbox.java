@@ -4,12 +4,9 @@ import io.netty.buffer.ByteBuf;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.FMLCommonHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
-import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
-import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
-public class PacketRequestUpdateWindowbox implements IMessage {
+//implements IMessage
+public class PacketRequestUpdateWindowbox  {
     private BlockPos pos;
     private int dimension;
 
@@ -19,12 +16,12 @@ public class PacketRequestUpdateWindowbox implements IMessage {
     }
 
     public PacketRequestUpdateWindowbox(TileEntityWindowbox te) {
-        this(te.getPos(), te.getWorld().provider.getDimension());
+        //this(te.getPos(), te.getWorld().provider.getDimension());
     }
 
     public PacketRequestUpdateWindowbox() {
     }
-
+/*
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeLong(pos.toLong());
@@ -50,5 +47,5 @@ public class PacketRequestUpdateWindowbox implements IMessage {
             }
         }
 
-    }
+    }*/
 }
