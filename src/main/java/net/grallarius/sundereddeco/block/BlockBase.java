@@ -1,14 +1,12 @@
 package net.grallarius.sundereddeco.block;
 
 import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.client.SunderedDecoTab;
 import net.grallarius.sundereddeco.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.item.ItemGroup;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;

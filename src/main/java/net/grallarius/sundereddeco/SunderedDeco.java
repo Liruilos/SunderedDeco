@@ -1,6 +1,7 @@
 package net.grallarius.sundereddeco;
 
 import net.grallarius.sundereddeco.block.ModBlocks;
+import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
 import net.grallarius.sundereddeco.client.ModColourManager;
 import net.grallarius.sundereddeco.client.SunderedDecoTab;
 import net.grallarius.sundereddeco.item.ModItems;
@@ -11,6 +12,8 @@ import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -51,6 +54,8 @@ public class SunderedDeco {
     public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
     public static SunderedDeco instance;
+
+    public static TileEntityType<TileEntityCounter> TECOUNTER;
 
     public SunderedDeco(){
 
@@ -128,6 +133,12 @@ public class SunderedDeco {
             // register a new block here
             LOGGER.info("HELLO from Register Block");
         }
+    }
+
+    @SubscribeEvent
+    public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
+        //registry.register(TileEntityType.Builder.create(TileEntityCounter::new).build(null).setRegistryName(new ResourceLocation(SunderedDeco.MODID, "counter")));
+        TECOUNTER = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.create(TileEntityCounter::new));
     }
 
 }

@@ -2,6 +2,8 @@ package net.grallarius.sundereddeco.block;
 
 
 import net.grallarius.sundereddeco.SunderedDeco;
+import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.BlockCounter;
+import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
 import net.grallarius.sundereddeco.block.furniture.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
@@ -10,6 +12,7 @@ import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +22,7 @@ import net.minecraftforge.registries.ObjectHolder;
 @Mod.EventBusSubscriber(modid = SunderedDeco.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 @ObjectHolder(SunderedDeco.MODID)
 public class ModBlocks {
+
 
     //SHOP
     public static final BlockCrate crate_closed = new BlockCrate("crate_closed");
@@ -65,8 +69,12 @@ public class ModBlocks {
     public static final BlockSittable stool = new BlockSittable(Block.Properties.create(Material.WOOD),"stool");
 
 
+    //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
+    public static final BlockCounter counter = new BlockCounter();
+
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
+
         event.getRegistry().registerAll(
 
                 //SHOP
@@ -80,7 +88,10 @@ public class ModBlocks {
                 hedge, fountain,
 
                 //HOME
-                sidetable, stool
+                sidetable, stool,
+
+                //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
+                counter
         );
     }
 
@@ -262,6 +273,7 @@ public class ModBlocks {
 
     }
 
+    //Do this in SunderedDeco instead!!
     public static void registerTiles(IForgeRegistry<TileEntityType<?>> registry){
         //registry.register(TileEntityType.Builder.create(TileEntityFlowerbed::new).build(null).setRegistryName(new ResourceLocation(SunderedDeco.MODID, "flowerbed")));
     }

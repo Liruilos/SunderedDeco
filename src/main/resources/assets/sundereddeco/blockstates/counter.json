@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": [
+      { "model": "sundereddeco:block/shop/crate/crate_closed" }
+    ]
+  }
+}

@@ -1,19 +1,33 @@
 package net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking;
 
-//extends TileEntity
-public class TileEntityCounter  {
+import net.grallarius.sundereddeco.SunderedDeco;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 
-    private int count;
+public class TileEntityCounter extends TileEntity {
 
-/*    public NBTTagCompound writetoNBT(NBTTagCompound compound) {
-        compound.setInteger("count", count);
-        return super.writeToNBT(compound);
+    private int count = 0;
+
+    public TileEntityCounter(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+        //super(TileEntityType.register("counter", TileEntityType.Builder.create(TileEntityCounter::new)));
+    }
+
+    public TileEntityCounter(){
+    super(SunderedDeco.TECOUNTER);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        count = compound.getInteger("count");
-        super.readFromNBT(compound);
+    public NBTTagCompound write(NBTTagCompound compound) {
+        compound.setInt("count", count);
+        return super.write(compound);
+    }
+
+    @Override
+    public void read(NBTTagCompound compound) {
+        count = compound.getInt("count");
+        super.read(compound);
     }
 
     public int getCount() {
@@ -27,5 +41,5 @@ public class TileEntityCounter  {
     public void decrementCount() {
         count--;
         markDirty();
-    }*/
+    }
 }
