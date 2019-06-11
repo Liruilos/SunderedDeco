@@ -1,13 +1,9 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
-import net.grallarius.sundereddeco.ModGuiHandler;
-import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -16,20 +12,17 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.EnumProperty;
-import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.BlockStateContainer;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.grallarius.sundereddeco.block.BlockTileEntity;
 
@@ -42,10 +35,11 @@ public class BlockWindowbox extends BlockTileEntity {
     public static final EnumProperty<EnumShape> SHAPE = EnumProperty.create("shape", EnumShape.class);
     public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
 
-    protected static final AxisAlignedBB BOX_NORTH_AABB = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 1.0D, 1.0D, 0.5D);
-    protected static final AxisAlignedBB BOX_SOUTH_AABB = new AxisAlignedBB(0.0D, 0.5D, 0.5D, 1.0D, 1.0D, 1.0D);
-    protected static final AxisAlignedBB BOX_WEST_AABB = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 0.5D, 1.0D, 1.0D);
-    protected static final AxisAlignedBB BOX_EAST_AABB = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
+    private static final VoxelShape BOUNDING_BOX_NORTH = Block.makeCuboidShape(0, 8, 0, 16, 16, 8);
+    private static final VoxelShape BOUNDING_BOX_SOUTH = Block.makeCuboidShape(0, 8, 8, 16, 16, 16);
+    private static final VoxelShape BOUNDING_BOX_EAST = Block.makeCuboidShape(8, 8, 0, 16, 16, 16);
+    private static final VoxelShape BOUNDING_BOX_WEST = Block.makeCuboidShape(0, 8, 0, 8, 16, 16);
+
 
     private static final Properties props = Properties.create(Material.ROCK)
             .sound(SoundType.STONE);
@@ -55,23 +49,22 @@ public class BlockWindowbox extends BlockTileEntity {
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(SHAPE, EnumShape.SINGLE));
     }
 
-/*    @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos)
-    {
-        switch ((EnumFacing)state.getValue(FACING))
+    @Override
+    @Deprecated
+    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+        switch (state.get(FACING))
         {
             case NORTH:
-                return BOX_NORTH_AABB;
+                return BOUNDING_BOX_NORTH;
             case SOUTH:
-                return BOX_SOUTH_AABB;
+                return BOUNDING_BOX_SOUTH;
             case WEST:
-                return BOX_WEST_AABB;
+                return BOUNDING_BOX_WEST;
             case EAST:
             default:
-                return BOX_EAST_AABB;
+                return BOUNDING_BOX_EAST;
         }
-    }*/
-
+    }
 
 
     @Override
