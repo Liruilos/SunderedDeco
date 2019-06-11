@@ -1,30 +1,30 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
 import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.network.garden.PacketRequestUpdateWindowbox;
-import net.grallarius.sundereddeco.network.garden.PacketUpdateWindowbox;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.items.ItemStackHandler;
 
-import javax.annotation.Nullable;
-
-//extends TileEntity
-public class TileEntityWindowbox  {
-    public long lastChangeTime;
+public class TileEntityWindowbox extends TileEntity {
     public int facing;
 
-/*    public ItemStackHandler inventory = new ItemStackHandler(3) {
+    public TileEntityWindowbox(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+    }
+
+    public TileEntityWindowbox(){
+        super(SunderedDeco.TEWINDOWBOX);
+    }
+
+    public ItemStackHandler inventory = new ItemStackHandler(3) {
 
         @Override
         protected void onContentsChanged(int slot){
             if (!world.isRemote) {
-                lastChangeTime = world.getTotalWorldTime();
-                SunderedDeco.wrapper.sendToAllAround(new PacketUpdateWindowbox(TileEntityWindowbox.this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
+                TileEntityWindowbox.this.saveAndSync();
+                //SunderedDeco.wrapper.sendToAllAround(new PacketUpdateWindowbox(TileEntityWindowbox.this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
             }
         }
 
@@ -33,38 +33,72 @@ public class TileEntityWindowbox  {
     @Override
     public void onLoad() {
         if (world.isRemote) {
-            SunderedDeco.wrapper.sendToServer(new PacketRequestUpdateWindowbox(this));
+            this.saveAndSync();
+            //SunderedDeco.wrapper.sendToServer(new PacketRequestUpdateWindowbox(this));
         }
-    }*/
-
-/*
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        compound.setTag("inventory", inventory.serializeNBT());
-        compound.setLong("lastChangeTime", lastChangeTime);
-        compound.setInteger("facing", getFacing());
-        return super.writeToNBT(compound);
     }
-
-
-    @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        inventory.deserializeNBT(compound.getCompoundTag("inventory"));
-        lastChangeTime =compound.getLong("lastChangeTime");
-        facing = compound.getInteger("facing");
-        super.readFromNBT(compound);
-    }
-*/
 
     public int getFacing() { return facing; }
 
     public void setFacing(int facing) { this.facing = facing; }
 
+    @Deprecated
+    public ItemStackHandler getInventory() {
+        return this.inventory;
+    }
+
+    public void saveAndSync() {
+        IBlockState state = this.world.getBlockState(this.pos);
+        this.world.markBlockRangeForRenderUpdate(this.pos, this.pos);
+        this.world.notifyBlockUpdate(pos, state, state, 3);
+        this.markDirty();
+    }
+
+    @Override
+    public void read(NBTTagCompound compound) {
+        super.read(compound);
+        this.inventory.deserializeNBT(compound.getCompound("inventory"));
+        this.facing = compound.getInt("facing");
+    }
+
+    @Override
+    public NBTTagCompound write(NBTTagCompound compound) {
+        compound.setTag("inventory", this.inventory.serializeNBT());
+        compound.setInt("facing", this.getFacing());
+        return super.write(compound);
+    }
+
+/*
+    @Nullable
+    @Override
+    public SPacketUpdateTileEntity getUpdatePacket() {
+        return new SPacketUpdateTileEntity(this.getPos(), 0, this.getUpdateTag());
+    }
+
+    @Override
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
+        this.read(packet.getNbtCompound());
+    }
+
+    @Override
+    public NBTTagCompound getUpdateTag() {
+        return this.write(new NBTTagCompound());
+    }
+
+    @Override
+    public void handleUpdateTag(NBTTagCompound nbt) {
+        this.read(nbt);
+    }
+*/
+
+
+
 /*    @Override
     public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
-    }*/
+    }
 
-/*    @Nullable
+    @Nullable
     @Override
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)inventory : super.getCapability(capability, facing);

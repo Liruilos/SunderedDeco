@@ -1,20 +1,16 @@
 {
   "variants": {
     "facing=north": {
-      "model": "sundereddeco:block/home/sidetable",
-      "y": 180
+      "model": "sundereddeco:block/home/sidetable", "y": 180
     },
     "facing=east": {
-      "model": "sundereddeco:block/home/sidetable",
-      "y": 270
+      "model": "sundereddeco:block/home/sidetable", "y": 270
     },
     "facing=south": {
-      "model": "sundereddeco:block/home/sidetable",
-      "y": 0
+      "model": "sundereddeco:block/home/sidetable", "y": 0
     },
     "facing=west": {
-      "model": "sundereddeco:block/home/sidetable",
-      "y": 90
+      "model": "sundereddeco:block/home/sidetable", "y": 90
     }
   }
 }

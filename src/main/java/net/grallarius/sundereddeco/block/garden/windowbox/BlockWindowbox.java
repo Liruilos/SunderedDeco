@@ -2,6 +2,7 @@ package net.grallarius.sundereddeco.block.garden.windowbox;
 
 import net.grallarius.sundereddeco.ModGuiHandler;
 import net.grallarius.sundereddeco.SunderedDeco;
+import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -9,20 +10,25 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.BlockStateContainer;
+import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.grallarius.sundereddeco.block.BlockTileEntity;
@@ -30,8 +36,8 @@ import net.grallarius.sundereddeco.block.BlockTileEntity;
 
 import javax.annotation.Nullable;
 
-//extends BlockTileEntity<TileEntityWindowbox>
-public class BlockWindowbox  {
+
+public class BlockWindowbox extends BlockTileEntity {
 
     public static final EnumProperty<EnumShape> SHAPE = EnumProperty.create("shape", EnumShape.class);
     public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
@@ -41,13 +47,13 @@ public class BlockWindowbox  {
     protected static final AxisAlignedBB BOX_WEST_AABB = new AxisAlignedBB(0.0D, 0.5D, 0.0D, 0.5D, 1.0D, 1.0D);
     protected static final AxisAlignedBB BOX_EAST_AABB = new AxisAlignedBB(0.5D, 0.5D, 0.0D, 1.0D, 1.0D, 1.0D);
 
-/*    private static final Properties props = Properties.create(Material.ROCK)
+    private static final Properties props = Properties.create(Material.ROCK)
             .sound(SoundType.STONE);
 
     public BlockWindowbox(String name){
         super(props, name);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(SHAPE, EnumShape.SINGLE));
-    }*/
+    }
 
 /*    @Deprecated
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos)
@@ -65,49 +71,65 @@ public class BlockWindowbox  {
                 return BOX_EAST_AABB;
         }
     }*/
-/*
+
+
+
     @Override
-    @Deprecated
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+    @Nullable
+    public IBlockState getStateForPlacement(BlockItemUseContext context) {
+        if (context.getPlayer() != null) {
+            return super.getStateForPlacement(context)
+                    .with(FACING, context.getPlayer().getHorizontalFacing())
+                    .with(SHAPE, EnumShape.SINGLE);
+        }else return super.getStateForPlacement(context).with(FACING, EnumFacing.NORTH).with(SHAPE, EnumShape.SINGLE);
     }
 
-
     @Override
     @Deprecated
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+    public IBlockState updatePostPlacement(IBlockState state, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
 
-        *//** Working out which type of model to place so all are connected correctly, ends (openleft and openright) = |_|
-         *    straight = | |   and single  *//*
+        //** Working out which type of model to place so all are connected correctly, ends (openleft and openright) = |_|
+        //    straight = | |   and single = []
 
-        TileEntityWindowbox tile = getTileEntity(worldIn, pos);
-        tile.setFacing(state.getValue(FACING).getHorizontalIndex());
+        if (world.getTileEntity(currentPos) instanceof TileEntityWindowbox) {
+            TileEntityWindowbox tile = (TileEntityWindowbox) world.getTileEntity(currentPos);
+            tile.setFacing(state.get(FACING).getHorizontalIndex());
 
-        IBlockState blockleft = worldIn.getBlockState(pos.offset(state.getValue(FACING).rotateYCCW()));
-        IBlockState blockright = worldIn.getBlockState(pos.offset(state.getValue(FACING).rotateY()));
+            IBlockState blockleft = world.getBlockState(currentPos.offset(state.get(FACING).rotateYCCW()));
+            IBlockState blockright = world.getBlockState(currentPos.offset(state.get(FACING).rotateY()));
 
-        boolean leftMatch = blockleft.getBlock() instanceof BlockWindowbox && (state.getValue(FACING) == blockleft.getValue(FACING));
-        boolean rightMatch = blockright.getBlock() instanceof BlockWindowbox && (state.getValue(FACING) == blockright.getValue(FACING));
+            boolean leftMatch = blockleft.getBlock() instanceof BlockWindowbox && (state.get(FACING) == blockleft.get(FACING));
+            boolean rightMatch = blockright.getBlock() instanceof BlockWindowbox && (state.get(FACING) == blockright.get(FACING));
 
 
-        *//** Check if no other windowboxes to the left and right in same facing, return single blockstates *//*
-        if(!leftMatch && !rightMatch){ return state.withProperty(SHAPE, EnumShape.SINGLE); }
+            //** Check if no other windowboxes to the left and right in same facing, return single blockstates
+            if (!leftMatch && !rightMatch) {
+                return state.with(SHAPE, EnumShape.SINGLE);
+            }
 
-        *//** Check if a windowboxe to the left in same facing but not the right, return endleft blockstates *//*
-        else if(leftMatch && !rightMatch){ return state.withProperty(SHAPE, EnumShape.ENDLEFT); }
+            //** Check if a windowboxe to the left in same facing but not the right, return endleft blockstates
+            else if (leftMatch && !rightMatch) {
+                return state.with(SHAPE, EnumShape.ENDLEFT);
+            }
 
-        *//** Check if a windowboxe to the right in same facing but not the left, return endright blockstates *//*
-        else if(!leftMatch && rightMatch){ return state.withProperty(SHAPE, EnumShape.ENDRIGHT); }
+            //** Check if a windowboxe to the right in same facing but not the left, return endright blockstates
+            else if (!leftMatch && rightMatch) {
+                return state.with(SHAPE, EnumShape.ENDRIGHT);
+            }
 
-        *//** Check if windowboxes exist to the left AND right in same facing, return straight blockstates *//*
-        else{ return state.withProperty(SHAPE, EnumShape.STRAIGHT); }
+            //** Check if windowboxes exist to the left AND right in same facing, return straight blockstates
+            else {
+                return state.with(SHAPE, EnumShape.STRAIGHT);
+            }
+        }
+        return state.with(SHAPE, EnumShape.SINGLE);
+    }
 
-    }*/
 
     /**
      * Check whether this Block can be placed at pos, while aiming at the side of an adjacent block (can only be placed on sides of full blocks)
      */
-/*    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
+    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
     {
         if (this.canAttachTo(worldIn, pos.west(), side))
         {
@@ -125,87 +147,91 @@ public class BlockWindowbox  {
         {
             return this.canAttachTo(worldIn, pos.south(), side);
         }
-    }*/
+    }
 
-/*    private boolean canAttachTo(World p_193392_1_, BlockPos p_193392_2_, EnumFacing p_193392_3_)
+    private boolean canAttachTo(World p_193392_1_, BlockPos p_193392_2_, EnumFacing p_193392_3_)
     {
         IBlockState iblockstate = p_193392_1_.getBlockState(p_193392_2_);
         boolean flag = isExceptBlockForAttachWithPiston(iblockstate.getBlock());
         return !flag && iblockstate.getBlockFaceShape(p_193392_1_, p_193392_2_, p_193392_3_) == BlockFaceShape.SOLID && !iblockstate.canProvidePower();
-    }*/
+    }
 
     /**
      * Pops windowbox block off if full block it was placed against is removed
      */
-/*    @Deprecated
+    @Deprecated
     public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
     {
-        EnumFacing enumfacing = (EnumFacing)state.getValue(FACING);
+        EnumFacing enumfacing = state.get(FACING);
 
         if (!this.canAttachTo(worldIn, pos.offset(enumfacing), enumfacing))
         {
-            this.dropBlockAsItem(worldIn, pos, state, 0);
-            worldIn.setBlockToAir(pos);
+            this.dropBlockAsItemWithChance(state, worldIn, pos,1 , 0);
+            worldIn.removeBlock(pos);
         }
         super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
-    }*/
+    }
 
     protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
         builder.add(FACING, SHAPE);
     }
 
-/*    @Override
+    @Override
     @Deprecated
     public boolean isFullCube(IBlockState state) {
         return false;
-    }*/
+    }
 
-/*
+
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    @Deprecated
+    public boolean onBlockActivated(IBlockState state, World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
-            TileEntityWindowbox te = getTileEntity(world, pos);
-            IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
+            if (world.getTileEntity(pos) instanceof TileEntityWindowbox) {
+                TileEntityWindowbox te = (TileEntityWindowbox) world.getTileEntity(pos);
+                IItemHandler itemHandler = te.getInventory();
+                        //te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
 
 
-            if (!player.isSneaking() && itemHandler != null) {
-                if (player.getHeldItem(hand).isEmpty()) {
-                    *//**remove items from relevant slot*//*
-                    if(!itemHandler.getStackInSlot(1).isEmpty()){
-                        player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(1,1,false));
+                if (!player.isSneaking() && itemHandler != null) {
+                    if (player.getHeldItem(hand).isEmpty()) {
+                    //remove items from relevant slot
+                        if (!itemHandler.getStackInSlot(1).isEmpty()) {
+                            player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(1, 1, false));
+                        } else if (!itemHandler.getStackInSlot(0).isEmpty()) {
+                            player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(0, 1, false));
+                        }
+
+                    } else if (canBePotted(player.getHeldItem(hand))) {
+                    //insert items from hand
+                        if (itemHandler.getStackInSlot(0).isEmpty()) {
+
+                            ItemStack singleItemFromHand1 = player.getHeldItem(hand).split(1);
+                            int remainder = player.getHeldItem(hand).getCount();
+                            ItemStack remainingItems = player.getHeldItem(hand).split(remainder);
+                            player.setHeldItem(hand, itemHandler.insertItem(0, singleItemFromHand1, false));
+                            player.setHeldItem(hand, remainingItems);
+
+                        } else if (itemHandler.getStackInSlot(1).isEmpty()) {
+
+                            ItemStack singleItemFromHand2 = player.getHeldItem(hand).split(1);
+                            int remainder = player.getHeldItem(hand).getCount();
+                            ItemStack remainingItems = player.getHeldItem(hand).split(remainder);
+                            player.setHeldItem(hand, itemHandler.insertItem(1, singleItemFromHand2, false));
+                            player.setHeldItem(hand, remainingItems);
+                        } else {
+                            return false;
+                        }
+                        te.markDirty();
                     }
-                    else if(!itemHandler.getStackInSlot(0).isEmpty()){
-                        player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(0,1,false));
-                    }
-
-                } else if(canBePotted(player.getHeldItem(hand))) {
-                    *//**insert items from hand*//*
-                    if(itemHandler.getStackInSlot(0).isEmpty()){
-
-                    ItemStack singleItemFromHand1 = player.getHeldItem(hand).splitStack(1);
-                    int remainder = player.getHeldItem(hand).getCount();
-                    ItemStack remainingItems = player.getHeldItem(hand).splitStack(remainder);
-                    player.setHeldItem(hand, itemHandler.insertItem(0, singleItemFromHand1, false));
-                    player.setHeldItem(hand, remainingItems);
-
-                    }
-                    else if(itemHandler.getStackInSlot(1).isEmpty()){
-
-                        ItemStack singleItemFromHand2 = player.getHeldItem(hand).splitStack(1);
-                        int remainder = player.getHeldItem(hand).getCount();
-                        ItemStack remainingItems = player.getHeldItem(hand).splitStack(remainder);
-                        player.setHeldItem(hand, itemHandler.insertItem(1, singleItemFromHand2, false));
-                        player.setHeldItem(hand, remainingItems);
-                    }
-
-                else {return false;}
-                te.markDirty();
-            }} else {
-                player.openGui(SunderedDeco.instance, ModGuiHandler.WINDOWBOX, world, pos.getX(), pos.getY(), pos.getZ());
+                } else {
+                    NetworkHooks.openGui((EntityPlayerMP) player, new InteractionObjectWindowbox(te), (buffer) -> buffer.writeBlockPos(pos));
+                    //player.openGui(SunderedDeco.instance, ModGuiHandler.WINDOWBOX, world, pos.getX(), pos.getY(), pos.getZ());
+                }
             }
         }
         return true;
-    }*/
+    }
 
     public static boolean canBePotted(ItemStack stack)
     {
@@ -226,31 +252,40 @@ public class BlockWindowbox  {
         }
     }
 
-
 /*    @Override
-    public void breakBlock(World world, BlockPos pos, IBlockState state) {
-        TileEntityWindowbox tile = getTileEntity(world, pos);
-        IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        for (int i = 0; i < 2; i++) {
-            if(!itemHandler.getStackInSlot(i).isEmpty()){
-                EntityItem droppedItem = new EntityItem(world, pos.getX(), pos.getY(), pos.getZ(), itemHandler.getStackInSlot(i));
-                world.spawnEntity(droppedItem);
+    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
+        if (world.getTileEntity(pos) instanceof TileEntityWindowbox) {
+            TileEntityWindowbox tile = (TileEntityWindowbox) world.getTileEntity(pos);
+            IItemHandler itemHandler = tile.getInventory();
+            for (int i = 0; i < 2; i++) {
+                if (!itemHandler.getStackInSlot(i).isEmpty()) {
+                    EntityItem droppedItem = new EntityItem(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), itemHandler.getStackInSlot(i));
+                    world.spawnEntity(droppedItem);
+                }
             }
         }
-        super.breakBlock(world, pos, state);
+        super.harvestBlock(world, player, pos, state, te, stack);
     }*/
 
-/*    @Override
-    public Class<TileEntityWindowbox> getTileEntityClass() {
-        return TileEntityWindowbox.class;
-    }*/
-/*
-    @Nullable
     @Override
-    public TileEntityWindowbox createTileEntity(World world, IBlockState state) {
+    @Deprecated
+    public void dropBlockAsItemWithChance(IBlockState state, World world, BlockPos pos, float chancePerItem, int fortune) {
+        if (world.getTileEntity(pos) instanceof TileEntityWindowbox) {
+            TileEntityWindowbox tile = (TileEntityWindowbox) world.getTileEntity(pos);
+            IItemHandler itemHandler = tile.getInventory();
+            for (int i = 0; i < 2; i++) {
+                if (!itemHandler.getStackInSlot(i).isEmpty()) {
+                    EntityItem droppedItem = new EntityItem(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), itemHandler.getStackInSlot(i));
+                    world.spawnEntity(droppedItem);
+                }
+            }
+        }
+        super.dropBlockAsItemWithChance(state, world, pos, chancePerItem, fortune);
+    }
+
+    public TileEntity createNewTileEntity(IBlockReader worldIn) {
         return new TileEntityWindowbox();
     }
-    */
 
     public enum EnumShape implements IStringSerializable {
 

@@ -10,6 +10,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.INameable;
 import net.minecraft.util.math.BlockPos;
@@ -81,6 +82,10 @@ public abstract class BlockTileEntity extends BlockBase implements ITileEntityPr
     @Override
     public boolean hasTileEntity(IBlockState state) {
         return true;
+    }
+
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 
 }

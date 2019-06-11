@@ -8,6 +8,7 @@ import net.grallarius.sundereddeco.block.furniture.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
 import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -64,6 +65,8 @@ public class ModBlocks {
     public static final BlockHedge hedge = new BlockHedge("hedge");
     public static final BlockFountain fountain = new BlockFountain("fountain");
 
+    public static final BlockWindowbox windowbox = new BlockWindowbox("windowbox");
+
     //HOME
     public static final BlockDirectional sidetable = new BlockDirectional(Block.Properties.create(Material.WOOD), "sidetable");
     public static final BlockSittable stool = new BlockSittable(Block.Properties.create(Material.WOOD),"stool");
@@ -85,7 +88,7 @@ public class ModBlocks {
 
                 //GARDEN
                 lantern_candle, lantern_blue, lantern_green, lantern_red, lantern_yellow,
-                hedge, fountain,
+                hedge, fountain, windowbox,
 
                 //HOME
                 sidetable, stool,

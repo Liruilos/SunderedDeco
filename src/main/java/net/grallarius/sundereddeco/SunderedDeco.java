@@ -2,6 +2,9 @@ package net.grallarius.sundereddeco;
 
 import net.grallarius.sundereddeco.block.ModBlocks;
 import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
+import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.GuiWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.client.ModColourManager;
 import net.grallarius.sundereddeco.client.SunderedDecoTab;
 import net.grallarius.sundereddeco.item.ModItems;
@@ -10,15 +13,21 @@ import net.grallarius.sundereddeco.proxy.IProxy;
 import net.grallarius.sundereddeco.proxy.ServerProxy;
 import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ExtensionPoint;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -55,9 +64,27 @@ public class SunderedDeco {
 
     public static SunderedDeco instance;
 
+    //Tile Entity Registration
     public static TileEntityType<TileEntityCounter> TECOUNTER;
+    public static TileEntityType<TileEntityWindowbox> TEWINDOWBOX;
 
     public SunderedDeco(){
+
+
+        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, () -> {
+            return (openContainer) -> {
+                ResourceLocation location = openContainer.getId();
+                if (location.toString().equals(MODID + ":windowbox_gui")) {
+                    EntityPlayerSP player = Minecraft.getInstance().player;
+                    BlockPos pos = openContainer.getAdditionalData().readBlockPos();
+                    TileEntity tileEntity = player.world.getTileEntity(pos);
+                    if (tileEntity instanceof TileEntityWindowbox) {
+                        return new GuiWindowbox(new ContainerWindowbox(player.inventory, (TileEntityWindowbox) tileEntity), player.inventory);
+                    }
+                }
+                return null;
+            };
+        });
 
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -139,6 +166,8 @@ public class SunderedDeco {
     public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
         //registry.register(TileEntityType.Builder.create(TileEntityCounter::new).build(null).setRegistryName(new ResourceLocation(SunderedDeco.MODID, "counter")));
         TECOUNTER = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.create(TileEntityCounter::new));
+        TEWINDOWBOX = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.create(TileEntityWindowbox::new));
+
     }
 
 }
