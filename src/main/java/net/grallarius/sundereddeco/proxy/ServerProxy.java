@@ -13,6 +13,7 @@ public class ServerProxy implements IProxy{
         return I18n.translateToLocalFormatted(unlocalized, args);
     }*/
 
+    @Override
     public void registerRenderers() {
     }
 }

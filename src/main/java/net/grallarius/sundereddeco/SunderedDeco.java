@@ -105,7 +105,6 @@ public class SunderedDeco {
 
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
-        LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
 
         ModBlocks.preInit();
         ModItems.preInit();
@@ -121,6 +120,8 @@ public class SunderedDeco {
         wrapper.registerMessage(new PacketRequestUpdateFlowerbed.Handler(), PacketRequestUpdateFlowerbed.class, packetId++, Side.SERVER);
         proxy.registerRenderers();*/
 
+        proxy.registerRenderers();
+
         ModRecipes.init();
 
         proxy.setup(event);
@@ -128,7 +129,7 @@ public class SunderedDeco {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+        //LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
