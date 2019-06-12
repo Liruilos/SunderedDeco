@@ -2,7 +2,7 @@ package net.grallarius.sundereddeco.block.furniture;
 
 import net.grallarius.sundereddeco.block.BlockBase;
 import net.grallarius.sundereddeco.entity.SittableEntity;
-import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
@@ -10,6 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -18,7 +19,7 @@ import java.util.List;
 
 public class BlockSittable extends BlockBase {
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.125D, 0.0D,0.125D,0.875D,0.62D,0.875D);
+    private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(2, 0, 2, 14, 10, 14);
 
     public BlockSittable(Properties properties, String name) {
         super(properties, name);
@@ -35,12 +36,12 @@ public class BlockSittable extends BlockBase {
         }
         return true;
     }
-/*
-    //@Override
+
+    @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
-        return BOUNDBOX;
-    }*/
+    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+        return BOUNDING_BOX;
+    }
 
     @Override
     @Deprecated
@@ -51,4 +52,5 @@ public class BlockSittable extends BlockBase {
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }
+
 }

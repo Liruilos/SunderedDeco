@@ -37,6 +37,15 @@ public class ModBlocks {
     public static final BlockCrate crate_potato = new BlockCrate("crate_potato");
     public static final BlockCrate crate_sugar = new BlockCrate("crate_sugar");
 
+    public static final BlockDisplayCrate displayCrateApple = new BlockDisplayCrate("display_crate_apple");
+    public static final BlockDisplayCrate displayCrateBerry = new BlockDisplayCrate("display_crate_berry");
+    public static final BlockDisplayCrate displayCrateCarrot = new BlockDisplayCrate("display_crate_carrot");
+    public static final BlockDisplayCrate displayCrateFish = new BlockDisplayCrate("display_crate_fish");
+    public static final BlockDisplayCrate displayCrateGrain = new BlockDisplayCrate("display_crate_grain");
+    public static final BlockDisplayCrate displayCrateIngot = new BlockDisplayCrate("display_crate_ingot");
+    public static final BlockDisplayCrate displayCratePotato = new BlockDisplayCrate("display_crate_potato");
+    public static final BlockDisplayCrate displayCrateSugar = new BlockDisplayCrate("display_crate_sugar");
+
     public static final BlockBasket basket_berry = new BlockBasket("basket_berry");
     public static final BlockBasket basket_apple = new BlockBasket("basket_apple");
     public static final BlockBasket basket_carrot = new BlockBasket("basket_carrot");
@@ -92,6 +101,8 @@ public class ModBlocks {
     //HOME
     public static final BlockDirectional sidetable = new BlockDirectional(Block.Properties.create(Material.WOOD), "sidetable");
     public static final BlockSittable stool = new BlockSittable(Block.Properties.create(Material.WOOD),"stool");
+    public static final BlockChair chair = new BlockChair("chair");
+
 
 
     //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
@@ -104,6 +115,8 @@ public class ModBlocks {
 
                 //SHOP
             crate_closed, crate_apple, crate_berry, crate_carrot, crate_fish, crate_grain, crate_ingot, crate_potato, crate_sugar,
+                displayCrateApple, displayCrateBerry, displayCrateCarrot, displayCrateFish, displayCrateGrain,
+                displayCrateIngot, displayCratePotato, displayCrateSugar,
                 basket_apple, basket_berry, basket_carrot, basket_fish, basket_grain, basket_ingot, basket_potato, basket_sugar,
                 basket_large_apple, basket_large_berry, basket_large_carrot, basket_large_fish, basket_large_grain,
                 basket_large_ingot, basket_large_potato, basket_large_sugar,
@@ -116,7 +129,7 @@ public class ModBlocks {
                 hedge, fountain, windowbox,
 
                 //HOME
-                sidetable, stool,
+                sidetable, stool, chair,
 
                 //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
                 counter
@@ -127,7 +140,6 @@ public class ModBlocks {
 /*
 
     public static BlockTable table = new BlockTable("table");
-    public static BlockChair chair = new BlockChair("chair");
     public static BlockConnectedChair parkbench = new BlockConnectedChair();
 
 
@@ -160,14 +172,7 @@ public class ModBlocks {
     */
 /** shop block *//*
 
-    public static BlockDisplayCrate displayCrateApple = new BlockDisplayCrate("display_crate_apple");
-    public static BlockDisplayCrate displayCrateBerry = new BlockDisplayCrate("display_crate_berry");
-    public static BlockDisplayCrate displayCrateCarrot = new BlockDisplayCrate("display_crate_carrot");
-    public static BlockDisplayCrate displayCrateFish = new BlockDisplayCrate("display_crate_fish");
-    public static BlockDisplayCrate displayCrateGrain = new BlockDisplayCrate("display_crate_grain");
-    public static BlockDisplayCrate displayCrateIngot = new BlockDisplayCrate("display_crate_ingot");
-    public static BlockDisplayCrate displayCratePotato = new BlockDisplayCrate("display_crate_potato");
-    public static BlockDisplayCrate displayCrateSugar = new BlockDisplayCrate("display_crate_sugar");
+
 
 
 
