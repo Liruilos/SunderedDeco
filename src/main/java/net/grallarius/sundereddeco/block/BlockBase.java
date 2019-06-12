@@ -16,7 +16,8 @@ public class BlockBase extends Block {
     protected String name;
 
     public BlockBase(Properties properties, String name) {
-        super(properties);
+        //TODO give each block a proper hardness and resistance
+        super(properties.hardnessAndResistance(1.5F, 6.0F));
 
         this.name = name;
         setRegistryName(SunderedDeco.MODID, name);

@@ -5,11 +5,15 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
+
+import static net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox.FACING;
 
 public class TileEntityWindowbox extends TileEntity {
     public int facing;
@@ -28,7 +32,6 @@ public class TileEntityWindowbox extends TileEntity {
         protected void onContentsChanged(int slot){
             if (!world.isRemote) {
                 TileEntityWindowbox.this.saveAndSync();
-                //SunderedDeco.wrapper.sendToAllAround(new PacketUpdateWindowbox(TileEntityWindowbox.this), new NetworkRegistry.TargetPoint(world.provider.getDimension(), pos.getX(), pos.getY(), pos.getZ(), 64));
             }
         }
 
@@ -38,7 +41,6 @@ public class TileEntityWindowbox extends TileEntity {
     public void onLoad() {
         if (world.isRemote) {
             this.saveAndSync();
-            //SunderedDeco.wrapper.sendToServer(new PacketRequestUpdateWindowbox(this));
         }
     }
 
@@ -46,13 +48,13 @@ public class TileEntityWindowbox extends TileEntity {
 
     public void setFacing(int facing) { this.facing = facing; }
 
-    @Deprecated
     public ItemStackHandler getInventory() {
         return this.inventory;
     }
 
     public void saveAndSync() {
         IBlockState state = this.world.getBlockState(this.pos);
+        this.setFacing(state.get(FACING).getHorizontalIndex());
         this.world.markBlockRangeForRenderUpdate(this.pos, this.pos);
         this.world.notifyBlockUpdate(pos, state, state, 3);
         this.markDirty();

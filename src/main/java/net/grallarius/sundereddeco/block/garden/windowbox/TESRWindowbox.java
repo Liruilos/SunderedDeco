@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
@@ -26,7 +27,6 @@ public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
                 GlStateManager.disableLighting();
                 GlStateManager.blendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
                 GlStateManager.pushMatrix();
-
 
                 //South
                 if (te.getFacing() == 0) {
@@ -48,7 +48,8 @@ public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
                 }
 
                 //IBlockState state = Block.getBlockFromItem(stack1.getItem()).getStateForPlacement(getWorld(), te.getPos(), EnumFacing.NORTH, 0, 0, 0, stack1. getMetadata(), null, null);
-                IBlockState state = Block.getBlockFromItem(stack1.getItem()).getDefaultState();
+                //IBlockState state = Block.getBlockFromItem(stack1.getItem()).getStateForPlacement(Block.getBlockFromItem(stack1.getItem()).getDefaultState(), EnumFacing.NORTH, null, getWorld(), null, null, null);
+                IBlockState state = Block.getBlockFromItem(stack1.getItem()).getStateContainer().getBaseState();
                 IBakedModel model = Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelShapes().getModel(state);
                 model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
 
@@ -90,7 +91,7 @@ public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
                 }
 
                 //IBlockState state = Block.getBlockFromItem(stack2.getItem()).getStateForPlacement(getWorld(), te.getPos(), EnumFacing.NORTH, 0, 0, 0, stack2.getMetadata(), null, null);
-            IBlockState state = Block.getBlockFromItem(stack1.getItem()).getDefaultState();
+            IBlockState state = Block.getBlockFromItem(stack2.getItem()).getDefaultState();
             IBakedModel model = Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelShapes().getModel(state);
             model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
 

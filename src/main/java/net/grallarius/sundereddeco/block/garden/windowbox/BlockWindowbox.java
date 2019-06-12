@@ -185,7 +185,6 @@ public class BlockWindowbox extends BlockTileEntity {
                 IItemHandler itemHandler = te.getInventory();
                         //te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
 
-
                 if (!player.isSneaking() && itemHandler != null) {
                     if (player.getHeldItem(hand).isEmpty()) {
                     //remove items from relevant slot
@@ -215,7 +214,8 @@ public class BlockWindowbox extends BlockTileEntity {
                         } else {
                             return false;
                         }
-                        te.markDirty();
+                        //te.markDirty();
+                        te.saveAndSync();
                     }
                 } else {
                     NetworkHooks.openGui((EntityPlayerMP) player, new InteractionObjectWindowbox(te), (buffer) -> buffer.writeBlockPos(pos));
@@ -244,21 +244,6 @@ public class BlockWindowbox extends BlockTileEntity {
             return true;
         }
     }
-
-/*    @Override
-    public void harvestBlock(World world, EntityPlayer player, BlockPos pos, IBlockState state, @Nullable TileEntity te, ItemStack stack) {
-        if (world.getTileEntity(pos) instanceof TileEntityWindowbox) {
-            TileEntityWindowbox tile = (TileEntityWindowbox) world.getTileEntity(pos);
-            IItemHandler itemHandler = tile.getInventory();
-            for (int i = 0; i < 2; i++) {
-                if (!itemHandler.getStackInSlot(i).isEmpty()) {
-                    EntityItem droppedItem = new EntityItem(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), itemHandler.getStackInSlot(i));
-                    world.spawnEntity(droppedItem);
-                }
-            }
-        }
-        super.harvestBlock(world, player, pos, state, te, stack);
-    }*/
 
     @Override
     @Deprecated
