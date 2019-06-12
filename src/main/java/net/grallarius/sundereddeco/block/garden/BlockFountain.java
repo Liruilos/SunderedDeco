@@ -28,7 +28,7 @@ public class BlockFountain extends BlockConnectableHorizontal {
     @Override
     @OnlyIn(Dist.CLIENT)
     public BlockRenderLayer getRenderLayer() {
-        return Minecraft.getInstance().gameSettings.fancyGraphics ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.SOLID;
+        return Minecraft.getInstance().gameSettings.fancyGraphics ? BlockRenderLayer.TRANSLUCENT : BlockRenderLayer.CUTOUT;
     }
 
 /*    @Override

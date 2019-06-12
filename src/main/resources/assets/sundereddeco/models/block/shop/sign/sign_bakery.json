@@ -1,0 +1,4 @@
+{
+  "parent": "sundereddeco:block/shop/sign/shop_sign",
+  "textures": {"sign": "sundereddeco:block/shop/sign_bakery"}
+}

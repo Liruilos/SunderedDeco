@@ -2,8 +2,8 @@
 	"__comment": "Designed by Liruilos with Cubik Studio - https://cubik.studio",
 	"textures": {
 		"particle": "#sign",
-		"wood_post": "blocks/log_oak",
-		"metal_connectors": "sundereddeco:blocks/shop/crate/crate_ingot",
+		"wood_post": "block/oak_log",
+		"metal_connectors": "sundereddeco:block/shop/crate/crate_ingot",
 		"sign": "#sign"
 	},
 	"elements": [ 	 

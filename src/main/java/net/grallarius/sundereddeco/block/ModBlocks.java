@@ -55,6 +55,27 @@ public class ModBlocks {
     public static final BlockLargeBasket basket_large_potato = new BlockLargeBasket("basket_large_potato");
     public static final BlockLargeBasket basket_large_sugar = new BlockLargeBasket("basket_large_sugar");
 
+    public static final BlockShopSign signApothecary = new BlockShopSign("sign_apothecary");
+    public static final BlockShopSign signArmoury = new BlockShopSign("sign_armoury");
+    public static final BlockShopSign signBakery = new BlockShopSign("sign_bakery");
+    public static final BlockShopSign signBlacksmith = new BlockShopSign("sign_blacksmith");
+    public static final BlockShopSign signBrewery = new BlockShopSign("sign_brewery");
+    public static final BlockShopSign signClinic = new BlockShopSign("sign_clinic");
+    public static final BlockShopSign signClothing = new BlockShopSign("sign_clothing");
+    public static final BlockShopSign signDiner = new BlockShopSign("sign_diner");
+    public static final BlockShopSign signExotics = new BlockShopSign("sign_exotics");
+    public static final BlockShopSign signFishery = new BlockShopSign("sign_fishery");
+    public static final BlockShopSign signFlorist = new BlockShopSign("sign_florist");
+    public static final BlockShopSign signFurniture = new BlockShopSign("sign_furniture");
+    public static final BlockShopSign signGeneral = new BlockShopSign("sign_general");
+    public static final BlockShopSign signInn = new BlockShopSign("sign_inn");
+    public static final BlockShopSign signJeweller = new BlockShopSign("sign_jeweller");
+    public static final BlockShopSign signMusic = new BlockShopSign("sign_music");
+    public static final BlockShopSign signPetshop = new BlockShopSign("sign_petshop");
+    public static final BlockShopSign signPostal = new BlockShopSign("sign_postal");
+    public static final BlockShopSign signPub = new BlockShopSign("sign_pub");
+    public static final BlockShopSign signWeapons = new BlockShopSign("sign_weapons");
+
 
     //GARDEN
     public static final BlockLantern lantern_candle = new BlockLantern("lantern_candle");
@@ -83,9 +104,12 @@ public class ModBlocks {
 
                 //SHOP
             crate_closed, crate_apple, crate_berry, crate_carrot, crate_fish, crate_grain, crate_ingot, crate_potato, crate_sugar,
-                basket_berry, basket_apple, basket_carrot, basket_fish, basket_grain, basket_ingot, basket_potato, basket_sugar,
+                basket_apple, basket_berry, basket_carrot, basket_fish, basket_grain, basket_ingot, basket_potato, basket_sugar,
                 basket_large_apple, basket_large_berry, basket_large_carrot, basket_large_fish, basket_large_grain,
                 basket_large_ingot, basket_large_potato, basket_large_sugar,
+                signApothecary, signArmoury, signBakery, signBlacksmith,signBrewery, signClinic, signClothing,
+                signDiner, signExotics, signFishery, signFlorist, signFurniture, signGeneral, signInn, signJeweller,
+                signMusic, signPetshop, signPostal, signPub, signWeapons,
 
                 //GARDEN
                 lantern_candle, lantern_blue, lantern_green, lantern_red, lantern_yellow,
@@ -147,145 +171,6 @@ public class ModBlocks {
 
 
 
-    public static BlockShopSign signApothecary = new BlockShopSign("sign_apothecary");
-    public static BlockShopSign signArmoury = new BlockShopSign("sign_armoury");
-    public static BlockShopSign signBakery = new BlockShopSign("sign_bakery");
-    public static BlockShopSign signBlacksmith = new BlockShopSign("sign_blacksmith");
-    public static BlockShopSign signBrewery = new BlockShopSign("sign_brewery");
-    public static BlockShopSign signClinic = new BlockShopSign("sign_clinic");
-    public static BlockShopSign signClothing = new BlockShopSign("sign_clothing");
-    public static BlockShopSign signDiner = new BlockShopSign("sign_diner");
-    public static BlockShopSign signExotics = new BlockShopSign("sign_exotics");
-    public static BlockShopSign signFishery = new BlockShopSign("sign_fishery");
-    public static BlockShopSign signFlorist = new BlockShopSign("sign_florist");
-    public static BlockShopSign signFurniture = new BlockShopSign("sign_furniture");
-    public static BlockShopSign signGeneral = new BlockShopSign("sign_general");
-    public static BlockShopSign signInn = new BlockShopSign("sign_inn");
-    public static BlockShopSign signJeweller = new BlockShopSign("sign_jeweller");
-    public static BlockShopSign signMusic = new BlockShopSign("sign_music");
-    public static BlockShopSign signPetshop = new BlockShopSign("sign_petshop");
-    public static BlockShopSign signPostal = new BlockShopSign("sign_postal");
-    public static BlockShopSign signPub = new BlockShopSign("sign_pub");
-    public static BlockShopSign signWeapons = new BlockShopSign("sign_weapons");
-
 */
 
-    public static void preInit() {
-/*
-
-                bottlePlaced.register();
-                plateMuffins.register();
-                plateCroissants.register();
-
-                //bookPedestal.register();
-
-                lanternCandle.register();
-                lanternBlue.register();
-                lanternGreen.register();
-                lanternRed.register();
-                lanternYellow.register();
-
-                roofShinglesRed.register();
-                roofShinglesRedConcave.register();
-                roofShinglesRedConvex.register();
-
-
-        */
-/** garden block *//*
-
-        fountain.register();
-        hedge.register();
-        largeplanterbox.register();
-        //windowbox.register();
-        //flowerbed.register();
-        //denseFlowerbed.register();
-        parkbench.register();
-        shrine.register();
-
-        */
-/** home block *//*
-
-        table.register();
-        stool.register();
-        chair.register();
-        sidetable.register();
-
-        */
-/** shop block *//*
-
-        coinpurse.register();
-        scales.register();
-
-        crateClosed.register();
-        crateApple.register();
-        crateBerry.register();
-        crateCarrot.register();
-        crateFish.register();
-        crateGrain.register();
-        crateIngot.register();
-        cratePotato.register();
-        crateSugar.register();
-
-        displayCrateApple.register();
-        displayCrateBerry.register();
-        displayCrateCarrot.register();
-        displayCrateFish.register();
-        displayCrateGrain.register();
-        displayCrateIngot.register();
-        displayCratePotato.register();
-        displayCrateSugar.register();
-
-        basketApple.register();
-        basketBerry.register();
-        basketCarrot.register();
-        basketFish.register();
-        basketGrain.register();
-        basketIngot.register();
-        basketPotato.register();
-        basketSugar.register();
-
-        basketLargeApple.register();
-        basketLargeBerry.register();
-        basketLargeCarrot.register();
-        basketLargeFish.register();
-        basketLargeGrain.register();
-        basketLargeIngot.register();
-        basketLargePotato.register();
-        basketLargeSugar.register();
-
-        signApothecary.register();
-        signArmoury.register();
-        signBakery.register();
-        signBlacksmith.register();
-        signBrewery.register();
-        signClinic.register();
-        signClothing.register();
-        signDiner.register();
-        signExotics.register();
-        signFishery.register();
-        signFlorist.register();
-        signFurniture.register();
-        signGeneral.register();
-        signInn.register();
-        signJeweller.register();
-        signMusic.register();
-        signPetshop.register();
-        signPostal.register();
-        signPub.register();
-        signWeapons.register();
-*/
-
-    }
-
-    public static void registerBlocks() {
-
-    }
-
-    public static void registerItemBlocks() {
-
-    }
-
-    public static void registerModels() {
-
-    }
 }
