@@ -1,10 +1,7 @@
 package net.grallarius.sundereddeco.item;
 
-import net.grallarius.sundereddeco.InvModel;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.minecraft.item.Item;
-
-import static net.grallarius.sundereddeco.SunderedDeco.ITEM_REGISTRY;
 
 public class ItemBase extends Item {
 

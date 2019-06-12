@@ -11,23 +11,23 @@ public class TileEntityCounter extends TileEntity {
 
     public TileEntityCounter(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
-        //super(TileEntityType.register("counter", TileEntityType.Builder.create(TileEntityCounter::new)));
     }
 
     public TileEntityCounter(){
-    super(SunderedDeco.TECOUNTER);
+    super(SunderedDeco.teCounter);
     }
 
     @Override
     public NBTTagCompound write(NBTTagCompound compound) {
+        super.write(compound);
         compound.setInt("count", count);
-        return super.write(compound);
+        return compound;
     }
 
     @Override
     public void read(NBTTagCompound compound) {
-        count = compound.getInt("count");
         super.read(compound);
+        count = compound.getInt("count");
     }
 
     public int getCount() {
@@ -42,4 +42,5 @@ public class TileEntityCounter extends TileEntity {
         count--;
         markDirty();
     }
+
 }

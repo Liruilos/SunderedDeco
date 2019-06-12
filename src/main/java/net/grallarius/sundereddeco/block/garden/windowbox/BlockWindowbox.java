@@ -280,6 +280,11 @@ public class BlockWindowbox extends BlockTileEntity {
         return new TileEntityWindowbox();
     }
 
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
+
     public enum EnumShape implements IStringSerializable {
 
         ENDLEFT( 0, "endleft"),

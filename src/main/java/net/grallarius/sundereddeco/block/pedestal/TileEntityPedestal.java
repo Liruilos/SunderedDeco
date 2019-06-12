@@ -1,22 +1,8 @@
 package net.grallarius.sundereddeco.block.pedestal;
 
-import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.network.PacketRequestUpdatePedestal;
-import net.grallarius.sundereddeco.network.PacketUpdatePedestal;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
-
-import javax.annotation.Nullable;
-
-import static net.grallarius.sundereddeco.block.pedestal.BlockPedestal.HASBOOK;
 
 //extends TileEntity
 public class TileEntityPedestal  {

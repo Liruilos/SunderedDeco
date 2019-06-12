@@ -3,9 +3,13 @@ package net.grallarius.sundereddeco.block.garden.windowbox;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.items.ItemStackHandler;
+
+import javax.annotation.Nullable;
 
 public class TileEntityWindowbox extends TileEntity {
     public int facing;
@@ -15,7 +19,7 @@ public class TileEntityWindowbox extends TileEntity {
     }
 
     public TileEntityWindowbox(){
-        super(SunderedDeco.TEWINDOWBOX);
+        super(SunderedDeco.teWindowbox);
     }
 
     public ItemStackHandler inventory = new ItemStackHandler(3) {
@@ -68,7 +72,7 @@ public class TileEntityWindowbox extends TileEntity {
         return super.write(compound);
     }
 
-/*
+
     @Nullable
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
@@ -89,7 +93,6 @@ public class TileEntityWindowbox extends TileEntity {
     public void handleUpdateTag(NBTTagCompound nbt) {
         this.read(nbt);
     }
-*/
 
 
 

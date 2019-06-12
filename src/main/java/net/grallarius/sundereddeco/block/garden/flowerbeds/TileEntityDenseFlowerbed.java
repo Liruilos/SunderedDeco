@@ -1,8 +1,6 @@
 package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
 import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.network.garden.PacketRequestUpdateDenseFlowerbed;
-import net.grallarius.sundereddeco.network.garden.PacketUpdateDenseFlowerbed;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

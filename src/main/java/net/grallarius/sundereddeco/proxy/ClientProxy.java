@@ -13,6 +13,7 @@ public class ClientProxy implements IProxy {
     public void setup(FMLCommonSetupEvent event){
         OBJLoader.INSTANCE.addDomain(MODID);
 
+        registerRenderers();
         //ModColourManager.registerColourHandlers();
     }
 

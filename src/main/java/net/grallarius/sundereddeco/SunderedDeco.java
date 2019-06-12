@@ -7,7 +7,6 @@ import net.grallarius.sundereddeco.block.garden.windowbox.GuiWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.client.ModColourManager;
 import net.grallarius.sundereddeco.client.SunderedDecoTab;
-import net.grallarius.sundereddeco.item.ModItems;
 import net.grallarius.sundereddeco.proxy.ClientProxy;
 import net.grallarius.sundereddeco.proxy.IProxy;
 import net.grallarius.sundereddeco.proxy.ServerProxy;
@@ -15,7 +14,6 @@ import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -26,7 +24,6 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ExtensionPoint;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
@@ -40,10 +37,6 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.stream.Collectors;
-
-//@Mod(modid = SunderedDeco.MODID, name = SunderedDeco.NAME, version = SunderedDeco.VERSION)
-
 @Mod(SunderedDeco.MODID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 
@@ -56,8 +49,6 @@ public class SunderedDeco {
     public static IForgeRegistry<Block> BLOCK_REGISTRY = GameRegistry.findRegistry(Block.class);
     public static IForgeRegistry<Item> ITEM_REGISTRY  = GameRegistry.findRegistry(Item.class);
 
-    //public static SimpleNetworkWrapper wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(SunderedDeco.MODID);
-
     public static final SunderedDecoTab creativeTab = new SunderedDecoTab();
 
     public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
@@ -65,8 +56,8 @@ public class SunderedDeco {
     public static SunderedDeco instance;
 
     //Tile Entity Registration
-    public static TileEntityType<TileEntityCounter> TECOUNTER;
-    public static TileEntityType<TileEntityWindowbox> TEWINDOWBOX;
+    public static TileEntityType<TileEntityCounter> teCounter;
+    public static TileEntityType<TileEntityWindowbox> teWindowbox;
 
     public SunderedDeco(){
 
@@ -86,45 +77,24 @@ public class SunderedDeco {
             };
         });
 
-        // Register the setup method for modloading
+        // Register methods for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        // Register the enqueueIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        // Register the processIMC method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        // Register the doClientStuff method for modloading
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, this::registerTileEntities);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(ModColourManager.class);
     }
 
-    private static byte packetId = 0;
     private void setup(final FMLCommonSetupEvent event){
-
-        // some preinit code
-        LOGGER.info("HELLO FROM PREINIT");
-
-        ModBlocks.preInit();
-        ModItems.preInit();
-
-/*        NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
-        wrapper.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, packetId++, Side.CLIENT);
-        wrapper.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, packetId++, Side.SERVER);
-        wrapper.registerMessage(new PacketUpdateWindowbox.Handler(), PacketUpdateWindowbox.class, packetId++, Side.CLIENT);
-        wrapper.registerMessage(new PacketRequestUpdateWindowbox.Handler(), PacketRequestUpdateWindowbox.class, packetId++, Side.SERVER);
-        wrapper.registerMessage(new PacketUpdateDenseFlowerbed.Handler(), PacketUpdateDenseFlowerbed.class, packetId++, Side.CLIENT);
-        wrapper.registerMessage(new PacketRequestUpdateDenseFlowerbed.Handler(), PacketRequestUpdateDenseFlowerbed.class, packetId++, Side.SERVER);
-        wrapper.registerMessage(new PacketUpdateFlowerbed.Handler(), PacketUpdateFlowerbed.class, packetId++, Side.CLIENT);
-        wrapper.registerMessage(new PacketRequestUpdateFlowerbed.Handler(), PacketRequestUpdateFlowerbed.class, packetId++, Side.SERVER);
-        proxy.registerRenderers();*/
-
-        proxy.registerRenderers();
 
         ModRecipes.init();
 
         proxy.setup(event);
+
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
@@ -152,23 +122,12 @@ public class SunderedDeco {
         LOGGER.info("HELLO from server starting");
     }
 
-    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
-    // Event bus for receiving Registry Events)
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-            // register a new block here
-            LOGGER.info("HELLO from Register Block");
-        }
-    }
-
     @SubscribeEvent
     public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-        //registry.register(TileEntityType.Builder.create(TileEntityCounter::new).build(null).setRegistryName(new ResourceLocation(SunderedDeco.MODID, "counter")));
-        TECOUNTER = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.create(TileEntityCounter::new));
-        TEWINDOWBOX = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.create(TileEntityWindowbox::new));
+        teCounter = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.create(TileEntityCounter::new));
+        teWindowbox = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.create(TileEntityWindowbox::new));
 
     }
+
 
 }

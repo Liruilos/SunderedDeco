@@ -9,6 +9,7 @@ import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -274,11 +275,6 @@ public class ModBlocks {
         signWeapons.register();
 */
 
-    }
-
-    //Do this in SunderedDeco instead!!
-    public static void registerTiles(IForgeRegistry<TileEntityType<?>> registry){
-        //registry.register(TileEntityType.Builder.create(TileEntityFlowerbed::new).build(null).setRegistryName(new ResourceLocation(SunderedDeco.MODID, "flowerbed")));
     }
 
     public static void registerBlocks() {

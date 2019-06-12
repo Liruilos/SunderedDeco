@@ -43,4 +43,9 @@ public class BlockCounter extends BlockTileEntity {
         return new TileEntityCounter();
     }
 
+    @Override
+    public boolean hasTileEntity(IBlockState state) {
+        return true;
+    }
+
 }
