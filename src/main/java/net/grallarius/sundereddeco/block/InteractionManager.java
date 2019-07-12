@@ -1,16 +1,20 @@
-package net.grallarius.sundereddeco.block.garden.windowbox;
+package net.grallarius.sundereddeco.block;
 
 import net.grallarius.sundereddeco.SunderedDeco;
+import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IInteractionObject;
 
-public class InteractionObjectWindowbox implements IInteractionObject {
-    private TileEntityWindowbox tile;
+public class InteractionManager implements IInteractionObject {
 
-    public InteractionObjectWindowbox(TileEntityWindowbox tile){
+    private TileEntity tile;
+
+    public InteractionManager(TileEntity tile){
         this.tile = tile;
     }
 
@@ -31,11 +35,13 @@ public class InteractionObjectWindowbox implements IInteractionObject {
 
     @Override
     public Container createContainer(InventoryPlayer playerInv, EntityPlayer arg1) {
-        return new ContainerWindowbox(playerInv, this.tile);
+        if (this.tile instanceof TileEntityWindowbox) return new ContainerWindowbox(playerInv, (TileEntityWindowbox) this.tile);
+        else return null;
     }
 
     @Override
     public String getGuiID() {
-        return SunderedDeco.MODID + ":windowbox_gui";
+        if (this.tile instanceof TileEntityWindowbox) return SunderedDeco.MODID + ":windowbox_gui";
+        else return null;
     }
 }

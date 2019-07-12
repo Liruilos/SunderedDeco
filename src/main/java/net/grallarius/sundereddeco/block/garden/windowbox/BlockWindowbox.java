@@ -1,5 +1,6 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
+import net.grallarius.sundereddeco.block.InteractionManager;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.BlockFaceShape;
@@ -218,7 +219,7 @@ public class BlockWindowbox extends BlockTileEntity {
                         te.saveAndSync();
                     }
                 } else {
-                    NetworkHooks.openGui((EntityPlayerMP) player, new InteractionObjectWindowbox(te), (buffer) -> buffer.writeBlockPos(pos));
+                    NetworkHooks.openGui((EntityPlayerMP) player, new InteractionManager(te), (buffer) -> buffer.writeBlockPos(pos));
                     //player.openGui(SunderedDeco.instance, ModGuiHandler.WINDOWBOX, world, pos.getX(), pos.getY(), pos.getZ());
                 }
             }
