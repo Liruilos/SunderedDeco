@@ -3,6 +3,7 @@ package net.grallarius.sundereddeco.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.EnumProperty;
@@ -94,6 +95,19 @@ public class BlockConnectableHorizontal extends BlockBase {
     @Deprecated
     public boolean isFullCube(IBlockState state) {
         return false;
+    }
+
+    @Override
+    @Deprecated
+    public boolean isTopSolid(IBlockState state)
+    {
+        return false;
+    }
+
+    @Override
+    @Deprecated
+    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
     }
 
     public enum EnumShape implements IStringSerializable {

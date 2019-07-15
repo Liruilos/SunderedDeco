@@ -28,8 +28,15 @@ public class BlockBase extends Block {
 
     @Override
     @Deprecated
-    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
+    public boolean isFullCube(IBlockState state) {
+        return true;
+    }
+
+    @Override
+    @Deprecated
+    public boolean isTopSolid(IBlockState state)
+    {
+        return true;
     }
 
     @Override

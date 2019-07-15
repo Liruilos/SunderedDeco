@@ -1,24 +1,19 @@
 package net.grallarius.sundereddeco.block;
 
-
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.BlockCounter;
-import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
 import net.grallarius.sundereddeco.block.furniture.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
-import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.ObjectHolder;
 
 @Mod.EventBusSubscriber(modid = SunderedDeco.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -27,7 +22,9 @@ public class ModBlocks {
 
 
     //SHOP
-    public static final BlockCrate crate_closed = new BlockCrate("crate_closed");
+    public static final BlockBase crate_closed = new BlockCrate(Block.Properties.create(Material.WOOD)
+            .hardnessAndResistance(2F, 10F)
+            .sound(SoundType.WOOD), "crate_closed");
     public static final BlockCrate crate_apple = new BlockCrate("crate_apple");
     public static final BlockCrate crate_berry = new BlockCrate("crate_berry");
     public static final BlockCrate crate_carrot = new BlockCrate("crate_carrot");
@@ -102,8 +99,11 @@ public class ModBlocks {
     public static final BlockDirectional sidetable = new BlockDirectional(Block.Properties.create(Material.WOOD), "sidetable");
     public static final BlockSittable stool = new BlockSittable(Block.Properties.create(Material.WOOD),"stool");
     public static final BlockChair chair = new BlockChair("chair");
-    public static BlockTable table = new BlockTable("table");
+    public static final BlockTable table = new BlockTable("table");
 
+
+    public static final BlockWindow window = new BlockWindow(Material.WOOD,"window");
+    public static final BlockConnectedChair parkbench = new BlockConnectedChair("parkbench");
 
 
     //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
@@ -132,6 +132,8 @@ public class ModBlocks {
                 //HOME
                 sidetable, stool, chair, table,
 
+                window, parkbench,
+
                 //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
                 counter
         );
@@ -141,7 +143,6 @@ public class ModBlocks {
 /*
 
 
-    public static BlockConnectedChair parkbench = new BlockConnectedChair();
 
 
     public static BlockDirectional scales = new BlockDirectional(Material.IRON, "scales");
@@ -151,12 +152,9 @@ public class ModBlocks {
     public static BlockDirectional coinpurse = new BlockDirectional(Material.CARPET, "coinpurse");
     //public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
 
-    public static BlockDirectional roofShinglesRed = new BlockDirectional(Material.WOOD, "roof_shingles_red");
-    public static BlockDirectional roofShinglesRedConcave = new BlockDirectional(Material.WOOD,"roof_shingles_red_concave");
-    public static BlockDirectional roofShinglesRedConvex = new BlockDirectional(Material.WOOD, "roof_shingles_red_convex");
 
     //TODO for now is registering itself and model registry happening in InvModel
-    public static BlockWindow window = new BlockWindow(Material.WOOD,"window");
+
 
 
 

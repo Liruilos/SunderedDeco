@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
@@ -50,6 +51,25 @@ public class BlockChair extends BlockSittable {
         return BOUNDING_BOX;
         //TODO try to add chair back to the bounding box?
         //return VoxelShapes.combine(BOUNDING_BOX, BOUNDING_BOX2, IBooleanFunction.AND);
+    }
+
+    @Override
+    @Deprecated
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    @Deprecated
+    public boolean isTopSolid(IBlockState state)
+    {
+        return false;
+    }
+
+    @Override
+    @Deprecated
+    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
     }
 
 }

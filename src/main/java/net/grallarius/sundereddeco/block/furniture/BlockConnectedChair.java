@@ -1,71 +1,104 @@
 package net.grallarius.sundereddeco.block.furniture;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.state.StateContainer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 
+import javax.annotation.Nullable;
+
+//TODO get to update correctly once placed, logic is whack, also needs model update
 public class BlockConnectedChair extends BlockChair {
-
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.0D, 0.0D,0.0D,1.0D,0.62D,1.0D);
+    private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(0, 0, 0, 16, 12, 16);
 
     /** Whether there should be legs to the left */
-    public static final BooleanProperty LEFTSIDE = BooleanProperty.create("leftside");
-    /** Whether there should be legs to the right */
-    public static final BooleanProperty RIGHTSIDE = BooleanProperty.create("rightside");
-    /** Whether there should be legs to the right */
-    public static final BooleanProperty LEFTCORNER = BooleanProperty.create("leftcorner");
-    /** Whether there should be legs to the right */
-    public static final BooleanProperty RIGHTCORNER = BooleanProperty.create("rightcorner");
-    /** Whether there should be legs to the right */
-    public static final BooleanProperty HASBACK = BooleanProperty.create("hasback");
+    public static final BooleanProperty NORTHSIDE = BooleanProperty.create("northside");
+    public static final BooleanProperty EASTSIDE = BooleanProperty.create("eastside");
+    public static final BooleanProperty SOUTHSIDE = BooleanProperty.create("southside");
+    public static final BooleanProperty WESTSIDE = BooleanProperty.create("westside");
+    public static final BooleanProperty NORTHBACK = BooleanProperty.create("northback");
+    public static final BooleanProperty EASTBACK = BooleanProperty.create("eastback");
+    public static final BooleanProperty SOUTHBACK = BooleanProperty.create("southback");
+    public static final BooleanProperty WESTBACK = BooleanProperty.create("westback");
 
-    public BlockConnectedChair() {
-        super("parkbench");
+
+    public BlockConnectedChair(String name){
+        super(name);
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(NORTHBACK, true)
+        .with(EASTBACK, false).with(SOUTHBACK, false).with(WESTBACK, false).with(NORTHSIDE, false)
+        .with(EASTSIDE, true).with(SOUTHSIDE, false).with(WESTSIDE, true));
     }
 
 
+    @Override
+    @Deprecated
+    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+        return BOUNDING_BOX;
+    }
+
+    @Override
+    @Nullable
+    public IBlockState getStateForPlacement(BlockItemUseContext context) {
+        if (context.getPlayer() != null) {
+            return super.getStateForPlacement(context)
+                    .with(FACING, context.getPlayer().getHorizontalFacing());
+        }else return super.getStateForPlacement(context).with(FACING, EnumFacing.NORTH);
+    }
+
     /** Logic for connectable chair submodels */
-   /* @Override
+    @Override
     @Deprecated
-    public IBlockState getActualState(IBlockState state, IBlockReader worldIn, BlockPos pos)
-    {
+    public IBlockState updatePostPlacement(IBlockState state, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos pos, BlockPos facingPos) {
 
-        IBlockState blockleft = worldIn.getBlockState(pos.offset(state.getValue(FACING).rotateYCCW()));
-        IBlockState blockright = worldIn.getBlockState(pos.offset(state.getValue(FACING).rotateY()));
-        IBlockState blockfront = worldIn.getBlockState(pos.offset(state.getValue(FACING).getOpposite()));
-        IBlockState blockback = worldIn.getBlockState(pos.offset(state.getValue(FACING)));
+        IBlockState blockleft = world.getBlockState(pos.offset(state.get(FACING).rotateYCCW()));
+        IBlockState blockright = world.getBlockState(pos.offset(state.get(FACING).rotateY()));
+        IBlockState blockfront = world.getBlockState(pos.offset(state.get(FACING).getOpposite()));
+        IBlockState blockback = world.getBlockState(pos.offset(state.get(FACING)));
 
-        boolean leftChair = blockleft.getBlock() instanceof BlockConnectedChair && !(state.getValue(FACING) == blockleft.getValue(FACING).getOpposite());
-        boolean rightChair = blockright.getBlock() instanceof BlockConnectedChair && !(state.getValue(FACING) == blockright.getValue(FACING).getOpposite());
-        boolean frontChairLeft = blockfront.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockfront.getValue(FACING).rotateY());
-        boolean frontChairRight = blockfront.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockfront.getValue(FACING).rotateYCCW());
-        boolean backChairLeft = blockback.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockback.getValue(FACING).rotateY());
-        boolean backChairRight = blockback.getBlock() instanceof BlockConnectedChair && (state.getValue(FACING) == blockback.getValue(FACING).rotateYCCW());
+        boolean leftChair = blockleft.getBlock() instanceof BlockConnectedChair && !(state.get(FACING) == blockleft.get(FACING).getOpposite());
+        boolean rightChair = blockright.getBlock() instanceof BlockConnectedChair && !(state.get(FACING) == blockright.get(FACING).getOpposite());
+        boolean frontChairLeft = blockfront.getBlock() instanceof BlockConnectedChair && (state.get(FACING) == blockfront.get(FACING).rotateY());
+        boolean frontChairRight = blockfront.getBlock() instanceof BlockConnectedChair && (state.get(FACING) == blockfront.get(FACING).rotateYCCW());
+        boolean backChairLeft = blockback.getBlock() instanceof BlockConnectedChair && (state.get(FACING) == blockback.get(FACING).rotateY());
+        boolean backChairRight = blockback.getBlock() instanceof BlockConnectedChair && (state.get(FACING) == blockback.get(FACING).rotateYCCW());
 
-        *//** LEFTCORNER / RIGHTCORNER submodels add back rotated in correct position to make internal corners *//*
-        *//** LEFTSIDE /RIGHTSIDE submodel added if no other connectable Chair to the side (in any direction but opposite) *//*
-        *//** Submodel for sides must be separate as submodel is mirrored not rotated, unlike for the corners *//*
-        *//** HASBACK property usually true, exception is when forming an outer corner *//*
+        boolean outer = (backChairLeft && rightChair) || (backChairRight && leftChair);
+        boolean innerExtraLeft = rightChair && frontChairRight;
+        boolean innerExtraRight = leftChair && frontChairLeft;
+
+        IBlockState newState = state
+                .with(NORTHSIDE, (state.get(FACING) == EnumFacing.EAST && !leftChair)
+                        || (state.get(FACING) == EnumFacing.WEST && !rightChair))
+                .with(EASTSIDE,(state.get(FACING) == EnumFacing.SOUTH && !leftChair)
+                        || (state.get(FACING) == EnumFacing.NORTH && !rightChair))
+                .with(SOUTHSIDE, (state.get(FACING) == EnumFacing.WEST && !leftChair)
+                        || (state.get(FACING) == EnumFacing.EAST && !rightChair))
+                .with(WESTSIDE,(state.get(FACING) == EnumFacing.NORTH && !leftChair)
+                        || (state.get(FACING) == EnumFacing.SOUTH && !rightChair))
+                .with(NORTHBACK, (state.get(FACING) == EnumFacing.NORTH && !outer)
+                        || (state.get(FACING) == EnumFacing.WEST && innerExtraRight)
+                        || (state.get(FACING) == EnumFacing.EAST && innerExtraLeft))
+                .with(EASTBACK, (state.get(FACING) == EnumFacing.EAST && !outer)
+                        || (state.get(FACING) == EnumFacing.NORTH && innerExtraRight)
+                        || (state.get(FACING) == EnumFacing.SOUTH && innerExtraLeft))
+                .with(SOUTHBACK, (state.get(FACING) == EnumFacing.SOUTH && !outer)
+                        || (state.get(FACING) == EnumFacing.EAST && innerExtraRight)
+                        || (state.get(FACING) == EnumFacing.WEST && innerExtraLeft))
+                .with(WESTBACK, (state.get(FACING) == EnumFacing.WEST && !outer)
+                        || (state.get(FACING) == EnumFacing.SOUTH && innerExtraRight)
+                        || (state.get(FACING) == EnumFacing.NORTH && innerExtraLeft));
+        return newState;
+    }
 
 
-        return state.withProperty(LEFTCORNER, frontChairLeft && !leftChair)
-                .withProperty(RIGHTCORNER, frontChairRight && !rightChair)
-                .withProperty(LEFTSIDE, !leftChair && !frontChairLeft && !backChairRight)
-                .withProperty(RIGHTSIDE,  !rightChair && !frontChairRight && !backChairLeft)
-                .withProperty(HASBACK, !((backChairLeft && !rightChair && !frontChairLeft) || (backChairRight && !leftChair && !frontChairRight)));
+    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+        builder.add(FACING, NORTHSIDE, EASTSIDE, SOUTHSIDE, WESTSIDE, NORTHBACK, EASTBACK, SOUTHBACK, WESTBACK);
+    }
 
-    }*/
-
-/*    @Override
-    @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
-        return BOUNDBOX;
-    }*/
-
-/*    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING, LEFTSIDE, RIGHTSIDE, LEFTCORNER, RIGHTCORNER, HASBACK});
-    }*/
 }
