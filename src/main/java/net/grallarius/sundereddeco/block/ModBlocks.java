@@ -102,6 +102,7 @@ public class ModBlocks {
     public static final BlockDirectional sidetable = new BlockDirectional(Block.Properties.create(Material.WOOD), "sidetable");
     public static final BlockSittable stool = new BlockSittable(Block.Properties.create(Material.WOOD),"stool");
     public static final BlockChair chair = new BlockChair("chair");
+    public static BlockTable table = new BlockTable("table");
 
 
 
@@ -129,7 +130,7 @@ public class ModBlocks {
                 hedge, fountain, windowbox,
 
                 //HOME
-                sidetable, stool, chair,
+                sidetable, stool, chair, table,
 
                 //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
                 counter
@@ -139,7 +140,7 @@ public class ModBlocks {
 
 /*
 
-    public static BlockTable table = new BlockTable("table");
+
     public static BlockConnectedChair parkbench = new BlockConnectedChair();
 
 
