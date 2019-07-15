@@ -1,20 +1,20 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "sundereddeco:shop/basket_goods",
-    "textures": {
-      "good":    "sundereddeco:blocks/shop/crate/crate_ingot"
-    }
-  },
   "variants": {
-    "normal":{"model":"sundereddeco:shop/basket_goods"},
-    "facing": {
-      "north": { "y": 0 },
-      "east":  { "y": 90 },
-      "south": { "y": 180 },
-      "west":  { "y": 270 }
+    "facing=north": {
+      "model": "sundereddeco:block/shop/basket/basket_ingot",
+      "y": 0
     },
-    "inventory": {"transform": "forge:default-block" }
+    "facing=east": {
+      "model": "sundereddeco:block/shop/basket/basket_ingot",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "sundereddeco:block/shop/basket/basket_ingot",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "sundereddeco:block/shop/basket/basket_ingot",
+      "y": 270
+    }
   }
 }
-

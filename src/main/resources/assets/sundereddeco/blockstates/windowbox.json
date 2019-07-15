@@ -1,30 +1,20 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "sundereddeco:garden/windowbox_single",
-    "textures": {
-      "box": "blocks/hardened_clay",
-      "dirt": "blocks/dirt_podzol_top"
-    },
-    "uvlock": true
-  },
   "variants": {
-    "facing": {
-      "north": { "y": 0 },
-      "east":  { "y": 90 },
-      "south": { "y": 180 },
-      "west":  { "y": 270 }
-    },
-    "shape": {
-      "single": {"model": "sundereddeco:garden/windowbox_single"},
-
-      "endleft": {"model": "sundereddeco:garden/windowbox_end_openleft"},
-
-      "endright": {"model": "sundereddeco:garden/windowbox_end_openright"},
-
-      "straight": {"model": "sundereddeco:garden/windowbox_straight"}
-
-    },
-    "inventory": {"model": "sundereddeco:garden/windowbox_single", "transform": "forge:default-block"}
+    "shape=single,facing=north": {"model": "sundereddeco:block/garden/windowbox_single", "y": 0},
+    "shape=endleft,facing=north": {"model": "sundereddeco:block/garden/windowbox_end_openleft", "y": 0},
+    "shape=endright,facing=north": {"model": "sundereddeco:block/garden/windowbox_end_openright", "y": 0},
+    "shape=straight,facing=north": {"model": "sundereddeco:block/garden/windowbox_straight", "y": 0},
+    "shape=single,facing=east": {"model": "sundereddeco:block/garden/windowbox_single", "y": 90},
+    "shape=endleft,facing=east": {"model": "sundereddeco:block/garden/windowbox_end_openleft", "y": 90},
+    "shape=endright,facing=east": {"model": "sundereddeco:block/garden/windowbox_end_openright", "y": 90},
+    "shape=straight,facing=east": {"model": "sundereddeco:block/garden/windowbox_straight", "y": 90},
+    "shape=single,facing=south": {"model": "sundereddeco:block/garden/windowbox_single", "y": 180},
+    "shape=endleft,facing=south": {"model": "sundereddeco:block/garden/windowbox_end_openleft", "y": 180},
+    "shape=endright,facing=south": {"model": "sundereddeco:block/garden/windowbox_end_openright", "y": 180},
+    "shape=straight,facing=south": {"model": "sundereddeco:block/garden/windowbox_straight", "y": 180},
+    "shape=single,facing=west": {"model": "sundereddeco:block/garden/windowbox_single", "y": 270},
+    "shape=endleft,facing=west": {"model": "sundereddeco:block/garden/windowbox_end_openleft", "y": 270},
+    "shape=endright,facing=west": {"model": "sundereddeco:block/garden/windowbox_end_openright", "y": 270},
+    "shape=straight,facing=west": {"model": "sundereddeco:block/garden/windowbox_straight", "y": 270}
   }
 }

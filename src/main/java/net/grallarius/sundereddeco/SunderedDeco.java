@@ -1,78 +1,133 @@
 package net.grallarius.sundereddeco;
 
+import net.grallarius.sundereddeco.block.ModBlocks;
+import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
+import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.GuiWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
+import net.grallarius.sundereddeco.client.ModColourManager;
 import net.grallarius.sundereddeco.client.SunderedDecoTab;
-import net.grallarius.sundereddeco.network.PacketRequestUpdatePedestal;
-import net.grallarius.sundereddeco.network.garden.*;
-import net.grallarius.sundereddeco.network.PacketUpdatePedestal;
+import net.grallarius.sundereddeco.proxy.ClientProxy;
+import net.grallarius.sundereddeco.proxy.IProxy;
 import net.grallarius.sundereddeco.proxy.ServerProxy;
+import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.item.Item;
-import net.minecraftforge.common.util.EnumHelper;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.network.NetworkRegistry;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.common.registry.GameRegistry;
-import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
+import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
+import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
-import net.minecraftforge.client.model.obj.OBJLoader;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-@Mod(modid = SunderedDeco.MODID, name = SunderedDeco.NAME, version = SunderedDeco.VERSION)
+@Mod(SunderedDeco.MODID)
+@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 
 public class SunderedDeco {
     public static final String MODID = "sundereddeco";
-    public static final String NAME = "Sundered Deco";
-    public static final String VERSION = "1.0";
+
+    // Directly reference a log4j logger.
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public static IForgeRegistry<Block> BLOCK_REGISTRY = GameRegistry.findRegistry(Block.class);
     public static IForgeRegistry<Item> ITEM_REGISTRY  = GameRegistry.findRegistry(Item.class);
 
-    public static SimpleNetworkWrapper wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(SunderedDeco.MODID);
-
     public static final SunderedDecoTab creativeTab = new SunderedDecoTab();
-    public static final Item.ToolMaterial copperToolMaterial = EnumHelper.addToolMaterial("COPPER", 2, 500, 6, 2,14);
 
-    @Mod.Instance(MODID)
+    public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
+
     public static SunderedDeco instance;
 
+    //Tile Entity Registration
+    public static TileEntityType<TileEntityCounter> teCounter;
+    public static TileEntityType<TileEntityWindowbox> teWindowbox;
 
-    private static byte packetId = 0;
+    public SunderedDeco(){
 
-    @EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
 
-        proxy.preInit(event);
+        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, () -> {
+            return (openContainer) -> {
+                ResourceLocation location = openContainer.getId();
+                if (location.toString().equals(MODID + ":windowbox_gui")) {
+                    EntityPlayerSP player = Minecraft.getInstance().player;
+                    BlockPos pos = openContainer.getAdditionalData().readBlockPos();
+                    TileEntity tileEntity = player.world.getTileEntity(pos);
+                    if (tileEntity instanceof TileEntityWindowbox) {
+                        return new GuiWindowbox(new ContainerWindowbox(player.inventory, (TileEntityWindowbox) tileEntity), player.inventory);
+                    }
+                }
+                return null;
+            };
+        });
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new ModGuiHandler());
+        // Register methods for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, this::registerTileEntities);
 
-        wrapper.registerMessage(new PacketUpdatePedestal.Handler(), PacketUpdatePedestal.class, packetId++, Side.CLIENT);
-        wrapper.registerMessage(new PacketRequestUpdatePedestal.Handler(), PacketRequestUpdatePedestal.class, packetId++, Side.SERVER);
-        wrapper.registerMessage(new PacketUpdateWindowbox.Handler(), PacketUpdateWindowbox.class, packetId++, Side.CLIENT);
-        wrapper.registerMessage(new PacketRequestUpdateWindowbox.Handler(), PacketRequestUpdateWindowbox.class, packetId++, Side.SERVER);
-        wrapper.registerMessage(new PacketUpdateDenseFlowerbed.Handler(), PacketUpdateDenseFlowerbed.class, packetId++, Side.CLIENT);
-        wrapper.registerMessage(new PacketRequestUpdateDenseFlowerbed.Handler(), PacketRequestUpdateDenseFlowerbed.class, packetId++, Side.SERVER);
-        wrapper.registerMessage(new PacketUpdateFlowerbed.Handler(), PacketUpdateFlowerbed.class, packetId++, Side.CLIENT);
-        wrapper.registerMessage(new PacketRequestUpdateFlowerbed.Handler(), PacketRequestUpdateFlowerbed.class, packetId++, Side.SERVER);
-
-        proxy.registerRenderers();
+        // Register ourselves for server and other game events we are interested in
+        MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(ModColourManager.class);
     }
 
-    @EventHandler
-    public void init(FMLInitializationEvent event) {
-        proxy.init(event);
+    private void setup(final FMLCommonSetupEvent event){
+
+        ModRecipes.init();
+
+        proxy.setup(event);
+
     }
 
-    @EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
-        proxy.postInit(event);
+    private void doClientStuff(final FMLClientSetupEvent event) {
+        // do something that can only be done on the client
+        //LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
-    @SidedProxy(serverSide = "net.grallarius.sundereddeco.proxy.ServerProxy",
-            clientSide = "net.grallarius.sundereddeco.proxy.ClientProxy",
-            modId = MODID)
-    public static ServerProxy proxy;
+    private void enqueueIMC(final InterModEnqueueEvent event)
+    {
+        // some example code to dispatch IMC to another mod
+        //InterModComms.sendTo("sundereddeco", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
+    }
+
+    private void processIMC(final InterModProcessEvent event)
+    {
+        // some example code to receive and process InterModComms from other mods
+        //LOGGER.info("Got IMC {}", event.getIMCStream().
+        //        map(m->m.getMessageSupplier().get()).
+        //        collect(Collectors.toList()));
+    }
+    // You can use SubscribeEvent and let the Event Bus discover methods to call
+    @SubscribeEvent
+    public void onServerStarting(FMLServerStartingEvent event) {
+        // do something when the server starts
+        LOGGER.info("HELLO from server starting");
+    }
+
+    @SubscribeEvent
+    public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
+        teCounter = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.create(TileEntityCounter::new));
+        teWindowbox = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.create(TileEntityWindowbox::new));
+
+    }
+
+
 }

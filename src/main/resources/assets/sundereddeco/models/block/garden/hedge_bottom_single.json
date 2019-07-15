@@ -1,9 +1,9 @@
 {
 	"__comment": "Designed by Liruilos with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "blocks/leaves_oak",
-		"texture": "blocks/leaves_oak",
-		"stump": "blocks/log_oak"
+		"particle": "block/oak_leaves",
+		"texture": "block/oak_leaves",
+		"stump": "block/oak_log"
 	},
 	"elements": [ 	 
 		{

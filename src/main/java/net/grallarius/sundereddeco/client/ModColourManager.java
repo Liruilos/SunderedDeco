@@ -8,62 +8,58 @@ import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.world.ColorizerGrass;
-import net.minecraft.world.biome.BiomeColorHelper;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.BossInfo;
+import net.minecraft.world.GrassColors;
+import net.minecraft.world.biome.BiomeColors;
+import net.minecraft.world.biome.WarmOceanBiome;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.ColorHandlerEvent;
+import net.minecraftforge.event.terraingen.BiomeEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 
-/**
- * Registers {@link IBlockColor}/{@link IItemColor} handlers for this mod's blocks/items.
- *
- * @author Choonster
- */
-@SideOnly(Side.CLIENT)
+@OnlyIn(Dist.CLIENT)
+@Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
 public class ModColourManager {
-    private static final Minecraft minecraft = Minecraft.getMinecraft();
+    private static final Minecraft minecraft = Minecraft.getInstance();
 
-    /**
-     * Register the colour handlers.
-     */
-    public static void registerColourHandlers() {
-        final BlockColors blockColors = minecraft.getBlockColors();
-        final ItemColors itemColors = minecraft.getItemColors();
-
-        registerBlockColourHandlers(blockColors);
-        registerItemColourHandlers(blockColors, itemColors);
-    }
-
-    /**
-     * Register the {@link IBlockColor} handlers.
-     *
-     * @param blockColors The BlockColors instance
-     */
-    private static void registerBlockColourHandlers(final BlockColors blockColors) {
-        // Use the grass colour of the biome or the default grass colour
+    @SubscribeEvent
+    public static void registerBlockColors(final ColorHandlerEvent.Block event)
+    {
         final IBlockColor grassColourHandler = (state, blockAccess, pos, tintIndex) -> {
             if (blockAccess != null && pos != null) {
-                return BiomeColorHelper.getGrassColorAtPos(blockAccess, pos);
+                return BiomeColors.getGrassColor(blockAccess, pos);
             }
 
-            return ColorizerGrass.getGrassColor(0.5D, 1.0D);
+            return GrassColors.get(0.5D, 1.0D);
         };
 
-        blockColors.registerBlockColorHandler(grassColourHandler, ModBlocks.hedge);
+        final IBlockColor waterColourHandler = (state, blockAccess, pos, tintIndex) -> {
+            if (blockAccess != null && pos != null) {
+                return BiomeColors.getWaterColor(blockAccess, pos);
+            }
+
+            //TODO actually return an appropriate water colour
+            return GrassColors.get(0.5D, 1.0D);
+        };
+
+        event.getBlockColors().register(grassColourHandler, ModBlocks.hedge);
+        event.getBlockColors().register(waterColourHandler, ModBlocks.fountain);
     }
 
-    /**
-     * Register the {@link IItemColor} handlers
-     *
-     * @param blockColors The BlockColors instance
-     * @param itemColors  The ItemColors instance
-     */
-    private static void registerItemColourHandlers(final BlockColors blockColors, final ItemColors itemColors) {
-        // Use the Block's colour handler for an ItemBlock
+    @SubscribeEvent
+    public static void registerItemColours(final ColorHandlerEvent.Item event){
+        final BlockColors blockColors = minecraft.getBlockColors();
         final IItemColor itemBlockColourHandler = (stack, tintIndex) -> {
-            IBlockState iblockstate = ((ItemBlock) stack.getItem()).getBlock().getStateFromMeta(stack.getMetadata());
-            return blockColors.colorMultiplier(iblockstate, null, null, tintIndex);
+            final IBlockState state = ((ItemBlock) stack.getItem()).getBlock().getDefaultState();
+            return blockColors.getColor(state, null, null, tintIndex);
         };
 
-        itemColors.registerItemColorHandler(itemBlockColourHandler, ModBlocks.hedge);
+
+        event.getItemColors().register(itemBlockColourHandler, ModBlocks.hedge);
+        event.getItemColors().register(itemBlockColourHandler, ModBlocks.fountain);
+
     }
+
 }

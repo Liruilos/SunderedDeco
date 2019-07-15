@@ -1,30 +1,39 @@
 package net.grallarius.sundereddeco.block.furniture;
 
 import net.grallarius.sundereddeco.block.BlockBase;
+import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 public class BlockTable extends BlockBase{
 
     /** Whether there should be a leg in the NW position */
-    public static final PropertyBool NORTHWEST = PropertyBool.create("northwest");
+    public static final BooleanProperty NORTHWEST = BooleanProperty.create("northwest");
     /** Whether there should be a leg in the NE position */
-    public static final PropertyBool NORTHEAST = PropertyBool.create("northeast");
+    public static final BooleanProperty NORTHEAST = BooleanProperty.create("northeast");
     /** Whether there should be a leg in the SE position */
-    public static final PropertyBool SOUTHEAST = PropertyBool.create("southeast");
+    public static final BooleanProperty SOUTHEAST = BooleanProperty.create("southeast");
     /** Whether there should be a leg in the SW position */
-    public static final PropertyBool SOUTHWEST = PropertyBool.create("southwest");
+    public static final BooleanProperty SOUTHWEST = BooleanProperty.create("southwest");
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.0D, 0.0D,0.0D,1.0D,1.0D,1.0D);
+    private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(0, 0, 0, 16, 16, 16);
+
+    private static final Properties props = Properties.create(Material.WOOD)
+            .sound(SoundType.WOOD);
 
 /*    public static final AxisAlignedBB TABLETOP_AABB = new AxisAlignedBB(0.0D, 0.8D, 0.0D, 1.0D, 1.0D, 1.0D);
     public static final AxisAlignedBB NORTHWEST_AABB = new AxisAlignedBB(0.375D, 0.0D, 0.625D, 0.625D, 1.5D, 1.0D);
@@ -33,70 +42,49 @@ public class BlockTable extends BlockBase{
     public static final AxisAlignedBB SOUTHWEST_AABB = new AxisAlignedBB(0.625D, 0.0D, 0.375D, 1.0D, 1.5D, 0.625D);
 */
     public BlockTable(String name) {
-        super(Material.WOOD, name);
-        setSoundType(SoundType.WOOD);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(NORTHEAST, true).withProperty(NORTHWEST, true)
-                .withProperty(SOUTHWEST, true).withProperty(SOUTHEAST, true));
+        super(props, name);
     }
-/*
-    public void addCollisionBoxToList(IBlockState state, World worldIn, BlockPos pos, AxisAlignedBB entityBox, List<AxisAlignedBB> collidingBoxes, @Nullable Entity entityIn, boolean bool)
-    {
-        state = state.getActualState(worldIn, pos);
-        addCollisionBoxToList(pos, entityBox, collidingBoxes, TABLETOP_AABB);
 
-        if (state.getValue(NORTHWEST).booleanValue())
-        {
-            addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTHWEST_AABB);
-        }
-        if (((Boolean)state.getValue(NORTHEAST)).booleanValue())
-        {
-            addCollisionBoxToList(pos, entityBox, collidingBoxes, NORTHEAST_AABB);
-        }
-        if (((Boolean)state.getValue(SOUTHEAST)).booleanValue())
-        {
-            addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTHEAST_AABB);
-        }
-        if (((Boolean)state.getValue(SOUTHWEST)).booleanValue())
-        {
-            addCollisionBoxToList(pos, entityBox, collidingBoxes, SOUTHWEST_AABB);
-        }
-    }
-*/
     @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return BOUNDBOX;
+    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+        return BOUNDING_BOX;
     }
 
     /** If no other block of type table present in relevant 2 cardinal directions, add a leg in that corner */
+    private IBlockState connectedState(IWorld world, BlockPos pos){
 
-    @Override
-    @Deprecated
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
+        boolean northTable = world.getBlockState(pos.north()).getBlock() instanceof BlockTable
+                || world.getBlockState(pos.north()).getBlock().isFullCube(world.getBlockState(pos.north()));
+        boolean southTable = world.getBlockState(pos.south()).getBlock() instanceof BlockTable
+                || world.getBlockState(pos.south()).getBlock().isFullCube(world.getBlockState(pos.south()));
+        boolean eastTable = world.getBlockState(pos.east()).getBlock() instanceof BlockTable
+                || world.getBlockState(pos.east()).getBlock().isFullCube(world.getBlockState(pos.east()));
+        boolean westTable = world.getBlockState(pos.west()).getBlock() instanceof BlockTable
+                || world.getBlockState(pos.west()).getBlock().isFullCube(world.getBlockState(pos.west()));
 
-        boolean northTable = worldIn.getBlockState(pos.north()).getBlock() instanceof BlockTable;
-        boolean southTable = worldIn.getBlockState(pos.south()).getBlock() instanceof BlockTable;
-        boolean eastTable = worldIn.getBlockState(pos.east()).getBlock() instanceof BlockTable;
-        boolean westTable = worldIn.getBlockState(pos.west()).getBlock() instanceof BlockTable;
-
-        return state.withProperty(NORTHWEST, !northTable && !westTable)
-                .withProperty(NORTHEAST,  !northTable && !eastTable)
-                .withProperty(SOUTHEAST, !southTable && !eastTable)
-                .withProperty(SOUTHWEST,  !southTable && !westTable);
-    }
-
-
-
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[] {NORTHWEST, NORTHEAST, SOUTHEAST, SOUTHWEST});
+        IBlockState newState = this.getDefaultState()
+                .with(NORTHWEST, !northTable && !westTable)
+                .with(NORTHEAST,  !northTable && !eastTable)
+                .with(SOUTHEAST, !southTable && !eastTable)
+                .with(SOUTHWEST,  !southTable && !westTable);
+        return newState;
     }
 
     @Override
     @Deprecated
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
+    public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+        return connectedState(world, currentPos);
+    }
+
+    @Override
+    @Nullable
+    public IBlockState getStateForPlacement(BlockItemUseContext context) {
+        return connectedState(context.getWorld(), context.getPos());
+    }
+
+    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+        builder.add(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST);
     }
 
     @Override
@@ -113,10 +101,8 @@ public class BlockTable extends BlockBase{
     }
 
     @Override
-    public boolean canPlaceTorchOnTop(IBlockState state, IBlockAccess world, BlockPos pos){return true;}
-
-    public int getMetaFromState(IBlockState state)
-    {
-        return 0;
+    @OnlyIn(Dist.CLIENT)
+    public BlockRenderLayer getRenderLayer(){
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 }

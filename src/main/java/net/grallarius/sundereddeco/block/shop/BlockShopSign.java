@@ -1,36 +1,63 @@
 package net.grallarius.sundereddeco.block.shop;
 
 import net.grallarius.sundereddeco.block.BlockDirectional;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 
 public class BlockShopSign extends BlockDirectional {
 
-    protected static final AxisAlignedBB BOUNDBOX_NS = new AxisAlignedBB(0.4D, 0.125D,0.065D,0.6D,1.0D,0.935D);
-    protected static final AxisAlignedBB BOUNDBOX_EW = new AxisAlignedBB(0.065D, 0.125D,0.4D,0.935D,1.0D,0.6D);
+    private static final VoxelShape BOUNDING_BOX_NS = Block.makeCuboidShape(6, 1, 1, 10, 16, 15);
+    private static final VoxelShape BOUNDING_BOX_EW = Block.makeCuboidShape(1, 1, 6, 15, 16, 10);
 
+    private static final Properties props = Properties.create(Material.WOOD)
+            .hardnessAndResistance(2F, 10F)
+            .sound(SoundType.WOOD);
 
     public BlockShopSign(String name){
-        super(Material.WOOD, name);
+        super(props, name);
     }
 
+    @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos)
-    {
-        switch (state.getValue(FACING))
+    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+        switch (state.get(FACING))
         {
             case NORTH:
-                return BOUNDBOX_NS;
+                return BOUNDING_BOX_NS;
             case SOUTH:
-                return BOUNDBOX_NS;
+                return BOUNDING_BOX_NS;
             case WEST:
-                return BOUNDBOX_EW;
+                return BOUNDING_BOX_EW;
             case EAST:
             default:
-                return BOUNDBOX_EW;
+                return BOUNDING_BOX_EW;
         }
     }
+
+    @Override
+    @Deprecated
+    public boolean isFullCube(IBlockState state) {
+        return false;
+    }
+
+    @Override
+    @Deprecated
+    public boolean isTopSolid(IBlockState state)
+    {
+        return false;
+    }
+
+    @Override
+    @Deprecated
+    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
+    }
+
 }

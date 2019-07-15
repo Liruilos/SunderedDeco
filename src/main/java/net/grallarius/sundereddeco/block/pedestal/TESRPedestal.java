@@ -3,16 +3,14 @@ package net.grallarius.sundereddeco.block.pedestal;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
-public class TESRPedestal extends TileEntitySpecialRenderer<TileEntityPedestal> {
-    @Override
+//extends TileEntitySpecialRenderer<TileEntityPedestal>
+public class TESRPedestal {
+/*    @Override
     public void render(TileEntityPedestal te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         ItemStack stack = te.inventory.getStackInSlot(0);
         if (!stack.isEmpty()) {
@@ -36,5 +34,5 @@ public class TESRPedestal extends TileEntitySpecialRenderer<TileEntityPedestal> 
             GlStateManager.disableRescaleNormal();
             GlStateManager.disableBlend();
         }
-    }
+    }*/
 }

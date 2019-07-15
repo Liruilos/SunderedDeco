@@ -1,11 +1,10 @@
 package net.grallarius.sundereddeco.block;
 
 
-import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
@@ -15,13 +14,13 @@ import static net.grallarius.sundereddeco.SunderedDeco.MODID;
 
 public abstract class BlockConnectableHTileEntity<TE extends TileEntity> extends BlockConnectableHorizontal {
 
-    public BlockConnectableHTileEntity(String name) {
-        super(name);
+    public BlockConnectableHTileEntity(Properties properties, String name) {
+        super(properties, name);
     }
 
     public abstract Class<TE> getTileEntityClass();
 
-    public TE getTileEntity(IBlockAccess world, BlockPos pos) {
+    public TE getTileEntity(IBlockReader world, BlockPos pos) {
         return (TE)world.getTileEntity(pos);
     }
 
@@ -30,14 +29,14 @@ public abstract class BlockConnectableHTileEntity<TE extends TileEntity> extends
         return true;
     }
 
-    @Nullable
+ /*   @Nullable
     @Override
-    public abstract TE createTileEntity(World world, IBlockState state);
+    public abstract TE createTileEntity(World world, IBlockState state);*/
 
-    public void register() {
-        GameRegistry.registerTileEntity(this.getTileEntityClass(), MODID + this.getUnlocalizedName());
+/*    public void register() {
+        GameRegistry.registerTileEntity(this.getTileEntityClass(), MODID + this.getTranslationKey());
         super.register();
-    }
+    }*/
 
 
 }

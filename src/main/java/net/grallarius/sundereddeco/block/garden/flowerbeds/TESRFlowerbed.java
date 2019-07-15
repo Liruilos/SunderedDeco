@@ -4,17 +4,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.texture.TextureMap;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
-public class TESRFlowerbed extends TileEntitySpecialRenderer<TileEntityFlowerbed> {
-    
+//extends TileEntitySpecialRenderer<TileEntityFlowerbed>
+public class TESRFlowerbed  {
+    /*
     @Override
     public void render(TileEntityFlowerbed te, double x, double y, double z, float partialTicks, int destroyStage, float alpha) {
         ItemStack stack1 = te.inventory.getStackInSlot(0);
@@ -96,5 +94,5 @@ public class TESRFlowerbed extends TileEntitySpecialRenderer<TileEntityFlowerbed
         GlStateManager.disableRescaleNormal();
         GlStateManager.disableBlend();
 
-    }
+    }*/
 }

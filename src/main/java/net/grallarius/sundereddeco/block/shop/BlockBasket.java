@@ -1,44 +1,32 @@
 package net.grallarius.sundereddeco.block.shop;
 
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
+import net.grallarius.sundereddeco.block.BlockDirectional;
+import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 
-public class BlockBasket extends BlockCrate {
+public class BlockBasket extends BlockDirectional {
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.065D, 0.0D,0.065D,0.935D,0.4D,0.935D);
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(1, 0, 1, 15, 6, 15);
 
-    public BlockBasket(String name){ super(name); }
+    private static final Properties props = Properties.create(Material.WOOD)
+            .hardnessAndResistance(1F, 10F)
+            .sound(SoundType.WOOD);
 
-    @Override
-    @Deprecated
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
-    }
-    @Override
-    @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return BOUNDBOX;
-    }
-
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
+    public BlockBasket(String name){
+        super(props, name);
     }
 
     @Override
     @Deprecated
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
+    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+        return BOUNDING_BOX;
     }
 
     @Override
@@ -49,11 +37,15 @@ public class BlockBasket extends BlockCrate {
 
     @Override
     @Deprecated
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
+    public boolean isTopSolid(IBlockState state)
+    {
+        return false;
     }
 
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
+    @Override
+    @Deprecated
+    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+        return BlockFaceShape.UNDEFINED;
     }
+
 }

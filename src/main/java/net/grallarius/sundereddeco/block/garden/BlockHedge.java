@@ -1,105 +1,111 @@
 package net.grallarius.sundereddeco.block.garden;
 
 import net.grallarius.sundereddeco.block.BlockBase;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockFenceGate;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraft.world.IWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nullable;
 
 public class BlockHedge extends BlockBase {
 
-
-
     /** Whether the hedge should extend to the north */
-    public static final PropertyBool NORTH = PropertyBool.create("north");
+    public static final BooleanProperty NORTH = BooleanProperty.create("north");
     /** Whether the hedge should extend to the east */
-    public static final PropertyBool EAST = PropertyBool.create("east");
+    public static final BooleanProperty EAST = BooleanProperty.create("east");
     /** Whether the hedge should extend to the south */
-    public static final PropertyBool SOUTH = PropertyBool.create("south");
+    public static final BooleanProperty SOUTH = BooleanProperty.create("south");
     /** Whether the hedge should extend to the west */
-    public static final PropertyBool WEST = PropertyBool.create("west");
-    /** Similar logic for top hedge blocks */
-    public static final PropertyBool TOP = PropertyBool.create("top");
-    public static final PropertyBool TOPNORTH = PropertyBool.create("topnorth");
-    public static final PropertyBool TOPEAST = PropertyBool.create("topeast");
-    public static final PropertyBool TOPSOUTH = PropertyBool.create("topsouth");
-    public static final PropertyBool TOPWEST = PropertyBool.create("topwest");
+    public static final BooleanProperty WEST = BooleanProperty.create("west");
+    /** Similar logic for top hedge block */
+    public static final BooleanProperty TOP = BooleanProperty.create("top");
+    public static final BooleanProperty TOPNORTH = BooleanProperty.create("topnorth");
+    public static final BooleanProperty TOPEAST = BooleanProperty.create("topeast");
+    public static final BooleanProperty TOPSOUTH = BooleanProperty.create("topsouth");
+    public static final BooleanProperty TOPWEST = BooleanProperty.create("topwest");
 
     protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.125D, 0.0D,0.125D,0.875D,1.0D,0.875D);
 
+    private static final Properties props = Properties.create(Material.LEAVES)
+            .sound(SoundType.PLANT);
+
     public BlockHedge(String name){
-        super(Material.LEAVES, name);
-        setSoundType(SoundType.PLANT);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(NORTH, false).withProperty(EAST, false)
-                .withProperty(SOUTH, false).withProperty(WEST, false).withProperty(TOP, false)
-                .withProperty(TOPNORTH, false).withProperty(TOPEAST, false).withProperty(TOPSOUTH, false)
-                .withProperty(TOPWEST, false));
+        super(props, name);
+        this.setDefaultState(this.stateContainer.getBaseState().with(NORTH, Boolean.FALSE).with(EAST, Boolean.FALSE)
+                .with(SOUTH, Boolean.FALSE).with(WEST, Boolean.FALSE).with(TOP, Boolean.FALSE).with(TOPNORTH, Boolean.FALSE)
+                .with(TOPEAST, Boolean.FALSE).with(TOPSOUTH, Boolean.FALSE).with(TOPWEST, Boolean.FALSE));
+
     }
 
-    @Override
+    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+        builder.add(NORTH, EAST, SOUTH, WEST, TOP, TOPNORTH, TOPEAST, TOPSOUTH, TOPWEST);
+    }
+/*
+    //@Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
         return BOUNDBOX;
-    }
+    }*/
 
-    /** If another block of type BlockHedge exists in that direction then join with a submodel */
 
-    @Override
-    @Deprecated
-    public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
-    {
-        boolean northHedge = worldIn.getBlockState(pos.north()).getBlock() instanceof BlockHedge;
-        boolean southHedge = worldIn.getBlockState(pos.south()).getBlock() instanceof BlockHedge;
-        boolean eastHedge = worldIn.getBlockState(pos.east()).getBlock() instanceof BlockHedge;
-        boolean westHedge = worldIn.getBlockState(pos.west()).getBlock() instanceof BlockHedge;
-        boolean hedgeBelow = worldIn.getBlockState(pos.down()).getBlock() instanceof BlockHedge;
+    private IBlockState connectedState(IWorld world, BlockPos pos){
+        boolean northHedge = world.getBlockState(pos.north()).getBlock() instanceof BlockHedge
+                || world.getBlockState(pos.north()).getBlock().isFullCube(world.getBlockState(pos.north()))
+                || world.getBlockState(pos.north()).getBlock() instanceof BlockFenceGate;
+        boolean southHedge = world.getBlockState(pos.south()).getBlock() instanceof BlockHedge
+                || world.getBlockState(pos.south()).getBlock().isFullCube(world.getBlockState(pos.south()))
+                || world.getBlockState(pos.south()).getBlock() instanceof BlockFenceGate;
+        boolean eastHedge = world.getBlockState(pos.east()).getBlock() instanceof BlockHedge
+                || world.getBlockState(pos.east()).getBlock().isFullCube(world.getBlockState(pos.east()))
+                || world.getBlockState(pos.east()).getBlock() instanceof BlockFenceGate;
+        boolean westHedge = world.getBlockState(pos.west()).getBlock() instanceof BlockHedge
+                || world.getBlockState(pos.west()).getBlock().isFullCube(world.getBlockState(pos.west()))
+                || world.getBlockState(pos.west()).getBlock() instanceof BlockFenceGate;
+        boolean hedgeBelow = world.getBlockState(pos.down()).getBlock() instanceof BlockHedge;
 
-        return state.withProperty(NORTH, !hedgeBelow && northHedge)
-                .withProperty(EAST,  !hedgeBelow && eastHedge)
-                .withProperty(SOUTH, !hedgeBelow && southHedge)
-                .withProperty(WEST,  !hedgeBelow && westHedge)
-                .withProperty(TOP, hedgeBelow)
-                .withProperty(TOPNORTH, hedgeBelow && northHedge)
-                .withProperty(TOPEAST, hedgeBelow && eastHedge)
-                .withProperty(TOPSOUTH, hedgeBelow && southHedge)
-                .withProperty(TOPWEST, hedgeBelow && westHedge);
-    }
-
-    protected BlockStateContainer createBlockState()
-    {
-        return new BlockStateContainer(this, new IProperty[] {NORTH, EAST, SOUTH, WEST, TOP, TOPNORTH, TOPEAST, TOPSOUTH, TOPWEST});
-    }
-
-    @Override
-    @Deprecated
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
+        IBlockState newState = this.getDefaultState()
+                .with(NORTH, !hedgeBelow && northHedge)
+                .with(EAST,  !hedgeBelow && eastHedge)
+                .with(SOUTH, !hedgeBelow && southHedge)
+                .with(WEST,  !hedgeBelow && westHedge)
+                .with(TOP, hedgeBelow)
+                .with(TOPNORTH, hedgeBelow && northHedge)
+                .with(TOPEAST, hedgeBelow && eastHedge)
+                .with(TOPSOUTH, hedgeBelow && southHedge)
+                .with(TOPWEST, hedgeBelow && westHedge);
+        return newState;
     }
 
     @Override
     @Deprecated
-    public boolean isFullCube(IBlockState state) {
-        return false;
+    public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+        return connectedState(world, currentPos);
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
-        return Minecraft.getMinecraft().gameSettings.fancyGraphics ? BlockRenderLayer.CUTOUT_MIPPED : BlockRenderLayer.SOLID;
+    @Nullable
+    public IBlockState getStateForPlacement(BlockItemUseContext context) {
+        return connectedState(context.getWorld(), context.getPos());
     }
 
-    public int getMetaFromState(IBlockState state)
-    {
-        return 0;
+
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public BlockRenderLayer getRenderLayer(){
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
+
 }

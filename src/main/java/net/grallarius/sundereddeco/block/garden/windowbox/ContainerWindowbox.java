@@ -6,36 +6,36 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerWindowbox extends Container {
 
     public ContainerWindowbox(InventoryPlayer playerInv, final TileEntityWindowbox windowbox) {
-        IItemHandler inventory = windowbox.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        addSlotToContainer(new SlotFlower(inventory, 0, 60, 21) {
+        //IItemHandler inventory = windowbox.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+        IItemHandler inventory = windowbox.getInventory();
+
+        addSlot(new SlotFlower(inventory, 0, 60, 21) {
             @Override
             public void onSlotChanged() { windowbox.markDirty(); }
         });
-        addSlotToContainer(new SlotFlower(inventory, 1, 100, 21) {
+        addSlot(new SlotFlower(inventory, 1, 100, 21) {
             @Override
             public void onSlotChanged() { windowbox.markDirty(); }
         });
-        addSlotToContainer(new SlotItemHandler(inventory, 2, 80, 53) {
+        addSlot(new SlotItemHandler(inventory, 2, 80, 53) {
             @Override
             public void onSlotChanged() { windowbox.markDirty(); }
         });
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                addSlot(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
         for (int k = 0; k < 9; k++) {
-            addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
+            addSlot(new Slot(playerInv, k, 8 + k * 18, 142));
         }
     }
 

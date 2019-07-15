@@ -3,8 +3,8 @@
   "defaults": {
     "model": "sundereddeco:shop/scales"
 /*    "textures": {
-      "good":    "sundereddeco:blocks/shop/crate/crate_apple",
-      "crate":    "blocks/planks_oak"
+      "good":    "assets.sundereddeco:block/shop/crate/crate_apple",
+      "crate":    "block/planks_oak"
     }*/
   },
   "variants": {

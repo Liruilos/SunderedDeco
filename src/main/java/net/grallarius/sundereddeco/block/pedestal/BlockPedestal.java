@@ -3,13 +3,10 @@ package net.grallarius.sundereddeco.block.pedestal;
 import net.grallarius.sundereddeco.ModGuiHandler;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.BlockTileEntity;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyBool;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,56 +15,65 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBook;
 import net.minecraft.item.ItemEnchantedBook;
 import net.minecraft.item.ItemStack;
+import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
-public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
+//extends BlockTileEntity<TileEntityPedestal>
+public class BlockPedestal  {
 
-    private static final PropertyDirection FACING = BlockHorizontal.FACING;
+    private static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
     /** Whether there should be a book model on the pedestal */
-    public static final PropertyBool HASBOOK = PropertyBool.create("hasbook");
+    public static final BooleanProperty HASBOOK = BooleanProperty.create("hasbook");
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.2D, 0.0D,0.2D,0.8D,1.2D,0.8D);
+/*    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.2D, 0.0D,0.2D,0.8D,1.2D,0.8D);
+    private static final Properties props = Properties.create(Material.WOOD)
+            .sound(SoundType.WOOD);
 
     public BlockPedestal(String name) {
-        super(Material.WOOD, name);
-        setSoundType(SoundType.WOOD);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH).withProperty(HASBOOK, false));
+        super(props, name);
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(HASBOOK, false));
+    }*/
+
+    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+        builder.add(FACING, HASBOOK);
     }
 
-    @Override
+/*    @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
         return BOUNDBOX;
     }
 
     @Override
     @Deprecated
     public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
+        return this.getDefaultState().with(FACING, placer.getHorizontalFacing());
     }
 
     @Override
     @Deprecated
     public boolean isOpaqueCube(IBlockState state) {
         return false;
-    }
+    }*/
 
-    @Override
+/*    @Override
     @Deprecated
     public boolean isFullCube(IBlockState state) {
         return false;
-    }
+    }*/
 
-    @Override
+  /*  @Override
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             TileEntityPedestal tile = getTileEntity(world, pos);
@@ -79,7 +85,7 @@ public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
                 }
                 tile.markDirty();
                 if (itemHandler.getStackInSlot(0).getItem() instanceof ItemEnchantedBook){
-                    Minecraft.getMinecraft().displayGuiScreen(new GuiEnchantments());
+                    //Minecraft.getMinecraft().displayGuiScreen(new GuiEnchantments());
                 }
                 tile.markDirty();
             } else {
@@ -99,37 +105,16 @@ public class BlockPedestal extends BlockTileEntity<TileEntityPedestal> {
             world.spawnEntity(item);
         }
         super.breakBlock(world, pos, state);
-    }
+    }*/
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING, HASBOOK});
-    }
-
-    @Override
-    @Deprecated
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState()
-                .withProperty(FACING, EnumFacing.getHorizontal(meta & 3))
-                .withProperty(HASBOOK, (meta & 4) == 4)
-                ;
-    }
-
-    public int getMetaFromState(IBlockState state) {
-        return (
-                (EnumFacing) state.getValue(FACING)).getHorizontalIndex()
-                | (((boolean) state.getValue(HASBOOK)) ? 4 : 0
-        );
-    }
-
-    @Override
+/*    @Override
     public Class<TileEntityPedestal> getTileEntityClass() {
         return TileEntityPedestal.class;
-    }
+    }*/
 
-    @Nullable
+/*    @Nullable
     @Override
     public TileEntityPedestal createTileEntity(World world, IBlockState state) {
         return new TileEntityPedestal();
-    }
+    }*/
 }

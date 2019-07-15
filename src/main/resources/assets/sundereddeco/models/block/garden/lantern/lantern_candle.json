@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "top":    "sundereddeco:block/lantern/lantern_top",
+    "bottom": "sundereddeco:block/lantern/lantern_top",
+    "side":   "sundereddeco:block/lantern/lantern_candle"
+  }
+}

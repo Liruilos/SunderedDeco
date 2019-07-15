@@ -1,29 +1,19 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "sundereddeco:table_top",
-    "uvlock": true
-  },
-  "variants": {
-    "northwest": {
-      "true": {"submodel": "sundereddeco:table_leg" },
-      "false": {}
+  "multipart": [
+    {
+      "apply": { "model": "sundereddeco:block/home/table_top"}
     },
-    "northeast": {
-      "true": {"submodel": "sundereddeco:table_leg", "y": 90 },
-      "false": {}
+    {   "when": { "northwest": "true" },
+      "apply": { "model": "sundereddeco:block/home/table_leg"}
     },
-    "southeast": {
-      "true": {"submodel": "sundereddeco:table_leg", "y": 180 },
-      "false": {}
+    {   "when": { "northeast": "true" },
+      "apply": { "model": "sundereddeco:block/home/table_leg", "y": 90 }
     },
-    "southwest": {
-      "true": {"submodel": "sundereddeco:table_leg", "y": 270 },
-      "false": {}
+    {   "when": { "southeast": "true" },
+      "apply": { "model": "sundereddeco:block/home/table_leg", "y": 180 }
     },
-    "inventory": {
-      "model": "sundereddeco:table_full",
-      "transform": "forge:default-block"
+    {   "when": { "southwest": "true" },
+      "apply": { "model": "sundereddeco:block/home/table_leg", "y": 270}
     }
-  }
+  ]
 }

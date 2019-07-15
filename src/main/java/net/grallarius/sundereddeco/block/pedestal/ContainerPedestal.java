@@ -13,7 +13,7 @@ import net.minecraftforge.items.SlotItemHandler;
 public class ContainerPedestal extends Container {
 
     public ContainerPedestal(InventoryPlayer playerInv, final TileEntityPedestal pedestal) {
-        IItemHandler inventory = pedestal.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+       /* IItemHandler inventory = pedestal.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
         addSlotToContainer(new SlotBook(inventory, 0, 80, 35) {
             @Override
             public void onSlotChanged() {
@@ -29,7 +29,7 @@ public class ContainerPedestal extends Container {
 
         for (int k = 0; k < 9; k++) {
             addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
-        }
+        }*/
     }
 
     @Override

@@ -36,11 +36,11 @@ public class SlotFlower extends SlotItemHandler {
         Block block = Block.getBlockFromItem(stack.getItem());
         Boolean isFlower = block instanceof BlockFlower;
 
-        if ((!isFlower) && (block != Blocks.YELLOW_FLOWER) && (block != Blocks.RED_FLOWER) && (block != Blocks.BROWN_MUSHROOM) && (block != Blocks.RED_MUSHROOM) && (block != Blocks.SAPLING) && (block != Blocks.DEADBUSH))
+/*        if ((!isFlower) && (block != Blocks.DANDELION) && (block != Blocks.POPPY) && (block != Blocks.BROWN_MUSHROOM) && (block != Blocks.RED_MUSHROOM) && (block != Blocks.SAPLING) && (block != Blocks.DEADBUSH))
         {
             int i = stack.getMetadata();
             return block == Blocks.TALLGRASS && i == BlockTallGrass.EnumType.FERN.getMeta();
-        }
+        }*/
 
         IItemHandler handler = this.getItemHandler();
         ItemStack remainder;

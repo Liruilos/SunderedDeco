@@ -12,7 +12,7 @@ import net.minecraftforge.items.IItemHandler;
 
 public class ContainerFlowerbed extends Container {
     public ContainerFlowerbed(InventoryPlayer playerInv, final TileEntityFlowerbed Flowerbed) {
-        IItemHandler inventory = Flowerbed.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+       /* IItemHandler inventory = Flowerbed.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
         addSlotToContainer(new SlotFlower(inventory, 0, 80, 21) {
             @Override
             public void onSlotChanged() { Flowerbed.markDirty(); }
@@ -30,7 +30,7 @@ public class ContainerFlowerbed extends Container {
 
         for (int k = 0; k < 9; k++) {
             addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
-        }
+        }*/
     }
 
     @Override

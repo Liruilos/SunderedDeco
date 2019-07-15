@@ -15,15 +15,12 @@ out
 
 # gradle
 build
-gradle/
 .gradle
-gradlew
-gradlew.bat
-
-# vim
-*~
-*.swp
 
 # other
 eclipse
 run
+
+# Files from Forge MDK
+forge*changelog.txt
+gradle/.DS_Store

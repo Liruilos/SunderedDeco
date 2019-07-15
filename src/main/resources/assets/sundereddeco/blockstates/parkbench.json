@@ -1,38 +1,31 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "sundereddeco:parkbench_seat"
-  },
-  "variants": {
-    "facing": {
-      "north": { "y": 90 },
-      "east":  { "y": 180 },
-      "south": { "y": 270 },
-      "west":  { "y": 0 }
+  "multipart": [
+    {
+      "apply": { "model": "sundereddeco:block/garden/parkbench_seat"}
     },
-    "leftside": {
-      "true": {"submodel": "sundereddeco:parkbench_leftside" },
-      "false": {}
+    {   "when": { "northside": "true" },
+      "apply": {"model": "sundereddeco:block/garden/parkbench_leftside", "y": 180}
     },
-    "rightside": {
-      "true": {"submodel": "sundereddeco:parkbench_rightside"},
-      "false": {}
+    {   "when": { "eastside": "true" },
+      "apply": {"model": "sundereddeco:block/garden/parkbench_leftside", "y": 270}
     },
-    "leftcorner": {
-      "true": {"submodel": "sundereddeco:parkbench_back", "y": 270},
-      "false": {}
+    {   "when": { "southside": "true" },
+      "apply": {"model": "sundereddeco:block/garden/parkbench_leftside", "y": 0 }
     },
-    "rightcorner": {
-      "true": {"submodel": "sundereddeco:parkbench_back", "y": 90},
-      "false": {}
+    {   "when": { "westside": "true" },
+      "apply": {"model": "sundereddeco:block/garden/parkbench_leftside", "y": 90 }
     },
-    "hasback": {
-      "true": {"submodel": "sundereddeco:parkbench_back"},
-      "false": {}
+    {   "when": { "northback": "true" },
+      "apply": { "model": "sundereddeco:block/garden/parkbench_back", "y": 90}
     },
-    "inventory": {
-      "model": "sundereddeco:parkbench_full",
-      "transform": "forge:default-block"
+    {   "when": { "eastback": "true" },
+      "apply": { "model": "sundereddeco:block/garden/parkbench_back", "y": 180}
+    },
+    {   "when": { "southback": "true" },
+      "apply": { "model": "sundereddeco:block/garden/parkbench_back", "y": 270 }
+    },
+    {   "when": { "westback": "true" },
+      "apply": { "model":  "sundereddeco:block/garden/parkbench_back", "y": 0}
     }
-  }
+  ]
 }

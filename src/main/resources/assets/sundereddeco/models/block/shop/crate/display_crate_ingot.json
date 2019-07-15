@@ -1,0 +1,7 @@
+{
+  "parent": "sundereddeco:block/shop/crate/display_crate_goods",
+  "textures": {
+    "good":    "sundereddeco:block/shop/crate/crate_ingot",
+    "crate": "block/oak_planks"
+  }
+}

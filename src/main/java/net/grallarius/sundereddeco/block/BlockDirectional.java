@@ -1,35 +1,35 @@
 package net.grallarius.sundereddeco.block;
 
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.IProperty;
-import net.minecraft.block.properties.PropertyDirection;
-import net.minecraft.block.state.BlockStateContainer;
+import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.state.DirectionProperty;
+import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.World;
+import javax.annotation.Nullable;
 
 public class BlockDirectional extends BlockBase {
 
-    public static final PropertyDirection FACING = BlockHorizontal.FACING;
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public BlockDirectional(Material material, String name){
-        super(material, name);
-        this.setDefaultState(this.blockState.getBaseState().withProperty(FACING, EnumFacing.NORTH));
+    public BlockDirectional(Properties properties, String name){
+        super(properties, name);
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH));
+    }
+
+    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+        builder.add(FACING);
     }
 
     @Override
-    @Deprecated
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
-        return this.getDefaultState().withProperty(FACING, placer.getHorizontalFacing());
-    }
-
-    @Override
-    @Deprecated
-    public boolean isOpaqueCube(IBlockState state) {
-        return false;
+    @Nullable
+    public IBlockState getStateForPlacement(BlockItemUseContext context) {
+        if (context.getPlayer() != null) {
+            return super.getStateForPlacement(context)
+                    .with(FACING, context.getPlayer().getHorizontalFacing());
+        }else return super.getStateForPlacement(context).with(FACING, EnumFacing.NORTH);
     }
 
     @Override
@@ -38,18 +38,7 @@ public class BlockDirectional extends BlockBase {
         return false;
     }
 
-    @Override
-    protected BlockStateContainer createBlockState() {
-        return new BlockStateContainer(this, new IProperty[] {FACING});
-    }
-
-    @Override
-    @Deprecated
-    public IBlockState getStateFromMeta(int meta) {
-        return this.getDefaultState().withProperty(FACING, EnumFacing.getFront(meta));
-    }
-
-    public int getMetaFromState(IBlockState state) {
-        return state.getValue(FACING).getIndex();
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT_MIPPED;
     }
 }
