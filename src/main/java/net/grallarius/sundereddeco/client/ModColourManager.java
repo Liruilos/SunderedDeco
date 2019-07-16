@@ -29,7 +29,8 @@ public class ModColourManager {
     {
         final IBlockColor grassColourHandler = (state, blockAccess, pos, tintIndex) -> {
             if (blockAccess != null && pos != null) {
-                return BiomeColors.getGrassColor(blockAccess, pos);
+                return BiomeColors.func_180286_a(blockAccess, pos);
+                //return BiomeColors.getGrassColor(blockAccess, pos);
             }
 
             return GrassColors.get(0.5D, 1.0D);
@@ -37,7 +38,8 @@ public class ModColourManager {
 
         final IBlockColor waterColourHandler = (state, blockAccess, pos, tintIndex) -> {
             if (blockAccess != null && pos != null) {
-                return BiomeColors.getWaterColor(blockAccess, pos);
+                return BiomeColors.func_180288_c(blockAccess, pos);
+                //return BiomeColors.getWaterColor(blockAccess, pos);
             }
 
             //TODO actually return an appropriate water colour
@@ -53,7 +55,7 @@ public class ModColourManager {
         final BlockColors blockColors = minecraft.getBlockColors();
         final IItemColor itemBlockColourHandler = (stack, tintIndex) -> {
             final IBlockState state = ((ItemBlock) stack.getItem()).getBlock().getDefaultState();
-            return blockColors.getColor(state, null, null, tintIndex);
+            return blockColors.getColor(state, null, null);
         };
 
 

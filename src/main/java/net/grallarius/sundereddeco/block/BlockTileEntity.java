@@ -53,12 +53,13 @@ public abstract class BlockTileEntity extends BlockBase implements ITileEntityPr
             }
 
             int i = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE, stack);
-            Item item = this.getItemDropped(state, worldIn, pos, i).asItem();
+            Item item = this.asItem();
+            //.getItemDropped(state, worldIn, pos, i).asItem();
             if (item == Items.AIR) {
                 return;
             }
 
-            ItemStack itemstack = new ItemStack(item, this.quantityDropped(state, worldIn.rand));
+            ItemStack itemstack = new ItemStack(item, i);
             itemstack.setDisplayName(((INameable)te).getCustomName());
             spawnAsEntity(worldIn, pos, itemstack);
         } else {

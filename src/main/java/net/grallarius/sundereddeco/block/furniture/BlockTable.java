@@ -4,6 +4,7 @@ import net.grallarius.sundereddeco.block.BlockBase;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
@@ -47,21 +48,27 @@ public class BlockTable extends BlockBase{
 
     @Override
     @Deprecated
-    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+    public VoxelShape func_196244_b(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
         return BOUNDING_BOX;
     }
+
+/*    @Override
+    @Deprecated
+    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+        return BOUNDING_BOX;
+    }*/
 
     /** If no other block of type table present in relevant 2 cardinal directions, add a leg in that corner */
     private IBlockState connectedState(IWorld world, BlockPos pos){
 
         boolean northTable = world.getBlockState(pos.north()).getBlock() instanceof BlockTable
-                || world.getBlockState(pos.north()).getBlock().isFullCube(world.getBlockState(pos.north()));
+                || world.getBlockState(pos.north()).getBlock().isSolid(world.getBlockState(pos.north()));
         boolean southTable = world.getBlockState(pos.south()).getBlock() instanceof BlockTable
-                || world.getBlockState(pos.south()).getBlock().isFullCube(world.getBlockState(pos.south()));
+                || world.getBlockState(pos.south()).getBlock().isSolid(world.getBlockState(pos.south()));
         boolean eastTable = world.getBlockState(pos.east()).getBlock() instanceof BlockTable
-                || world.getBlockState(pos.east()).getBlock().isFullCube(world.getBlockState(pos.east()));
+                || world.getBlockState(pos.east()).getBlock().isSolid(world.getBlockState(pos.east()));
         boolean westTable = world.getBlockState(pos.west()).getBlock() instanceof BlockTable
-                || world.getBlockState(pos.west()).getBlock().isFullCube(world.getBlockState(pos.west()));
+                || world.getBlockState(pos.west()).getBlock().isSolid(world.getBlockState(pos.west()));
 
         IBlockState newState = this.getDefaultState()
                 .with(NORTHWEST, !northTable && !westTable)
@@ -89,17 +96,9 @@ public class BlockTable extends BlockBase{
 
     @Override
     @Deprecated
-    public boolean isFullCube(IBlockState state) {
-        return false;
+    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
+        return BlockFaceShape.UNDEFINED;
     }
-
-    @Override
-    @Deprecated
-    public boolean isTopSolid(IBlockState state)
-    {
-        return true;
-    }
-
     @Override
     @OnlyIn(Dist.CLIENT)
     public BlockRenderLayer getRenderLayer(){

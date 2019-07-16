@@ -64,11 +64,11 @@ public class GuiEnchantments extends GuiScreen
     /**
      * Adds the buttons (and other controls) to the screen in question.
      */
-    @Override
+/*    @Override
     public void initGui()
     {
         // DEBUG
-/*        System.out.println("Gui Enchantments initGUI()");
+        System.out.println("Gui Enchantments initGUI()");
         buttonList.clear();
         Keyboard.enableRepeatEvents(true);
 
@@ -79,8 +79,8 @@ public class GuiEnchantments extends GuiScreen
         buttonList.add(buttonDone);
         int offsetFromScreenLeft = (width - bookImageWidth) / 2;
         buttonList.add(buttonNextPage = new NextPageButton(1, offsetFromScreenLeft + 120, 156, true));
-        buttonList.add(buttonPreviousPage = new NextPageButton(2, offsetFromScreenLeft + 38, 156, false));*/
-    }
+        buttonList.add(buttonPreviousPage = new NextPageButton(2, offsetFromScreenLeft + 38, 156, false));
+    }*/
 
     /**
      * Called from the main game loop to update the screen.
@@ -169,21 +169,21 @@ public class GuiEnchantments extends GuiScreen
      * Called when the screen is unloaded. Used to disable keyboard repeat
      * events
      */
-    @Override
+/*    @Override
     public void onGuiClosed()
     {
 
-    }
+    }*/
 
     /**
      * Returns true if this GUI should pause the game when it is displayed in
      * single-player
      */
-    @Override
+/*    @Override
     public boolean doesGuiPauseGame()
     {
         return true;
-    }
+    }*/
 
     @OnlyIn(Dist.CLIENT)
     static class NextPageButton extends GuiButton

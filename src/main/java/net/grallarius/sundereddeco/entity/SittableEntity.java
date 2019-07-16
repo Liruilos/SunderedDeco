@@ -14,7 +14,7 @@ public class SittableEntity extends Entity {
         //TODO find a better entity type
         super(EntityType.MINECART , world);
         setPosition(pos.getX() + 0.5, pos.getY() + 0.4, pos.getZ() + 0.5);
-        setSize(0F, 0F);
+        //setSize(0F, 0F);
     }
 
     @Override
@@ -46,7 +46,12 @@ public class SittableEntity extends Entity {
     }
 
     @Override
-    protected void writeAdditional(NBTTagCompound compound) {
+    protected void func_70014_b(NBTTagCompound p_70014_1_) {
 
     }
+
+/*    @Override
+    protected void writeAdditional(NBTTagCompound compound) {
+
+    }*/
 }

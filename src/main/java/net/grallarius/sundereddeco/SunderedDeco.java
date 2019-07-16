@@ -1,6 +1,5 @@
 package net.grallarius.sundereddeco;
 
-import net.grallarius.sundereddeco.block.ModBlocks;
 import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
 import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.GuiWindowbox;
@@ -124,8 +123,8 @@ public class SunderedDeco {
 
     @SubscribeEvent
     public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-        teCounter = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.create(TileEntityCounter::new));
-        teWindowbox = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.create(TileEntityWindowbox::new));
+        teCounter = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.func_200963_a(TileEntityCounter::new));
+        teWindowbox = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.func_200963_a(TileEntityWindowbox::new));
 
     }
 

@@ -33,15 +33,29 @@ public class InteractionManager implements IInteractionObject {
         return false;
     }
 
+
     @Override
-    public Container createContainer(InventoryPlayer playerInv, EntityPlayer arg1) {
-        if (this.tile instanceof TileEntityWindowbox) return new ContainerWindowbox(playerInv, (TileEntityWindowbox) this.tile);
+    public Container func_174876_a(InventoryPlayer inventoryPlayer, EntityPlayer entityPlayer) {
+        if (this.tile instanceof TileEntityWindowbox) return new ContainerWindowbox(inventoryPlayer, (TileEntityWindowbox) this.tile);
         else return null;
     }
 
+/*    @Override
+    public Container createContainer(InventoryPlayer playerInv, EntityPlayer arg1) {
+        if (this.tile instanceof TileEntityWindowbox) return new ContainerWindowbox(playerInv, (TileEntityWindowbox) this.tile);
+        else return null;
+    }*/
+
     @Override
-    public String getGuiID() {
+    public String func_174875_k() {
         if (this.tile instanceof TileEntityWindowbox) return SunderedDeco.MODID + ":windowbox_gui";
         else return null;
     }
+
+/*    @Override
+    public String getGuiID() {
+        if (this.tile instanceof TileEntityWindowbox) return SunderedDeco.MODID + ":windowbox_gui";
+        else return null;
+    }*/
+
 }

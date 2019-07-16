@@ -23,29 +23,29 @@ public class BlockBasket extends BlockDirectional {
         super(props, name);
     }
 
+
     @Override
     @Deprecated
-    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+    public VoxelShape func_196244_b(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
         return BOUNDING_BOX;
     }
 
-    @Override
+/*    @Override
     @Deprecated
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
+    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+        return BOUNDING_BOX;
+    }*/
 
     @Override
     @Deprecated
-    public boolean isTopSolid(IBlockState state)
-    {
-        return false;
+    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
+        return BlockFaceShape.UNDEFINED;
     }
 
-    @Override
+/*    @Override
     @Deprecated
     public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
-    }
+    }*/
 
 }

@@ -17,7 +17,14 @@ public class BlockLargeBasket extends BlockBasket {
 
     @Override
     @Deprecated
-    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+    public VoxelShape func_196244_b(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
         return BOUNDING_BOX;
     }
+
+/*    @Override
+    @Deprecated
+    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
+        return BOUNDING_BOX;
+    }*/
+
 }

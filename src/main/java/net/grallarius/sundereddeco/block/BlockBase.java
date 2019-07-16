@@ -3,13 +3,7 @@ package net.grallarius.sundereddeco.block;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.item.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 
 public class BlockBase extends Block {
 
@@ -25,25 +19,5 @@ public class BlockBase extends Block {
         ModItems.itemBlocks.add(new ItemBlock(this, new ItemBlock.Properties().group(SunderedDeco.creativeTab)).setRegistryName(SunderedDeco.MODID, name));
         //setCreativeTab(SunderedDeco.creativeTab);
     }
-
-    @Override
-    @Deprecated
-    public boolean isFullCube(IBlockState state) {
-        return true;
-    }
-
-    @Override
-    @Deprecated
-    public boolean isTopSolid(IBlockState state)
-    {
-        return true;
-    }
-
-    @Override
-    @Deprecated
-    public boolean canEntitySpawn(IBlockState state, Entity entityIn) {
-        return false;
-    }
-
 
 }

@@ -45,31 +45,18 @@ public class BlockChair extends BlockSittable {
         }else return super.getStateForPlacement(context).with(FACING, EnumFacing.NORTH);
     }
 
-    @Override
+/*    @Override
     @Deprecated
     public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
         return BOUNDING_BOX;
         //TODO try to add chair back to the bounding box?
         //return VoxelShapes.combine(BOUNDING_BOX, BOUNDING_BOX2, IBooleanFunction.AND);
-    }
+    }*/
 
     @Override
     @Deprecated
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-    @Override
-    @Deprecated
-    public boolean isTopSolid(IBlockState state)
-    {
-        return false;
-    }
-
-    @Override
-    @Deprecated
-    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
+    public VoxelShape func_196244_b(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
+        return BOUNDING_BOX;
     }
 
 }

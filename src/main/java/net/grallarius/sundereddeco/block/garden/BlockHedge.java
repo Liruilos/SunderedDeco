@@ -63,16 +63,16 @@ public class BlockHedge extends BlockBase {
 
     private IBlockState connectedState(IWorld world, BlockPos pos){
         boolean northHedge = world.getBlockState(pos.north()).getBlock() instanceof BlockHedge
-                || world.getBlockState(pos.north()).getBlock().isFullCube(world.getBlockState(pos.north()))
+                || world.getBlockState(pos.north()).getBlock().isSolid(world.getBlockState(pos.north()))
                 || world.getBlockState(pos.north()).getBlock() instanceof BlockFenceGate;
         boolean southHedge = world.getBlockState(pos.south()).getBlock() instanceof BlockHedge
-                || world.getBlockState(pos.south()).getBlock().isFullCube(world.getBlockState(pos.south()))
+                || world.getBlockState(pos.south()).getBlock().isSolid(world.getBlockState(pos.south()))
                 || world.getBlockState(pos.south()).getBlock() instanceof BlockFenceGate;
         boolean eastHedge = world.getBlockState(pos.east()).getBlock() instanceof BlockHedge
-                || world.getBlockState(pos.east()).getBlock().isFullCube(world.getBlockState(pos.east()))
+                || world.getBlockState(pos.east()).getBlock().isSolid(world.getBlockState(pos.east()))
                 || world.getBlockState(pos.east()).getBlock() instanceof BlockFenceGate;
         boolean westHedge = world.getBlockState(pos.west()).getBlock() instanceof BlockHedge
-                || world.getBlockState(pos.west()).getBlock().isFullCube(world.getBlockState(pos.west()))
+                || world.getBlockState(pos.west()).getBlock().isSolid(world.getBlockState(pos.west()))
                 || world.getBlockState(pos.west()).getBlock() instanceof BlockFenceGate;
         boolean hedgeBelow = world.getBlockState(pos.down()).getBlock() instanceof BlockHedge;
 

@@ -25,20 +25,13 @@ public class BlockLantern extends BlockBase {
 
     @Override
     @Deprecated
-    public boolean isFullCube(IBlockState state) {
-        return false;
+    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
+        return BlockFaceShape.UNDEFINED;
     }
 
-    @Override
-    @Deprecated
-    public boolean isTopSolid(IBlockState state)
-    {
-        return false;
-    }
-
-    @Override
+/*    @Override
     @Deprecated
     public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
         return BlockFaceShape.UNDEFINED;
-    }
+    }*/
 }
