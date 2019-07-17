@@ -1,12 +1,11 @@
 package net.grallarius.sundereddeco.block;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -23,13 +22,13 @@ public class BlockConnectableHorizontal extends BlockBase {
         this.setDefaultState(this.stateContainer.getBaseState().with(SHAPE, EnumShape.SINGLE));
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(SHAPE);
     }
 
     /** Working out which type of model to place so all are connected correctly, end = |_|    straight = | |
      * corner = |_     side = _     centre =     */
-    private IBlockState connectedState(IWorld world, BlockPos pos){
+    private BlockState connectedState(IWorld world, BlockPos pos){
         boolean northConnectable = world.getBlockState(pos.north()).getBlock() == this;
         boolean southConnectable = world.getBlockState(pos.south()).getBlock() == this;
         boolean eastConnectable = world.getBlockState(pos.east()).getBlock() == this;
@@ -73,21 +72,21 @@ public class BlockConnectableHorizontal extends BlockBase {
 
     @Override
     @Deprecated
-    public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
         return connectedState(world, currentPos);
     }
 
     @Override
     @Nullable
-    public IBlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
         return connectedState(context.getWorld(), context.getPos());
     }
 
-    @Override
+/*    @Override
     @Deprecated
-    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
+    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, BlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
         return BlockFaceShape.UNDEFINED;
-    }
+    }*/
 
     public enum EnumShape implements IStringSerializable {
 

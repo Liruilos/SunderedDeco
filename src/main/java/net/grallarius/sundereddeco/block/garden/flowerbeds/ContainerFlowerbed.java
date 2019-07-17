@@ -1,18 +1,13 @@
 package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
 import net.grallarius.sundereddeco.block.garden.SlotFlower;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class ContainerFlowerbed extends Container {
-    public ContainerFlowerbed(InventoryPlayer playerInv, final TileEntityFlowerbed Flowerbed) {
-       /* IItemHandler inventory = Flowerbed.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
+public class ContainerFlowerbed /*extends Container*/ {
+    /*public ContainerFlowerbed(InventoryPlayer playerInv, final TileEntityFlowerbed Flowerbed) {
+       *//* IItemHandler inventory = Flowerbed.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
         addSlotToContainer(new SlotFlower(inventory, 0, 80, 21) {
             @Override
             public void onSlotChanged() { Flowerbed.markDirty(); }
@@ -30,7 +25,7 @@ public class ContainerFlowerbed extends Container {
 
         for (int k = 0; k < 9; k++) {
             addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
-        }*/
+        }*//*
     }
 
     @Override
@@ -70,5 +65,5 @@ public class ContainerFlowerbed extends Container {
         }
 
         return itemstack;
-    }
+    }*/
 }

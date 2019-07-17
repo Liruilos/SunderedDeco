@@ -1,9 +1,9 @@
 package net.grallarius.sundereddeco.block.shop;
 
 import net.grallarius.sundereddeco.block.BlockDirectional;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -22,7 +22,7 @@ public class BlockClutterPlate extends BlockDirectional {
 
     //@Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
+    public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos) {
         return BOUNDBOX;
     }
 }

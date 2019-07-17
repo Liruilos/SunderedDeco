@@ -3,7 +3,8 @@ package net.grallarius.sundereddeco.entity;
 import net.grallarius.sundereddeco.block.furniture.BlockSittable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.IPacket;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
@@ -36,22 +37,23 @@ public class SittableEntity extends Entity {
     }
 
     @Override
+    protected void readAdditional(CompoundNBT compound) {
+
+    }
+
+    @Override
+    protected void writeAdditional(CompoundNBT compound) {
+
+    }
+
+    @Override
+    public IPacket<?> createSpawnPacket() {
+        return null;
+    }
+
+    @Override
     protected void registerData() {
 
     }
 
-    @Override
-    protected void readAdditional(NBTTagCompound compound) {
-
-    }
-
-    @Override
-    protected void func_70014_b(NBTTagCompound p_70014_1_) {
-
-    }
-
-/*    @Override
-    protected void writeAdditional(NBTTagCompound compound) {
-
-    }*/
 }

@@ -4,22 +4,13 @@ import net.grallarius.sundereddeco.ModGuiHandler;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.BlockTileEntity;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockHorizontal;
-import net.minecraft.block.SoundType;
-import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemBook;
-import net.minecraft.item.ItemEnchantedBook;
+
+import net.minecraft.block.BlockState;
+import net.minecraft.block.HorizontalBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -32,7 +23,7 @@ import javax.annotation.Nullable;
 //extends BlockTileEntity<TileEntityPedestal>
 public class BlockPedestal  {
 
-    private static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
+    private static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
     /** Whether there should be a book model on the pedestal */
     public static final BooleanProperty HASBOOK = BooleanProperty.create("hasbook");
 
@@ -45,7 +36,7 @@ public class BlockPedestal  {
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(HASBOOK, false));
     }*/
 
-    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING, HASBOOK);
     }
 

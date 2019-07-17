@@ -1,17 +1,15 @@
 package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
 import net.grallarius.sundereddeco.block.garden.SlotFlower;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
+
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-public class ContainerDenseFlowerbed extends Container {
-    public ContainerDenseFlowerbed(InventoryPlayer playerInv, final TileEntityDenseFlowerbed DenseFlowerbed) {
+public class ContainerDenseFlowerbed /*extends Container*/ {
+    public ContainerDenseFlowerbed(Inventory playerInv, final TileEntityDenseFlowerbed DenseFlowerbed) {
       /*  IItemHandler inventory = DenseFlowerbed.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
         addSlotToContainer(new SlotFlower(inventory, 0, 60, 21) {
             @Override
@@ -41,8 +39,8 @@ public class ContainerDenseFlowerbed extends Container {
         }*/
     }
 
-    @Override
-    public boolean canInteractWith(EntityPlayer player) {
+  /*  @Override
+    public boolean canInteractWith(PlayerEntity player) {
         return true;
     }
 
@@ -78,5 +76,5 @@ public class ContainerDenseFlowerbed extends Container {
         }
 
         return itemstack;
-    }
+    }*/
 }

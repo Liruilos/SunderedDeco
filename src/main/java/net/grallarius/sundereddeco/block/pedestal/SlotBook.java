@@ -1,7 +1,7 @@
 package net.grallarius.sundereddeco.block.pedestal;
 
-import net.minecraft.item.ItemBook;
-import net.minecraft.item.ItemEnchantedBook;
+import net.minecraft.item.BookItem;
+import net.minecraft.item.EnchantedBookItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
@@ -30,7 +30,7 @@ public class SlotBook extends SlotItemHandler {
         if (stack.isEmpty())
             return false;
 
-        return stack.getItem() instanceof ItemBook || stack.getItem() instanceof ItemEnchantedBook;
+        return stack.getItem() instanceof BookItem || stack.getItem() instanceof EnchantedBookItem;
 
     }
 

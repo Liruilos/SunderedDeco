@@ -4,11 +4,8 @@ import net.grallarius.sundereddeco.block.BlockConnectableHorizontal;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -54,11 +51,11 @@ public class BlockFountain extends BlockConnectableHorizontal {
         return *//*!Minecraft.getMinecraft().gameSettings.fancyGraphics && *//*blockAccess.getBlockState(pos.offset(side)).getBlock() == this ? false : super.shouldSideBeRendered(blockState, blockAccess, pos, side);
     }*/
 
-    @Override
+/*    @Override
     @Deprecated
     public VoxelShape func_196244_b(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
         return BOUNDING_BOX;
-    }
+    }*/
 
 /*    @Override
     @Deprecated
@@ -66,11 +63,11 @@ public class BlockFountain extends BlockConnectableHorizontal {
         return BOUNDING_BOX;
     }*/
 
-    @Override
+/*    @Override
     @Deprecated
     public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
         return BlockFaceShape.UNDEFINED;
-    }
+    }*/
 
 /*    @Override
     @Deprecated

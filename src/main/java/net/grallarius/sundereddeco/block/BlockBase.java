@@ -3,7 +3,7 @@ package net.grallarius.sundereddeco.block;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.item.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
+import net.minecraft.item.BlockItem;
 
 public class BlockBase extends Block {
 
@@ -16,7 +16,7 @@ public class BlockBase extends Block {
         this.name = name;
         setRegistryName(SunderedDeco.MODID, name);
 
-        ModItems.itemBlocks.add(new ItemBlock(this, new ItemBlock.Properties().group(SunderedDeco.creativeTab)).setRegistryName(SunderedDeco.MODID, name));
+        ModItems.itemBlocks.add(new BlockItem(this, new BlockItem.Properties().group(SunderedDeco.creativeTab)).setRegistryName(SunderedDeco.MODID, name));
         //setCreativeTab(SunderedDeco.creativeTab);
     }
 

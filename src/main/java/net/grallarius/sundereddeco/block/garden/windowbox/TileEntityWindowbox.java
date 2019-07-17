@@ -1,14 +1,10 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
 import net.grallarius.sundereddeco.SunderedDeco;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.NetworkManager;
-import net.minecraft.network.play.server.SPacketUpdateTileEntity;
+import net.minecraft.block.BlockState;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.EnumFacing;
 import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
@@ -53,14 +49,14 @@ public class TileEntityWindowbox extends TileEntity {
     }
 
     public void saveAndSync() {
-        IBlockState state = this.world.getBlockState(this.pos);
+        BlockState state = this.world.getBlockState(this.pos);
         this.setFacing(state.get(FACING).getHorizontalIndex());
-        this.world.markBlockRangeForRenderUpdate(this.pos, this.pos);
+        //this.world.markBlockRangeForRenderUpdate(this.pos, this.pos);
         this.world.notifyBlockUpdate(pos, state, state, 3);
         this.markDirty();
     }
 
-    @Override
+/*    @Override
     public void read(NBTTagCompound compound) {
         super.read(compound);
         this.inventory.deserializeNBT(compound.getCompound("inventory"));
@@ -69,13 +65,13 @@ public class TileEntityWindowbox extends TileEntity {
 
     @Override
     public NBTTagCompound write(NBTTagCompound compound) {
-        compound.setTag("inventory", this.inventory.serializeNBT());
-        compound.setInt("facing", this.getFacing());
+        compound.func_74782_a("inventory", this.inventory.serializeNBT());
+        compound.putInt("facing", this.getFacing());
         return super.write(compound);
-    }
+    }*/
 
 
-    @Nullable
+/*    @Nullable
     @Override
     public SPacketUpdateTileEntity getUpdatePacket() {
         return new SPacketUpdateTileEntity(this.getPos(), 0, this.getUpdateTag());
@@ -94,7 +90,7 @@ public class TileEntityWindowbox extends TileEntity {
     @Override
     public void handleUpdateTag(NBTTagCompound nbt) {
         this.read(nbt);
-    }
+    }*/
 
 
 

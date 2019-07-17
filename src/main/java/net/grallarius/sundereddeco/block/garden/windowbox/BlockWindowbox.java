@@ -1,29 +1,21 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
-import net.grallarius.sundereddeco.block.InteractionManager;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Blocks;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.IItemHandler;
 import net.grallarius.sundereddeco.block.BlockTileEntity;
 
@@ -34,7 +26,7 @@ import javax.annotation.Nullable;
 public class BlockWindowbox extends BlockTileEntity {
 
     public static final EnumProperty<EnumShape> SHAPE = EnumProperty.create("shape", EnumShape.class);
-    public static final DirectionProperty FACING = BlockHorizontal.HORIZONTAL_FACING;
+    public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
     private static final VoxelShape BOUNDING_BOX_NORTH = Block.makeCuboidShape(0, 8, 0, 16, 16, 8);
     private static final VoxelShape BOUNDING_BOX_SOUTH = Block.makeCuboidShape(0, 8, 8, 16, 16, 16);
@@ -47,10 +39,27 @@ public class BlockWindowbox extends BlockTileEntity {
 
     public BlockWindowbox(String name){
         super(props, name);
-        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, EnumFacing.NORTH).with(SHAPE, EnumShape.SINGLE));
+        this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SHAPE, EnumShape.SINGLE));
     }
 
-    @Override
+/*    @Override
+    @Deprecated
+    public VoxelShape func_196244_b(BlockState state, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
+        switch (state.get(FACING))
+        {
+            case NORTH:
+                return BOUNDING_BOX_NORTH;
+            case SOUTH:
+                return BOUNDING_BOX_SOUTH;
+            case WEST:
+                return BOUNDING_BOX_WEST;
+            case EAST:
+            default:
+                return BOUNDING_BOX_EAST;
+        }
+    }*/
+
+/*    @Override
     @Deprecated
     public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
         switch (state.get(FACING))
@@ -65,22 +74,22 @@ public class BlockWindowbox extends BlockTileEntity {
             default:
                 return BOUNDING_BOX_EAST;
         }
-    }
+    }*/
 
 
     @Override
     @Nullable
-    public IBlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
         if (context.getPlayer() != null) {
             return super.getStateForPlacement(context)
                     .with(FACING, context.getPlayer().getHorizontalFacing())
                     .with(SHAPE, EnumShape.SINGLE);
-        }else return super.getStateForPlacement(context).with(FACING, EnumFacing.NORTH).with(SHAPE, EnumShape.SINGLE);
+        }else return super.getStateForPlacement(context).with(FACING, Direction.NORTH).with(SHAPE, EnumShape.SINGLE);
     }
 
     @Override
     @Deprecated
-    public IBlockState updatePostPlacement(IBlockState state, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updatePostPlacement(BlockState state, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
 
         //** Working out which type of model to place so all are connected correctly, ends (openleft and openright) = |_|
         //    straight = | |   and single = []
@@ -89,8 +98,8 @@ public class BlockWindowbox extends BlockTileEntity {
             TileEntityWindowbox tile = (TileEntityWindowbox) world.getTileEntity(currentPos);
             tile.setFacing(state.get(FACING).getHorizontalIndex());
 
-            IBlockState blockleft = world.getBlockState(currentPos.offset(state.get(FACING).rotateYCCW()));
-            IBlockState blockright = world.getBlockState(currentPos.offset(state.get(FACING).rotateY()));
+            BlockState blockleft = world.getBlockState(currentPos.offset(state.get(FACING).rotateYCCW()));
+            BlockState blockright = world.getBlockState(currentPos.offset(state.get(FACING).rotateY()));
 
             boolean leftMatch = blockleft.getBlock() instanceof BlockWindowbox && (state.get(FACING) == blockleft.get(FACING));
             boolean rightMatch = blockright.getBlock() instanceof BlockWindowbox && (state.get(FACING) == blockright.get(FACING));
@@ -123,7 +132,7 @@ public class BlockWindowbox extends BlockTileEntity {
     /**
      * Check whether this Block can be placed at pos, while aiming at the side of an adjacent block (can only be placed on sides of full blocks)
      */
-    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, EnumFacing side)
+/*    public boolean canPlaceBlockOnSide(World worldIn, BlockPos pos, Direction side)
     {
         if (this.canAttachTo(worldIn, pos.west(), side))
         {
@@ -141,45 +150,39 @@ public class BlockWindowbox extends BlockTileEntity {
         {
             return this.canAttachTo(worldIn, pos.south(), side);
         }
-    }
+    }*/
 
-    private boolean canAttachTo(World p_193392_1_, BlockPos p_193392_2_, EnumFacing p_193392_3_)
+/*    private boolean canAttachTo(World p_193392_1_, BlockPos p_193392_2_, Direction p_193392_3_)
     {
-        IBlockState iblockstate = p_193392_1_.getBlockState(p_193392_2_);
-        boolean flag = isExceptBlockForAttachWithPiston(iblockstate.getBlock());
-        return !flag && iblockstate.getBlockFaceShape(p_193392_1_, p_193392_2_, p_193392_3_) == BlockFaceShape.SOLID && !iblockstate.canProvidePower();
-    }
+        BlockState iblockstate = p_193392_1_.getBlockState(p_193392_2_);
+        //return iblockstate.getBlockFaceShape(p_193392_1_, p_193392_2_, p_193392_3_) == BlockFaceShape.SOLID && !iblockstate.canProvidePower();
+        return iblockstate.func_193401_d(p_193392_1_, p_193392_2_, p_193392_3_)== BlockFaceShape.SOLID && !iblockstate.canProvidePower();
+    }*/
 
     /**
      * Pops windowbox block off if full block it was placed against is removed
      */
+    @Override
     @Deprecated
-    public void neighborChanged(IBlockState state, World worldIn, BlockPos pos, Block blockIn, BlockPos fromPos)
-    {
-        EnumFacing enumfacing = state.get(FACING);
+    public void updateNeighbors(BlockState state, IWorld worldIn, BlockPos pos, int flags) {
+        Direction enumfacing = state.get(FACING);
 
-        if (!this.canAttachTo(worldIn, pos.offset(enumfacing), enumfacing))
+/*        if (!this.canAttachTo(worldIn.getWorld(), pos.offset(enumfacing), enumfacing))
         {
-            this.dropBlockAsItemWithChance(state, worldIn, pos,1 , 0);
-            worldIn.removeBlock(pos);
-        }
-        super.neighborChanged(state, worldIn, pos, blockIn, fromPos);
+            //TODO replace code with something that works - drop method commented out below
+            //this.dropBlockAsItemWithChance(state, worldIn.getWorld(), pos, 1 , 0);
+            //worldIn.removeBlock(pos);
+        }*/
+        super.updateNeighbors(state, worldIn, pos, flags);
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(FACING, SHAPE);
     }
 
     @Override
     @Deprecated
-    public boolean isFullCube(IBlockState state) {
-        return false;
-    }
-
-
-    @Override
-    @Deprecated
-    public boolean onBlockActivated(IBlockState state, World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public void onBlockClicked(BlockState state, World world, BlockPos pos, PlayerEntity player) {
         if (!world.isRemote) {
             if (world.getTileEntity(pos) instanceof TileEntityWindowbox) {
                 TileEntityWindowbox te = (TileEntityWindowbox) world.getTileEntity(pos);
@@ -187,7 +190,7 @@ public class BlockWindowbox extends BlockTileEntity {
                         //te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
 
                 if (!player.isSneaking() && itemHandler != null) {
-                    if (player.getHeldItem(hand).isEmpty()) {
+                    if (player.getHeldItem(player.getActiveHand()).isEmpty()) {
                     //remove items from relevant slot
                         if (!itemHandler.getStackInSlot(1).isEmpty()) {
                             player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(1, 1, false));
@@ -195,42 +198,39 @@ public class BlockWindowbox extends BlockTileEntity {
                             player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(0, 1, false));
                         }
 
-                    } else if (canBePotted(player.getHeldItem(hand))) {
+                    } else if (canBePotted(player.getHeldItem(player.getActiveHand()))) {
                     //insert items from hand
                         if (itemHandler.getStackInSlot(0).isEmpty()) {
 
-                            ItemStack singleItemFromHand1 = player.getHeldItem(hand).split(1);
-                            int remainder = player.getHeldItem(hand).getCount();
-                            ItemStack remainingItems = player.getHeldItem(hand).split(remainder);
-                            player.setHeldItem(hand, itemHandler.insertItem(0, singleItemFromHand1, false));
-                            player.setHeldItem(hand, remainingItems);
+                            ItemStack singleItemFromHand1 = player.getHeldItem(player.getActiveHand()).split(1);
+                            int remainder = player.getHeldItem(player.getActiveHand()).getCount();
+                            ItemStack remainingItems = player.getHeldItem(player.getActiveHand()).split(remainder);
+                            player.setHeldItem(player.getActiveHand(), itemHandler.insertItem(0, singleItemFromHand1, false));
+                            player.setHeldItem(player.getActiveHand(), remainingItems);
 
                         } else if (itemHandler.getStackInSlot(1).isEmpty()) {
 
-                            ItemStack singleItemFromHand2 = player.getHeldItem(hand).split(1);
-                            int remainder = player.getHeldItem(hand).getCount();
-                            ItemStack remainingItems = player.getHeldItem(hand).split(remainder);
-                            player.setHeldItem(hand, itemHandler.insertItem(1, singleItemFromHand2, false));
-                            player.setHeldItem(hand, remainingItems);
-                        } else {
-                            return false;
+                            ItemStack singleItemFromHand2 = player.getHeldItem(player.getActiveHand()).split(1);
+                            int remainder = player.getHeldItem(player.getActiveHand()).getCount();
+                            ItemStack remainingItems = player.getHeldItem(player.getActiveHand()).split(remainder);
+                            player.setHeldItem(player.getActiveHand(), itemHandler.insertItem(1, singleItemFromHand2, false));
+                            player.setHeldItem(player.getActiveHand(), remainingItems);
                         }
                         //te.markDirty();
                         te.saveAndSync();
                     }
                 } else {
-                    NetworkHooks.openGui((EntityPlayerMP) player, new InteractionManager(te), (buffer) -> buffer.writeBlockPos(pos));
+                    //NetworkHooks.openGui((ServerPlayerEntity) player, new ContainerWindowbox(player.inventory, (TileEntityWindowbox) this.te), (buffer) -> buffer.writeBlockPos(pos));
                     //player.openGui(SunderedDeco.instance, ModGuiHandler.WINDOWBOX, world, pos.getX(), pos.getY(), pos.getZ());
                 }
             }
         }
-        return true;
     }
 
     public static boolean canBePotted(ItemStack stack)
     {
         Block block = Block.getBlockFromItem(stack.getItem());
-        Boolean isFlower = block instanceof BlockFlower;
+        Boolean isFlower = block instanceof FlowerBlock;
 
         if ((!isFlower) && (block != Blocks.DANDELION) && (block != Blocks.POPPY) && (block != Blocks.BROWN_MUSHROOM)
                 && (block != Blocks.RED_MUSHROOM) && (block != Blocks.ACACIA_SAPLING) && (block != Blocks.SPRUCE_SAPLING)
@@ -246,7 +246,7 @@ public class BlockWindowbox extends BlockTileEntity {
         }
     }
 
-    @Override
+/*    @Override
     @Deprecated
     public void dropBlockAsItemWithChance(IBlockState state, World world, BlockPos pos, float chancePerItem, int fortune) {
         if (world.getTileEntity(pos) instanceof TileEntityWindowbox) {
@@ -260,14 +260,14 @@ public class BlockWindowbox extends BlockTileEntity {
             }
         }
         super.dropBlockAsItemWithChance(state, world, pos, chancePerItem, fortune);
-    }
+    }*/
 
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
         return new TileEntityWindowbox();
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(BlockState state) {
         return true;
     }
 

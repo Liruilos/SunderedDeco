@@ -3,11 +3,8 @@ package net.grallarius.sundereddeco.block;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -29,9 +26,9 @@ public class BlockBottle extends BlockDirectional {
         return BlockRenderLayer.TRANSLUCENT;
     }
 
-    //@Override
+/*    @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
-        return BOUNDBOX;
-    }
+    public VoxelShape func_196244_b(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
+        return BOUNDING_BOX;
+    }*/
 }

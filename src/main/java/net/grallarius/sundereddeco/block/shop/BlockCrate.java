@@ -1,11 +1,10 @@
 package net.grallarius.sundereddeco.block.shop;
 
 import net.grallarius.sundereddeco.block.BlockBase;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
@@ -23,11 +22,11 @@ public class BlockCrate extends BlockBase {
         super(properties, name);
     }
 
-    @Override
+/*    @Override
     @Deprecated
-    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
+    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, BlockState p_193383_2_, BlockPos p_193383_3_, Direction p_193383_4_) {
         return BlockFaceShape.UNDEFINED;
-    }
+    }*/
 
 /*    @Override
     @Deprecated

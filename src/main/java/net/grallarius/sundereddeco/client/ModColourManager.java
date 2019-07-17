@@ -1,14 +1,13 @@
 package net.grallarius.sundereddeco.client;
 
 import net.grallarius.sundereddeco.block.ModBlocks;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
 import net.minecraft.client.renderer.color.ItemColors;
-import net.minecraft.item.ItemBlock;
-import net.minecraft.world.BossInfo;
+import net.minecraft.item.BlockItem;
 import net.minecraft.world.GrassColors;
 import net.minecraft.world.biome.BiomeColors;
 import net.minecraft.world.biome.WarmOceanBiome;
@@ -29,8 +28,7 @@ public class ModColourManager {
     {
         final IBlockColor grassColourHandler = (state, blockAccess, pos, tintIndex) -> {
             if (blockAccess != null && pos != null) {
-                return BiomeColors.func_180286_a(blockAccess, pos);
-                //return BiomeColors.getGrassColor(blockAccess, pos);
+                return BiomeColors.getGrassColor(blockAccess, pos);
             }
 
             return GrassColors.get(0.5D, 1.0D);
@@ -38,8 +36,7 @@ public class ModColourManager {
 
         final IBlockColor waterColourHandler = (state, blockAccess, pos, tintIndex) -> {
             if (blockAccess != null && pos != null) {
-                return BiomeColors.func_180288_c(blockAccess, pos);
-                //return BiomeColors.getWaterColor(blockAccess, pos);
+                return BiomeColors.getWaterColor(blockAccess, pos);
             }
 
             //TODO actually return an appropriate water colour
@@ -54,7 +51,7 @@ public class ModColourManager {
     public static void registerItemColours(final ColorHandlerEvent.Item event){
         final BlockColors blockColors = minecraft.getBlockColors();
         final IItemColor itemBlockColourHandler = (stack, tintIndex) -> {
-            final IBlockState state = ((ItemBlock) stack.getItem()).getBlock().getDefaultState();
+            final BlockState state = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
             return blockColors.getColor(state, null, null);
         };
 

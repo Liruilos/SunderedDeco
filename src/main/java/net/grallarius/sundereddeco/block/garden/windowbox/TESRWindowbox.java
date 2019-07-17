@@ -1,15 +1,8 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.model.IBakedModel;
-import net.minecraft.client.renderer.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumFacing;
 import net.minecraftforge.client.ForgeHooksClient;
 import org.lwjgl.opengl.GL11;
 
@@ -20,7 +13,7 @@ public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
         ItemStack stack1 = te.inventory.getStackInSlot(0);
         ItemStack stack2 = te.inventory.getStackInSlot(1);
 
-        if (!stack1.isEmpty()) {
+       /* if (!stack1.isEmpty()) {
                 GlStateManager.enableRescaleNormal();
                 GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
                 GlStateManager.enableBlend();
@@ -102,7 +95,7 @@ public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
             GlStateManager.disableRescaleNormal();
             GlStateManager.disableBlend();
 
-        }
+        }*/
     }
 
 }

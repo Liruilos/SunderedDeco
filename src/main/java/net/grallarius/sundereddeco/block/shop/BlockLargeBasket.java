@@ -1,7 +1,7 @@
 package net.grallarius.sundereddeco.block.shop;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -15,11 +15,11 @@ public class BlockLargeBasket extends BlockBasket {
         super(name);
     }
 
-    @Override
+/*    @Override
     @Deprecated
-    public VoxelShape func_196244_b(IBlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
+    public VoxelShape func_196244_b(BlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
         return BOUNDING_BOX;
-    }
+    }*/
 
 /*    @Override
     @Deprecated

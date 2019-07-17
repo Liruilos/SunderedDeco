@@ -1,17 +1,19 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
 import net.grallarius.sundereddeco.block.garden.SlotFlower;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.Slot;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerWindowbox extends Container {
 
-    public ContainerWindowbox(InventoryPlayer playerInv, final TileEntityWindowbox windowbox) {
+    public ContainerWindowbox(Inventory playerInv, final TileEntityWindowbox windowbox) {
+        //TODO i just picked a random id to make this class work, idekwid
+        super(null, 20);
         //IItemHandler inventory = windowbox.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
         IItemHandler inventory = windowbox.getInventory();
 
@@ -40,12 +42,12 @@ public class ContainerWindowbox extends Container {
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer player) {
+    public boolean canInteractWith(PlayerEntity player) {
         return true;
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+    public ItemStack transferStackInSlot(PlayerEntity player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = inventorySlots.get(index);
 
@@ -77,4 +79,5 @@ public class ContainerWindowbox extends Container {
 
         return itemstack;
     }
+
 }

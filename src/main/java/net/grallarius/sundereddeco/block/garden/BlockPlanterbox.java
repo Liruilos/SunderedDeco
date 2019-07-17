@@ -1,11 +1,10 @@
 package net.grallarius.sundereddeco.block.garden;
 
 import net.grallarius.sundereddeco.block.BlockConnectableHorizontal;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.BlockFaceShape;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -27,11 +26,11 @@ public class BlockPlanterbox extends BlockConnectableHorizontal {
     }*/
 
 
-    @Override
+/*    @Override
     @Deprecated
     public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
         return BlockFaceShape.SOLID;
-    }
+    }*/
 
 /*    @Override
     @Deprecated
@@ -41,6 +40,6 @@ public class BlockPlanterbox extends BlockConnectableHorizontal {
     }*/
 
     @Override
-    public boolean canSustainPlant(IBlockState state, IBlockReader world, BlockPos pos, EnumFacing direction, net.minecraftforge.common.IPlantable plantable){ return true;}
+    public boolean canSustainPlant(BlockState state, IBlockReader world, BlockPos pos, Direction direction, net.minecraftforge.common.IPlantable plantable){ return true;}
 
 }

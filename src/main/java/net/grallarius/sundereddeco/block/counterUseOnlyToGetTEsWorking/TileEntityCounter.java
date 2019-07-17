@@ -1,7 +1,6 @@
 package net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking;
 
 import net.grallarius.sundereddeco.SunderedDeco;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
 
@@ -17,10 +16,10 @@ public class TileEntityCounter extends TileEntity {
     super(SunderedDeco.teCounter);
     }
 
-    @Override
+    /*@Override
     public NBTTagCompound write(NBTTagCompound compound) {
         super.write(compound);
-        compound.setInt("count", count);
+        compound.putInt("count", count);
         return compound;
     }
 
@@ -28,7 +27,7 @@ public class TileEntityCounter extends TileEntity {
     public void read(NBTTagCompound compound) {
         super.read(compound);
         count = compound.getInt("count");
-    }
+    }*/
 
     public int getCount() {
         return count;

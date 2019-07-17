@@ -12,7 +12,6 @@ import net.grallarius.sundereddeco.proxy.ServerProxy;
 import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -61,7 +60,7 @@ public class SunderedDeco {
     public SunderedDeco(){
 
 
-        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, () -> {
+/*        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> {
             return (openContainer) -> {
                 ResourceLocation location = openContainer.getId();
                 if (location.toString().equals(MODID + ":windowbox_gui")) {
@@ -74,14 +73,15 @@ public class SunderedDeco {
                 }
                 return null;
             };
-        });
+        });*/
 
         // Register methods for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, this::registerTileEntities);
+
+        //FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, this::registerTileEntities);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -121,12 +121,12 @@ public class SunderedDeco {
         LOGGER.info("HELLO from server starting");
     }
 
-    @SubscribeEvent
+/*    @SubscribeEvent
     public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
         teCounter = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.func_200963_a(TileEntityCounter::new));
         teWindowbox = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.func_200963_a(TileEntityWindowbox::new));
 
-    }
+    }*/
 
 
 }
