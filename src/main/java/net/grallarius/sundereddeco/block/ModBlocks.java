@@ -6,6 +6,7 @@ import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
 import net.grallarius.sundereddeco.block.furniture.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
+import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
 import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.Block;
@@ -22,7 +23,7 @@ import net.minecraftforge.registries.ObjectHolder;
 public class ModBlocks {
 
     @ObjectHolder("sundereddeco:counter")
-    public static BlockCounter COUNTER;
+    public static final BlockCounter COUNTER = new BlockCounter();
 
     @ObjectHolder("sundereddeco:counter")
     public static TileEntityType<TileEntityCounter> COUNTER_TILE;
@@ -100,6 +101,7 @@ public class ModBlocks {
     public static final BlockFountain fountain = new BlockFountain("fountain");
 
     public static final BlockWindowbox windowbox = new BlockWindowbox("windowbox");
+    public static final BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
 
     //HOME
     public static final BlockDirectional sidetable = new BlockDirectional(Block.Properties.create(Material.WOOD), "sidetable");
@@ -131,12 +133,14 @@ public class ModBlocks {
 
                 //GARDEN
                 lantern_candle, lantern_blue, lantern_green, lantern_red, lantern_yellow,
-                hedge, fountain, windowbox,
+                hedge, fountain, windowbox, largeplanterbox,
 
                 //HOME
                 sidetable, stool, chair, table,
 
-                window, parkbench
+                window, parkbench,
+
+                COUNTER
         );
     }
 
@@ -163,7 +167,6 @@ public class ModBlocks {
     */
 /** garden block *//*
 
-    public static BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
     //public static BlockWindowbox windowbox = new BlockWindowbox("windowbox");
     //public static BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
     //public static BlockDenseFlowerbed denseFlowerbed = new BlockDenseFlowerbed("denseflowerbed");

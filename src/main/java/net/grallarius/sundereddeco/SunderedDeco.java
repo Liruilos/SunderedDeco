@@ -121,7 +121,7 @@ public class SunderedDeco {
 
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-        event.getRegistry().register(new BlockCounter());
+        //event.getRegistry().register(new BlockCounter()); //alt way to register
     }
 
     @SubscribeEvent

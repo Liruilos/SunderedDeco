@@ -1,9 +1,9 @@
 ﻿{
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "#box",
-		"1": "#dirt",
-		"particle": "#box"
+		"0": "block/terracotta",
+		"1": "block/podzol_top",
+		"particle": "block/terracotta"
 	},
 	"elements": [
 		{

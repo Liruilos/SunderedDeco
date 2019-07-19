@@ -1,5 +1,5 @@
 {
-  "parent": "sundereddeco:block/shop/basket/basket_carrot",
+  "parent": "sundereddeco:block/garden/planterboxlarge_single",
   "display": {
     "gui": {
       "rotation": [30, 225, 0],
