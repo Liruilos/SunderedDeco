@@ -7,6 +7,7 @@ import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
@@ -35,17 +36,11 @@ public class BlockConnectedChair extends BlockChair {
         .with(EASTSIDE, true).with(SOUTHSIDE, false).with(WESTSIDE, true));
     }
 
-/*    @Override
+    @Override
     @Deprecated
-    public VoxelShape func_196244_b(BlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return BOUNDING_BOX;
-    }*/
-
-/*    @Override
-    @Deprecated
-    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-        return BOUNDING_BOX;
-    }*/
+    }
 
     @Override
     @Nullable

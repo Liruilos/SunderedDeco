@@ -1,16 +1,17 @@
 package net.grallarius.sundereddeco.block;
 
 import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.BlockCounter;
+import net.grallarius.sundereddeco.block.counter.BlockCounter;
+import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
 import net.grallarius.sundereddeco.block.furniture.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
-import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
 import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,6 +21,11 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(SunderedDeco.MODID)
 public class ModBlocks {
 
+    @ObjectHolder("sundereddeco:counter")
+    public static BlockCounter COUNTER;
+
+    @ObjectHolder("sundereddeco:counter")
+    public static TileEntityType<TileEntityCounter> COUNTER_TILE;
 
     //SHOP
     public static final BlockBase crate_closed = new BlockCrate(Block.Properties.create(Material.WOOD)
@@ -106,8 +112,6 @@ public class ModBlocks {
     public static final BlockConnectedChair parkbench = new BlockConnectedChair("parkbench");
 
 
-    //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
-    public static final BlockCounter counter = new BlockCounter();
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -132,10 +136,7 @@ public class ModBlocks {
                 //HOME
                 sidetable, stool, chair, table,
 
-                window, parkbench,
-
-                //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
-                counter
+                window, parkbench
         );
     }
 

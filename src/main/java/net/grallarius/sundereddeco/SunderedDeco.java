@@ -1,8 +1,9 @@
 package net.grallarius.sundereddeco;
 
-import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
+import net.grallarius.sundereddeco.block.ModBlocks;
+import net.grallarius.sundereddeco.block.counter.BlockCounter;
+import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
 import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
-import net.grallarius.sundereddeco.block.garden.windowbox.GuiWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.client.ModColourManager;
 import net.grallarius.sundereddeco.client.SunderedDecoTab;
@@ -11,18 +12,15 @@ import net.grallarius.sundereddeco.proxy.IProxy;
 import net.grallarius.sundereddeco.proxy.ServerProxy;
 import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ExtensionPoint;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -54,7 +52,7 @@ public class SunderedDeco {
     public static SunderedDeco instance;
 
     //Tile Entity Registration
-    public static TileEntityType<TileEntityCounter> teCounter;
+
     public static TileEntityType<TileEntityWindowbox> teWindowbox;
 
     public SunderedDeco(){
@@ -121,12 +119,28 @@ public class SunderedDeco {
         LOGGER.info("HELLO from server starting");
     }
 
-/*    @SubscribeEvent
-    public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-        teCounter = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.func_200963_a(TileEntityCounter::new));
-        teWindowbox = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.func_200963_a(TileEntityWindowbox::new));
+    @SubscribeEvent
+    public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
+        event.getRegistry().register(new BlockCounter());
+    }
 
-    }*/
+    @SubscribeEvent
+    public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
+        event.getRegistry().register(TileEntityType.Builder.create(TileEntityCounter::new, ModBlocks.COUNTER).build(null).setRegistryName("counter"));
+        //teWindowbox = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.func_200963_a(TileEntityWindowbox::new));
+
+    }
+
+    @SubscribeEvent
+    public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> event) {
+
+/*        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+            BlockPos pos = data.readBlockPos();
+            return new ContainerWindowbox(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+        }).setRegistryName("windowbox"));*/
+
+
+    }
 
 
 }

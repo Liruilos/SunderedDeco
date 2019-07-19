@@ -20,9 +20,9 @@ public class BlockClutterPlate extends BlockDirectional {
         super(props, name);
     }
 
-    //@Override
+/*    @Override
     @Deprecated
     public AxisAlignedBB getBoundingBox(BlockState state, IBlockReader source, BlockPos pos) {
         return BOUNDBOX;
-    }
+    }*/
 }

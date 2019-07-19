@@ -8,7 +8,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -33,23 +35,11 @@ public class BlockSittable extends BlockBase {
         }
     }
 
-/*    @Override
+    @Override
     @Deprecated
-    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, BlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
-        return BlockFaceShape.UNDEFINED;
-    }*/
-
-/*    @Override
-    @Deprecated
-    public VoxelShape func_196244_b(BlockState p_196244_1_, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return BOUNDING_BOX;
-    }*/
-
-/*    @Override
-    @Deprecated
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return BOUNDING_BOX;
-    }*/
+    }
 
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;

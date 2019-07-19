@@ -22,17 +22,5 @@ public class BlockCrate extends BlockBase {
         super(properties, name);
     }
 
-/*    @Override
-    @Deprecated
-    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, BlockState p_193383_2_, BlockPos p_193383_3_, Direction p_193383_4_) {
-        return BlockFaceShape.UNDEFINED;
-    }*/
-
-/*    @Override
-    @Deprecated
-    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }*/
-
 
 }
