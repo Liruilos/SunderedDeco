@@ -6,6 +6,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 
@@ -22,9 +23,9 @@ public class BlockShopSign extends BlockDirectional {
         super(props, name);
     }
 
-/*    @Override
+    @Override
     @Deprecated
-    public VoxelShape func_196244_b(BlockState state, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         switch (state.get(FACING))
         {
             case NORTH:
@@ -37,35 +38,6 @@ public class BlockShopSign extends BlockDirectional {
             default:
                 return BOUNDING_BOX_EW;
         }
-    }*/
-
-/*    @Override
-    @Deprecated
-    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-        switch (state.get(FACING))
-        {
-            case NORTH:
-                return BOUNDING_BOX_NS;
-            case SOUTH:
-                return BOUNDING_BOX_NS;
-            case WEST:
-                return BOUNDING_BOX_EW;
-            case EAST:
-            default:
-                return BOUNDING_BOX_EW;
-        }
-    }*/
-
-/*    @Override
-    @Deprecated
-    public BlockFaceShape func_193383_a(IBlockReader p_193383_1_, IBlockState p_193383_2_, BlockPos p_193383_3_, EnumFacing p_193383_4_) {
-        return BlockFaceShape.UNDEFINED;
-    }*/
-
-/*    @Override
-    @Deprecated
-    public BlockFaceShape getBlockFaceShape(IBlockReader worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
-        return BlockFaceShape.UNDEFINED;
-    }*/
+    }
 
 }

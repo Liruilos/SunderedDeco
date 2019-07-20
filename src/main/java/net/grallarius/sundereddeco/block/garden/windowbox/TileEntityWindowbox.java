@@ -1,37 +1,37 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
-import net.grallarius.sundereddeco.SunderedDeco;
 import net.minecraft.block.BlockState;
-import net.minecraft.state.DirectionProperty;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.tileentity.TileEntityType;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.items.ItemStackHandler;
-
 import javax.annotation.Nullable;
 
+import static net.grallarius.sundereddeco.block.ModBlocks.WINDOWBOX_TILE;
 import static net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox.FACING;
 
-public class TileEntityWindowbox extends TileEntity {
+public class TileEntityWindowbox extends TileEntity implements INamedContainerProvider {
     public int facing;
 
-    public TileEntityWindowbox(TileEntityType<?> tileEntityTypeIn) {
-        super(tileEntityTypeIn);
-    }
+    public ItemStackHandler inventory;
 
     public TileEntityWindowbox(){
-        super(SunderedDeco.teWindowbox);
-    }
+        super(WINDOWBOX_TILE);
 
-    public ItemStackHandler inventory = new ItemStackHandler(3) {
-
-        @Override
-        protected void onContentsChanged(int slot){
-            if (!world.isRemote) {
-                TileEntityWindowbox.this.saveAndSync();
+        this.inventory = new ItemStackHandler(3) {
+            @Override
+            protected void onContentsChanged(int slot) {
+                if (!world.isRemote) {
+                    TileEntityWindowbox.this.saveAndSync();
+                }
             }
-        }
-
-    };
+        };
+    }
 
     @Override
     public void onLoad() {
@@ -44,7 +44,7 @@ public class TileEntityWindowbox extends TileEntity {
 
     public void setFacing(int facing) { this.facing = facing; }
 
-    public ItemStackHandler getInventory() {
+    public ItemStackHandler getInventory(){
         return this.inventory;
     }
 
@@ -56,57 +56,29 @@ public class TileEntityWindowbox extends TileEntity {
         this.markDirty();
     }
 
-/*    @Override
-    public void read(NBTTagCompound compound) {
+    @Override
+    public void read(CompoundNBT compound) {
         super.read(compound);
         this.inventory.deserializeNBT(compound.getCompound("inventory"));
         this.facing = compound.getInt("facing");
     }
 
     @Override
-    public NBTTagCompound write(NBTTagCompound compound) {
-        compound.func_74782_a("inventory", this.inventory.serializeNBT());
+    public CompoundNBT write(CompoundNBT compound) {
+        compound.put("inventory", this.inventory.serializeNBT());
         compound.putInt("facing", this.getFacing());
         return super.write(compound);
-    }*/
-
-
-/*    @Nullable
-    @Override
-    public SPacketUpdateTileEntity getUpdatePacket() {
-        return new SPacketUpdateTileEntity(this.getPos(), 0, this.getUpdateTag());
     }
 
     @Override
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity packet) {
-        this.read(packet.getNbtCompound());
-    }
-
-    @Override
-    public NBTTagCompound getUpdateTag() {
-        return this.write(new NBTTagCompound());
-    }
-
-    @Override
-    public void handleUpdateTag(NBTTagCompound nbt) {
-        this.read(nbt);
-    }*/
-
-
-
-/*    @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+    public ITextComponent getDisplayName() {
+        return new StringTextComponent(getType().getRegistryName().getPath());
     }
 
     @Nullable
     @Override
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)inventory : super.getCapability(capability, facing);
-    }*/
+    public Container createMenu(int i, PlayerInventory playerInventory, PlayerEntity playerEntity) {
+        return new ContainerWindowbox(i, world, pos, playerInventory, playerEntity);
+    }
 
-/*    @Override
-    public AxisAlignedBB getRenderBoundingBox() {
-        return new AxisAlignedBB(getPos(), getPos().add(1, 2, 1));
-    }*/
 }

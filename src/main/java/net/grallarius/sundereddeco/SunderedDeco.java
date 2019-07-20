@@ -33,6 +33,8 @@ import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.io.Console;
+
 @Mod(SunderedDeco.MODID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
 
@@ -51,10 +53,6 @@ public class SunderedDeco {
 
     public static SunderedDeco instance;
 
-    //Tile Entity Registration
-
-    public static TileEntityType<TileEntityWindowbox> teWindowbox;
-
     public SunderedDeco(){
 
 
@@ -66,7 +64,7 @@ public class SunderedDeco {
                     BlockPos pos = openContainer.getAdditionalData().readBlockPos();
                     TileEntity tileEntity = player.world.getTileEntity(pos);
                     if (tileEntity instanceof TileEntityWindowbox) {
-                        return new GuiWindowbox(new ContainerWindowbox(player.inventory, (TileEntityWindowbox) tileEntity), player.inventory);
+                        return new WindowboxScreen(new ContainerWindowbox(player.inventory, (TileEntityWindowbox) tileEntity), player.inventory);
                     }
                 }
                 return null;
@@ -127,18 +125,17 @@ public class SunderedDeco {
     @SubscribeEvent
     public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
         event.getRegistry().register(TileEntityType.Builder.create(TileEntityCounter::new, ModBlocks.COUNTER).build(null).setRegistryName("counter"));
-        //teWindowbox = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.func_200963_a(TileEntityWindowbox::new));
+        event.getRegistry().register(TileEntityType.Builder.create(TileEntityWindowbox::new, ModBlocks.windowbox).build(null).setRegistryName("windowbox"));
 
     }
 
     @SubscribeEvent
     public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> event) {
 
-/*        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
             BlockPos pos = data.readBlockPos();
             return new ContainerWindowbox(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
-        }).setRegistryName("windowbox"));*/
-
+        }).setRegistryName("windowbox"));
 
     }
 

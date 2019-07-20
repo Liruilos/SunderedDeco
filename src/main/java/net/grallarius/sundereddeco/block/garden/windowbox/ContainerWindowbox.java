@@ -2,42 +2,64 @@ package net.grallarius.sundereddeco.block.garden.windowbox;
 
 import net.grallarius.sundereddeco.block.garden.SlotFlower;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
+import net.minecraft.util.IntReferenceHolder;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
+import net.minecraftforge.items.wrapper.InvWrapper;
+
+import static net.grallarius.sundereddeco.block.ModBlocks.WINDOWBOX_CONTAINER;
 
 public class ContainerWindowbox extends Container {
 
-    public ContainerWindowbox(Inventory playerInv, final TileEntityWindowbox windowbox) {
-        //TODO i just picked a random id to make this class work, idekwid
-        super(null, 20);
-        //IItemHandler inventory = windowbox.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        IItemHandler inventory = windowbox.getInventory();
+    private TileEntityWindowbox tileEntity;
+    private PlayerEntity playerEntity;
+    private IItemHandler playerInventory;
 
-        addSlot(new SlotFlower(inventory, 0, 60, 21) {
+
+    public ContainerWindowbox(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
+
+        super(WINDOWBOX_CONTAINER, windowId);
+        tileEntity = (TileEntityWindowbox) world.getTileEntity(pos);
+        this.playerEntity = player;
+        this.playerInventory = new InvWrapper(playerInventory);
+
+
+        //layoutPlayerInventorySlots(10, 70);
+
+        IItemHandler inventory = tileEntity.getInventory();
+
+        addSlot(new SlotFlower((IItemHandler) inventory, 0, 60, 21) {
             @Override
-            public void onSlotChanged() { windowbox.markDirty(); }
+            public void onSlotChanged() { tileEntity.markDirty(); }
         });
-        addSlot(new SlotFlower(inventory, 1, 100, 21) {
+        addSlot(new SlotFlower((IItemHandler) inventory, 1, 100, 21) {
             @Override
-            public void onSlotChanged() { windowbox.markDirty(); }
+            public void onSlotChanged() { tileEntity.markDirty(); }
         });
-        addSlot(new SlotItemHandler(inventory, 2, 80, 53) {
+        addSlot(new SlotItemHandler((IItemHandler) inventory, 2, 80, 53) {
             @Override
-            public void onSlotChanged() { windowbox.markDirty(); }
+            public void onSlotChanged() { tileEntity.markDirty(); }
         });
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                addSlot(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
         for (int k = 0; k < 9; k++) {
-            addSlot(new Slot(playerInv, k, 8 + k * 18, 142));
+            addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
         }
     }
 
@@ -45,6 +67,7 @@ public class ContainerWindowbox extends Container {
     public boolean canInteractWith(PlayerEntity player) {
         return true;
     }
+
 
     @Override
     public ItemStack transferStackInSlot(PlayerEntity player, int index) {
@@ -79,5 +102,31 @@ public class ContainerWindowbox extends Container {
 
         return itemstack;
     }
+
+    /*private void layoutPlayerInventorySlots(int leftCol, int topRow) {
+        // Player inventory
+        addSlotBox(playerInventory, 9, leftCol, topRow, 9, 18, 3, 18);
+
+        // Hotbar
+        topRow += 58;
+        addSlotRange(playerInventory, 0, leftCol, topRow, 9, 18);
+    }
+
+    private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
+        for (int i = 0 ; i < amount ; i++) {
+            addSlot(new SlotItemHandler(handler, index, x, y));
+            x += dx;
+            index++;
+        }
+        return index;
+    }
+
+    private int addSlotBox(IItemHandler handler, int index, int x, int y, int horAmount, int dx, int verAmount, int dy) {
+        for (int j = 0 ; j < verAmount ; j++) {
+            index = addSlotRange(handler, index, x, y, horAmount, dx);
+            y += dy;
+        }
+        return index;
+    }*/
 
 }

@@ -1,17 +1,17 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
-import net.minecraft.block.Block;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.ForgeHooksClient;
-import org.lwjgl.opengl.GL11;
+import net.minecraftforge.items.IItemHandler;
 
 public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
 
     @Override
     public void render(TileEntityWindowbox te, double x, double y, double z, float partialTicks, int destroyStage) {
-        ItemStack stack1 = te.inventory.getStackInSlot(0);
-        ItemStack stack2 = te.inventory.getStackInSlot(1);
+        IItemHandler handler = te.getInventory();
+        ItemStack stack1 = handler.getStackInSlot(0);
+        ItemStack stack2 = handler.getStackInSlot(1);
+
 
        /* if (!stack1.isEmpty()) {
                 GlStateManager.enableRescaleNormal();

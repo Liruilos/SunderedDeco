@@ -1,6 +1,8 @@
 package net.grallarius.sundereddeco.proxy;
+import net.grallarius.sundereddeco.block.ModBlocks;
 import net.grallarius.sundereddeco.block.garden.windowbox.TESRWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxScreen;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -17,7 +19,7 @@ public class ClientProxy implements IProxy {
     @Override
     public void init() {
         //match containers with their guis
-        //ScreenManager.registerFactory(ModBlocks.FIRSTBLOCK_CONTAINER, FirstBlockScreen::new);
+        ScreenManager.registerFactory(ModBlocks.WINDOWBOX_CONTAINER, WindowboxScreen::new);
     }
 
     @Override

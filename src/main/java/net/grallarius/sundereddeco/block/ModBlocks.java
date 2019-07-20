@@ -8,10 +8,15 @@ import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,9 +29,13 @@ public class ModBlocks {
 
     @ObjectHolder("sundereddeco:counter")
     public static final BlockCounter COUNTER = new BlockCounter();
-
     @ObjectHolder("sundereddeco:counter")
     public static TileEntityType<TileEntityCounter> COUNTER_TILE;
+
+    @ObjectHolder("sundereddeco:windowbox")
+    public static TileEntityType<TileEntityWindowbox> WINDOWBOX_TILE;
+    @ObjectHolder("sundereddeco:windowbox")
+    public static ContainerType<ContainerWindowbox> WINDOWBOX_CONTAINER;
 
     //SHOP
     public static final BlockCrate crate_closed = new BlockCrate("crate_closed", true);
@@ -98,7 +107,9 @@ public class ModBlocks {
     public static final BlockHedge hedge = new BlockHedge("hedge");
     public static final BlockFountain fountain = new BlockFountain("fountain");
 
+    @ObjectHolder("sundereddeco:windowbox")
     public static final BlockWindowbox windowbox = new BlockWindowbox("windowbox");
+
     public static final BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
 
     //HOME

@@ -3,6 +3,8 @@ package net.grallarius.sundereddeco.block.garden.windowbox;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
@@ -10,12 +12,18 @@ import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.LazyOptional;
+import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.grallarius.sundereddeco.block.BlockTileEntity;
 
@@ -42,9 +50,9 @@ public class BlockWindowbox extends BlockTileEntity {
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SHAPE, EnumShape.SINGLE));
     }
 
-/*    @Override
+    @Override
     @Deprecated
-    public VoxelShape func_196244_b(BlockState state, IBlockReader p_196244_2_, BlockPos p_196244_3_) {
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         switch (state.get(FACING))
         {
             case NORTH:
@@ -57,25 +65,7 @@ public class BlockWindowbox extends BlockTileEntity {
             default:
                 return BOUNDING_BOX_EAST;
         }
-    }*/
-
-/*    @Override
-    @Deprecated
-    public VoxelShape getShape(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-        switch (state.get(FACING))
-        {
-            case NORTH:
-                return BOUNDING_BOX_NORTH;
-            case SOUTH:
-                return BOUNDING_BOX_SOUTH;
-            case WEST:
-                return BOUNDING_BOX_WEST;
-            case EAST:
-            default:
-                return BOUNDING_BOX_EAST;
-        }
-    }*/
-
+    }
 
     @Override
     @Nullable
@@ -182,16 +172,16 @@ public class BlockWindowbox extends BlockTileEntity {
 
     @Override
     @Deprecated
-    public void onBlockClicked(BlockState state, World world, BlockPos pos, PlayerEntity player) {
+    public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!world.isRemote) {
             if (world.getTileEntity(pos) instanceof TileEntityWindowbox) {
-                TileEntityWindowbox te = (TileEntityWindowbox) world.getTileEntity(pos);
-                IItemHandler itemHandler = te.getInventory();
-                        //te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
+                TileEntityWindowbox tileEntity = (TileEntityWindowbox) world.getTileEntity(pos);
+                IItemHandler itemHandler = tileEntity.getInventory();
+                //te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
 
                 if (!player.isSneaking() && itemHandler != null) {
                     if (player.getHeldItem(player.getActiveHand()).isEmpty()) {
-                    //remove items from relevant slot
+                        //remove items from relevant slot
                         if (!itemHandler.getStackInSlot(1).isEmpty()) {
                             player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(1, 1, false));
                         } else if (!itemHandler.getStackInSlot(0).isEmpty()) {
@@ -199,7 +189,7 @@ public class BlockWindowbox extends BlockTileEntity {
                         }
 
                     } else if (canBePotted(player.getHeldItem(player.getActiveHand()))) {
-                    //insert items from hand
+                        //insert items from hand
                         if (itemHandler.getStackInSlot(0).isEmpty()) {
 
                             ItemStack singleItemFromHand1 = player.getHeldItem(player.getActiveHand()).split(1);
@@ -217,14 +207,18 @@ public class BlockWindowbox extends BlockTileEntity {
                             player.setHeldItem(player.getActiveHand(), remainingItems);
                         }
                         //te.markDirty();
-                        te.saveAndSync();
+                        tileEntity.saveAndSync();
                     }
                 } else {
-                    //NetworkHooks.openGui((ServerPlayerEntity) player, new ContainerWindowbox(player.inventory, (TileEntityWindowbox) this.te), (buffer) -> buffer.writeBlockPos(pos));
-                    //player.openGui(SunderedDeco.instance, ModGuiHandler.WINDOWBOX, world, pos.getX(), pos.getY(), pos.getZ());
+                    if (tileEntity instanceof INamedContainerProvider) {
+                        NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, tileEntity.getPos());
+                    } else {
+                        throw new IllegalStateException("Our named container provider is missing!");
+                    }
                 }
             }
         }
+        return true;
     }
 
     public static boolean canBePotted(ItemStack stack)
