@@ -29,9 +29,7 @@ public class ModBlocks {
     public static TileEntityType<TileEntityCounter> COUNTER_TILE;
 
     //SHOP
-    public static final BlockBase crate_closed = new BlockCrate(Block.Properties.create(Material.WOOD)
-            .hardnessAndResistance(2F, 10F)
-            .sound(SoundType.WOOD), "crate_closed");
+    public static final BlockCrate crate_closed = new BlockCrate("crate_closed", true);
     public static final BlockCrate crate_apple = new BlockCrate("crate_apple");
     public static final BlockCrate crate_berry = new BlockCrate("crate_berry");
     public static final BlockCrate crate_carrot = new BlockCrate("crate_carrot");
