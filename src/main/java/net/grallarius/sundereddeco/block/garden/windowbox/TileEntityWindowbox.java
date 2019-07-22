@@ -30,6 +30,7 @@ public class TileEntityWindowbox extends TileEntity implements INamedContainerPr
                     TileEntityWindowbox.this.saveAndSync();
                 }
             }
+
         };
     }
 
@@ -51,7 +52,7 @@ public class TileEntityWindowbox extends TileEntity implements INamedContainerPr
     public void saveAndSync() {
         BlockState state = this.world.getBlockState(this.pos);
         this.setFacing(state.get(FACING).getHorizontalIndex());
-        //this.world.markBlockRangeForRenderUpdate(this.pos, this.pos);
+        this.world.markForRerender(this.pos);
         this.world.notifyBlockUpdate(pos, state, state, 3);
         this.markDirty();
     }
@@ -61,6 +62,7 @@ public class TileEntityWindowbox extends TileEntity implements INamedContainerPr
         super.read(compound);
         this.inventory.deserializeNBT(compound.getCompound("inventory"));
         this.facing = compound.getInt("facing");
+        System.out.println("facing was set to: " + this.facing);
     }
 
     @Override

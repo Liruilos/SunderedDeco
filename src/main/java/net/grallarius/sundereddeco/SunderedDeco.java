@@ -88,6 +88,7 @@ public class SunderedDeco {
 
         ModRecipes.init();
 
+        proxy.init();
         proxy.setup(event);
 
     }

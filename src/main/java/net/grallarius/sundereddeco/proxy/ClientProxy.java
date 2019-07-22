@@ -1,6 +1,6 @@
 package net.grallarius.sundereddeco.proxy;
 import net.grallarius.sundereddeco.block.ModBlocks;
-import net.grallarius.sundereddeco.block.garden.windowbox.TESRWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxRenderer;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxScreen;
 import net.minecraft.client.Minecraft;
@@ -43,7 +43,7 @@ public class ClientProxy implements IProxy {
     @Override
     public void registerRenderers() {
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestal.class, new TESRPedestal());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWindowbox.class, new TESRWindowbox());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWindowbox.class, new WindowboxRenderer());
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenseFlowerbed.class, new TESRDenseFlowerbed());
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlowerbed.class, new TESRFlowerbed());
     }

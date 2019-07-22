@@ -1,10 +1,19 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.model.IBakedModel;
+import net.minecraft.client.renderer.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.texture.AtlasTexture;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.ForgeHooksClient;
 import net.minecraftforge.items.IItemHandler;
+import org.lwjgl.opengl.GL11;
 
-public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
+public class WindowboxRenderer extends TileEntityRenderer<TileEntityWindowbox> {
 
     @Override
     public void render(TileEntityWindowbox te, double x, double y, double z, float partialTicks, int destroyStage) {
@@ -13,7 +22,7 @@ public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
         ItemStack stack2 = handler.getStackInSlot(1);
 
 
-       /* if (!stack1.isEmpty()) {
+        if (!stack1.isEmpty()) {
                 GlStateManager.enableRescaleNormal();
                 GlStateManager.alphaFunc(GL11.GL_GREATER, 0.1f);
                 GlStateManager.enableBlend();
@@ -40,13 +49,12 @@ public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
                     GlStateManager.rotatef(90, 0, 1, 0);
                 }
 
-                //IBlockState state = Block.getBlockFromItem(stack1.getItem()).getStateForPlacement(getWorld(), te.getPos(), EnumFacing.NORTH, 0, 0, 0, stack1. getMetadata(), null, null);
-                //IBlockState state = Block.getBlockFromItem(stack1.getItem()).getStateForPlacement(Block.getBlockFromItem(stack1.getItem()).getDefaultState(), EnumFacing.NORTH, null, getWorld(), null, null, null);
-                IBlockState state = Block.getBlockFromItem(stack1.getItem()).getStateContainer().getBaseState();
+            Block block = Block.getBlockFromItem(stack1.getItem());
+            BlockState state = block.getStateContainer().getBaseState();
                 IBakedModel model = Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelShapes().getModel(state);
                 model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
 
-                Minecraft.getInstance().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+                Minecraft.getInstance().getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
                 Minecraft.getInstance().getItemRenderer().renderItem(stack1, model);
 
 
@@ -83,19 +91,19 @@ public class TESRWindowbox extends TileEntityRenderer<TileEntityWindowbox> {
                     GlStateManager.rotatef(90, 0, 1, 0);
                 }
 
-                //IBlockState state = Block.getBlockFromItem(stack2.getItem()).getStateForPlacement(getWorld(), te.getPos(), EnumFacing.NORTH, 0, 0, 0, stack2.getMetadata(), null, null);
-            IBlockState state = Block.getBlockFromItem(stack2.getItem()).getDefaultState();
+                Block block = Block.getBlockFromItem(stack2.getItem());
+                BlockState state = block.getDefaultState();
             IBakedModel model = Minecraft.getInstance().getBlockRendererDispatcher().getBlockModelShapes().getModel(state);
             model = ForgeHooksClient.handleCameraTransforms(model, ItemCameraTransforms.TransformType.GROUND, false);
 
-            Minecraft.getInstance().getTextureManager().bindTexture(TextureMap.LOCATION_BLOCKS_TEXTURE);
+            Minecraft.getInstance().getTextureManager().bindTexture(AtlasTexture.LOCATION_BLOCKS_TEXTURE);
             Minecraft.getInstance().getItemRenderer().renderItem(stack2, model);
 
             GlStateManager.popMatrix();
             GlStateManager.disableRescaleNormal();
             GlStateManager.disableBlend();
 
-        }*/
+        }
     }
 
 }

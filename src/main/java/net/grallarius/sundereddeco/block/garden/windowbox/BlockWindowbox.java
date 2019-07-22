@@ -206,9 +206,9 @@ public class BlockWindowbox extends BlockTileEntity {
                             player.setHeldItem(player.getActiveHand(), itemHandler.insertItem(1, singleItemFromHand2, false));
                             player.setHeldItem(player.getActiveHand(), remainingItems);
                         }
-                        //te.markDirty();
-                        tileEntity.saveAndSync();
                     }
+                    tileEntity.saveAndSync();
+
                 } else {
                     if (tileEntity instanceof INamedContainerProvider) {
                         NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, tileEntity.getPos());
