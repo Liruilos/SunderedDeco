@@ -6,12 +6,16 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
 
@@ -26,13 +30,8 @@ public class BlockSittable extends BlockBase {
 
     @Override
     @Deprecated
-    public void onBlockClicked(BlockState state, World world, BlockPos pos, PlayerEntity player) {
-        List<SittableEntity> sittables = world.getEntitiesWithinAABB(SittableEntity.class, new AxisAlignedBB(pos, pos.add(1, 1, 1)), null);
-        if (sittables.isEmpty()) {
-            SittableEntity sittable = new SittableEntity(world, pos);
-            world.addEntity(sittable);
-            player.startRiding(sittable);
-        }
+    public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        return SittableEntity.create(world, pos, 0.4, player);
     }
 
     @Override
@@ -41,6 +40,8 @@ public class BlockSittable extends BlockBase {
         return BOUNDING_BOX;
     }
 
+    @Override
+    @OnlyIn(Dist.CLIENT)
     public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT_MIPPED;
     }

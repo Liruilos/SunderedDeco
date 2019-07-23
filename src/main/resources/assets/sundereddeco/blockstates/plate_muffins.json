@@ -1,18 +1,21 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "sundereddeco:shop/plate_muffins"
-  },
   "variants": {
-    "facing": {
-      "north": { "y": 180 },
-      "east":  { "y": 270 },
-      "south": { "y": 0 },
-      "west":  { "y": 90 }
+    "facing=north": {
+      "model": "sundereddeco:block/shop/plate_muffins",
+      "y": 180
     },
-    "inventory": {
-      "model": "sundereddeco:shop/plate_muffins",
-      "transform": "forge:default-block" }
+    "facing=east": {
+      "model": "sundereddeco:block/shop/plate_muffins",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "sundereddeco:block/shop/plate_muffins",
+      "y": 0
+    },
+    "facing=west": {
+      "model": "sundereddeco:block/shop/plate_muffins",
+      "y": 90
+    }
   }
 }
 

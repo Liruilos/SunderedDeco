@@ -3,6 +3,7 @@ package net.grallarius.sundereddeco.block;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.counter.BlockCounter;
 import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
+import net.grallarius.sundereddeco.block.garden.BlockShrine;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.*;
 import net.grallarius.sundereddeco.block.home.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
@@ -102,6 +103,8 @@ public class ModBlocks {
     public static final BlockShopSign signPub = new BlockShopSign("sign_pub");
     public static final BlockShopSign signWeapons = new BlockShopSign("sign_weapons");
 
+    public static final BlockClutterPlate plateMuffins = new BlockClutterPlate("plate_muffins");
+    public static final BlockClutterPlate plateCroissants = new BlockClutterPlate("plate_croissants");
 
     //GARDEN
     public static final BlockLantern lantern_candle = new BlockLantern("lantern_candle");
@@ -112,6 +115,8 @@ public class ModBlocks {
 
     public static final BlockHedge hedge = new BlockHedge("hedge");
     public static final BlockFountain fountain = new BlockFountain("fountain");
+    public static final BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
+    public static final BlockShrine shrine = new BlockShrine("shrine");
 
     @ObjectHolder("sundereddeco:windowbox")
     public static final BlockWindowbox windowbox = new BlockWindowbox("windowbox");
@@ -120,7 +125,6 @@ public class ModBlocks {
     @ObjectHolder("sundereddeco:denseflowerbed")
     public static final BlockDenseFlowerbed denseflowerbed = new BlockDenseFlowerbed("denseflowerbed");
 
-    public static final BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
 
     //HOME
     public static final BlockSidetable sidetable = new BlockSidetable("sidetable");
@@ -148,10 +152,11 @@ public class ModBlocks {
                 signApothecary, signArmoury, signBakery, signBlacksmith,signBrewery, signClinic, signClothing,
                 signDiner, signExotics, signFishery, signFlorist, signFurniture, signGeneral, signInn, signJeweller,
                 signMusic, signPetshop, signPostal, signPub, signWeapons,
+                plateMuffins, plateCroissants,
 
                 //GARDEN
                 lantern_candle, lantern_blue, lantern_green, lantern_red, lantern_yellow,
-                hedge, fountain, windowbox, largeplanterbox, flowerbed, denseflowerbed,
+                hedge, fountain, largeplanterbox, shrine, windowbox, flowerbed, denseflowerbed,
 
                 //HOME
                 sidetable, stool, chair, table,
@@ -168,8 +173,7 @@ public class ModBlocks {
 
     public static BlockDirectional scales = new BlockDirectional(Material.IRON, "scales");
     public static BlockBottle bottlePlaced = new BlockBottle("bottle_placed");
-    public static BlockClutterPlate plateMuffins = new BlockClutterPlate("plate_muffins");
-    public static BlockClutterPlate plateCroissants = new BlockClutterPlate("plate_croissants");
+
     public static BlockDirectional coinpurse = new BlockDirectional(Material.CARPET, "coinpurse");
     //public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
 
@@ -177,7 +181,6 @@ public class ModBlocks {
     */
 /** garden block *//*
 
-    public static BlockDirectional shrine = new BlockDirectional(Material.ROCK, "shrine");
 
     */
 /** shop block *//*

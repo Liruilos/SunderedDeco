@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.block.shop;
+package net.grallarius.sundereddeco.block.garden;
 
 import net.grallarius.sundereddeco.block.BlockDirectional;
 import net.minecraft.block.Block;
@@ -14,17 +14,15 @@ import net.minecraft.world.IBlockReader;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class BlockClutterPlate extends BlockDirectional {
-
+public class BlockShrine extends BlockDirectional {
     private static final VoxelShape BOUNDING_BOX = VoxelShapes.or(
-            Block.makeCuboidShape(2, 0, 2, 14, 1.5, 14),
-            Block.makeCuboidShape(3, 1, 3, 13, 3.5, 13));
+            Block.makeCuboidShape(1, 3, 1, 15, 16, 15),
+            Block.makeCuboidShape(3, 0, 3, 13, 3, 13));
 
     private static final Properties props = Properties.create(Material.ROCK)
-            .hardnessAndResistance(2F, 10F)
             .sound(SoundType.STONE);
 
-    public BlockClutterPlate(String name){
+    public BlockShrine(String name){
         super(props, name);
     }
 

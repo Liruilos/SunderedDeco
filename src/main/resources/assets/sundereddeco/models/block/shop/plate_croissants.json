@@ -1,9 +1,9 @@
 {
 	"__comment": "Designed by Liruilos with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "blocks/quartz_block_top",
-		"plate": "blocks/quartz_block_top",
-		"croissant": "sundereddeco:blocks/shop/crate/crate_grain"
+		"particle": "block/quartz_block_top",
+		"plate": "block/quartz_block_top",
+		"croissant": "sundereddeco:block/shop/crate/crate_grain"
 	},
 	"elements": [ 	 
 		{

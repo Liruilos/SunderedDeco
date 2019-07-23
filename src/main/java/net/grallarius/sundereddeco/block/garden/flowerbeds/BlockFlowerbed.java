@@ -29,7 +29,7 @@ import static net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox.
 
 public class BlockFlowerbed extends BlockConnectableHorizontal {
 
-    private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(0, 0, 0, 16, 9.5, 16);
+    private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(0, 0, 0, 16, 9, 16);
     private static final Properties props = Properties.create(Material.ROCK)
             .sound(SoundType.STONE);
 

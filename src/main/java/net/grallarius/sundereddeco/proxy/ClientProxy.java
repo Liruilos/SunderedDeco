@@ -4,6 +4,8 @@ import net.grallarius.sundereddeco.block.garden.flowerbeds.*;
 import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxRenderer;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxScreen;
+import net.grallarius.sundereddeco.entity.SittableEntity;
+import net.grallarius.sundereddeco.entity.SittableRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.player.PlayerEntity;
@@ -26,6 +28,8 @@ public class ClientProxy implements IProxy {
         ScreenManager.registerFactory(ModBlocks.DENSE_FLOWERBED_CONTAINER, DenseFlowerbedScreen::new);
 
         registerRenderers();
+
+        RenderingRegistry.registerEntityRenderingHandler(SittableEntity.class, SittableRenderer::new);
 
     }
 

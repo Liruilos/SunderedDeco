@@ -11,11 +11,14 @@ import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.client.ModColourManager;
 import net.grallarius.sundereddeco.client.SunderedDecoTab;
+import net.grallarius.sundereddeco.entity.SittableEntity;
 import net.grallarius.sundereddeco.proxy.ClientProxy;
 import net.grallarius.sundereddeco.proxy.IProxy;
 import net.grallarius.sundereddeco.proxy.ServerProxy;
 import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraft.block.Block;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
@@ -136,6 +139,11 @@ public class SunderedDeco {
             BlockPos pos = data.readBlockPos();
             return new ContainerDenseFlowerbed(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
         }).setRegistryName("denseflowerbed"));
+    }
+
+    @SubscribeEvent
+    public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> entityRegistryEvent) {
+
     }
 
 
