@@ -14,5 +14,5 @@ public interface IProxy {
 
     void setup(final FMLCommonSetupEvent event);
 
-    public void registerRenderers();
+    void registerRenderers();
 }

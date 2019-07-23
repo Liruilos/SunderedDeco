@@ -56,28 +56,11 @@ public class SunderedDeco {
     public SunderedDeco(){
 
 
-/*        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.CONFIGGUIFACTORY, () -> {
-            return (openContainer) -> {
-                ResourceLocation location = openContainer.getId();
-                if (location.toString().equals(MODID + ":windowbox_gui")) {
-                    EntityPlayerSP player = Minecraft.getInstance().player;
-                    BlockPos pos = openContainer.getAdditionalData().readBlockPos();
-                    TileEntity tileEntity = player.world.getTileEntity(pos);
-                    if (tileEntity instanceof TileEntityWindowbox) {
-                        return new WindowboxScreen(new ContainerWindowbox(player.inventory, (TileEntityWindowbox) tileEntity), player.inventory);
-                    }
-                }
-                return null;
-            };
-        });*/
-
         // Register methods for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-
-        //FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, this::registerTileEntities);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);

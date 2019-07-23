@@ -21,9 +21,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.fml.network.NetworkHooks;
-import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.grallarius.sundereddeco.block.BlockTileEntity;
 
@@ -207,7 +205,10 @@ public class BlockWindowbox extends BlockTileEntity {
                             player.setHeldItem(player.getActiveHand(), remainingItems);
                         }
                     }
+                    System.out.println("before save and sync te thinks facing is: " + tileEntity.getFacing() + "  is actually: " + state.get(FACING).getHorizontalIndex());
                     tileEntity.saveAndSync();
+                    System.out.println("after save and sync te thinks facing is: " + tileEntity.getFacing());
+
 
                 } else {
                     if (tileEntity instanceof INamedContainerProvider) {
@@ -240,23 +241,9 @@ public class BlockWindowbox extends BlockTileEntity {
         }
     }
 
-/*    @Override
-    @Deprecated
-    public void dropBlockAsItemWithChance(IBlockState state, World world, BlockPos pos, float chancePerItem, int fortune) {
-        if (world.getTileEntity(pos) instanceof TileEntityWindowbox) {
-            TileEntityWindowbox tile = (TileEntityWindowbox) world.getTileEntity(pos);
-            IItemHandler itemHandler = tile.getInventory();
-            for (int i = 0; i < 2; i++) {
-                if (!itemHandler.getStackInSlot(i).isEmpty()) {
-                    EntityItem droppedItem = new EntityItem(world.getWorld(), pos.getX(), pos.getY(), pos.getZ(), itemHandler.getStackInSlot(i));
-                    world.spawnEntity(droppedItem);
-                }
-            }
-        }
-        super.dropBlockAsItemWithChance(state, world, pos, chancePerItem, fortune);
-    }*/
-
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new TileEntityWindowbox();
     }
 

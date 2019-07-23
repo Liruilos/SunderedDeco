@@ -21,6 +21,8 @@ public class WindowboxRenderer extends TileEntityRenderer<TileEntityWindowbox> {
         ItemStack stack1 = handler.getStackInSlot(0);
         ItemStack stack2 = handler.getStackInSlot(1);
 
+        TileEntityWindowbox tileEntity = (TileEntityWindowbox) Minecraft.getInstance().world.getTileEntity(te.getPos());
+
 
         if (!stack1.isEmpty()) {
                 GlStateManager.enableRescaleNormal();
@@ -31,20 +33,20 @@ public class WindowboxRenderer extends TileEntityRenderer<TileEntityWindowbox> {
                 GlStateManager.pushMatrix();
 
                 //South
-                if (te.getFacing() == 0) {
+                if (tileEntity.getFacing() == 0) {
                     GlStateManager.translated(x + 0.75, y + 1.35, z + 0.75);
                 }
                 // West
-                else if (te.getFacing() == 1) {
+                else if (tileEntity.getFacing() == 1) {
                     GlStateManager.translated(x + 0.25, y + 1.35, z + 0.75);
                     GlStateManager.rotatef(90, 0, 1, 0);
                 }
                 // North
-                else if (te.getFacing() == 2) {
+                else if (tileEntity.getFacing() == 2) {
                     GlStateManager.translated(x + 0.25, y + 1.35, z + 0.25);
                 }
                 //East
-                else if (te.getFacing() == 3) {
+                else if (tileEntity.getFacing() == 3) {
                     GlStateManager.translated(x + 0.75, y + 1.35, z + 0.25);
                     GlStateManager.rotatef(90, 0, 1, 0);
                 }

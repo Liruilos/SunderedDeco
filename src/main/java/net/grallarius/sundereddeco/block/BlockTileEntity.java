@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public abstract class BlockTileEntity extends BlockBase implements ITileEntityProvider {
+public abstract class BlockTileEntity extends BlockBase {
 
     public BlockTileEntity(Properties properties, String name) {
         super(properties, name);
