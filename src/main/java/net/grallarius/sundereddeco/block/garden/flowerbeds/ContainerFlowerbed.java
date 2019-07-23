@@ -2,39 +2,55 @@ package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
 import net.grallarius.sundereddeco.block.garden.SlotFlower;
 
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
-public class ContainerFlowerbed /*extends Container*/ {
-    /*public ContainerFlowerbed(InventoryPlayer playerInv, final TileEntityFlowerbed Flowerbed) {
-       *//* IItemHandler inventory = Flowerbed.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
-        addSlotToContainer(new SlotFlower(inventory, 0, 80, 21) {
+import static net.grallarius.sundereddeco.block.ModBlocks.FLOWERBED_CONTAINER;
+
+public class ContainerFlowerbed extends Container {
+
+    private TileEntityFlowerbed tileEntity;
+
+
+    public ContainerFlowerbed(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
+
+        super(FLOWERBED_CONTAINER, windowId);
+        tileEntity = (TileEntityFlowerbed) world.getTileEntity(pos);
+        IItemHandler inventory = tileEntity.getInventory();
+
+        addSlot(new SlotFlower(inventory, 0, 80, 21) {
             @Override
-            public void onSlotChanged() { Flowerbed.markDirty(); }
+            public void onSlotChanged() { tileEntity.markDirty(); }
         });
-        addSlotToContainer(new SlotFlower(inventory, 1, 80, 53) {
+        addSlot(new SlotFlower(inventory, 1, 80, 53) {
             @Override
-            public void onSlotChanged() { Flowerbed.markDirty(); }
+            public void onSlotChanged() { tileEntity.markDirty(); }
         });
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
-                addSlotToContainer(new Slot(playerInv, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                addSlot(new Slot(playerInventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
             }
         }
 
         for (int k = 0; k < 9; k++) {
-            addSlotToContainer(new Slot(playerInv, k, 8 + k * 18, 142));
-        }*//*
+            addSlot(new Slot(playerInventory, k, 8 + k * 18, 142));
+        }
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer player) {
+    public boolean canInteractWith(PlayerEntity player) {
         return true;
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int index) {
+    public ItemStack transferStackInSlot(PlayerEntity player, int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = inventorySlots.get(index);
 
@@ -65,5 +81,5 @@ public class ContainerFlowerbed /*extends Container*/ {
         }
 
         return itemstack;
-    }*/
+    }
 }

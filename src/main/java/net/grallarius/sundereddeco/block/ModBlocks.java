@@ -3,6 +3,8 @@ package net.grallarius.sundereddeco.block;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.counter.BlockCounter;
 import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.ContainerFlowerbed;
 import net.grallarius.sundereddeco.block.home.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
@@ -33,6 +35,10 @@ public class ModBlocks {
     public static TileEntityType<TileEntityWindowbox> WINDOWBOX_TILE;
     @ObjectHolder("sundereddeco:windowbox")
     public static ContainerType<ContainerWindowbox> WINDOWBOX_CONTAINER;
+    @ObjectHolder("sundereddeco:flowerbed")
+    public static TileEntityType<TileEntityWindowbox> FLOWERBED_TILE;
+    @ObjectHolder("sundereddeco:flowerbed")
+    public static ContainerType<ContainerFlowerbed> FLOWERBED_CONTAINER;
 
     //SHOP
     public static final BlockCrate crate_closed = new BlockCrate("crate_closed", true);
@@ -106,6 +112,8 @@ public class ModBlocks {
 
     @ObjectHolder("sundereddeco:windowbox")
     public static final BlockWindowbox windowbox = new BlockWindowbox("windowbox");
+    @ObjectHolder("sundereddeco:flowerbed")
+    public static final BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
 
     public static final BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
 
@@ -138,7 +146,7 @@ public class ModBlocks {
 
                 //GARDEN
                 lantern_candle, lantern_blue, lantern_green, lantern_red, lantern_yellow,
-                hedge, fountain, windowbox, largeplanterbox,
+                hedge, fountain, windowbox, largeplanterbox, flowerbed,
 
                 //HOME
                 sidetable, stool, chair, table,

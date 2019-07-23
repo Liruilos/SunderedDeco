@@ -175,7 +175,6 @@ public class BlockWindowbox extends BlockTileEntity {
             if (world.getTileEntity(pos) instanceof TileEntityWindowbox) {
                 TileEntityWindowbox tileEntity = (TileEntityWindowbox) world.getTileEntity(pos);
                 IItemHandler itemHandler = tileEntity.getInventory();
-                //te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
 
                 if (!player.isSneaking() && itemHandler != null) {
                     if (player.getHeldItem(player.getActiveHand()).isEmpty()) {
@@ -208,11 +207,7 @@ public class BlockWindowbox extends BlockTileEntity {
                     tileEntity.saveAndSync();
 
                 } else {
-                    if (tileEntity instanceof INamedContainerProvider) {
-                        NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, tileEntity.getPos());
-                    } else {
-                        throw new IllegalStateException("Our named container provider is missing!");
-                    }
+                    NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, tileEntity.getPos());
                 }
             }
         }

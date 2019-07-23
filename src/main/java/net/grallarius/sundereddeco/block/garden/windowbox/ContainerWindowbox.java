@@ -17,13 +17,10 @@ public class ContainerWindowbox extends Container {
 
     private TileEntityWindowbox tileEntity;
 
-
-
     public ContainerWindowbox(int windowId, World world, BlockPos pos, PlayerInventory playerInventory, PlayerEntity player) {
 
         super(WINDOWBOX_CONTAINER, windowId);
         tileEntity = (TileEntityWindowbox) world.getTileEntity(pos);
-
         IItemHandler inventory = tileEntity.getInventory();
 
         addSlot(new SlotFlower(inventory, 0, 60, 21) {

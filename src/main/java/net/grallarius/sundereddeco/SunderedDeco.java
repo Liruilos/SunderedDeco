@@ -3,6 +3,8 @@ package net.grallarius.sundereddeco;
 import net.grallarius.sundereddeco.block.ModBlocks;
 import net.grallarius.sundereddeco.block.counter.BlockCounter;
 import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.ContainerFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityFlowerbed;
 import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.client.ModColourManager;
@@ -110,6 +112,7 @@ public class SunderedDeco {
     public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
         event.getRegistry().register(TileEntityType.Builder.create(TileEntityCounter::new, ModBlocks.COUNTER).build(null).setRegistryName("counter"));
         event.getRegistry().register(TileEntityType.Builder.create(TileEntityWindowbox::new, ModBlocks.windowbox).build(null).setRegistryName("windowbox"));
+        event.getRegistry().register(TileEntityType.Builder.create(TileEntityFlowerbed::new, ModBlocks.flowerbed).build(null).setRegistryName("flowerbed"));
 
     }
 
@@ -121,6 +124,10 @@ public class SunderedDeco {
             return new ContainerWindowbox(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
         }).setRegistryName("windowbox"));
 
+        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+            BlockPos pos = data.readBlockPos();
+            return new ContainerFlowerbed(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+        }).setRegistryName("flowerbed"));
     }
 
 

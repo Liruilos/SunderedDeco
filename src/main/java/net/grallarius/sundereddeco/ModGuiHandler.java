@@ -36,7 +36,7 @@ public class ModGuiHandler implements IGuiHandler {
             case WINDOWBOX:
                 return new WindowboxScreen(getServerGuiElement(ID, player, world, x, y, z), player.inventory);
             case FLOWERBED:
-                return new GuiFlowerbed(getServerGuiElement(ID, player, world, x, y, z), player.inventory);
+                return new FlowerbedScreen(getServerGuiElement(ID, player, world, x, y, z), player.inventory);
             case DENSEFLOWERBED:
                 return new GuiDenseFlowerbed(getServerGuiElement(ID, player, world, x, y, z), player.inventory);*/
 

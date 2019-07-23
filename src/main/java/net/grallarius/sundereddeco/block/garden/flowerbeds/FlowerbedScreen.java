@@ -1,7 +1,8 @@
-package net.grallarius.sundereddeco.block.garden.windowbox;
+package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.grallarius.sundereddeco.SunderedDeco;
+
 import net.grallarius.sundereddeco.block.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
@@ -10,12 +11,12 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
-public class WindowboxScreen extends ContainerScreen<ContainerWindowbox> {
-    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(SunderedDeco.MODID, "textures/gui/windowbox_gui.png");
+public class FlowerbedScreen extends ContainerScreen<ContainerFlowerbed> {
+    private static final ResourceLocation BG_TEXTURE = new ResourceLocation(SunderedDeco.MODID, "textures/gui/flowerbed_gui.png");
 
     PlayerInventory playerInv;
 
-    public WindowboxScreen(ContainerWindowbox container, PlayerInventory inv, ITextComponent name) {
+    public FlowerbedScreen(ContainerFlowerbed container, PlayerInventory inv, ITextComponent name) {
         super(container, inv, name);
         this.playerInv = inv;
     }
@@ -29,7 +30,7 @@ public class WindowboxScreen extends ContainerScreen<ContainerWindowbox> {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String name = I18n.format(ModBlocks.windowbox.getTranslationKey());
+        String name = I18n.format(ModBlocks.flowerbed.getTranslationKey());
         String invName = playerInv.getDisplayName().getUnformattedComponentText();
         drawString(Minecraft.getInstance().fontRenderer, name, 2, 6, 0x404040);
         //drawString(Minecraft.getInstance().fontRenderer, invName, 2, 6, 0x404040);
@@ -43,5 +44,4 @@ public class WindowboxScreen extends ContainerScreen<ContainerWindowbox> {
         int relY = (this.height - this.ySize) / 2;
         this.blit(relX, relY, 0, 0, this.xSize, this.ySize);
     }
-
 }

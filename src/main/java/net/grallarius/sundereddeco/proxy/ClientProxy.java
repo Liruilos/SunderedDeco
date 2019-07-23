@@ -1,5 +1,8 @@
 package net.grallarius.sundereddeco.proxy;
 import net.grallarius.sundereddeco.block.ModBlocks;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.FlowerbedRenderer;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.FlowerbedScreen;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityFlowerbed;
 import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxRenderer;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxScreen;
@@ -21,6 +24,7 @@ public class ClientProxy implements IProxy {
     public void init() {
         //match containers with their guis
         ScreenManager.registerFactory(ModBlocks.WINDOWBOX_CONTAINER, WindowboxScreen::new);
+        ScreenManager.registerFactory(ModBlocks.FLOWERBED_CONTAINER, FlowerbedScreen::new);
 
         registerRenderers();
 
@@ -48,7 +52,8 @@ public class ClientProxy implements IProxy {
         
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityPedestal.class, new TESRPedestal());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWindowbox.class, new WindowboxRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlowerbed.class, new FlowerbedRenderer());
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenseFlowerbed.class, new TESRDenseFlowerbed());
-        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlowerbed.class, new TESRFlowerbed());
+
     }
 }
