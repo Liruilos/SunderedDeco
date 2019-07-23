@@ -205,10 +205,7 @@ public class BlockWindowbox extends BlockTileEntity {
                             player.setHeldItem(player.getActiveHand(), remainingItems);
                         }
                     }
-                    System.out.println("before save and sync te thinks facing is: " + tileEntity.getFacing() + "  is actually: " + state.get(FACING).getHorizontalIndex());
                     tileEntity.saveAndSync();
-                    System.out.println("after save and sync te thinks facing is: " + tileEntity.getFacing());
-
 
                 } else {
                     if (tileEntity instanceof INamedContainerProvider) {

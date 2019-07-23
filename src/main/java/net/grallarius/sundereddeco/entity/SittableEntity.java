@@ -1,6 +1,6 @@
 package net.grallarius.sundereddeco.entity;
 
-import net.grallarius.sundereddeco.block.furniture.BlockSittable;
+import net.grallarius.sundereddeco.block.home.BlockSittable;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.nbt.CompoundNBT;

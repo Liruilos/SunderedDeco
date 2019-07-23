@@ -3,7 +3,7 @@ package net.grallarius.sundereddeco.block;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.counter.BlockCounter;
 import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
-import net.grallarius.sundereddeco.block.furniture.*;
+import net.grallarius.sundereddeco.block.home.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
@@ -12,10 +12,7 @@ import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
@@ -113,11 +110,10 @@ public class ModBlocks {
     public static final BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
 
     //HOME
-    public static final BlockDirectional sidetable = new BlockDirectional(Block.Properties.create(Material.WOOD), "sidetable");
+    public static final BlockSidetable sidetable = new BlockSidetable("sidetable");
     public static final BlockSittable stool = new BlockSittable(Block.Properties.create(Material.WOOD),"stool");
     public static final BlockChair chair = new BlockChair("chair");
     public static final BlockTable table = new BlockTable("table");
-
 
     public static final BlockWindow window = new BlockWindow(Material.WOOD,"window");
     public static final BlockConnectedChair parkbench = new BlockConnectedChair("parkbench");

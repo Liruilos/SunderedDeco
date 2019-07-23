@@ -77,15 +77,12 @@ public class TileEntityWindowbox extends TileEntity implements INamedContainerPr
     @Nullable
     @Override
     public SUpdateTileEntityPacket getUpdatePacket() {
-        System.out.println("packet sent to client");
         return new SUpdateTileEntityPacket(this.getPos(), 0, this.getUpdateTag());
     }
 
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket packet) {
         this.read(packet.getNbtCompound());
-        System.out.println("packet sent back from client");
-
     }
 
     @Override
@@ -103,14 +100,12 @@ public class TileEntityWindowbox extends TileEntity implements INamedContainerPr
         super.read(compound);
         this.inventory.deserializeNBT(compound.getCompound("inventory"));
         this.facing = compound.getInt("facing");
-        System.out.println("facing was set to: " + this.facing);
     }
 
     @Override
     public CompoundNBT write(CompoundNBT compound) {
         compound.put("inventory", this.inventory.serializeNBT());
         compound.putInt("facing", this.getFacing());
-        System.out.println("saving facing as: " + this.getFacing());
         return super.write(compound);
 
     }

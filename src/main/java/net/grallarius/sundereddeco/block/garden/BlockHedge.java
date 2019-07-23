@@ -14,6 +14,10 @@ import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -37,7 +41,13 @@ public class BlockHedge extends BlockBase {
     public static final BooleanProperty TOPSOUTH = BooleanProperty.create("topsouth");
     public static final BooleanProperty TOPWEST = BooleanProperty.create("topwest");
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.125D, 0.0D,0.125D,0.875D,1.0D,0.875D);
+    private static final VoxelShape CENTRE_BOX = Block.makeCuboidShape(2, 0, 2, 14, 16, 14);
+    private static final VoxelShape NCONNECT_BOX = Block.makeCuboidShape(2, 0, 0, 14, 16, 2);
+    private static final VoxelShape ECONNECT_BOX = Block.makeCuboidShape(14, 0, 2, 16, 16, 14);
+    private static final VoxelShape SCONNECT_BOX = Block.makeCuboidShape(2, 0, 14, 14, 16, 16);
+    private static final VoxelShape WCONNECT_BOX = Block.makeCuboidShape(0, 0, 2, 2, 16, 14);
+
+
 
     private static final Properties props = Properties.create(Material.LEAVES)
             .sound(SoundType.PLANT);
@@ -53,13 +63,24 @@ public class BlockHedge extends BlockBase {
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(NORTH, EAST, SOUTH, WEST, TOP, TOPNORTH, TOPEAST, TOPSOUTH, TOPWEST);
     }
-/*
-    //@Override
+    @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
-        return BOUNDBOX;
-    }*/
-
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        VoxelShape COMBI_SHAPE = CENTRE_BOX;
+        if (state.get(NORTH)){
+            COMBI_SHAPE = VoxelShapes.or(COMBI_SHAPE, NCONNECT_BOX);
+        }
+        if (state.get(EAST)){
+            COMBI_SHAPE = VoxelShapes.or(COMBI_SHAPE, ECONNECT_BOX);
+        }
+        if (state.get(SOUTH)){
+            COMBI_SHAPE = VoxelShapes.or(COMBI_SHAPE, SCONNECT_BOX);
+        }
+        if (state.get(WEST)){
+            COMBI_SHAPE = VoxelShapes.or(COMBI_SHAPE, WCONNECT_BOX);
+        }
+        return COMBI_SHAPE;
+    }
 
     private BlockState connectedState(IWorld world, BlockPos pos){
         boolean northHedge = world.getBlockState(pos.north()).getBlock() instanceof BlockHedge

@@ -1,4 +1,4 @@
-package net.grallarius.sundereddeco.block.furniture;
+package net.grallarius.sundereddeco.block.home;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

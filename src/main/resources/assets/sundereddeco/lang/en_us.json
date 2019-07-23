@@ -7,15 +7,11 @@
 
   "_comment": "Blocks",
 
-  "block.sundereddeco.roof_shingles_red": "Red Roofing Shingles",
-  "block.sundereddeco.roof_shingles_red_concave": "Red Roofing Shingles Inner Corner",
-  "block.sundereddeco.roof_shingles_red.name_convex": "Red Roofing Shingles Outer Corner",
-
   "block.sundereddeco.bottle_placed": "Green Glass Bottle",
   "block.sundereddeco.plate_croissants": "Plate of Croissants",
   "block.sundereddeco.plate_muffins": "Plate of Muffins",
+  "block.sundereddeco.window": "Window",
 
-  "block.sundereddeco.book_pedestal": "Book Pedestal",
 
   "_comment": "garden",
   "block.sundereddeco.fountain": "Fountain",
