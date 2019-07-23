@@ -1,125 +1,132 @@
 package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
-import net.grallarius.sundereddeco.ModGuiHandler;
-import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.block.BlockConnectableHTileEntity;
 import net.grallarius.sundereddeco.block.BlockConnectableHorizontal;
 import net.minecraft.block.Block;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
+import static net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox.canBePotted;
 
-//extends BlockConnectableHTileEntity<TileEntityDenseFlowerbed>
-public class BlockDenseFlowerbed  {
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.0D, 0.0D,0.0D,1.0D,0.6D,1.0D);
 
-/*    private static final Properties props = Properties.create(Material.ROCK)
+public class BlockDenseFlowerbed extends BlockConnectableHorizontal {
+
+    private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(0, 0, 0, 16, 9, 16);
+    private static final Properties props = Properties.create(Material.ROCK)
             .sound(SoundType.STONE);
 
     public BlockDenseFlowerbed(String name){
         super(props, name);
-        this.setDefaultState(this.stateContainer.getBaseState().with(SHAPE, BlockConnectableHorizontal.EnumShape.SINGLE));
-    }*/
-    /*
-    @Override
-    @Deprecated
-    public IBlockState getActualState(IBlockState state, IBlockReader worldIn, BlockPos pos) {
-
-        BlockConnectableHorizontal.EnumShape shape = getShape(state, worldIn, pos, worldIn.getBlockState(pos).getClass());
-        return state.with(SHAPE, shape);
     }
 
     @Override
-    public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!world.isRemote) {
-            TileEntityDenseFlowerbed te = getTileEntity(world, pos);
-            IItemHandler itemHandler = te.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, side);
+
+            if (world.getTileEntity(pos) instanceof TileEntityDenseFlowerbed) {
+                TileEntityDenseFlowerbed tileEntity = (TileEntityDenseFlowerbed) world.getTileEntity(pos);
+                IItemHandler itemHandler = tileEntity.getInventory();
 
 
-            if (!player.isSneaking() && itemHandler != null) {
-                if (player.getHeldItem(hand).isEmpty()) {
-                    *//**remove items from relevant slot*//*
-                    if(!itemHandler.getStackInSlot(3).isEmpty()){
-                        player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(3,1,false));
+                if (!player.isSneaking() && itemHandler != null) {
+                    if (player.getHeldItem(handIn).isEmpty()) {
+                        //remove items from relevant slot
+                        if(!itemHandler.getStackInSlot(3).isEmpty()){
+                            player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(3,1,false));
+                        } else if(!itemHandler.getStackInSlot(2).isEmpty()){
+                            player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(2,1,false));
+                        } else if (!itemHandler.getStackInSlot(1).isEmpty()) {
+                            player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(1, 1, false));
+                        } else if (!itemHandler.getStackInSlot(0).isEmpty()) {
+                            player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(0, 1, false));
+                        }
+
+                    } else if (canBePotted(player.getHeldItem(handIn))) {
+                        //insert items from hand
+                        if (itemHandler.getStackInSlot(0).isEmpty()) {
+                            ItemStack singleItemFromHand1 = player.getHeldItem(player.getActiveHand()).split(1);
+                            int remainder = player.getHeldItem(player.getActiveHand()).getCount();
+                            ItemStack remainingItems = player.getHeldItem(player.getActiveHand()).split(remainder);
+                            player.setHeldItem(player.getActiveHand(), itemHandler.insertItem(0, singleItemFromHand1, false));
+                            player.setHeldItem(player.getActiveHand(), remainingItems);
+
+                        } else if (itemHandler.getStackInSlot(1).isEmpty()) {
+                            ItemStack singleItemFromHand2 = player.getHeldItem(player.getActiveHand()).split(1);
+                            int remainder = player.getHeldItem(player.getActiveHand()).getCount();
+                            ItemStack remainingItems = player.getHeldItem(player.getActiveHand()).split(remainder);
+                            player.setHeldItem(player.getActiveHand(), itemHandler.insertItem(1, singleItemFromHand2, false));
+                            player.setHeldItem(player.getActiveHand(), remainingItems);
+
+                        } else if(itemHandler.getStackInSlot(2).isEmpty()){
+                            ItemStack singleItemFromHand3 = player.getHeldItem(player.getActiveHand()).split(1);
+                            int remainder = player.getHeldItem(player.getActiveHand()).getCount();
+                            ItemStack remainingItems = player.getHeldItem(player.getActiveHand()).split(remainder);
+                            player.setHeldItem(player.getActiveHand(), itemHandler.insertItem(2, singleItemFromHand3, false));
+                            player.setHeldItem(player.getActiveHand(), remainingItems);
+                        }
+                        else if(itemHandler.getStackInSlot(3).isEmpty()){
+                            ItemStack singleItemFromHand4 = player.getHeldItem(player.getActiveHand()).split(1);
+                            int remainder = player.getHeldItem(player.getActiveHand()).getCount();
+                            ItemStack remainingItems = player.getHeldItem(player.getActiveHand()).split(remainder);
+                            player.setHeldItem(player.getActiveHand(), itemHandler.insertItem(3, singleItemFromHand4, false));
+                            player.setHeldItem(player.getActiveHand(), remainingItems);
+                        } else {
+                            return false;
+                        }
                     }
-                    else if(!itemHandler.getStackInSlot(2).isEmpty()){
-                        player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(2,1,false));
-                    }
-                    else if(!itemHandler.getStackInSlot(1).isEmpty()){
-                        player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(1,1,false));
-                    }
-                    else if(!itemHandler.getStackInSlot(0).isEmpty()){
-                        player.inventory.placeItemBackInInventory(world, itemHandler.extractItem(0,1,false));
-                    }
-
-                } else if(canBePotted(player.getHeldItem(hand))) {
-                    *//**insert items from hand*//*
-                    if(itemHandler.getStackInSlot(0).isEmpty()){
-
-                        ItemStack singleItemFromHand1 = player.getHeldItem(hand).splitStack(1);
-                        int remainder = player.getHeldItem(hand).getCount();
-                        ItemStack remainingItems = player.getHeldItem(hand).splitStack(remainder);
-                        player.setHeldItem(hand, itemHandler.insertItem(0, singleItemFromHand1, false));
-                        player.setHeldItem(hand, remainingItems);
-
-                    }
-                    else if(itemHandler.getStackInSlot(1).isEmpty()){
-
-                        ItemStack singleItemFromHand2 = player.getHeldItem(hand).splitStack(1);
-                        int remainder = player.getHeldItem(hand).getCount();
-                        ItemStack remainingItems = player.getHeldItem(hand).splitStack(remainder);
-                        player.setHeldItem(hand, itemHandler.insertItem(1, singleItemFromHand2, false));
-                        player.setHeldItem(hand, remainingItems);
-                    }
-                    else if(itemHandler.getStackInSlot(2).isEmpty()){
-
-                        ItemStack singleItemFromHand3 = player.getHeldItem(hand).splitStack(1);
-                        int remainder = player.getHeldItem(hand).getCount();
-                        ItemStack remainingItems = player.getHeldItem(hand).splitStack(remainder);
-                        player.setHeldItem(hand, itemHandler.insertItem(2, singleItemFromHand3, false));
-                        player.setHeldItem(hand, remainingItems);
-                    }
-                    else if(itemHandler.getStackInSlot(3).isEmpty()){
-
-                        ItemStack singleItemFromHand4 = player.getHeldItem(hand).splitStack(1);
-                        int remainder = player.getHeldItem(hand).getCount();
-                        ItemStack remainingItems = player.getHeldItem(hand).splitStack(remainder);
-                        player.setHeldItem(hand, itemHandler.insertItem(3, singleItemFromHand4, false));
-                        player.setHeldItem(hand, remainingItems);
-                    }
-
-                    else {return false;}
-                    te.markDirty();
-                }} else {
-                player.openGui(SunderedDeco.instance, ModGuiHandler.DENSEFLOWERBED, world, pos.getX(), pos.getY(), pos.getZ());
+                    tileEntity.saveAndSync();
+                } else {
+                    NetworkHooks.openGui((ServerPlayerEntity) player, tileEntity, tileEntity.getPos());
+                }
             }
         }
         return true;
     }
 
-    public static boolean canBePotted(ItemStack stack)
-    {
-        Block block = Block.getBlockFromItem(stack.getItem());
-        Boolean isFlower = block instanceof BlockFlower;
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
 
-        if ((!isFlower) && (block != Blocks.YELLOW_FLOWER) && (block != Blocks.RED_FLOWER) && (block != Blocks.BROWN_MUSHROOM) && (block != Blocks.RED_MUSHROOM) && (block != Blocks.SAPLING) && (block != Blocks.DEADBUSH))
-        {
-            int i = stack.getMetadata();
-            return block == Blocks.TALLGRASS && i == BlockTallGrass.EnumType.FERN.getMeta();
-        }
-        else
-        {
-            return true;
-        }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return new TileEntityDenseFlowerbed();
     }
 
     @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
+
+    @Override
+    @Deprecated
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return BOUNDING_BOX;
+    }
+
+    /*@Override
     public void breakBlock(World world, BlockPos pos, IBlockState state) {
         TileEntityDenseFlowerbed tile = getTileEntity(world, pos);
         IItemHandler itemHandler = tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.NORTH);
@@ -145,20 +152,5 @@ public class BlockDenseFlowerbed  {
         }
         super.breakBlock(world, pos, state);
     }*/
-/*    @Override
-    public Class<TileEntityDenseFlowerbed> getTileEntityClass() {
-        return TileEntityDenseFlowerbed.class;
-    }*/
 
-   /* @Nullable
-    @Override
-    public TileEntityDenseFlowerbed createTileEntity(World world, IBlockState state) {
-        return new TileEntityDenseFlowerbed();
-    }
-
-    @Override
-    @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return BOUNDBOX;
-    }*/
 }

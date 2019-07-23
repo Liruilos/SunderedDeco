@@ -3,8 +3,7 @@ package net.grallarius.sundereddeco.block;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.counter.BlockCounter;
 import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
-import net.grallarius.sundereddeco.block.garden.flowerbeds.BlockFlowerbed;
-import net.grallarius.sundereddeco.block.garden.flowerbeds.ContainerFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.*;
 import net.grallarius.sundereddeco.block.home.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
@@ -36,9 +35,13 @@ public class ModBlocks {
     @ObjectHolder("sundereddeco:windowbox")
     public static ContainerType<ContainerWindowbox> WINDOWBOX_CONTAINER;
     @ObjectHolder("sundereddeco:flowerbed")
-    public static TileEntityType<TileEntityWindowbox> FLOWERBED_TILE;
+    public static TileEntityType<TileEntityFlowerbed> FLOWERBED_TILE;
     @ObjectHolder("sundereddeco:flowerbed")
     public static ContainerType<ContainerFlowerbed> FLOWERBED_CONTAINER;
+    @ObjectHolder("sundereddeco:denseflowerbed")
+    public static TileEntityType<TileEntityDenseFlowerbed> DENSE_FLOWERBED_TILE;
+    @ObjectHolder("sundereddeco:denseflowerbed")
+    public static ContainerType<ContainerDenseFlowerbed> DENSE_FLOWERBED_CONTAINER;
 
     //SHOP
     public static final BlockCrate crate_closed = new BlockCrate("crate_closed", true);
@@ -114,6 +117,8 @@ public class ModBlocks {
     public static final BlockWindowbox windowbox = new BlockWindowbox("windowbox");
     @ObjectHolder("sundereddeco:flowerbed")
     public static final BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
+    @ObjectHolder("sundereddeco:denseflowerbed")
+    public static final BlockDenseFlowerbed denseflowerbed = new BlockDenseFlowerbed("denseflowerbed");
 
     public static final BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
 
@@ -146,7 +151,7 @@ public class ModBlocks {
 
                 //GARDEN
                 lantern_candle, lantern_blue, lantern_green, lantern_red, lantern_yellow,
-                hedge, fountain, windowbox, largeplanterbox, flowerbed,
+                hedge, fountain, windowbox, largeplanterbox, flowerbed, denseflowerbed,
 
                 //HOME
                 sidetable, stool, chair, table,
@@ -161,8 +166,6 @@ public class ModBlocks {
 /*
 
 
-
-
     public static BlockDirectional scales = new BlockDirectional(Material.IRON, "scales");
     public static BlockBottle bottlePlaced = new BlockBottle("bottle_placed");
     public static BlockClutterPlate plateMuffins = new BlockClutterPlate("plate_muffins");
@@ -171,18 +174,9 @@ public class ModBlocks {
     //public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
 
 
-    //TODO for now is registering itself and model registry happening in InvModel
-
-
-
-
-
     */
 /** garden block *//*
 
-    //public static BlockWindowbox windowbox = new BlockWindowbox("windowbox");
-    //public static BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
-    //public static BlockDenseFlowerbed denseFlowerbed = new BlockDenseFlowerbed("denseflowerbed");
     public static BlockDirectional shrine = new BlockDirectional(Material.ROCK, "shrine");
 
     */

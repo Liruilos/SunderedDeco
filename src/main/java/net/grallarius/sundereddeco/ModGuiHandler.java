@@ -38,7 +38,7 @@ public class ModGuiHandler implements IGuiHandler {
             case FLOWERBED:
                 return new FlowerbedScreen(getServerGuiElement(ID, player, world, x, y, z), player.inventory);
             case DENSEFLOWERBED:
-                return new GuiDenseFlowerbed(getServerGuiElement(ID, player, world, x, y, z), player.inventory);*/
+                return new DenseFlowerbedScreen(getServerGuiElement(ID, player, world, x, y, z), player.inventory);*/
 
             default:
                 return null;
