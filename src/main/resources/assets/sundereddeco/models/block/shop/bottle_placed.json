@@ -1,10 +1,10 @@
 {
 	"__comment": "Designed by Liruilos with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "blocks/glass_green",
-		"glass": "blocks/glass_green",
-		"cork": "sundereddeco:blocks/shop/crate/crate_closed",
-		"label": "sundereddeco:blocks/shop/crate/crate_sugar"
+		"particle": "block/green_stained_glass",
+		"glass": "block/green_stained_glass",
+		"cork": "sundereddeco:block/shop/crate/crate_closed",
+		"label": "sundereddeco:block/shop/crate/crate_sugar"
 	},
 	"elements": [ 	 
 		{
@@ -597,12 +597,12 @@
 			"from": [ 7, 14, 7 ],
 			"to": [ 9, 15, 9 ],
 			"faces": {
-				"down": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#voxels_palette" },
-				"up": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#voxels_palette" },
-				"north": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#voxels_palette" },
-				"south": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#voxels_palette" },
-				"west": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#voxels_palette" },
-				"east": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#voxels_palette" }
+				"down": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#cork" },
+				"up": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#cork" },
+				"north": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#cork" },
+				"south": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#cork" },
+				"west": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#cork" },
+				"east": { "uv": [ 12.96, 0.96, 15.04, 3.04 ], "texture": "#cork" }
 			}
 		},
 		{

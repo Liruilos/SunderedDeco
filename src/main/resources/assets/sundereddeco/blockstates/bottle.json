@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "sundereddeco:block/shop/bottle_placed",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "sundereddeco:block/shop/bottle_placed",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "sundereddeco:block/shop/bottle_placed",
+      "y": 0
+    },
+    "facing=west": {
+      "model": "sundereddeco:block/shop/bottle_placed",
+      "y": 90
+    }
+  }
+}
