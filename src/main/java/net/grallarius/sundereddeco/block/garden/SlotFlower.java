@@ -1,9 +1,7 @@
 package net.grallarius.sundereddeco.block.garden;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFlower;
-import net.minecraft.block.BlockTallGrass;
-import net.minecraft.init.Blocks;
+import net.minecraft.block.FlowerBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.IItemHandlerModifiable;
@@ -34,7 +32,7 @@ public class SlotFlower extends SlotItemHandler {
             return false;
 
         Block block = Block.getBlockFromItem(stack.getItem());
-        Boolean isFlower = block instanceof BlockFlower;
+        Boolean isFlower = block instanceof FlowerBlock;
 
 /*        if ((!isFlower) && (block != Blocks.DANDELION) && (block != Blocks.POPPY) && (block != Blocks.BROWN_MUSHROOM) && (block != Blocks.RED_MUSHROOM) && (block != Blocks.SAPLING) && (block != Blocks.DEADBUSH))
         {

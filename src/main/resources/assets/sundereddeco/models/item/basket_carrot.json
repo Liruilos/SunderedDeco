@@ -1,5 +1,5 @@
 {
-  "parent": "sundereddeco:block/shop/basket/basket_berry",
+  "parent": "sundereddeco:block/shop/basket/basket_carrot",
   "display": {
     "gui": {
       "rotation": [30, 225, 0],

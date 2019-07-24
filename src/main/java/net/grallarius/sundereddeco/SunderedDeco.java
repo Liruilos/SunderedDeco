@@ -1,30 +1,35 @@
 package net.grallarius.sundereddeco;
 
 import net.grallarius.sundereddeco.block.ModBlocks;
-import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.TileEntityCounter;
+import net.grallarius.sundereddeco.block.counter.BlockCounter;
+import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.ContainerDenseFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.ContainerFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityDenseFlowerbed;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityFlowerbed;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineContainer;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineTileEntity;
 import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
-import net.grallarius.sundereddeco.block.garden.windowbox.GuiWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.client.ModColourManager;
 import net.grallarius.sundereddeco.client.SunderedDecoTab;
+import net.grallarius.sundereddeco.entity.SittableEntity;
 import net.grallarius.sundereddeco.proxy.ClientProxy;
 import net.grallarius.sundereddeco.proxy.IProxy;
 import net.grallarius.sundereddeco.proxy.ServerProxy;
 import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityPlayerSP;
+import net.minecraft.entity.EntityClassification;
+import net.minecraft.entity.EntityType;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.extensions.IForgeContainerType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.fml.ExtensionPoint;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -36,6 +41,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.io.Console;
 
 @Mod(SunderedDeco.MODID)
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
@@ -55,34 +62,14 @@ public class SunderedDeco {
 
     public static SunderedDeco instance;
 
-    //Tile Entity Registration
-    public static TileEntityType<TileEntityCounter> teCounter;
-    public static TileEntityType<TileEntityWindowbox> teWindowbox;
-
     public SunderedDeco(){
 
-
-        ModLoadingContext.get().registerExtensionPoint(ExtensionPoint.GUIFACTORY, () -> {
-            return (openContainer) -> {
-                ResourceLocation location = openContainer.getId();
-                if (location.toString().equals(MODID + ":windowbox_gui")) {
-                    EntityPlayerSP player = Minecraft.getInstance().player;
-                    BlockPos pos = openContainer.getAdditionalData().readBlockPos();
-                    TileEntity tileEntity = player.world.getTileEntity(pos);
-                    if (tileEntity instanceof TileEntityWindowbox) {
-                        return new GuiWindowbox(new ContainerWindowbox(player.inventory, (TileEntityWindowbox) tileEntity), player.inventory);
-                    }
-                }
-                return null;
-            };
-        });
 
         // Register methods for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
         //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
-        FMLJavaModLoadingContext.get().getModEventBus().addGenericListener(TileEntityType.class, this::registerTileEntities);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -93,6 +80,7 @@ public class SunderedDeco {
 
         ModRecipes.init();
 
+        proxy.init();
         proxy.setup(event);
 
     }
@@ -123,9 +111,46 @@ public class SunderedDeco {
     }
 
     @SubscribeEvent
-    public void registerTileEntities(RegistryEvent.Register<TileEntityType<?>> event) {
-        teCounter = TileEntityType.register(SunderedDeco.MODID + ":counter_tile_entity", TileEntityType.Builder.create(TileEntityCounter::new));
-        teWindowbox = TileEntityType.register(SunderedDeco.MODID + ":windowbox_tile_entity", TileEntityType.Builder.create(TileEntityWindowbox::new));
+    public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
+        //event.getRegistry().register(new BlockCounter()); //alt way to register
+    }
+
+    @SubscribeEvent
+    public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
+        event.getRegistry().register(TileEntityType.Builder.create(TileEntityCounter::new, ModBlocks.COUNTER).build(null).setRegistryName("counter"));
+        event.getRegistry().register(TileEntityType.Builder.create(TileEntityWindowbox::new, ModBlocks.windowbox).build(null).setRegistryName("windowbox"));
+        event.getRegistry().register(TileEntityType.Builder.create(TileEntityFlowerbed::new, ModBlocks.flowerbed).build(null).setRegistryName("flowerbed"));
+        event.getRegistry().register(TileEntityType.Builder.create(TileEntityDenseFlowerbed::new, ModBlocks.denseflowerbed).build(null).setRegistryName("denseflowerbed"));
+        event.getRegistry().register(TileEntityType.Builder.create(ShrineTileEntity::new, ModBlocks.shrine).build(null).setRegistryName("shrine"));
+
+    }
+
+    @SubscribeEvent
+    public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> event) {
+
+        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+            BlockPos pos = data.readBlockPos();
+            return new ContainerWindowbox(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+        }).setRegistryName("windowbox"));
+
+        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+            BlockPos pos = data.readBlockPos();
+            return new ContainerFlowerbed(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+        }).setRegistryName("flowerbed"));
+
+        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+            BlockPos pos = data.readBlockPos();
+            return new ContainerDenseFlowerbed(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+        }).setRegistryName("denseflowerbed"));
+
+        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+            BlockPos pos = data.readBlockPos();
+            return new ShrineContainer(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+        }).setRegistryName("shrine"));
+    }
+
+    @SubscribeEvent
+    public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> entityRegistryEvent) {
 
     }
 

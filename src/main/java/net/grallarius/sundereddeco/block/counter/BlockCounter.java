@@ -1,15 +1,16 @@
-package net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking;
+package net.grallarius.sundereddeco.block.counter;
 
 import net.grallarius.sundereddeco.block.BlockTileEntity;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -24,19 +25,20 @@ public class BlockCounter extends BlockTileEntity {
 
     @Override
     @Deprecated
-    public boolean onBlockActivated(IBlockState state, World world, BlockPos pos, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
+    public boolean onBlockActivated(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!world.isRemote) {
             if (world.getTileEntity(pos) != null && world.getTileEntity(pos) instanceof TileEntityCounter) {
                 TileEntityCounter tile = (TileEntityCounter) world.getTileEntity(pos);
-                if (facing == EnumFacing.DOWN) {
+                //facing == EnumFacing.DOWN
+                if (hit.getFace() == Direction.DOWN) {
                     tile.decrementCount();
-                } else if (facing == EnumFacing.UP) {
+                    //facing == EnumFacing.UP
+                } else if (hit.getFace() == Direction.UP) {
                     tile.incrementCount();
                 }
                 Minecraft.getInstance().player.sendChatMessage("Count: " + tile.getCount());
             }
-        }
-        return true;
+        } return true;
     }
 
     public TileEntity createNewTileEntity(IBlockReader worldIn) {
@@ -44,7 +46,7 @@ public class BlockCounter extends BlockTileEntity {
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(BlockState state) {
         return true;
     }
 

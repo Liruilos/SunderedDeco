@@ -2,18 +2,22 @@ package net.grallarius.sundereddeco.block.garden;
 
 import net.grallarius.sundereddeco.block.BlockBase;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFenceGate;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumFacing;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -37,7 +41,13 @@ public class BlockHedge extends BlockBase {
     public static final BooleanProperty TOPSOUTH = BooleanProperty.create("topsouth");
     public static final BooleanProperty TOPWEST = BooleanProperty.create("topwest");
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.125D, 0.0D,0.125D,0.875D,1.0D,0.875D);
+    private static final VoxelShape CENTRE_BOX = Block.makeCuboidShape(2, 0, 2, 14, 16, 14);
+    private static final VoxelShape NCONNECT_BOX = Block.makeCuboidShape(2, 0, 0, 14, 16, 2);
+    private static final VoxelShape ECONNECT_BOX = Block.makeCuboidShape(14, 0, 2, 16, 16, 14);
+    private static final VoxelShape SCONNECT_BOX = Block.makeCuboidShape(2, 0, 14, 14, 16, 16);
+    private static final VoxelShape WCONNECT_BOX = Block.makeCuboidShape(0, 0, 2, 2, 16, 14);
+
+
 
     private static final Properties props = Properties.create(Material.LEAVES)
             .sound(SoundType.PLANT);
@@ -50,33 +60,44 @@ public class BlockHedge extends BlockBase {
 
     }
 
-    protected void fillStateContainer(StateContainer.Builder<Block, IBlockState> builder) {
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         builder.add(NORTH, EAST, SOUTH, WEST, TOP, TOPNORTH, TOPEAST, TOPSOUTH, TOPWEST);
     }
-/*
-    //@Override
+    @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
-        return BOUNDBOX;
-    }*/
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        VoxelShape COMBI_SHAPE = CENTRE_BOX;
+        if (state.get(NORTH)){
+            COMBI_SHAPE = VoxelShapes.or(COMBI_SHAPE, NCONNECT_BOX);
+        }
+        if (state.get(EAST)){
+            COMBI_SHAPE = VoxelShapes.or(COMBI_SHAPE, ECONNECT_BOX);
+        }
+        if (state.get(SOUTH)){
+            COMBI_SHAPE = VoxelShapes.or(COMBI_SHAPE, SCONNECT_BOX);
+        }
+        if (state.get(WEST)){
+            COMBI_SHAPE = VoxelShapes.or(COMBI_SHAPE, WCONNECT_BOX);
+        }
+        return COMBI_SHAPE;
+    }
 
-
-    private IBlockState connectedState(IWorld world, BlockPos pos){
+    private BlockState connectedState(IWorld world, BlockPos pos){
         boolean northHedge = world.getBlockState(pos.north()).getBlock() instanceof BlockHedge
-                || world.getBlockState(pos.north()).getBlock().isFullCube(world.getBlockState(pos.north()))
-                || world.getBlockState(pos.north()).getBlock() instanceof BlockFenceGate;
+                || world.getBlockState(pos.north()).getBlock().isSolid(world.getBlockState(pos.north()))
+                || world.getBlockState(pos.north()).getBlock() instanceof FenceGateBlock;
         boolean southHedge = world.getBlockState(pos.south()).getBlock() instanceof BlockHedge
-                || world.getBlockState(pos.south()).getBlock().isFullCube(world.getBlockState(pos.south()))
-                || world.getBlockState(pos.south()).getBlock() instanceof BlockFenceGate;
+                || world.getBlockState(pos.south()).getBlock().isSolid(world.getBlockState(pos.south()))
+                || world.getBlockState(pos.south()).getBlock() instanceof FenceGateBlock;
         boolean eastHedge = world.getBlockState(pos.east()).getBlock() instanceof BlockHedge
-                || world.getBlockState(pos.east()).getBlock().isFullCube(world.getBlockState(pos.east()))
-                || world.getBlockState(pos.east()).getBlock() instanceof BlockFenceGate;
+                || world.getBlockState(pos.east()).getBlock().isSolid(world.getBlockState(pos.east()))
+                || world.getBlockState(pos.east()).getBlock() instanceof FenceGateBlock;
         boolean westHedge = world.getBlockState(pos.west()).getBlock() instanceof BlockHedge
-                || world.getBlockState(pos.west()).getBlock().isFullCube(world.getBlockState(pos.west()))
-                || world.getBlockState(pos.west()).getBlock() instanceof BlockFenceGate;
+                || world.getBlockState(pos.west()).getBlock().isSolid(world.getBlockState(pos.west()))
+                || world.getBlockState(pos.west()).getBlock() instanceof FenceGateBlock;
         boolean hedgeBelow = world.getBlockState(pos.down()).getBlock() instanceof BlockHedge;
 
-        IBlockState newState = this.getDefaultState()
+        BlockState newState = this.getDefaultState()
                 .with(NORTH, !hedgeBelow && northHedge)
                 .with(EAST,  !hedgeBelow && eastHedge)
                 .with(SOUTH, !hedgeBelow && southHedge)
@@ -91,13 +112,13 @@ public class BlockHedge extends BlockBase {
 
     @Override
     @Deprecated
-    public IBlockState updatePostPlacement(IBlockState stateIn, EnumFacing facing, IBlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
+    public BlockState updatePostPlacement(BlockState stateIn, Direction facing, BlockState facingState, IWorld world, BlockPos currentPos, BlockPos facingPos) {
         return connectedState(world, currentPos);
     }
 
     @Override
     @Nullable
-    public IBlockState getStateForPlacement(BlockItemUseContext context) {
+    public BlockState getStateForPlacement(BlockItemUseContext context) {
         return connectedState(context.getWorld(), context.getPos());
     }
 

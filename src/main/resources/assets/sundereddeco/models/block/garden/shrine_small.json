@@ -1,9 +1,9 @@
 {
 	"__comment": "Designed by Liruilos with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "blocks/stone",
-		"texture": "blocks/stone",
-		"roof": "blocks/cobblestone_mossy"
+		"particle": "block/stone",
+		"texture": "block/stone",
+		"roof": "block/mossy_cobblestone"
 	},
 	"elements": [ 	 
 		{

@@ -1,8 +1,8 @@
 ﻿{
 	"textures": {
-		"box": "block/brown_glazed_terracotta",
+		"box": "block/terracotta",
 		"dirt": "block/podzol_top",
-		"particle": "block/brown_glazed_terracotta"
+		"particle": "block/terracotta"
 	},
 	"elements": [
 		{

@@ -1,7 +1,7 @@
 package net.grallarius.sundereddeco.block;
 
 
-import net.minecraft.block.state.IBlockState;
+import net.minecraft.block.BlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
@@ -25,7 +25,7 @@ public abstract class BlockConnectableHTileEntity<TE extends TileEntity> extends
     }
 
     @Override
-    public boolean hasTileEntity(IBlockState state) {
+    public boolean hasTileEntity(BlockState state) {
         return true;
     }
 

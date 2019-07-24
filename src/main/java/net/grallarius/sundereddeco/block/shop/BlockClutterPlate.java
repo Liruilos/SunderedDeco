@@ -1,16 +1,24 @@
 package net.grallarius.sundereddeco.block.shop;
 
 import net.grallarius.sundereddeco.block.BlockDirectional;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class BlockClutterPlate extends BlockDirectional {
 
-    protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.1D, 0.0D,0.1D,0.75D,0.2D,0.9D);
+    private static final VoxelShape BOUNDING_BOX = VoxelShapes.or(
+            Block.makeCuboidShape(2, 0, 2, 14, 1.5, 14),
+            Block.makeCuboidShape(3, 1, 3, 13, 3.5, 13));
 
     private static final Properties props = Properties.create(Material.ROCK)
             .hardnessAndResistance(2F, 10F)
@@ -20,9 +28,15 @@ public class BlockClutterPlate extends BlockDirectional {
         super(props, name);
     }
 
-    //@Override
+    @Override
+    @OnlyIn(Dist.CLIENT)
+    public BlockRenderLayer getRenderLayer() {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+    @Override
     @Deprecated
-    public AxisAlignedBB getBoundingBox(IBlockState state, IBlockReader source, BlockPos pos) {
-        return BOUNDBOX;
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return BOUNDING_BOX;
     }
 }

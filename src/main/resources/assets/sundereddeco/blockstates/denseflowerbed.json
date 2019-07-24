@@ -1,32 +1,20 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "sundereddeco:garden/flowerbed_single",
-    "textures": {
-      "box": "blocks/hardened_clay",
-      "dirt": "blocks/dirt_podzol_top"
-    },
-    "uvlock": true
-  },
   "variants": {
-    "shape": {
-      "single": {"model": "sundereddeco:garden/flowerbed_single"},
-      "endeast": {"model": "sundereddeco:garden/flowerbed_end", "y": 90},
-      "endsouth": {"model": "sundereddeco:garden/flowerbed_end", "y": 180},
-      "endwest": {"model": "sundereddeco:garden/flowerbed_end", "y": 270},
-      "endnorth": {"model": "sundereddeco:garden/flowerbed_end"},
-      "straighteastwest": {"model": "sundereddeco:garden/flowerbed_straight", "y": 90},
-      "straightnorthsouth": {"model": "sundereddeco:garden/flowerbed_straight"},
-      "northwest": {"model": "sundereddeco:garden/flowerbed_corner", "y": 180},
-      "northeast": {"model": "sundereddeco:garden/flowerbed_corner", "y": 270},
-      "southeast": {"model": "sundereddeco:garden/flowerbed_corner"},
-      "southwest": {"model": "sundereddeco:garden/flowerbed_corner", "y": 90},
-      "sideeast": {"model": "sundereddeco:garden/flowerbed_side", "y": 90},
-      "sidesouth": {"model": "sundereddeco:garden/flowerbed_side", "y": 180},
-      "sidewest": {"model": "sundereddeco:garden/flowerbed_side", "y": 270},
-      "sidenorth": {"model": "sundereddeco:garden/flowerbed_side"},
-      "centre": {"model": "sundereddeco:garden/flowerbed_centre"}
-    },
-    "inventory": {"model": "sundereddeco:garden/flowerbed_single", "transform": "forge:default-block"}
+    "shape=single": {"model": "sundereddeco:block/garden/flowerbed_single"},
+    "shape=endeast": {"model": "sundereddeco:block/garden/flowerbed_end", "y": 90},
+    "shape=endsouth": {"model": "sundereddeco:block/garden/flowerbed_end", "y": 180},
+    "shape=endwest": {"model": "sundereddeco:block/garden/flowerbed_end", "y": 270},
+    "shape=endnorth": {"model": "sundereddeco:block/garden/flowerbed_end"},
+    "shape=straighteastwest": {"model": "sundereddeco:block/garden/flowerbed_straight", "y": 90},
+    "shape=straightnorthsouth": {"model": "sundereddeco:block/garden/flowerbed_straight"},
+    "shape=northwest": {"model": "sundereddeco:block/garden/flowerbed_corner", "y": 180},
+    "shape=northeast": {"model": "sundereddeco:block/garden/flowerbed_corner", "y": 270},
+    "shape=southeast": {"model": "sundereddeco:block/garden/flowerbed_corner"},
+    "shape=southwest": {"model": "sundereddeco:block/garden/flowerbed_corner", "y": 90},
+    "shape=sideeast": {"model": "sundereddeco:block/garden/flowerbed_side", "y": 90},
+    "shape=sidesouth": {"model": "sundereddeco:block/garden/flowerbed_side", "y": 180},
+    "shape=sidewest": {"model": "sundereddeco:block/garden/flowerbed_side", "y": 270},
+    "shape=sidenorth": {"model": "sundereddeco:block/garden/flowerbed_side"},
+    "shape=centre": {"model": "sundereddeco:block/garden/flowerbed_centre"}
   }
 }

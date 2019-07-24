@@ -1,9 +1,10 @@
 {
   "credit": "Made with Blockbench, a free, modern block model editor by JannisX11",
   "textures": {
+    "particle": "block/stone",
     "0": "block/stone",
-    "1": "block/water_still",
-    "particle": "block/stone"
+    "1": "block/water_still"
+
   },
   "elements": [
     {

@@ -1,16 +1,24 @@
 package net.grallarius.sundereddeco.block;
 
 import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.block.counterUseOnlyToGetTEsWorking.BlockCounter;
-import net.grallarius.sundereddeco.block.furniture.*;
+import net.grallarius.sundereddeco.block.counter.BlockCounter;
+import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineBlock;
+import net.grallarius.sundereddeco.block.garden.flowerbeds.*;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineContainer;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineTileEntity;
+import net.grallarius.sundereddeco.block.home.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
 import net.grallarius.sundereddeco.block.garden.BlockPlanterbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
+import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.shop.*;
 import net.minecraft.block.Block;
-import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.inventory.container.ContainerType;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,11 +28,30 @@ import net.minecraftforge.registries.ObjectHolder;
 @ObjectHolder(SunderedDeco.MODID)
 public class ModBlocks {
 
+    @ObjectHolder("sundereddeco:counter")
+    public static final BlockCounter COUNTER = new BlockCounter();
+    @ObjectHolder("sundereddeco:counter")
+    public static TileEntityType<TileEntityCounter> COUNTER_TILE;
+
+    @ObjectHolder("sundereddeco:windowbox")
+    public static TileEntityType<TileEntityWindowbox> WINDOWBOX_TILE;
+    @ObjectHolder("sundereddeco:windowbox")
+    public static ContainerType<ContainerWindowbox> WINDOWBOX_CONTAINER;
+    @ObjectHolder("sundereddeco:flowerbed")
+    public static TileEntityType<TileEntityFlowerbed> FLOWERBED_TILE;
+    @ObjectHolder("sundereddeco:flowerbed")
+    public static ContainerType<ContainerFlowerbed> FLOWERBED_CONTAINER;
+    @ObjectHolder("sundereddeco:denseflowerbed")
+    public static TileEntityType<TileEntityDenseFlowerbed> DENSE_FLOWERBED_TILE;
+    @ObjectHolder("sundereddeco:denseflowerbed")
+    public static ContainerType<ContainerDenseFlowerbed> DENSE_FLOWERBED_CONTAINER;
+    @ObjectHolder("sundereddeco:shrine")
+    public static TileEntityType<ShrineTileEntity> SHRINE_TILE;
+    @ObjectHolder("sundereddeco:shrine")
+    public static ContainerType<ShrineContainer> SHRINE_CONTAINER;
 
     //SHOP
-    public static final BlockBase crate_closed = new BlockCrate(Block.Properties.create(Material.WOOD)
-            .hardnessAndResistance(2F, 10F)
-            .sound(SoundType.WOOD), "crate_closed");
+    public static final BlockCrate crate_closed = new BlockCrate("crate_closed", true);
     public static final BlockCrate crate_apple = new BlockCrate("crate_apple");
     public static final BlockCrate crate_berry = new BlockCrate("crate_berry");
     public static final BlockCrate crate_carrot = new BlockCrate("crate_carrot");
@@ -82,6 +109,14 @@ public class ModBlocks {
     public static final BlockShopSign signPub = new BlockShopSign("sign_pub");
     public static final BlockShopSign signWeapons = new BlockShopSign("sign_weapons");
 
+    public static final BlockClutterPlate plateMuffins = new BlockClutterPlate("plate_muffins");
+    public static final BlockClutterPlate plateCroissants = new BlockClutterPlate("plate_croissants");
+
+    public static final BlockClutterObject coinpurse = new BlockClutterObject(Material.CARPET, "coinpurse");
+    public static final BlockClutterObject scales = new BlockClutterObject(Material.IRON, "scales");
+
+    public static final BlockBottle bottle = new BlockBottle("bottle");
+
 
     //GARDEN
     public static final BlockLantern lantern_candle = new BlockLantern("lantern_candle");
@@ -92,22 +127,27 @@ public class ModBlocks {
 
     public static final BlockHedge hedge = new BlockHedge("hedge");
     public static final BlockFountain fountain = new BlockFountain("fountain");
+    public static final BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
 
+    @ObjectHolder("sundereddeco:windowbox")
     public static final BlockWindowbox windowbox = new BlockWindowbox("windowbox");
+    @ObjectHolder("sundereddeco:flowerbed")
+    public static final BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
+    @ObjectHolder("sundereddeco:denseflowerbed")
+    public static final BlockDenseFlowerbed denseflowerbed = new BlockDenseFlowerbed("denseflowerbed");
+    @ObjectHolder("sundereddeco:shrine")
+    public static final ShrineBlock shrine = new ShrineBlock("shrine");
 
     //HOME
-    public static final BlockDirectional sidetable = new BlockDirectional(Block.Properties.create(Material.WOOD), "sidetable");
+    public static final BlockSidetable sidetable = new BlockSidetable("sidetable");
     public static final BlockSittable stool = new BlockSittable(Block.Properties.create(Material.WOOD),"stool");
     public static final BlockChair chair = new BlockChair("chair");
     public static final BlockTable table = new BlockTable("table");
-
 
     public static final BlockWindow window = new BlockWindow(Material.WOOD,"window");
     public static final BlockConnectedChair parkbench = new BlockConnectedChair("parkbench");
 
 
-    //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
-    public static final BlockCounter counter = new BlockCounter();
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event) {
@@ -124,57 +164,21 @@ public class ModBlocks {
                 signApothecary, signArmoury, signBakery, signBlacksmith,signBrewery, signClinic, signClothing,
                 signDiner, signExotics, signFishery, signFlorist, signFurniture, signGeneral, signInn, signJeweller,
                 signMusic, signPetshop, signPostal, signPub, signWeapons,
+                plateMuffins, plateCroissants,
+                coinpurse, scales,
+                bottle,
 
                 //GARDEN
                 lantern_candle, lantern_blue, lantern_green, lantern_red, lantern_yellow,
-                hedge, fountain, windowbox,
+                hedge, fountain, largeplanterbox, shrine, windowbox, flowerbed, denseflowerbed,
 
                 //HOME
                 sidetable, stool, chair, table,
 
                 window, parkbench,
 
-                //TODO TO BE REMOVED ONCE CODE EXAMPLES NO LONGER REQUIRED
-                counter
+                COUNTER
         );
     }
-
-
-/*
-
-
-
-
-    public static BlockDirectional scales = new BlockDirectional(Material.IRON, "scales");
-    public static BlockBottle bottlePlaced = new BlockBottle("bottle_placed");
-    public static BlockClutterPlate plateMuffins = new BlockClutterPlate("plate_muffins");
-    public static BlockClutterPlate plateCroissants = new BlockClutterPlate("plate_croissants");
-    public static BlockDirectional coinpurse = new BlockDirectional(Material.CARPET, "coinpurse");
-    //public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
-
-
-    //TODO for now is registering itself and model registry happening in InvModel
-
-
-
-
-
-    */
-/** garden block *//*
-
-    public static BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
-    //public static BlockWindowbox windowbox = new BlockWindowbox("windowbox");
-    //public static BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
-    //public static BlockDenseFlowerbed denseFlowerbed = new BlockDenseFlowerbed("denseflowerbed");
-    public static BlockDirectional shrine = new BlockDirectional(Material.ROCK, "shrine");
-
-    */
-/** shop block *//*
-
-
-
-
-
-*/
 
 }
