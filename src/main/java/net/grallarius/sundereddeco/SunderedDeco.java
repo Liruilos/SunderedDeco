@@ -7,6 +7,8 @@ import net.grallarius.sundereddeco.block.garden.flowerbeds.ContainerDenseFlowerb
 import net.grallarius.sundereddeco.block.garden.flowerbeds.ContainerFlowerbed;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityDenseFlowerbed;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityFlowerbed;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineContainer;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineTileEntity;
 import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.client.ModColourManager;
@@ -119,6 +121,7 @@ public class SunderedDeco {
         event.getRegistry().register(TileEntityType.Builder.create(TileEntityWindowbox::new, ModBlocks.windowbox).build(null).setRegistryName("windowbox"));
         event.getRegistry().register(TileEntityType.Builder.create(TileEntityFlowerbed::new, ModBlocks.flowerbed).build(null).setRegistryName("flowerbed"));
         event.getRegistry().register(TileEntityType.Builder.create(TileEntityDenseFlowerbed::new, ModBlocks.denseflowerbed).build(null).setRegistryName("denseflowerbed"));
+        event.getRegistry().register(TileEntityType.Builder.create(ShrineTileEntity::new, ModBlocks.shrine).build(null).setRegistryName("shrine"));
 
     }
 
@@ -139,6 +142,11 @@ public class SunderedDeco {
             BlockPos pos = data.readBlockPos();
             return new ContainerDenseFlowerbed(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
         }).setRegistryName("denseflowerbed"));
+
+        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+            BlockPos pos = data.readBlockPos();
+            return new ShrineContainer(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+        }).setRegistryName("shrine"));
     }
 
     @SubscribeEvent

@@ -1,6 +1,8 @@
 package net.grallarius.sundereddeco.proxy;
 import net.grallarius.sundereddeco.block.ModBlocks;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.*;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineRenderer;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineTileEntity;
 import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxRenderer;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxScreen;
@@ -57,6 +59,8 @@ public class ClientProxy implements IProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWindowbox.class, new WindowboxRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityFlowerbed.class, new FlowerbedRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDenseFlowerbed.class, new DenseFlowerbedRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(ShrineTileEntity.class, new ShrineRenderer());
+
 
     }
 }

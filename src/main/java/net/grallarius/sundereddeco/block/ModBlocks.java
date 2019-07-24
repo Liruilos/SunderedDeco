@@ -3,8 +3,10 @@ package net.grallarius.sundereddeco.block;
 import net.grallarius.sundereddeco.SunderedDeco;
 import net.grallarius.sundereddeco.block.counter.BlockCounter;
 import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
-import net.grallarius.sundereddeco.block.garden.BlockShrine;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineBlock;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.*;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineContainer;
+import net.grallarius.sundereddeco.block.garden.shrine.ShrineTileEntity;
 import net.grallarius.sundereddeco.block.home.*;
 import net.grallarius.sundereddeco.block.garden.BlockFountain;
 import net.grallarius.sundereddeco.block.garden.BlockHedge;
@@ -43,6 +45,10 @@ public class ModBlocks {
     public static TileEntityType<TileEntityDenseFlowerbed> DENSE_FLOWERBED_TILE;
     @ObjectHolder("sundereddeco:denseflowerbed")
     public static ContainerType<ContainerDenseFlowerbed> DENSE_FLOWERBED_CONTAINER;
+    @ObjectHolder("sundereddeco:shrine")
+    public static TileEntityType<ShrineTileEntity> SHRINE_TILE;
+    @ObjectHolder("sundereddeco:shrine")
+    public static ContainerType<ShrineContainer> SHRINE_CONTAINER;
 
     //SHOP
     public static final BlockCrate crate_closed = new BlockCrate("crate_closed", true);
@@ -120,7 +126,6 @@ public class ModBlocks {
     public static final BlockHedge hedge = new BlockHedge("hedge");
     public static final BlockFountain fountain = new BlockFountain("fountain");
     public static final BlockPlanterbox largeplanterbox = new BlockPlanterbox("largeplanterbox");
-    public static final BlockShrine shrine = new BlockShrine("shrine");
 
     @ObjectHolder("sundereddeco:windowbox")
     public static final BlockWindowbox windowbox = new BlockWindowbox("windowbox");
@@ -128,7 +133,8 @@ public class ModBlocks {
     public static final BlockFlowerbed flowerbed = new BlockFlowerbed("flowerbed");
     @ObjectHolder("sundereddeco:denseflowerbed")
     public static final BlockDenseFlowerbed denseflowerbed = new BlockDenseFlowerbed("denseflowerbed");
-
+    @ObjectHolder("sundereddeco:shrine")
+    public static final ShrineBlock shrine = new ShrineBlock("shrine");
 
     //HOME
     public static final BlockSidetable sidetable = new BlockSidetable("sidetable");
