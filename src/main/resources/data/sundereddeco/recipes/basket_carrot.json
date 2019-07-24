@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "   ",
+    "#S#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:sugarcane"
+    },
+    "S": {
+      "item": "minecraft:carrot"
+    }
+  },
+  "result": {
+    "item": "sundereddeco:basket_carrot"
+  }
+}
