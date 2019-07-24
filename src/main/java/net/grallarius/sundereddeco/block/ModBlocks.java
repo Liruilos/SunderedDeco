@@ -106,6 +106,10 @@ public class ModBlocks {
     public static final BlockClutterPlate plateMuffins = new BlockClutterPlate("plate_muffins");
     public static final BlockClutterPlate plateCroissants = new BlockClutterPlate("plate_croissants");
 
+    public static BlockClutterObject coinpurse = new BlockClutterObject(Material.CARPET, "coinpurse");
+    public static BlockClutterObject scales = new BlockClutterObject(Material.IRON, "scales");
+
+
     //GARDEN
     public static final BlockLantern lantern_candle = new BlockLantern("lantern_candle");
     public static final BlockLantern lantern_blue = new BlockLantern("lantern_blue");
@@ -153,6 +157,7 @@ public class ModBlocks {
                 signDiner, signExotics, signFishery, signFlorist, signFurniture, signGeneral, signInn, signJeweller,
                 signMusic, signPetshop, signPostal, signPub, signWeapons,
                 plateMuffins, plateCroissants,
+                coinpurse, scales,
 
                 //GARDEN
                 lantern_candle, lantern_blue, lantern_green, lantern_red, lantern_yellow,
@@ -171,10 +176,9 @@ public class ModBlocks {
 /*
 
 
-    public static BlockDirectional scales = new BlockDirectional(Material.IRON, "scales");
     public static BlockBottle bottlePlaced = new BlockBottle("bottle_placed");
 
-    public static BlockDirectional coinpurse = new BlockDirectional(Material.CARPET, "coinpurse");
+
     //public static BlockPedestal bookPedestal = new BlockPedestal("book_pedestal");
 
 

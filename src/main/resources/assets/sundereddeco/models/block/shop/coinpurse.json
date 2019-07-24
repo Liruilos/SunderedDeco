@@ -1,8 +1,8 @@
 {
 	"__comment": "Designed by Liruilos with Cubik Studio - https://cubik.studio",
 	"textures": {
-		"particle": "sundereddeco:blocks/coinpurse",
-		"voxels_atlas": "sundereddeco:blocks/coinpurse"
+		"particle": "sundereddeco:block/coinpurse",
+		"voxels_atlas": "sundereddeco:block/coinpurse"
 	},
 	"elements": [ 	 
 		{

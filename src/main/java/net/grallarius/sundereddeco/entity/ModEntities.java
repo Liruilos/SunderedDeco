@@ -12,7 +12,7 @@ import static net.grallarius.sundereddeco.SunderedDeco.MODID;
 
 public class ModEntities {
 
-    public static final EntityType<SittableEntity> SITTABLE_ENTITY = buildType(new ResourceLocation(MODID, "seat"), EntityType.Builder.<SittableEntity>create((type, world) -> new SittableEntity(world), EntityClassification.MISC).size(0.0F, 0.0F).setCustomClientFactory((spawnEntity, world) -> new SittableEntity(world)));
+    public static final EntityType<SittableEntity> SITTABLE_ENTITY = buildType(new ResourceLocation(MODID, "sittable"), EntityType.Builder.<SittableEntity>create((type, world) -> new SittableEntity(world), EntityClassification.MISC).size(0.0F, 0.0F).setCustomClientFactory((spawnEntity, world) -> new SittableEntity(world)));
 
     private static <T extends Entity> EntityType<T> buildType(ResourceLocation id, EntityType.Builder<T> builder)
     {

@@ -1,21 +1,20 @@
 {
-  "forge_marker": 1,
-  "defaults": {
-    "model": "sundereddeco:shop/scales"
-/*    "textures": {
-      "good":    "assets.sundereddeco:block/shop/crate/crate_apple",
-      "crate":    "block/planks_oak"
-    }*/
-  },
   "variants": {
-    "normal":{"model":"sundereddeco:shop/scales"},
-    "facing": {
-      "north": { "y": 0 },
-      "east":  { "y": 90 },
-      "south": { "y": 180 },
-      "west":  { "y": 270 }
+    "facing=north": {
+      "model": "sundereddeco:block/shop/scales",
+      "y": 180
     },
-    "inventory": {"transform": "forge:default-block" }
+    "facing=east": {
+      "model": "sundereddeco:block/shop/scales",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "sundereddeco:block/shop/scales",
+      "y": 0
+    },
+    "facing=west": {
+      "model": "sundereddeco:block/shop/scales",
+      "y": 90
+    }
   }
 }
-
