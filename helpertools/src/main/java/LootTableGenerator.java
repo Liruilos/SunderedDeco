@@ -1,26 +1,22 @@
-import net.grallarius.sundereddeco.item.ModItems;
-import net.minecraft.item.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class LootTableGenerator {
 
+    private static ArrayList<String> blockList = new ArrayList<>();
 
     @SuppressWarnings("unchecked")
     public static void main( String[] args ) {
 
-        ArrayList<String> blockList = new ArrayList<>();
+        try{
+            addStringsFromFile();
+        }catch(IOException e){
+            e.printStackTrace();
+        }
 
-/*        for (Item i :ModItems.itemBlocks){
-            blockList.add(i.getRegistryName().toString());
-        }*/
-
-        blockList.add("table");
 
         for (String s : blockList) {
 
@@ -51,16 +47,34 @@ public class LootTableGenerator {
             conditions.add(condition1);
             condition1.put("condition", "minecraft:survives_explosion");
 
+            File file = new File(dir, s + ".json");
+            if (!file.exists()) {
+                //Write JSON file
+                try (FileWriter writer = new FileWriter(file)) {
 
-            //Write JSON file
-            try (FileWriter file = new FileWriter(new File(dir, s + ".json"))) {
+                    writer.write(loot_table.toJSONString());
+                    writer.flush();
 
-                file.write(loot_table.toJSONString());
-                file.flush();
-
-            } catch (IOException e) {
-                e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
+        }
+    }
+
+    private static void addStringsFromFile() throws IOException {
+        File dir = new File("D:\\Users\\Lauren\\Documents\\GitHub\\SunderedDeco\\helpertools\\src\\main\\resources");
+        File file = new File(dir, "RegistryList.txt");
+        BufferedReader reader = new BufferedReader(new FileReader(file));
+        String line;
+
+        try {
+            while((line = reader.readLine()) != null) {
+                blockList.add(line);
+            }
+
+        } finally {
+            reader.close();
         }
     }
 }

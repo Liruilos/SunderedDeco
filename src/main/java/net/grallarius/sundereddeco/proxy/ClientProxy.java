@@ -6,6 +6,7 @@ import net.grallarius.sundereddeco.block.garden.shrine.ShrineTileEntity;
 import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxRenderer;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.WindowboxScreen;
+import net.grallarius.sundereddeco.client.ModColourManager;
 import net.grallarius.sundereddeco.entity.SittableEntity;
 import net.grallarius.sundereddeco.entity.SittableRenderer;
 import net.minecraft.client.Minecraft;
@@ -13,6 +14,7 @@ import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.model.obj.OBJLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -32,6 +34,8 @@ public class ClientProxy implements IProxy {
         registerRenderers();
 
         RenderingRegistry.registerEntityRenderingHandler(SittableEntity.class, SittableRenderer::new);
+
+        MinecraftForge.EVENT_BUS.register(ModColourManager.class);
 
     }
 

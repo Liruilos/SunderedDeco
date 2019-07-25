@@ -1,0 +1,1 @@
+{"pools":[{"entries":[{"name":"sundereddeco:shrine","type":"minecraft:item"}],"name":"pool1","rolls":1,"conditions":[{"condition":"minecraft:survives_explosion"}]}],"type":"minecraft:block"}

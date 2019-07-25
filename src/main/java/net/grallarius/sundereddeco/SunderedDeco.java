@@ -73,7 +73,6 @@ public class SunderedDeco {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(ModColourManager.class);
     }
 
     private void setup(final FMLCommonSetupEvent event){

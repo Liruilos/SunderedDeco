@@ -5,6 +5,10 @@ import net.grallarius.sundereddeco.item.ModItems;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class BlockBase extends Block {
 
     protected String name;
@@ -18,6 +22,18 @@ public class BlockBase extends Block {
 
         ModItems.itemBlocks.add(new BlockItem(this, new BlockItem.Properties().group(SunderedDeco.creativeTab)).setRegistryName(SunderedDeco.MODID, name));
         //setCreativeTab(SunderedDeco.creativeTab);
+
+        //addToRegistryListTextFile(this.name);
+    }
+
+    void addToRegistryListTextFile(String s){
+        File dir = new File("D:\\Users\\Lauren\\Documents\\GitHub\\SunderedDeco\\helpertools\\src\\main\\resources");
+        File file = new File(dir, "RegistryList.txt");
+        try (FileWriter writer = new FileWriter(file, true)) {
+            writer.write(s + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
