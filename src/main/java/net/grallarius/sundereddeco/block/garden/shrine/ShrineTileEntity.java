@@ -49,7 +49,7 @@ public class ShrineTileEntity extends TileEntity {
     public void saveAndSync() {
         BlockState state = this.world.getBlockState(this.pos);
         this.setFacing(state.get(FACING).getHorizontalIndex());
-        this.world.markForRerender(this.pos);
+        //this.world.markForRerender(this.pos);
         this.world.notifyBlockUpdate(pos, state, state, 3);
         this.markDirty();
     }

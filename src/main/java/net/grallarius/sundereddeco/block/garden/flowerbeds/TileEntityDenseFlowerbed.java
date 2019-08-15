@@ -57,7 +57,7 @@ public class TileEntityDenseFlowerbed extends TileEntity implements INamedContai
 
     public void saveAndSync() {
         BlockState state = this.world.getBlockState(this.pos);
-        this.world.markForRerender(this.pos);
+        //this.world.markForRerender(this.pos);
         this.world.notifyBlockUpdate(pos, state, state, 3);
         this.markDirty();
     }

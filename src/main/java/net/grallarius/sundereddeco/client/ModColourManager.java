@@ -49,7 +49,7 @@ public class ModColourManager {
         final BlockColors blockColors = minecraft.getBlockColors();
         final IItemColor itemBlockColourHandler = (stack, tintIndex) -> {
             final BlockState state = ((BlockItem) stack.getItem()).getBlock().getDefaultState();
-            return blockColors.getColor(state, null, null);
+            return blockColors.getColor(state, null, null, 0);
         };
 
 
