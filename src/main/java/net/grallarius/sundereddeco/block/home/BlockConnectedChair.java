@@ -29,8 +29,8 @@ public class BlockConnectedChair extends BlockChair {
     public static final BooleanProperty WESTBACK = BooleanProperty.create("westback");
 
 
-    public BlockConnectedChair(String name){
-        super(name);
+    public BlockConnectedChair(){
+        super();
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(NORTHBACK, true)
         .with(EASTBACK, false).with(SOUTHBACK, false).with(WESTBACK, false).with(NORTHSIDE, false)
         .with(EASTSIDE, true).with(SOUTHSIDE, false).with(WESTSIDE, true));

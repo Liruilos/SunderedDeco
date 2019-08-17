@@ -2,7 +2,6 @@ package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.grallarius.sundereddeco.SunderedDeco;
-
 import net.grallarius.sundereddeco.block.ModBlocks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;

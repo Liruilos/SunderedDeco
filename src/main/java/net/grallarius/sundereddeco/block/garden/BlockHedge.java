@@ -6,13 +6,11 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -52,8 +50,8 @@ public class BlockHedge extends BlockBase {
     private static final Properties props = Properties.create(Material.LEAVES)
             .sound(SoundType.PLANT);
 
-    public BlockHedge(String name){
-        super(props, name);
+    public BlockHedge(){
+        super(props);
         this.setDefaultState(this.stateContainer.getBaseState().with(NORTH, Boolean.FALSE).with(EAST, Boolean.FALSE)
                 .with(SOUTH, Boolean.FALSE).with(WEST, Boolean.FALSE).with(TOP, Boolean.FALSE).with(TOPNORTH, Boolean.FALSE)
                 .with(TOPEAST, Boolean.FALSE).with(TOPSOUTH, Boolean.FALSE).with(TOPWEST, Boolean.FALSE));

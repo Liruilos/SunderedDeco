@@ -21,7 +21,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 import javax.annotation.Nullable;
 
-public class BlockTable extends BlockBase{
+public class BlockTable extends BlockBase {
 
     /** Whether there should be a leg in the NW position */
     public static final BooleanProperty NORTHWEST = BooleanProperty.create("northwest");
@@ -43,8 +43,8 @@ public class BlockTable extends BlockBase{
     private static final VoxelShape SWLEG_BOX = Block.makeCuboidShape(1, 0, 12, 4, 14, 15);
 
 
-    public BlockTable(String name) {
-        super(props, name);
+    public BlockTable() {
+        super(props);
     }
 
     @Override

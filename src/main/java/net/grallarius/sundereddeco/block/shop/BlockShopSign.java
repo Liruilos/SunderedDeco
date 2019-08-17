@@ -19,8 +19,8 @@ public class BlockShopSign extends BlockDirectional {
             .hardnessAndResistance(2F, 10F)
             .sound(SoundType.WOOD);
 
-    public BlockShopSign(String name){
-        super(props, name);
+    public BlockShopSign(){
+        super(props);
     }
 
     @Override

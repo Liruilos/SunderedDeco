@@ -1,12 +1,5 @@
 package net.grallarius.sundereddeco.block.pedestal;
 
-import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.Container;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-import net.minecraftforge.items.SlotItemHandler;
-
 public class ContainerPedestal /*extends Container*/ {
 /*
     public ContainerPedestal(Inventory playerInv, final TileEntityPedestal pedestal) {

@@ -1,8 +1,6 @@
 package net.grallarius.sundereddeco;
 
 import net.grallarius.sundereddeco.block.ModBlocks;
-import net.grallarius.sundereddeco.block.counter.BlockCounter;
-import net.grallarius.sundereddeco.block.counter.TileEntityCounter;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.ContainerDenseFlowerbed;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.ContainerFlowerbed;
 import net.grallarius.sundereddeco.block.garden.flowerbeds.TileEntityDenseFlowerbed;
@@ -11,16 +9,12 @@ import net.grallarius.sundereddeco.block.garden.shrine.ShrineContainer;
 import net.grallarius.sundereddeco.block.garden.shrine.ShrineTileEntity;
 import net.grallarius.sundereddeco.block.garden.windowbox.ContainerWindowbox;
 import net.grallarius.sundereddeco.block.garden.windowbox.TileEntityWindowbox;
-import net.grallarius.sundereddeco.client.ModColourManager;
-import net.grallarius.sundereddeco.client.SunderedDecoTab;
-import net.grallarius.sundereddeco.entity.SittableEntity;
+import net.grallarius.sundereddeco.item.FirstItem;
 import net.grallarius.sundereddeco.proxy.ClientProxy;
 import net.grallarius.sundereddeco.proxy.IProxy;
 import net.grallarius.sundereddeco.proxy.ServerProxy;
-import net.grallarius.sundereddeco.recipe.ModRecipes;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityClassification;
-import net.minecraft.entity.EntityType;
+import net.minecraft.block.Blocks;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntityType;
@@ -31,62 +25,51 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.registries.IForgeRegistry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.Console;
+import java.util.stream.Collectors;
 
-@Mod(SunderedDeco.MODID)
-@Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-
-public class SunderedDeco {
+// The value here should match an entry in the META-INF/mods.toml file
+@Mod("sundereddeco")
+public class SunderedDeco
+{
     public static final String MODID = "sundereddeco";
-
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
-    //public static IForgeRegistry<Block> BLOCK_REGISTRY = GameRegistry.findRegistry(Block.class);
-    //public static IForgeRegistry<Item> ITEM_REGISTRY  = GameRegistry.findRegistry(Item.class);
-
-    public static final SunderedDecoTab creativeTab = new SunderedDecoTab();
-
     public static IProxy proxy = DistExecutor.runForDist(() -> () -> new ClientProxy(), () -> () -> new ServerProxy());
 
-    //public static SunderedDeco instance;
-
-    public SunderedDeco(){
-
-
-        // Register methods for modloading
+    public SunderedDeco() {
+        // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
-        //FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
+        // Register the enqueueIMC method for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
+        // Register the processIMC method for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
+        // Register the doClientStuff method for modloading
+        FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
 
-    private void setup(final FMLCommonSetupEvent event){
-
-        ModRecipes.init();
-
+    private void setup(final FMLCommonSetupEvent event)
+    {
+        // some preinit code
+        LOGGER.info("HELLO FROM PREINIT");
         proxy.init();
-        proxy.setup(event);
-
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
-        //LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -98,9 +81,9 @@ public class SunderedDeco {
     private void processIMC(final InterModProcessEvent event)
     {
         // some example code to receive and process InterModComms from other mods
-        //LOGGER.info("Got IMC {}", event.getIMCStream().
-        //        map(m->m.getMessageSupplier().get()).
-        //        collect(Collectors.toList()));
+        LOGGER.info("Got IMC {}", event.getIMCStream().
+                map(m->m.getMessageSupplier().get()).
+                collect(Collectors.toList()));
     }
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
@@ -109,49 +92,51 @@ public class SunderedDeco {
         LOGGER.info("HELLO from server starting");
     }
 
-    @SubscribeEvent
-    public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-        //event.getRegistry().register(new BlockCounter()); //alt way to register
+    // You can use EventBusSubscriber to automatically subscribe events on the contained class (this is subscribing to the MOD
+    // Event bus for receiving Registry Events)
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
+    public static class RegistryEvents {
+        @SubscribeEvent
+        public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
+
+        }
+
+        @SubscribeEvent
+        public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
+
+
+            //event.getRegistry().register(new FirstItem());
+        }
+
+        @SubscribeEvent
+        public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
+            event.getRegistry().register(TileEntityType.Builder.create(TileEntityWindowbox::new, ModBlocks.windowbox).build(null).setRegistryName("windowbox"));
+            event.getRegistry().register(TileEntityType.Builder.create(TileEntityFlowerbed::new, ModBlocks.flowerbed).build(null).setRegistryName("flowerbed"));
+            event.getRegistry().register(TileEntityType.Builder.create(TileEntityDenseFlowerbed::new, ModBlocks.denseflowerbed).build(null).setRegistryName("denseflowerbed"));
+            event.getRegistry().register(TileEntityType.Builder.create(ShrineTileEntity::new, ModBlocks.shrine).build(null).setRegistryName("shrine"));
+        }
+
+        @SubscribeEvent
+        public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> event) {
+            event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                return new ContainerWindowbox(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+            }).setRegistryName("windowbox"));
+
+            event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                return new ContainerFlowerbed(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+            }).setRegistryName("flowerbed"));
+
+            event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                return new ContainerDenseFlowerbed(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+            }).setRegistryName("denseflowerbed"));
+
+            event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
+                BlockPos pos = data.readBlockPos();
+                return new ShrineContainer(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
+            }).setRegistryName("shrine"));
+        }
     }
-
-    @SubscribeEvent
-    public static void onTileEntityRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
-        event.getRegistry().register(TileEntityType.Builder.create(TileEntityCounter::new, ModBlocks.COUNTER).build(null).setRegistryName("counter"));
-        event.getRegistry().register(TileEntityType.Builder.create(TileEntityWindowbox::new, ModBlocks.windowbox).build(null).setRegistryName("windowbox"));
-        event.getRegistry().register(TileEntityType.Builder.create(TileEntityFlowerbed::new, ModBlocks.flowerbed).build(null).setRegistryName("flowerbed"));
-        event.getRegistry().register(TileEntityType.Builder.create(TileEntityDenseFlowerbed::new, ModBlocks.denseflowerbed).build(null).setRegistryName("denseflowerbed"));
-        event.getRegistry().register(TileEntityType.Builder.create(ShrineTileEntity::new, ModBlocks.shrine).build(null).setRegistryName("shrine"));
-
-    }
-
-    @SubscribeEvent
-    public static void onContainerRegistry(final RegistryEvent.Register<ContainerType<?>> event) {
-
-        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
-            BlockPos pos = data.readBlockPos();
-            return new ContainerWindowbox(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
-        }).setRegistryName("windowbox"));
-
-        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
-            BlockPos pos = data.readBlockPos();
-            return new ContainerFlowerbed(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
-        }).setRegistryName("flowerbed"));
-
-        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
-            BlockPos pos = data.readBlockPos();
-            return new ContainerDenseFlowerbed(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
-        }).setRegistryName("denseflowerbed"));
-
-        event.getRegistry().register(IForgeContainerType.create((windowId, inv, data) -> {
-            BlockPos pos = data.readBlockPos();
-            return new ShrineContainer(windowId, SunderedDeco.proxy.getClientWorld(), pos, inv, SunderedDeco.proxy.getClientPlayer());
-        }).setRegistryName("shrine"));
-    }
-
-    @SubscribeEvent
-    public static void onEntitiesRegistry(final RegistryEvent.Register<EntityType<?>> entityRegistryEvent) {
-
-    }
-
-
 }

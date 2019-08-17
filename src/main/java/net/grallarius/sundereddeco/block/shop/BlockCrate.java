@@ -26,12 +26,12 @@ public class BlockCrate extends BlockBase {
             .sound(SoundType.WOOD);
     private boolean isClosed = false;
 
-    public BlockCrate(String name){
-        super(props, name);
+    public BlockCrate(){
+        super(props);
     }
 
-    public BlockCrate(String name, boolean isClosed){
-        super(props, name);
+    public BlockCrate( boolean isClosed){
+        super(props);
         this.isClosed = isClosed;
     }
 

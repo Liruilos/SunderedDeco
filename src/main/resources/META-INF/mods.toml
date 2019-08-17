@@ -6,7 +6,7 @@
 # The name of the mod loader type to load - for regular FML @Mod mods it should be javafml
 modLoader="javafml" #mandatory
 # A version range to match for said mod loader - for regular FML @Mod it will be the forge version
-loaderVersion="[25,)" #mandatory (24 is current forge version)
+loaderVersion="[25,)" #mandatory (26 is current forge version)
 # A URL to refer people to when problems occur with this mod
 issueTrackerURL="http://my.issue.tracker/" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
@@ -14,24 +14,22 @@ issueTrackerURL="http://my.issue.tracker/" #optional
 # The modid of the mod
 modId="sundereddeco" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="0.1" #mandatory
+version="${file.jarVersion}" #mandatory
  # A display name for the mod
 displayName="Sundered Deco" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="http://grallarius.net/forum/" #optional
+displayURL="http://grallarius.net/forum" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
-credits="" #optional
+credits="Thanks for this example mod goes to Java" #optional
 # A text field displayed in the mod UI
-authors="Lexie/Liruilos" #optional
+authors="Liruilos/lexie" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-This is a decorations mod for minecraft!
-
-Later I will add more to the description.
+This is a decorations mod for minecraft. It includes useful and clutter items for your home, garden and shop.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.sundereddeco]] #optional
@@ -49,6 +47,6 @@ Later I will add more to the description.
 [[dependencies.sundereddeco]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.14.3, 1.14.4]"
+    versionRange="[1.14.3,1.14.4]"
     ordering="NONE"
     side="BOTH"

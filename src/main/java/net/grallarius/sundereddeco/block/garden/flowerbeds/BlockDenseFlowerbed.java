@@ -30,11 +30,11 @@ import static net.grallarius.sundereddeco.block.garden.windowbox.BlockWindowbox.
 public class BlockDenseFlowerbed extends BlockConnectableHorizontal {
 
     private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(0, 0, 0, 16, 9, 16);
-    private static final Properties props = Properties.create(Material.ROCK)
+    private static final Block.Properties props = Block.Properties.create(Material.ROCK)
             .sound(SoundType.STONE);
 
-    public BlockDenseFlowerbed(String name){
-        super(props, name);
+    public BlockDenseFlowerbed(){
+        super(props);
     }
 
     @Override

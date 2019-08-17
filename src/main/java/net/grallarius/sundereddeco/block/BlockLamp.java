@@ -10,8 +10,8 @@ public class BlockLamp extends BlockLantern {
 
     protected static final AxisAlignedBB BOUNDBOX = new AxisAlignedBB(0.25D, 0.2D,0.25D,0.75D,0.8D,0.75D);
 
-    public BlockLamp(String name){
-        super(name);
+    public BlockLamp(){
+        super();
     }
 
     //@Override

@@ -21,12 +21,12 @@ public class BlockBottle extends BlockDirectional {
             Block.makeCuboidShape(4, 0, 4, 12, 9, 12),
             Block.makeCuboidShape(6, 9, 6, 10, 14, 10)) ;
 
-    private static final Properties props = Properties.create(Material.GLASS)
+    private static final Block.Properties props = Block.Properties.create(Material.GLASS)
             .hardnessAndResistance(1F, 10F)
             .sound(SoundType.GLASS);
 
-    public BlockBottle(String name){
-        super(props, name);
+    public BlockBottle(){
+        super(props);
     }
 
     @Override

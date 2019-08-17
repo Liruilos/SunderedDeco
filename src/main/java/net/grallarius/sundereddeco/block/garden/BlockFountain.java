@@ -19,11 +19,11 @@ public class BlockFountain extends BlockConnectableHorizontal {
     private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(0, 0, 0, 16, 15, 16);
     private static final VoxelShape SINGLE_BOX = Block.makeCuboidShape(2, 0, 2, 14, 13, 14);
 
-    private static final Properties props = Properties.create(Material.ROCK)
+    private static final Block.Properties props = Block.Properties.create(Material.ROCK)
             .sound(SoundType.STONE);
 
-    public BlockFountain(String name) {
-        super(props, name);
+    public BlockFountain() {
+        super(props);
     }
 
 

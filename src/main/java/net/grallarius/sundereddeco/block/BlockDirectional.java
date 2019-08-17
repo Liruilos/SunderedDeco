@@ -8,14 +8,15 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
+
 import javax.annotation.Nullable;
 
 public class BlockDirectional extends BlockBase {
 
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public BlockDirectional(Properties properties, String name){
-        super(properties, name);
+    public BlockDirectional(Properties properties){
+        super(properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
     }
 

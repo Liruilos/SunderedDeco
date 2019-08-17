@@ -18,8 +18,8 @@ public class BlockBasket extends BlockDirectional {
             .hardnessAndResistance(1F, 10F)
             .sound(SoundType.WOOD);
 
-    public BlockBasket(String name){
-        super(props, name);
+    public BlockBasket(){
+        super(props);
     }
 
 

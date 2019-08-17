@@ -8,7 +8,6 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 
 import javax.annotation.Nullable;
@@ -17,8 +16,8 @@ public class BlockConnectableHorizontal extends BlockBase {
 
     public static final EnumProperty<EnumShape> SHAPE = EnumProperty.create("shape", EnumShape.class);
 
-    public BlockConnectableHorizontal(Properties properties, String name){
-        super(properties, name);
+    public BlockConnectableHorizontal(Properties properties){
+        super(properties);
         this.setDefaultState(this.stateContainer.getBaseState().with(SHAPE, EnumShape.SINGLE));
     }
 

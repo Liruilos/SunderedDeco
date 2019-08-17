@@ -2,14 +2,12 @@ package net.grallarius.sundereddeco.block;
 
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.stats.Stat;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.INameable;
@@ -20,8 +18,8 @@ import javax.annotation.Nullable;
 
 public abstract class BlockTileEntity extends BlockBase {
 
-    public BlockTileEntity(Properties properties, String name) {
-        super(properties, name);
+    public BlockTileEntity(Properties properties) {
+        super(properties);
     }
 
     /**
@@ -71,7 +69,7 @@ public abstract class BlockTileEntity extends BlockBase {
      * Called on server when World#addBlockEvent is called. If server returns true, then also called on the client. On
      * the Server, this may perform additional changes to the world, like pistons replacing the block with an extended
      * base. On the client, the update may involve replacing tile entities or effects such as sounds or particles
-     * @deprecated call via {@link BlockState#onBlockEventReceived(World,BlockPos,int,int)} whenever possible.
+     * @deprecated call via {@link BlockState#onBlockEventReceived(World, BlockPos,int,int)} whenever possible.
      * Implementing/overriding is fine.
      */
     public boolean eventReceived(BlockState state, World worldIn, BlockPos pos, int id, int param) {

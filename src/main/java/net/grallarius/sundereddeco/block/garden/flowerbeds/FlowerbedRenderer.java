@@ -2,7 +2,6 @@ package net.grallarius.sundereddeco.block.garden.flowerbeds;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import net.minecraft.block.Block;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.model.IBakedModel;

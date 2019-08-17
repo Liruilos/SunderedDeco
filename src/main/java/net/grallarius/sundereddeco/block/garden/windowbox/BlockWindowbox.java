@@ -1,10 +1,10 @@
 package net.grallarius.sundereddeco.block.garden.windowbox;
 
+import net.grallarius.sundereddeco.block.BlockTileEntity;
 import net.minecraft.block.*;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
@@ -23,8 +23,6 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.IItemHandler;
-import net.grallarius.sundereddeco.block.BlockTileEntity;
-
 
 import javax.annotation.Nullable;
 
@@ -40,11 +38,11 @@ public class BlockWindowbox extends BlockTileEntity {
     private static final VoxelShape BOUNDING_BOX_WEST = Block.makeCuboidShape(0, 8, 0, 8, 16, 16);
 
 
-    private static final Properties props = Properties.create(Material.ROCK)
+    private static final Block.Properties props = Block.Properties.create(Material.ROCK)
             .sound(SoundType.STONE);
 
-    public BlockWindowbox(String name){
-        super(props, name);
+    public BlockWindowbox(){
+        super(props);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH).with(SHAPE, EnumShape.SINGLE));
     }
 

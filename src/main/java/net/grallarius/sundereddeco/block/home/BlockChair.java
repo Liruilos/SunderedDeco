@@ -29,12 +29,12 @@ public class BlockChair extends BlockSittable {
     //directional code
     public static final DirectionProperty FACING = HorizontalBlock.HORIZONTAL_FACING;
 
-    private static final Properties props = Properties.create(Material.WOOD)
+    private static final Block.Properties props = Block.Properties.create(Material.WOOD)
             .hardnessAndResistance(2F, 10F)
             .sound(SoundType.WOOD);
 
-    public BlockChair(String name) {
-        super(props, name);
+    public BlockChair() {
+        super(props);
         this.setDefaultState(this.stateContainer.getBaseState().with(FACING, Direction.NORTH));
     }
 

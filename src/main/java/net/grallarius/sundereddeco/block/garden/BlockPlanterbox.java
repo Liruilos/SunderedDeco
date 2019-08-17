@@ -13,11 +13,11 @@ import net.minecraft.world.IBlockReader;
 
 public class BlockPlanterbox extends BlockConnectableHorizontal {
 
-    private static final Properties props = Properties.create(Material.ROCK).sound(SoundType.STONE);
+    private static final Block.Properties props = Block.Properties.create(Material.ROCK).sound(SoundType.STONE);
     protected static final VoxelShape BOUNDBOX = Block.makeCuboidShape(0, 0,0,16,18,16);
 
-    public BlockPlanterbox(String name){
-        super(props, name);
+    public BlockPlanterbox(){
+        super(props);
         this.setDefaultState(this.stateContainer.getBaseState().with(SHAPE, EnumShape.SINGLE));
     }
 

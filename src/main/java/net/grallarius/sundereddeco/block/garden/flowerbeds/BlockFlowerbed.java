@@ -33,8 +33,8 @@ public class BlockFlowerbed extends BlockConnectableHorizontal {
     private static final Properties props = Properties.create(Material.ROCK)
             .sound(SoundType.STONE);
 
-    public BlockFlowerbed(String name){
-        super(props, name);
+    public BlockFlowerbed(){
+        super(props);
     }
 
     @Override

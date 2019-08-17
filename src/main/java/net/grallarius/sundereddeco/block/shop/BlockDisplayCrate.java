@@ -5,7 +5,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -15,12 +14,12 @@ public class BlockDisplayCrate extends BlockDirectional {
 
     private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(1, 0, 1, 15, 10, 15);
 
-    private static final Properties props = Properties.create(Material.WOOD)
+    private static final Block.Properties props = Block.Properties.create(Material.WOOD)
             .hardnessAndResistance(2F, 10F)
             .sound(SoundType.WOOD);
 
-    public BlockDisplayCrate(String name){
-        super(props, name);
+    public BlockDisplayCrate(){
+        super(props);
     }
 
     @Override

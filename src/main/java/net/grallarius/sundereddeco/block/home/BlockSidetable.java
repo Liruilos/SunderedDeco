@@ -22,8 +22,8 @@ public class BlockSidetable extends BlockDirectional {
             Block.makeCuboidShape(1, 0, 1, 15, 13, 15)) ;
 
 
-    public BlockSidetable(String name){
-        super(props, name);
+    public BlockSidetable(){
+        super(props);
     }
 
     @Override

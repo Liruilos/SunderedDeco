@@ -1,24 +1,11 @@
 package net.grallarius.sundereddeco.block.pedestal;
 
-import net.grallarius.sundereddeco.ModGuiHandler;
-import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.block.BlockTileEntity;
 import net.minecraft.block.Block;
-
 import net.minecraft.block.BlockState;
 import net.minecraft.block.HorizontalBlock;
-import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.IBlockReader;
-import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
-
-import javax.annotation.Nullable;
 
 //extends BlockTileEntity<TileEntityPedestal>
 public class BlockPedestal  {

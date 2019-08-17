@@ -10,8 +10,8 @@ public class BlockLantern extends BlockBase {
             .hardnessAndResistance(1F, 10F)
             .sound(SoundType.GLASS);
 
-    public BlockLantern(String name){
-        super(props, name);
+    public BlockLantern(){
+        super(props);
        /* setHardness(1.0F);
         setResistance(10.0F);
         this.setLightLevel(1.0F);

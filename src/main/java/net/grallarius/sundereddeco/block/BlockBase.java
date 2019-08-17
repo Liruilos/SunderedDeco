@@ -1,39 +1,50 @@
 package net.grallarius.sundereddeco.block;
 
-import net.grallarius.sundereddeco.SunderedDeco;
-import net.grallarius.sundereddeco.item.ModItems;
 import net.minecraft.block.Block;
-import net.minecraft.item.BlockItem;
+import net.minecraft.block.BlockState;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class BlockBase extends Block {
 
-    protected String name;
 
-    public BlockBase(Properties properties, String name) {
-        //TODO give each block a proper hardness and resistance
-        super(properties.hardnessAndResistance(1.5F, 6.0F));
+    public BlockBase(Properties props) {
+        super(props);
 
-        this.name = name;
-        setRegistryName(SunderedDeco.MODID, name);
-
-        ModItems.itemBlocks.add(new BlockItem(this, new BlockItem.Properties().group(SunderedDeco.creativeTab)).setRegistryName(SunderedDeco.MODID, name));
-        //setCreativeTab(SunderedDeco.creativeTab);
-
-        //addToRegistryListTextFile(this.name);
     }
 
-    void addToRegistryListTextFile(String s){
-        File dir = new File("D:\\Users\\Lauren\\Documents\\GitHub\\SunderedDeco\\helpertools\\src\\main\\resources");
-        File file = new File(dir, "RegistryList.txt");
-        try (FileWriter writer = new FileWriter(file, true)) {
-            writer.write(s + "\n");
-        } catch (IOException e) {
-            e.printStackTrace();
+    @Override
+    public BlockRenderLayer getRenderLayer()
+    {
+        return BlockRenderLayer.CUTOUT;
+    }
+
+
+    @Override
+    public void onReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean isMoving)
+    {
+        if(state.getBlock() != newState.getBlock())
+        {
+            TileEntity tileEntity = world.getTileEntity(pos);
+            if(tileEntity instanceof IInventory)
+            {
+                InventoryHelper.dropInventoryItems(world, pos, (IInventory) tileEntity);
+                world.updateComparatorOutputLevel(pos, this);
+            }
         }
+        super.onReplaced(state, world, pos, newState, isMoving);
     }
 
+    @Override
+    public boolean eventReceived(BlockState state, World world, BlockPos pos, int id, int type)
+    {
+        super.eventReceived(state, world, pos, id, type);
+        TileEntity tileEntity = world.getTileEntity(pos);
+        return tileEntity != null && tileEntity.receiveClientEvent(id, type);
+    }
 }

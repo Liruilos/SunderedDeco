@@ -28,11 +28,11 @@ public class ShrineBlock extends BlockDirectional {
             Block.makeCuboidShape(1, 3, 1, 15, 16, 15),
             Block.makeCuboidShape(3, 0, 3, 13, 3, 13));
 
-    private static final Properties props = Properties.create(Material.ROCK)
+    private static final Block.Properties props = Block.Properties.create(Material.ROCK)
             .sound(SoundType.STONE);
 
-    public ShrineBlock(String name){
-        super(props, name);
+    public ShrineBlock(){
+        super(props);
     }
 
 

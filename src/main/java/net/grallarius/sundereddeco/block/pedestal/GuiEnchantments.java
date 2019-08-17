@@ -1,12 +1,5 @@
 package net.grallarius.sundereddeco.block.pedestal;
 
-import net.grallarius.sundereddeco.SunderedDeco;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-
 public class GuiEnchantments/* extends GuiScreen*/
 {/*
     //due to texture file being 512x512 instead of 256x256, all these pixel values had to be halved.

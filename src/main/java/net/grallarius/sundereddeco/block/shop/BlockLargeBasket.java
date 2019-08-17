@@ -11,8 +11,8 @@ public class BlockLargeBasket extends BlockBasket {
 
     private static final VoxelShape BOUNDING_BOX = Block.makeCuboidShape(1, 0, 1, 15, 12, 15);
 
-    public BlockLargeBasket(String name){
-        super(name);
+    public BlockLargeBasket(){
+        super();
     }
 
     @Override

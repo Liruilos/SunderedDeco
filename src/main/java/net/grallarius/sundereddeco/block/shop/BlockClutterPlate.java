@@ -24,8 +24,8 @@ public class BlockClutterPlate extends BlockDirectional {
             .hardnessAndResistance(2F, 10F)
             .sound(SoundType.STONE);
 
-    public BlockClutterPlate(String name){
-        super(props, name);
+    public BlockClutterPlate(){
+        super(props);
     }
 
     @Override
